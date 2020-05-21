@@ -1,0 +1,235 @@
+<#ftl encoding="utf-8" output_format="HTML" />
+<#import "/web/templates/modernui/funnelback_classic.ftl" as s/>
+<#import "/web/templates/modernui/funnelback.ftl" as fb />
+
+<#import "history_cart.ftl" as history_cart />
+<#import "/share/stencils/libraries/base/client_includes.ftl" as client_includes />
+<#import "project.ftl" as project />
+
+<!DOCTYPE html>
+<html lang="en"> 
+    <head>
+        <!-- htmlcs-disable -->
+        <!-- Metadata -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="referrer" content="always">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        
+        <!-- Imports -->
+        <link href="https://unpkg.com/normalize.css@8.0.1/normalize.css" rel="stylesheet">
+         <script src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
+          
+        <title><@s.AfterSearchOnly>${question.query!}<@s.IfDefCGI name="query">,&nbsp;</@s.IfDefCGI></@s.AfterSearchOnly><@s.cfg>service_name</@s.cfg></title>
+        <link href="/s/resources/${question.collection.id}/${question.profile}/css/main.css" rel="stylesheet">
+        
+        <@client_includes.HTMLHeader />
+    </head>
+    <body>
+        <@client_includes.ContentHeader />
+        
+        <div class="fb-container">
+            <section class="assist content-wrapper">
+                <div class="assist__wrapper">
+                    <nav aria-label="Breadcrumb" class="breadcrumb">
+                        <span class="sr-only">You are here</span>
+                        <ol class="breadcrumb__list" itemscope itemtype="http://schema.org/BreadcrumbList">
+                            <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                <a class="breadcrumb__link" href="#" itemscope itemtype="http://schema.org/Thing" itemprop="item">
+                                    <span class="sr-only" itemprop="name">Home</span>
+                                </a>
+                                <meta itemprop="position" content="1" />
+                            </li>
+                            <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                <a class="breadcrumb__link" href="#" itemscope itemtype="http://schema.org/Thing" itemprop="item">
+                                    <span itemprop="name">Finders</span>
+                                </a>
+                                <meta itemprop="position" content="2" />
+                            </li>
+                            <li class="breadcrumb__item">
+                                <span>${question.collection.configuration.value("stencils.I18n.finder_type", "Course")} Finder</span>
+                            </li>
+                        </ol>
+                    </nav><!-- /.breadcrumb -->
+    
+    
+                    <section class="tools">
+                       <a href="#" class="tools__print">Print</a>
+                    </section><!-- /.tools -->
+
+
+            </div>
+        </section>
+        <main class="main" role="main">
+        
+            <@s.InitialFormOnly>
+            
+            <section class="module-intro content-wrapper">
+                <h1 class="module-intro__title">Explore ${question.collection.configuration.value("stencils.I18n.finder_type", "Course")}s</h1>
+                <p class="module-intro__desc">
+                    Use our interactive ${question.collection.configuration.value("stencils.I18n.finder_type", "Course")?lower_case} finder to explore what Funnelback has to offer. Filter your search by subject,
+                    delivery method and term. Or type a keyword to get started.
+                </p>
+            </section>
+            </@s.InitialFormOnly>
+            
+            <section class="module-search js-module-search content-wrapper">
+                <h2 class="sr-only">Search module</h2>
+                
+                <@project.SearchForm />
+                
+            </section>
+            
+            <@s.AfterSearchOnly>
+            
+            <@project.Facets/>
+    
+            <#-- SEARCH RESULTS -->
+            <section class="search-results js-search-results">
+                <div class="content-wrapper">
+                
+                    <div class="search-results__tools">
+                        <h2 class="search-results__tools-title">${question.collection.configuration.value("stencils.I18n.finder_type", "Course")}s<#if question.query??> for "<@s.QueryClean/>"</#if></h2>
+                        
+                        <@project.FacetBreadBox/>
+
+                        <div class="search-results__tools-right">
+                            <#if question.selectedFacets?size &gt; 0>
+                            <a href="${response.facetExtras.unselectAllFacetsUrl!}"
+                               class="search-results__tools-link highlight">Clear all filters</a>
+                             </#if>
+                            <a href="#"
+                               class="search-results__icon search-results__icon--box active"><span class="sr-only">Grid
+                                view</span></a>
+                            <a href="#"
+                               class="search-results__icon search-results__icon--list"><span class="sr-only">List view</span></a>
+                        </div>
+                    </div>
+                    
+                    <@project.Results />
+                    
+                    <@project.Pagination/>
+                </div>
+                
+            </section>
+            <#-- END SEARCH RESULTS -->
+
+            <section class="module-compare js-module-compare" style="display:none">
+                <h2 class="sr-only">Compare elements</h2>
+                <div class="module-compare__bar content-wrapper">
+                    <span class="module-compare__number">3</span>
+                    <div class="module-compare__data">
+                        <span><span class="highlight">Courses</span> Selected</span>
+                        <a href="#" class="module-compare__clear">Clear</a>
+                    </div>
+                    <a href="#" class="module-compare__compare">Compare</a>
+                </div>
+                <div class="module-compare__wrapper content-wrapper">
+                    <article class="module-compare__list more-children">
+                        <article class="module-compare__item">
+                            <a href="#" class="module-compare__remove">Remove</a>
+                            <h3 class="module-compare__title">Lorem ipsum dolor (Ph.D.)</h3>
+                            <p class="module-compare__desc">
+                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                                dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+                                amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+                                dolor sit amet
+                            </p>
+                            <div class="module-compare__overview">
+                                <h4 class="module-compare__overview-title">Course Overview</h4>
+                                <dl class="module-compare__overview-list">
+                                    <dt class="module-compare__dt">Course Type</dt>
+                                    <dd class="module-compare__dd">Degree of Sciences</dd>
+                                    <dt class="module-compare__dt">Course Format</dt>
+                                    <dd class="module-compare__dd">On Campus Course</dd>
+                                    <dt class="module-compare__dt">Course Timescale</dt>
+                                    <dd class="module-compare__dd">Course Timescale</dd>
+                                </dl>
+                            </div>
+                            <a href="#" class="module-compare__link link">Visit Course Page</a>
+                        </article>
+                        <article class="module-compare__item">
+                            <a href="#" class="module-compare__remove">Remove</a>
+                            <h3 class="module-compare__title">Lorem ipsum dolor (Ph.D.)</h3>
+                            <p class="module-compare__desc">
+                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                                dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+                                amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                                justo.
+                            </p>
+                            <div class="module-compare__overview">
+                                <h4 class="module-compare__overview-title">Course Overview</h4>
+                                <dl class="module-compare__overview-list">
+                                    <dt class="module-compare__dt">Course Type</dt>
+                                    <dd class="module-compare__dd">Degree of Sciences</dd>
+                                    <dt class="module-compare__dt">Course Format</dt>
+                                    <dd class="module-compare__dd">On Campus Course</dd>
+                                    <dt class="module-compare__dt">Course Timescale</dt>
+                                    <dd class="module-compare__dd">Course Timescale</dd>
+                                </dl>
+                            </div>
+                            <a href="#" class="module-compare__link link">Visit Course Page</a>
+                        </article>
+                        <article class="module-compare__item">
+                            <a href="#" class="module-compare__remove">Remove</a>
+                            <h3 class="module-compare__title">Lorem ipsum dolor (Ph.D.)</h3>
+                            <p class="module-compare__desc">
+                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                                dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+                                amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                                justo.
+                            </p>
+                            <div class="module-compare__overview">
+                                <h4 class="module-compare__overview-title">Course Overview</h4>
+                                <dl class="module-compare__overview-list">
+                                    <dt class="module-compare__dt">Course Type</dt>
+                                    <dd class="module-compare__dd">Degree of Sciences</dd>
+                                    <dt class="module-compare__dt">Course Format</dt>
+                                    <dd class="module-compare__dd">On Campus Course</dd>
+                                    <dt class="module-compare__dt">Course Timescale</dt>
+                                    <dd class="module-compare__dd">Course Timescale</dd>
+                                </dl>
+                            </div>
+                            <a href="#" class="module-compare__link link">Visit Course Page</a>
+                        </article>
+                    </article>
+                </div>
+            </section>
+            </@s.AfterSearchOnly>
+        </main><!-- /.main -->
+    </div>
+  
+  <#-- Concierge includes -->  
+  <script src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
+  <script src="/stencils/resources/thirdparty/popper/v1.12.3/umd/popper.min.js"></script>
+  <script src="/stencils/resources/thirdparty/bootstrap/v4.0.0/js/bootstrap.min.js"></script>
+
+  <script src="/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
+  <script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
+  <script src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
+
+  <@project.AutoCompleteTemplates />
+  <script>
+    jQuery(document).ready( function() {
+        <@project.AutoComplete />
+    });
+  </script>
+  
+
+    <@client_includes.ContentFooter />
+    <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/runtime.js"></script>
+    <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/vendors.js"></script>
+    <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/main.js"></script></body>
+    
+    <@project.CartTemplate/>
+    <@history_cart.Config />
+    
+</html>
+<#-- vim: set expandtab ts=2 sw=2 sts=2 :-->

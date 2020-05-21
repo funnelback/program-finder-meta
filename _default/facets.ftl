@@ -1,0 +1,62 @@
+<#ftl encoding="utf-8" output_format="HTML" />
+
+<#macro DropdownFacets>
+    <#local facetNames = question.collection.configuration.value("stencils.facets.dropdown", "")?split(",") >
+    <ul class="module-filter__list">
+        <#list getFacets(response, facetNames) as facet>
+        <li class="module-filter__item" tabindex="0">
+            <span class="module-filter__item-title<#if facet.selected> active</#if>" aria-haspopup="true" aria-expanded="false">
+                ${facet.name}
+            </span>
+            <div class="module-filter__facets">
+                <div class="content-wrapper">
+                    <#-- These counts allow us to split the values evenly along the ULs -->
+                    <#local breakCount = ((facet.allValues?size) / 3)?floor >
+                    <#local valueCount = 0>
+                    <#list facet.allValues as value>
+                        <#if valueCount == 0>
+                            <ul class="module-filter__facets-list" role="menu">
+                        </#if>
+                        <li class="module-filter__facets-item" role="menuitem">
+                                <a href="${value.toggleUrl}" class="module-filter__facets-link<#if value.selected> active</#if>">
+                                ${value.label}
+                                </a>
+                        </li>
+                        <#local valueCount = valueCount + 1>
+                        <#-- reset once we reach our breakpoint -->
+                        <#if valueCount &gt;= breakCount>
+                            <#local valueCount = 0>
+                        </#if>
+                        <#if valueCount == 0 || value_index == (facet.allValues?size - 1) >
+                            </ul>
+                        </#if>
+                    </#list>
+                </div>
+            </div>
+        </li>
+        </#list>
+    </ul>
+</#macro>
+
+<#macro CheckboxFacet>
+    <#-- This can be only 1 facet -->
+    <#local facetName = question.collection.configuration.value("stencils.facets.checkbox", "") >
+    <#list getFacets(response, facetName) as facet>
+        <ul class="module-filter__checkbox-list">
+            <#list facet.allValues as value>
+            <li class="module-filter__checkbox-item">
+                <input <#if value.selected>checked</#if> type="checkbox" id="${value.label?lower_case?replace(" ", "-")}" name="compare" value="${value.label}">
+                <label class="module-filter__label" for="campus" data-url="${value.toggleUrl}">${value.label}</label>
+            </li>
+            </#list>
+        </ul>
+    </#list>
+    <script type="text/javascript">
+        jQuery(document).ready( function() {
+           $(".module-filter__label").click(function() {
+               var url = $(this).attr("data-url");
+               window.location = url;
+           });
+        });
+    </script>
+</#macro>

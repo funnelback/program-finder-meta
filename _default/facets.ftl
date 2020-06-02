@@ -4,6 +4,7 @@
     <#local facetNames = question.collection.configuration.value("stencils.facets.dropdown", "")?split(",") >
     <ul class="module-filter__list">
         <#list getFacets(response, facetNames) as facet>
+        <#if facet.allValues?size != 0>
         <li class="module-filter__item" tabindex="0">
             <span class="module-filter__item-title<#if facet.selected> active</#if>" aria-haspopup="true" aria-expanded="false">
                 ${facet.name}
@@ -34,6 +35,7 @@
                 </div>
             </div>
         </li>
+        </#if>
         </#list>
     </ul>
 </#macro>

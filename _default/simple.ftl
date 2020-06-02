@@ -114,94 +114,25 @@
             </section>
             <#-- END SEARCH RESULTS -->
 
-            <section class="module-compare js-module-compare" style="display:none">
+          
+            <#-- testing custom code -->
+            <section class="module-compare js-module-compare">
                 <h2 class="sr-only">Compare elements</h2>
                 <div class="module-compare__bar content-wrapper">
-                    <span class="module-compare__number">3</span>
+                    <span class="module-compare__number">0</span>
                     <div class="module-compare__data">
                         <span><span class="highlight">Courses</span> Selected</span>
-                        <a href="#" class="module-compare__clear">Clear</a>
+                        <a href="#" class="module-compare__clear hidden">Clear</a>
                     </div>
-                    <a href="#" class="module-compare__compare">Compare</a>
+                    <a href="#" class="module-compare__compare hidden">Compare</a>
                 </div>
                 <div class="module-compare__wrapper content-wrapper">
                     <article class="module-compare__list more-children">
-                        <article class="module-compare__item">
-                            <a href="#" class="module-compare__remove">Remove</a>
-                            <h3 class="module-compare__title">Lorem ipsum dolor (Ph.D.)</h3>
-                            <p class="module-compare__desc">
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                                dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-                                amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-                                dolor sit amet
-                            </p>
-                            <div class="module-compare__overview">
-                                <h4 class="module-compare__overview-title">Course Overview</h4>
-                                <dl class="module-compare__overview-list">
-                                    <dt class="module-compare__dt">Course Type</dt>
-                                    <dd class="module-compare__dd">Degree of Sciences</dd>
-                                    <dt class="module-compare__dt">Course Format</dt>
-                                    <dd class="module-compare__dd">On Campus Course</dd>
-                                    <dt class="module-compare__dt">Course Timescale</dt>
-                                    <dd class="module-compare__dd">Course Timescale</dd>
-                                </dl>
-                            </div>
-                            <a href="#" class="module-compare__link link">Visit Course Page</a>
-                        </article>
-                        <article class="module-compare__item">
-                            <a href="#" class="module-compare__remove">Remove</a>
-                            <h3 class="module-compare__title">Lorem ipsum dolor (Ph.D.)</h3>
-                            <p class="module-compare__desc">
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                                dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-                                amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo.
-                            </p>
-                            <div class="module-compare__overview">
-                                <h4 class="module-compare__overview-title">Course Overview</h4>
-                                <dl class="module-compare__overview-list">
-                                    <dt class="module-compare__dt">Course Type</dt>
-                                    <dd class="module-compare__dd">Degree of Sciences</dd>
-                                    <dt class="module-compare__dt">Course Format</dt>
-                                    <dd class="module-compare__dd">On Campus Course</dd>
-                                    <dt class="module-compare__dt">Course Timescale</dt>
-                                    <dd class="module-compare__dd">Course Timescale</dd>
-                                </dl>
-                            </div>
-                            <a href="#" class="module-compare__link link">Visit Course Page</a>
-                        </article>
-                        <article class="module-compare__item">
-                            <a href="#" class="module-compare__remove">Remove</a>
-                            <h3 class="module-compare__title">Lorem ipsum dolor (Ph.D.)</h3>
-                            <p class="module-compare__desc">
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                                dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-                                amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo.
-                            </p>
-                            <div class="module-compare__overview">
-                                <h4 class="module-compare__overview-title">Course Overview</h4>
-                                <dl class="module-compare__overview-list">
-                                    <dt class="module-compare__dt">Course Type</dt>
-                                    <dd class="module-compare__dd">Degree of Sciences</dd>
-                                    <dt class="module-compare__dt">Course Format</dt>
-                                    <dd class="module-compare__dd">On Campus Course</dd>
-                                    <dt class="module-compare__dt">Course Timescale</dt>
-                                    <dd class="module-compare__dd">Course Timescale</dd>
-                                </dl>
-                            </div>
-                            <a href="#" class="module-compare__link link">Visit Course Page</a>
-                        </article>
+                        <#-- actual compare items go here -->
                     </article>
                 </div>
             </section>
+
             </@s.AfterSearchOnly>
         </main><!-- /.main -->
     </div>

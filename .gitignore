@@ -35,5 +35,3 @@ synthetic-data/
 *.gz
 # Classic UI
 rss.xsl
-# Config files to generate fake analytics
-_default/query-*

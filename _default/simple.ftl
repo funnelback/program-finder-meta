@@ -29,6 +29,7 @@
         <@client_includes.ContentHeader />
         
         <div class="fb-container">
+            <#--  
             <section class="assist content-wrapper">
                 <div class="assist__wrapper">
                     <nav aria-label="Breadcrumb" class="breadcrumb">
@@ -50,117 +51,117 @@
                                 <span>${question.collection.configuration.value("stencils.I18n.finder_type", "Course")} Finder</span>
                             </li>
                         </ol>
-                    </nav><!-- /.breadcrumb -->
+                    </nav>
     
     
                     <section class="tools">
                        <a href="#" class="tools__print">Print</a>
-                    </section><!-- /.tools -->
-
-
-            </div>
-        </section>
-        <main class="main" role="main">
+                    </section>
+                </div>
+            </section>  
+            -->
+            <main class="main" role="main">
+            
+                <@s.InitialFormOnly>
+                
+                <section class="module-intro content-wrapper">
+                    <h1 class="module-intro__title">Explore ${question.collection.configuration.value("stencils.I18n.finder_type", "Course")}s</h1>
+                    <p class="module-intro__desc">
+                        Use our interactive ${question.collection.configuration.value("stencils.I18n.finder_type", "Course")?lower_case} finder to explore what Funnelback has to offer. Filter your search by subject,
+                        delivery method and term. Or type a keyword to get started.
+                    </p>
+                </section>
+                </@s.InitialFormOnly>
+                
+                <section class="module-search js-module-search content-wrapper">
+                    <h2 class="sr-only">Search module</h2>
+                    
+                    <@project.SearchForm />
+                    
+                </section>
+                
+                <@s.AfterSearchOnly>
+                
+                <@project.Facets/>
         
-            <@s.InitialFormOnly>
-            
-            <section class="module-intro content-wrapper">
-                <h1 class="module-intro__title">Explore ${question.collection.configuration.value("stencils.I18n.finder_type", "Course")}s</h1>
-                <p class="module-intro__desc">
-                    Use our interactive ${question.collection.configuration.value("stencils.I18n.finder_type", "Course")?lower_case} finder to explore what Funnelback has to offer. Filter your search by subject,
-                    delivery method and term. Or type a keyword to get started.
-                </p>
-            </section>
-            </@s.InitialFormOnly>
-            
-            <section class="module-search js-module-search content-wrapper">
-                <h2 class="sr-only">Search module</h2>
-                
-                <@project.SearchForm />
-                
-            </section>
-            
-            <@s.AfterSearchOnly>
-            
-            <@project.Facets/>
-    
-            <#-- SEARCH RESULTS -->
-            <section class="search-results js-search-results">
-                <div class="content-wrapper">
-                
-                    <div class="search-results__tools">
-                        <h2 class="search-results__tools-title">${question.collection.configuration.value("stencils.I18n.finder_type", "Course")}s<#if question.query??> for "<@s.QueryClean/>"</#if></h2>
-                        
-                        <@project.FacetBreadBox/>
+                <#-- SEARCH RESULTS -->
+                <section class="search-results js-search-results">
+                    <div class="content-wrapper">
+                    
+                        <div class="search-results__tools">
+                            <h2 class="search-results__tools-title">${question.collection.configuration.value("stencils.I18n.finder_type", "Course")}s<#if question.query??> for "<@s.QueryClean/>"</#if></h2>
+                            
+                            <@project.FacetBreadBox/>
 
-                        <div class="search-results__tools-right">
-                            <#if question.selectedFacets?size &gt; 0>
-                            <a href="${response.facetExtras.unselectAllFacetsUrl!}"
-                               class="search-results__tools-link highlight">Clear all filters</a>
-                             </#if>
-                            <a href="#"
-                               class="search-results__icon search-results__icon--box active"><span class="sr-only">Grid
-                                view</span></a>
-                            <a href="#"
-                               class="search-results__icon search-results__icon--list"><span class="sr-only">List view</span></a>
+                            <div class="search-results__tools-right">
+                                <#if question.selectedFacets?size &gt; 0>
+                                <a href="${response.facetExtras.unselectAllFacetsUrl!}"
+                                class="search-results__tools-link highlight">Clear all filters</a>
+                                </#if>
+                                <a href="#"
+                                class="search-results__icon search-results__icon--box active"><span class="sr-only">Grid
+                                    view</span></a>
+                                <a href="#"
+                                class="search-results__icon search-results__icon--list"><span class="sr-only">List view</span></a>
+                            </div>
                         </div>
+                        
+                        <@project.Results />
+                        
+                        <@project.Pagination/>
                     </div>
                     
-                    <@project.Results />
-                    
-                    <@project.Pagination/>
-                </div>
-                
-            </section>
-            <#-- END SEARCH RESULTS -->
+                </section>
+                <#-- END SEARCH RESULTS -->
 
-          
-            <#-- testing custom code -->
-            <section class="module-compare js-module-compare">
-                <h2 class="sr-only">Compare elements</h2>
-                <div class="module-compare__bar content-wrapper">
-                    <span class="module-compare__number">0</span>
-                    <div class="module-compare__data">
-                        <span><span class="highlight">Courses</span> Selected</span>
-                        <a href="#" class="module-compare__clear hidden">Clear</a>
+            
+                <#-- testing custom code -->
+                <section class="module-compare js-module-compare">
+                    <h2 class="sr-only">Compare elements</h2>
+                    <div class="module-compare__bar content-wrapper">
+                        <span class="module-compare__number">0</span>
+                        <div class="module-compare__data">
+                            <span><span class="highlight">Courses</span> Selected</span>
+                            <a href="#" class="module-compare__clear hidden">Clear</a>
+                        </div>
+                        <a href="#" class="module-compare__compare hidden">Compare</a>
                     </div>
-                    <a href="#" class="module-compare__compare hidden">Compare</a>
-                </div>
-                <div class="module-compare__wrapper content-wrapper">
-                    <article class="module-compare__list more-children">
-                        <#-- actual compare items go here -->
-                    </article>
-                </div>
-            </section>
+                    <div class="module-compare__wrapper content-wrapper">
+                        <article class="module-compare__list more-children">
+                            <#-- actual compare items go here -->
+                        </article>
+                    </div>
+                </section>
 
-            </@s.AfterSearchOnly>
-        </main><!-- /.main -->
-    </div>
+                </@s.AfterSearchOnly>
+            </main><!-- /.main -->
+        </div>
   
-  <#-- Concierge includes -->  
-  <script src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
-  <script src="/stencils/resources/thirdparty/popper/v1.12.3/umd/popper.min.js"></script>
-  <script src="/stencils/resources/thirdparty/bootstrap/v4.0.0/js/bootstrap.min.js"></script>
+        <#-- Concierge includes -->  
+        <script src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
+        <script src="/stencils/resources/thirdparty/popper/v1.12.3/umd/popper.min.js"></script>
+        <script src="/stencils/resources/thirdparty/bootstrap/v4.0.0/js/bootstrap.min.js"></script>
 
-  <script src="/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
-  <script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
-  <script src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
+        <script src="/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
+        <script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
+        <script src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
 
-  <@project.AutoCompleteTemplates />
-  <script>
-    jQuery(document).ready( function() {
-        <@project.AutoComplete />
-    });
-  </script>
-  
+        <@project.AutoCompleteTemplates />
+        <script>
+            jQuery(document).ready( function() {
+                <@project.AutoComplete />
+            });
+        </script>
+        
 
-    <@client_includes.ContentFooter />
-    <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/runtime.js"></script>
-    <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/vendors.js"></script>
-    <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/main.js"></script></body>
+        <@client_includes.ContentFooter />
+        <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/runtime.js"></script>
+        <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/vendors.js"></script>
+        <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/main.js"></script>
     
-    <@project.CartTemplate/>
-    <@history_cart.Config />
     
+        <@project.CartTemplate/>
+        <@history_cart.Config />
+    </body>
 </html>
 <#-- vim: set expandtab ts=2 sw=2 sts=2 :-->

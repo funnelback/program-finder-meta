@@ -83,9 +83,20 @@
 </#macro>
 
 <#macro Results>
+
     <@base.ResultCount />
-    <@base.NoResults />
-    
+    <@base.NoResults />  
+
+    <div class="fb-curator">
+        <article class="search-results__list--list-view">
+            <@base.CuratorExhibits "center" />
+        </article>
+
+        <article class="search-results__list--list-view">
+            <@base.BestBets />
+        </article>
+    </div>
+
     <article class="search-results__list">
         <#list (response.resultPacket.resultsWithTierBars)![] as result>
             <#if result.class.simpleName == "TierBar">

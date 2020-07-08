@@ -1,6 +1,6 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 
-<#macro Result result>
+<#macro ProgramResult result>
     <article class="search-results__item">
             <#if result.metaData.courseImage??>
                 <figure class="search-results__bg">
@@ -52,9 +52,52 @@
                         </#if>
                     </span>
                     <div class="search-results__compare">
-                        <input type="checkbox" id="compare${result.rank}" name="compare${result.rank}" value="Compare ${question.collection.configuration.value("stencils.I18n.finder_type", "Course")}">
-                        <label class="compare-button" data-url="${result.liveUrl}" for="compare${result.rank}">Compare ${question.collection.configuration.value("stencils.I18n.finder_type", "Course")}</label>
+                        <input type="checkbox" id="compare${result.rank}" name="compare${result.rank}" value="Compare Program">
+                        <label class="compare-button" data-url="${result.liveUrl}" for="compare${result.rank}">Compare Program</label>
                     </div>
+                </div>
+            </div>
+        </article>
+</#macro>
+
+<#macro CourseResult result>
+    <article class="search-results__item">
+            <#if result.metaData.courseImage??>
+                <figure class="search-results__bg">
+                    <img src="${result.metaData.courseImage}" alt="${result.title}"/>
+                </figure>
+            <#else>
+                <figure class="search-results__bg">
+                    <img src="https://source.unsplash.com/random/335x192?${(result.title)!''?url}" alt="${result.title}"/>
+                </figure>
+            </#if>
+            <div class="search-results__content">
+                <h3 class="search-results__title">
+                    <a href="${result.clickTrackingUrl}" class="search-results__link">
+                        ${result.title}
+                    </a>
+                </h3>
+                <p class="search-results__desc">
+                    <#if result.metaData.stencilsCourseDesc??>
+                        ${result.metaData.stencilsCourseDesc}
+                    <#else>
+                        ${result.summary}
+                    </#if>
+                </p>
+                <div class="search-results__bottom">
+                    <span class="search-results__info search-results__info--icon search-results__info--icon-list">
+                        <#if result.metaData.stencilsCourseDepartment??>Department: ${result.metaData.stencilsCourseDepartment}</#if>
+                    </span>
+                    <span class="search-results__info search-results__info--icon search-results__info--icon-list">
+                        <#if result.metaData.stencilsCourseDelivery??>Delivery: ${result.metaData.stencilsCourseDelivery}</#if>
+                    </span>
+                    <span class="search-results__info search-results__info--icon search-results__info--icon-list">
+                        <#if result.metaData.stencilsCourseCredit??>${result.metaData.stencilsCourseCredit}</#if>
+                    </span>
+                    <#-- <div class="search-results__compare">
+                        <input type="checkbox" id="compareCourse${result.rank}" name="compareCourse${result.rank}" value="Compare Course">
+                        <label class="compare-button" data-url="${result.liveUrl}" for="compareCourse${result.rank}">Compare Course</label>
+                    </div> -->
                 </div>
             </div>
         </article>
@@ -77,25 +120,19 @@
     </script>
 </#macro>
 
-<#-- this is only used by the vanilla config -->
 <#macro CartTemplate>
     <script id="cart-template-program-finder" type="text/x-cart-template">
-        <article class="module-compare__item">
+        <td>
             <a href="#" class="module-compare__remove" data-url="{{url}}">Remove</a>
+            <figure class="module-compare__bg">
+                <img src="https://source.unsplash.com/random/335x192?{{name}}" alt="">
+            </figure>
+            <span class="module-compare__phrase">{{id}}</span>
             <h3 class="module-compare__title">{{name}}</h3>
             <p class="module-compare__desc">
                 {{desc}}
             </p>
-            <div class="module-compare__overview">
-                <h4 class="module-compare__overview-title">Course Overview</h4>
-                <dl class="module-compare__overview-list">
-                    <dt class="module-compare__dt">Course Type</dt>
-                    <dd class="module-compare__dd">{{credential}}</dd>
-                    <dt class="module-compare__dt">Course ID</dt>
-                    <dd class="module-compare__dd">{{id}}</dd>
-                </dl>
-            </div>
-            <a href="{{url}}" class="module-compare__link link">Visit Course Page</a>
-        </article>
+            <a href="{{url}}" class="btn--link">More Details</a>
+        </td>
     </script>
 </#macro>

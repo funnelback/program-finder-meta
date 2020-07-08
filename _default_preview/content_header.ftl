@@ -1,14 +1,7 @@
 <#ftl encoding="utf-8" output_format="HTML" />
         <!--noindex-->
         <header class="fb-header">
-            <#-- 
-            <section class="header-top">
-                <div class="header-top__wrapper content-wrapper">
-                    <p>Welcome to Funnelback Product Search 2.0 - <a href="#">See Update Details</a></p>
-                </div>
-            </section>
-            -->
-    
+
             <div class="fb-header-bottom content-wrapper">
                 <div class="fb-header-left">
                     <div class="header-logo">

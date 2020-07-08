@@ -1,8 +1,8 @@
 [ {
   "created" : "2020-06-03T12:05:51.469556Z",
-  "lastModified" : "2020-06-03T23:51:50.561789+10:00",
+  "lastModified" : "2020-07-02T04:55:04.369918+10:00",
   "id" : "546c96f9-38a3-40cd-8c27-a0062f7f1454",
-  "name" : "Science",
+  "name" : "Science - STEM Promotion",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {

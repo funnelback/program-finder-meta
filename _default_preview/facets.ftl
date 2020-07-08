@@ -1,5 +1,21 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 
+<#macro RadioFacet>
+    <#local facetNames = question.collection.configuration.value("stencils.facets.radio", "Display")?split(",") >
+    <#list getFacets(response, facetNames) as facet>
+        <#if facet.allValues?size != 0>
+            <ul class="module-filter__radio-list">
+                <#list facet.allValues as value>
+                    <li class="module-filter__radio-item">
+                        <input type="radio" id="${value.label}" name="${facet.name}" value="${value.label}" <#if value.selected>checked</#if>>
+                        <label class="program-finder-display" data-url="${value.toggleUrl}" for="${value.label}">${value.label}</label>
+                    </li>
+                </#list>
+            </ul>
+        </#if>
+    </#list>
+</#macro>
+
 <#macro DropdownFacets>
     <#local facetNames = question.collection.configuration.value("stencils.facets.dropdown", "")?split(",") >
     <ul class="module-filter__list">

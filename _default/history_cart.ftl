@@ -21,8 +21,8 @@
         pinboardWrapper: '.js-module-compare',
         pinboard: '.module-compare__wrapper',
         pinboardList: '.module-compare__list',
-        pinboardView: '.module-compare__compare',
-        pinboardCounter: '.module-compare__number',
+        pinboardView: '.btn__compare',
+        pinboardCounter: '.btn__compare-total',
         pinboardToggle: '.js-pinboard-toggle',
         pinBtn: '.compare-button',
         clearBtn: '.module-compare__clear',
@@ -79,8 +79,6 @@
         if (pinboardView && searchResults) {
             pinboardView.addEventListener("click", function (e) {
                 e.preventDefault();
-                // hide serach results
-                searchResults.classList.toggle(self.searchResultsClass);
                 // hide aside and set full width
                 pinboardWrapper.classList.toggle(self.hiddenAsideClass);
                 if (!pinboard.classList.contains(self.activePinboardClass)) {
@@ -95,6 +93,7 @@
                 e.preventDefault();
 
                 self.deleteAllItems();
+                document.querySelector(".module-compare__close").click();
             });
         
 

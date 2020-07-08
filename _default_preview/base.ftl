@@ -26,13 +26,13 @@
 
 <#macro ResultCount>
     <#if (response.resultPacket.resultsSummary.totalMatching)! != 0>
-        <span class="search-results__total">Showing <span>${response.resultPacket.resultsSummary.currStart!}</span> - <span>${response.resultPacket.resultsSummary.currEnd!}</span> of <span>${response.resultPacket.resultsSummary.totalMatching!}</span> Results</span>
+        <span class="search-results__total text-right">Showing <span>${response.resultPacket.resultsSummary.currStart!}</span> - <span>${response.resultPacket.resultsSummary.currEnd!}</span> of <span>${response.resultPacket.resultsSummary.totalMatching!}</span> Results</span>
     </#if>
 </#macro>
 
 <#macro NoResults>
     <#if (response.resultPacket.resultsSummary.totalMatching)! == 0>
-        <span class="search-results__total"><span>No</span> Results found</span>
+        <span class="search-results__total text-right"><span>No</span> results found</span>
     </#if>
 </#macro>
 
@@ -43,6 +43,9 @@
     Only messages with a position attribute matching this will be displayed. Can be empty to display all messages regardless of position.
 -->
 <#macro CuratorExhibits position>
+    <#if !haveshownCurator>
+    <#global haveshownCurator = true >
+    
     <#list (response.curator.exhibits)![] as exhibit>
         <#-- Skip best bets -->
         <#if exhibit.category != "BEST_BETS">      
@@ -82,6 +85,7 @@
             </#if>
         </#if>
   </#list>
+  </#if>
 </#macro>
 
 <#--
@@ -98,3 +102,4 @@
     </#if>
   </#list>
 </#macro>
+

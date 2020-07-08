@@ -49,16 +49,25 @@
 </#macro>
 
 <#macro Facets>
-    <section class="module-filter js-module-filter">
+    <section class="module-filter module-filter--dark js-module-filter content-wrapper">
 
-        <div class="module-filter__wrapper  content-wrapper">
-            <h2 class="module-filter__title">Filter by:</h2>
+        <div class="module-filter__wrapper">
+            <h2 class="module-filter__title">Refine by<span class="mobile-hide">:</span></h2>
 
             <div class="module-filter__wrapper-mobile">
-                <@facets.DropdownFacets/>
-                
-                <@facets.CheckboxFacet/>
+                <@facets.RadioFacet/>
             </div>
+            
+            <h2 class="module-filter__title">Filter by<span class="mobile-hide">:</span></h2>
+            <div class="module-filter__wrapper-mobile">
+                <@facets.DropdownFacets/>
+            </div>
+            
+            
+            <a href="#" class="btn__compare">
+                <span class="btn__compare-text">Program comparison</span>
+                <span class="btn__compare-total">0</span>
+            </a>
         </div>
     </section>
 </#macro> 
@@ -82,8 +91,9 @@
     </#if>
 </#macro>
 
-<#macro Results>
+<#macro Results name="Programs">
 
+    <@base.TypeDisplay name=name />
     <@base.ResultCount />
     <@base.NoResults />  
 
@@ -102,7 +112,11 @@
             <#if result.class.simpleName == "TierBar">
                 <@results.TierBar tierbar=result />
             <#else>
-                <@results.Result result=result />
+                <#if name == "Programs">
+                    <@results.ProgramResult result=result />
+                <#else>
+                    <@results.CourseResult result=result />
+                </#if>
             </#if>
         </#list>
     </article>

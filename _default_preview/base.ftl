@@ -20,6 +20,10 @@
     </form>
 </#macro>
 
+<#macro TypeDisplay name="">
+    <h3 class="search-results__section-title">${name} (<span>${response.resultPacket.resultsSummary.totalMatching!}</span>)</h3>
+</#macro>
+
 <#macro ResultCount>
     <#if (response.resultPacket.resultsSummary.totalMatching)! != 0>
         <span class="search-results__total">Showing <span>${response.resultPacket.resultsSummary.currStart!}</span> - <span>${response.resultPacket.resultsSummary.currEnd!}</span> of <span>${response.resultPacket.resultsSummary.totalMatching!}</span> Results</span>

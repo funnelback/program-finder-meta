@@ -1,6 +1,6 @@
 [ {
   "created" : "2020-06-03T12:05:51.469556Z",
-  "lastModified" : "2020-06-03T12:36:39.275113Z",
+  "lastModified" : "2020-06-03T23:51:50.561789+10:00",
   "id" : "546c96f9-38a3-40cd-8c27-a0062f7f1454",
   "name" : "Science",
   "label" : "DEFAULT",
@@ -17,10 +17,10 @@
   },
   "actions" : [ {
     "type" : "DisplayUrlAdvert",
-    "titleHtml" : "Academic Achievement Scholarships",
+    "titleHtml" : "STEM Scholarships",
     "displayUrl" : "",
     "linkUrl" : "www.funnelback.com",
-    "descriptionHtml" : "Several scholarships for current Health Science and Exercise Science students are made possible through the generous donations alumni, businesses and other supporters make to the to the institution.",
+    "descriptionHtml" : "We're offering STEM students a $1,000 scholarship to celebrate your hard work and success. Made possible through generous donations from alumni, businesses, and other supporters.",
     "additionalProperties" : {
       "tag" : "Promoted"
     },
@@ -28,13 +28,13 @@
     "removeCollectionUrl" : false
   }, {
     "type" : "PromoteUrls",
-    "urlsToPromote" : [ "https://www.tru.ca/programs/catalogue/bachelor-of-science.html" ]
+    "urlsToPromote" : [ "https://www.tru.ca/programs/catalogue/bachelor-of-science" ]
   } ]
 }, {
-  "created" : "2020-06-03T11:13:45.249211Z",
-  "lastModified" : "2020-06-03T12:45:07.534463Z",
-  "id" : "1cea6b42-4819-4b8a-977a-cd06396e6ce0",
-  "name" : "Covid",
+  "created" : "2020-06-03T23:56:42.567678+10:00",
+  "lastModified" : "2020-06-03T23:56:42.574417+10:00",
+  "id" : "b79c4d02-8716-4bd1-89d4-8ca9522b695d",
+  "name" : "Business - top result",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -43,25 +43,18 @@
       "type" : "Or",
       "triggers" : [ {
         "type" : "AllQueryWords",
-        "triggerWords" : [ "science" ]
+        "triggerWords" : [ "business" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "administration" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "admin" ]
       } ]
     } ]
   },
   "actions" : [ {
-    "type" : "DisplayUrlAdvert",
-    "titleHtml" : "University Admissions: How Will COVID-19 Affect My Application?",
-    "displayUrl" : "",
-    "linkUrl" : "www.funnelback.com",
-    "descriptionHtml" : "Information sessions and tours are cancelled for prospective students. On-campuses admissions office is also closed indefinitely, although they are still answering emails and phone calls. The university has assured students whose education has been interrupted by COVID-19 that they will not be penalized in the admissions process.",
-    "additionalProperties" : {
-      "tag" : "Alert"
-    },
-    "category" : "",
-    "removeCollectionUrl" : false
-  }, {
-    "type" : "DisplayMessage",
-    "messageHtml" : "<strong>COVID-19</strong> The University is closely monitoring the ongoing Coronavirus Disease 2019 (COVID-19) pandemic. Our top priority remains the health, safety, and well-being of our community, on and off campus. We are planning for several reopening stages to limit the spread of COVID-19 while ensuring the continuity of our teaching and research mission. We will continue to update the community regularly to keep you informed of additional measures.",
-    "additionalProperties" : { },
-    "category" : ""
+    "type" : "PromoteUrls",
+    "urlsToPromote" : [ "https://www.tru.ca/programs/catalogue/bachelor-of-business-administration" ]
   } ]
 } ]

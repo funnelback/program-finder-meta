@@ -1,0 +1,60 @@
+[ {
+  "created" : "2020-06-03T23:56:42.567678+10:00",
+  "lastModified" : "2020-06-03T23:56:42.574417+10:00",
+  "id" : "b79c4d02-8716-4bd1-89d4-8ca9522b695d",
+  "name" : "Business - top result",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "business" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "administration" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "admin" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "PromoteUrls",
+    "urlsToPromote" : [ "https://www.tru.ca/programs/catalogue/bachelor-of-business-administration" ]
+  } ]
+}, {
+  "created" : "2020-06-03T12:05:51.469556Z",
+  "lastModified" : "2020-07-02T04:55:04.369918+10:00",
+  "id" : "546c96f9-38a3-40cd-8c27-a0062f7f1454",
+  "name" : "Science - STEM Promotion",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "science" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "STEM Scholarships",
+    "displayUrl" : "",
+    "linkUrl" : "www.funnelback.com",
+    "descriptionHtml" : "We're offering STEM students a $1,000 scholarship to celebrate your hard work and success. Made possible through generous donations from alumni, businesses, and other supporters.",
+    "additionalProperties" : {
+      "tag" : "Promoted"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "PromoteUrls",
+    "urlsToPromote" : [ "https://www.tru.ca/programs/catalogue/bachelor-of-science" ]
+  } ]
+} ]

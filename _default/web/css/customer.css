@@ -7,6 +7,11 @@
   margin-bottom: 3em;
 }
 
+.fb-container .fb-curator .search-results__bottom {
+  height: 7.5em;
+}
+
+
 .fb-container .fb-curator .search-results__list--list-view .search-results__info {
   color: #e42b12;
 } 

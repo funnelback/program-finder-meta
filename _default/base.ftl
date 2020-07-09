@@ -94,11 +94,26 @@
 <#macro BestBets>
   <#list (response.curator.exhibits)![] as exhibit>
     <#if exhibit.category == "BEST_BETS">
-    <div class="alert alert-warning" role="alert">
-      <strong><a class="text-warning" href="${exhibit.linkUrl!}">${exhibit.titleHtml!}</a></strong>
-      <#if exhibit.descriptionHtml??><p>${exhibit.descriptionHtml?no_esc}</p></#if>
-      <#if exhibit.displayUrl?? && exhibit.displayUrl != "-"><cite><a class="text-muted" href="${exhibit.linkUrl!}">${exhibit.displayUrl}</a></cite></#if>
-    </div>
+    <#-- Rich message -->
+    <article class="search-results__item ${(exhibit.additionalProperties.class)!}">
+        <div class="search-results__content">
+            <h3 class="search-results__title">
+                <a href="${exhibit.linkUrl!}" class="search-results__link">${exhibit.titleHtml!}</a>
+            </h3>
+            <p class="search-results__desc">
+                <#if exhibit.displayUrl?? && exhibit.displayUrl != "-">
+                    <cite class="text-success">${exhibit.displayUrl}</cite>
+                    <br />
+                </#if>
+                <#if exhibit.descriptionHtml??>${exhibit.descriptionHtml?no_esc}</#if>
+            </p>
+            <div class="search-results__bottom">
+                <span class="search-results__info ">
+                    ${(exhibit.additionalProperties.tag)!"Best Bet"}
+                </span>
+            </div>
+        </div>
+    </article>
     </#if>
   </#list>
 </#macro>

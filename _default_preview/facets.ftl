@@ -1,7 +1,7 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 
 <#macro RadioFacet>
-    <#local facetNames = question.collection.configuration.value("stencils.facets.radio", "Display")?split(",") >
+    <#local facetNames = (question.getCurrentProfileConfig().get("stencils.facets.radio"))!""?split(",") >
     <#list getFacets(response, facetNames) as facet>
         <#if facet.allValues?size != 0>
             <ul class="module-filter__radio-list">
@@ -17,7 +17,7 @@
 </#macro>
 
 <#macro DropdownFacets>
-    <#local facetNames = question.collection.configuration.value("stencils.facets.dropdown", "")?split(",") >
+    <#local facetNames = (question.getCurrentProfileConfig().get("stencils.facets.dropdown"))!""?split(",") >
     <ul class="module-filter__list">
         <#list getFacets(response, facetNames) as facet>
         <#if facet.allValues?size != 0>
@@ -58,7 +58,8 @@
 
 <#macro CheckboxFacet>
     <#-- This can be only 1 facet -->
-    <#local facetName = question.collection.configuration.value("stencils.facets.checkbox", "") >
+    <#local facetName = (question.getCurrentProfileConfig().get("stencils.facets.checkbox"))!"" >
+    <h1>${facetName}</h1>
     <#list getFacets(response, facetName) as facet>
         <ul class="module-filter__checkbox-list">
             <#list facet.allValues as value>

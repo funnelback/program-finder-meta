@@ -1,7 +1,4 @@
 
-
-
-
 .fb-container .fb-curator {
   margin-top: 3em;
   margin-bottom: 3em;
@@ -11,7 +8,18 @@
   height: 7.5em;
 }
 
-
 .fb-container .fb-curator .search-results__list--list-view .search-results__info {
   color: #e42b12;
-} 
+}
+
+/* 
+  Ensure that the navigation bar in the case where there are 
+  no filters 
+*/
+@media only screen and (min-width: 1025px) {
+  .fb-container .module-filter--dark .module-filter__wrapper {
+      background-color: #000;
+      padding: 0 3.375rem;
+      min-height: 5.65rem;
+  }
+}

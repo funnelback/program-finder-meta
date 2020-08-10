@@ -67,7 +67,7 @@
                 <section class="module-intro content-wrapper">
                     <h1 class="module-intro__title">Explore Programs</h1>
                     <p class="module-intro__desc">
-                        Use our interactive Program finder to explore what Funnelback has to offer. Filter your search by subject,
+                        Use our interactive Program Finder to explore what Funnelback has to offer. Filter your search by subject,
                         delivery method and term. Or type a keyword to get started.
                     </p>
                 </section>

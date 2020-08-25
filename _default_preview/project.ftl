@@ -4,15 +4,25 @@
 <#import "results.ftl" as results />
 <#import "history_cart.ftl" as history_cart />
 
+<#-- 
+    Include all the cart templates which determines 
+    how items in the cart are to be displayed.
+-->
 <#macro CartTemplate>
     <@results.CartTemplate/>
 </#macro>
 
-<#-- Include all relevant autoc templates here -->
+<#-- 
+    Include all the auto complete templates which determines 
+    how items in concierge are to be displayed.
+-->
 <#macro AutoCompleteTemplates>
     <@results.AutoCompleteTemplate/>
 </#macro>
 
+<#--
+    Javascript required to configure concierge
+-->
 <#macro AutoComplete>
   <#if question.collection.configuration.hasValue("stencils.auto-completion.datasets")>
     jQuery('#query').qc({
@@ -43,14 +53,14 @@
   </#if>
 </#macro>
 
+<#-- Display the search form required to query this search implementation -->
 <#macro SearchForm>
-    <@base.SearchForm>
-    </@base.SearchForm>
+    <@base.SearchForm />
 </#macro>
 
+<#-- Display the facets allowing the user to refine the search results -->
 <#macro Facets>
     <section class="module-filter module-filter--dark js-module-filter content-wrapper">
-
         <div class="module-filter__wrapper">
             <h2 class="module-filter__title">Refine by<span class="mobile-hide">:</span></h2>
 
@@ -63,7 +73,6 @@
                 <@facets.DropdownFacets/>
             </div>
             
-            
             <a href="#" class="btn__compare">
                 <span class="btn__compare-text">Program comparison</span>
                 <span class="btn__compare-total">0</span>
@@ -72,27 +81,31 @@
     </section>
 </#macro> 
 
+<#--
+    Display the facet bread crumb which describes the 
+    facets/filter options that have been selected by the user
+--> 
 <#macro FacetBreadBox>
     <#if response.facetExtras.hasSelectedNonTabFacets>
-    <section class="filter-list">
-        <h3 class="filter-list__title">Filters:</h3>
-        <ul class="filter-list__list">
-            <#list response.facets as facet>
-                <#if facet.selected && facet.guessedDisplayType != "TAB">
-                    <#list facet.selectedValues as value>
-                    <li class="filter-list__item">
-                        <a href="${value.toggleUrl}" title="Remove '${facet.name}: ${value.label}'" class="filter-list__link"><span class="sr-only">Clear filter </span><strong>${facet.name}:</strong> ${value.label}</a>
-                    </li>
-                    </#list>
-                </#if>
-            </#list>
-        </ul>
-    </section>
+        <section class="filter-list">
+            <h3 class="filter-list__title">Filters:</h3>
+            <ul class="filter-list__list">
+                <#list response.facets as facet>
+                    <#if facet.selected && facet.guessedDisplayType != "TAB">
+                        <#list facet.selectedValues as value>
+                            <li class="filter-list__item">
+                                <a href="${value.toggleUrl}" title="Remove '${facet.name}: ${value.label}'" class="filter-list__link"><span class="sr-only">Clear filter </span><strong>${facet.name}:</strong> ${value.label}</a>
+                            </li>
+                        </#list>
+                    </#if>
+                </#list>
+            </ul>
+        </section>
     </#if>
 </#macro>
 
+<#-- Displays the search results -->
 <#macro Results name="Programs">
-
     <@base.TypeDisplay name=name />
     <@base.ResultCount />
     <@base.NoResults />  
@@ -120,45 +133,45 @@
             </#if>
         </#list>
     </article>
-
 </#macro>
 
+<#-- Display the pagination used to sequentially navigate large volume of results -->
 <#macro Pagination>
-<#if response.resultPacket.resultsSummary.nextStart?exists || response.resultPacket.resultsSummary.prevStart?exists>
-<section class="pagination">
-    <nav class="pagination__nav" aria-label="Pagination Navigation">
-        <@fb.Prev>
-        <div class="pagination__item pagination__item-navigation pagination__item-previous">
-            <a class="pagination__link" rel="prev" href="${fb.prevUrl}">
-                <span class="pagination__label">Prev</span>
-            </a>
-        </div>
-        </@fb.Prev>
-        <ul class="pagination__pages-list">
-        <@fb.Page numPages=5>
-            <li class="pagination__item<#if fb.pageCurrent> pagination__item--active</#if>">
-                <#if !fb.pageCurrent>
-                    <a class="pagination__link" href="${fb.pageUrl}" aria-label="Go to Page ${fb.pageNumber}">
-                <#else>
-                    <span class="pagination__current"  aria-label="Current Page, Page ${fb.pageNumber}">
-                </#if>
-                <span class="pagination__label">${fb.pageNumber}</span>
-                <#if !fb.pageCurrent>
+    <#if response.resultPacket.resultsSummary.nextStart?exists || response.resultPacket.resultsSummary.prevStart?exists>
+        <section class="pagination">
+            <nav class="pagination__nav" aria-label="Pagination Navigation">
+                <@fb.Prev>
+                    <div class="pagination__item pagination__item-navigation pagination__item-previous">
+                        <a class="pagination__link" rel="prev" href="${fb.prevUrl}">
+                            <span class="pagination__label">Prev</span>
+                        </a>
+                    </div>
+                </@fb.Prev>
+                <ul class="pagination__pages-list">
+                    <@fb.Page numPages=5>
+                        <li class="pagination__item<#if fb.pageCurrent> pagination__item--active</#if>">
+                            <#if !fb.pageCurrent>
+                                <a class="pagination__link" href="${fb.pageUrl}" aria-label="Go to Page ${fb.pageNumber}">
+                            <#else>
+                                <span class="pagination__current"  aria-label="Current Page, Page ${fb.pageNumber}">
+                            </#if>
+                            <span class="pagination__label">${fb.pageNumber}</span>
+                            <#if !fb.pageCurrent>
+                                </a>
+                            <#else>
+                                </span>
+                            </#if>
+                        </li>
+                    </@fb.Page>
+                </ul>
+                <@fb.Next>
+                <div class="pagination__item pagination__item-navigation pagination__item-next">
+                    <a class="pagination__link" href="${fb.nextUrl}" rel="next">
+                        <span class="pagination__label">Next</span>
                     </a>
-                <#else>
-                    </span>
-                </#if>
-            </li>
-        </@fb.Page>
-        </ul>
-        <@fb.Next>
-        <div class="pagination__item pagination__item-navigation pagination__item-next">
-            <a class="pagination__link" href="${fb.nextUrl}" rel="next">
-                <span class="pagination__label">Next</span>
-            </a>
-        </div>
-        </@fb.Next>
-    </nav>
-</section>
-</#if>
+                </div>
+                </@fb.Next>
+            </nav>
+        </section>
+    </#if>
 </#macro>

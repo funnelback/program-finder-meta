@@ -23,45 +23,18 @@
         <title><@s.AfterSearchOnly>${question.query!}<@s.IfDefCGI name="query">,&nbsp;</@s.IfDefCGI></@s.AfterSearchOnly><@s.cfg>service_name</@s.cfg></title>
         <link href="/s/resources/${question.collection.id}/${question.profile}/css/main.css" rel="stylesheet">
         
+        <#-- Output the implementation specific CSS -->
         <@client_includes.HTMLHeader />
     </head>
     <body>
+
+        <#-- Output the clients global navigation -->
         <@client_includes.ContentHeader />
         
         <div class="fb-container">
-            <#--  
-            <section class="assist content-wrapper">
-                <div class="assist__wrapper">
-                    <nav aria-label="Breadcrumb" class="breadcrumb">
-                        <span class="sr-only">You are here</span>
-                        <ol class="breadcrumb__list" itemscope itemtype="http://schema.org/BreadcrumbList">
-                            <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                <a class="breadcrumb__link" href="#" itemscope itemtype="http://schema.org/Thing" itemprop="item">
-                                    <span class="sr-only" itemprop="name">Home</span>
-                                </a>
-                                <meta itemprop="position" content="1" />
-                            </li>
-                            <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                <a class="breadcrumb__link" href="#" itemscope itemtype="http://schema.org/Thing" itemprop="item">
-                                    <span itemprop="name">Finders</span>
-                                </a>
-                                <meta itemprop="position" content="2" />
-                            </li>
-                            <li class="breadcrumb__item">
-                                <span>Program Finder</span>
-                            </li>
-                        </ol>
-                    </nav>
-    
-    
-                    <section class="tools">
-                       <a href="#" class="tools__print">Print</a>
-                    </section>
-                </div>
-            </section>  
-            -->
             <main class="main" role="main">
-            
+
+                <#-- Display the initial -->
                 <@s.InitialFormOnly>
                 
                 <section class="module-intro content-wrapper">
@@ -82,52 +55,64 @@
                 
                 <@s.AfterSearchOnly>
                 
-                <@project.Facets/>
+                <#-- Display the facets for the program finder -->
+                <@project.Facets />
         
                 <#-- SEARCH RESULTS -->
                 <section class="search-results js-search-results">
-                
-                    
                     <div class="content-wrapper">
-                    
                         <div class="search-results__tools">
                             <h2 class="search-results__tools-title">Search results <#if question.query??> for "<@s.QueryClean/>"</#if></h2>
                             
+                            <#-- Display the facets which have been selected by the user -->
                             <@project.FacetBreadBox/>
 
                             <div class="search-results__tools-right">
                                 <#if response.facetExtras.hasSelectedNonTabFacets>
-                                <a href="${response.facetExtras.unselectAllFacetsUrl!}"
-                                class="search-results__tools-link highlight">Clear all filters</a>
+                                    <a href="${response.facetExtras.unselectAllFacetsUrl!}"
+                                    class="search-results__tools-link highlight">Clear all filters</a>
                                 </#if>
                                 <a href="#"
-                                class="search-results__icon search-results__icon--box active"><span class="sr-only">Grid
-                                    view</span></a>
+                                    class="search-results__icon search-results__icon--box active">
+                                    <span class="sr-only">
+                                        Grid view
+                                    </span>
+                                </a>
                                 <a href="#"
-                                class="search-results__icon search-results__icon--list"><span class="sr-only">List view</span></a>
+                                    class="search-results__icon search-results__icon--list">
+                                    <span class="sr-only">
+                                        List view
+                                    </span>
+                                </a>
                             </div>
                         </div>
-                        
-                        <#-- so we only show curator once -->
-                        <#global haveshownCurator = false >
-                        
-                        <#if question.customData.stencilsShowPrograms?? && question.customData.stencilsShowPrograms>
-                            <@fb.ExtraResults name="programs">
-                                <@project.Results />
-                            
-                                <@project.Pagination/>
-                            </@fb.ExtraResults>
-                        </#if>
                     </div>
     
+                    <#-- 
+                        Setup a global variable to ensure we only show curator once.
+                        The variable get secs to true once curator macro is called
+                        for the first time
+                    -->
+                    <#global haveshownCurator = false >
+                    
+                    <#if question.customData.stencilsShowPrograms?? && question.customData.stencilsShowPrograms>
+                        <@fb.ExtraResults name="programs">
+                            <div class="content-wrapper">
+                                <@project.Results name="Programs" />
+                            
+                                <@project.Pagination/>
+                            </div>
+                        </@fb.ExtraResults>
+                    </#if>
+
                     <#if question.customData.stencilsShowCourses?? && question.customData.stencilsShowCourses>
                         <@fb.ExtraResults name="courses">
-                        <div class="content-wrapper">
-                            
-                            <@project.Results name="Courses"/>
+                            <div class="content-wrapper">
+                                
+                                <@project.Results name="Courses" />
 
-                            <@project.Pagination/>
-                        </div>
+                                <@project.Pagination/>
+                            </div>
                         </@fb.ExtraResults>
                     </#if>
                 </section>

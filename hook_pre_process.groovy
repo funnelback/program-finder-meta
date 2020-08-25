@@ -1,5 +1,14 @@
 new com.funnelback.stencils.hook.StencilHooks().apply(transaction, binding.hasVariable("hook") ? hook : null)
 
+
+/**
+  * Determine which extra searches we should show
+  * All         - Show both
+  * Programs    - Only show programs
+  * Courses     - Only show courses
+  * 
+  * Note: We won't be using the results from the original transaction.
+  */ 
 def stencilsShowPrograms = true
 def stencilsShowCourses = true
 

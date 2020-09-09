@@ -38,7 +38,7 @@
                 <@s.InitialFormOnly>
                 
                 <section class="module-intro content-wrapper">
-                    <h1 class="module-intro__title">Explore ${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")}</h1>
+                    <h1 class="module-intro__title">Explore ${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")}s</h1>
                     <p class="module-intro__desc">
                         Use our interactive ${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")} Finder to explore what Funnelback has to offer. Filter your search by subject,
                         delivery method and term. Or type a keyword to get started.

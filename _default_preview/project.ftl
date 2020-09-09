@@ -74,7 +74,7 @@
             </div>
             
             <a href="#" class="btn__compare">
-                <span class="btn__compare-text">Program comparison</span>
+                <span class="btn__compare-text">${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?cap_first} comparison</span>
                 <span class="btn__compare-total">0</span>
             </a>
         </div>
@@ -109,7 +109,7 @@
     <@base.TypeDisplay name=name />
     <@base.ResultCount />
     <@base.NoResults />  
-
+    
     <div class="fb-curator">
         <article class="search-results__list--list-view">
             <@base.CuratorExhibits "center" />
@@ -125,7 +125,7 @@
             <#if result.class.simpleName == "TierBar">
                 <@results.TierBar tierbar=result />
             <#else>
-                <#if name == "Programs">
+                <#if name!?upper_case == (question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course") + "s")?upper_case >
                     <@results.ProgramResult result=result />
                 <#else>
                     <@results.CourseResult result=result />

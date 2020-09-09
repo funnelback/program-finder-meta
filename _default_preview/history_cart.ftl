@@ -2,10 +2,11 @@
 
 <#macro Config>
  <#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
+ <#local host=httpRequest.getHeader('host')>
  <script type="text/javascript">
  var cartJS = {
     config: {
-        apiUrl: 'https://stage-stencil-search.clients.funnelback.com/s/cart.json',
+        apiUrl: '//${host}/s/cart.json',
         collectionName: 'program-finder-meta',
         loadOnInit: true,
         itemTemplate: document.getElementById('cart-template-program-finder').innerHTML,

@@ -38,9 +38,9 @@
                 <@s.InitialFormOnly>
                 
                 <section class="module-intro content-wrapper">
-                    <h1 class="module-intro__title">Explore Programs</h1>
+                    <h1 class="module-intro__title">Explore ${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")}</h1>
                     <p class="module-intro__desc">
-                        Use our interactive Program Finder to explore what Funnelback has to offer. Filter your search by subject,
+                        Use our interactive ${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")} Finder to explore what Funnelback has to offer. Filter your search by subject,
                         delivery method and term. Or type a keyword to get started.
                     </p>
                 </section>
@@ -98,7 +98,7 @@
                     <#if question.customData.stencilsShowPrograms?? && question.customData.stencilsShowPrograms>
                         <@fb.ExtraResults name="programs">
                             <div class="content-wrapper">
-                                <@project.Results name="Programs" />
+                                <@project.Results name=question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?cap_first + "s" />
                             
                                 <@project.Pagination/>
                             </div>
@@ -108,8 +108,8 @@
                     <#if question.customData.stencilsShowCourses?? && question.customData.stencilsShowCourses>
                         <@fb.ExtraResults name="courses">
                             <div class="content-wrapper">
-                                
-                                <@project.Results name="Courses" />
+
+                                <@project.Results name=question.collection.configuration.value("stencils.I18n.finder_type_secondary", "Course")?cap_first + "s" />
 
                                 <@project.Pagination/>
                             </div>

@@ -1,10 +1,24 @@
 <#ftl encoding="utf-8" output_format="HTML" />
+
 <#import "/web/templates/modernui/funnelback_classic.ftl" as s/>
 <#import "/web/templates/modernui/funnelback.ftl" as fb />
 
-<#import "history_cart.ftl" as history_cart />
 <#import "/share/stencils/libraries/base/client_includes.ftl" as client_includes />
+<#import "history_cart.ftl" as history_cart />
 <#import "project.ftl" as project />
+<#import "base.ftl" as base />
+<#import "facets.ftl" as facets />
+<#import "results.ftl" as results />
+<#import "auto-complete.ftl" as auto_complete />
+<#import "curator.ftl" as curator />
+
+
+<#-- Specific result styling imports
+	These imports are required for the automatic template selection to work
+	The various namespaces (e.g. 'video', 'facebook') need to be on the main scope 
+-->
+<#import "programs.ftl" as programs />
+<#import "courses.ftl" as courses />
 
 <!DOCTYPE html>
 <html lang="en"> 
@@ -21,6 +35,8 @@
          <script src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
           
         <title><@s.AfterSearchOnly>${question.query!}<@s.IfDefCGI name="query">,&nbsp;</@s.IfDefCGI></@s.AfterSearchOnly><@s.cfg>service_name</@s.cfg></title>
+        
+        <#-- Presentation logic shared across all Vertical Product -->
         <link href="/s/resources/${question.collection.id}/${question.profile}/css/main.css" rel="stylesheet">
         
         <#-- Output the implementation specific CSS -->
@@ -65,7 +81,7 @@
                             <h2 class="search-results__tools-title">Search results <#if question.query??> for "<@s.QueryClean/>"</#if></h2>
                             
                             <#-- Display the facets which have been selected by the user -->
-                            <@project.FacetBreadBox/>
+                            <@facets.FacetBreadBox/>
 
                             <div class="search-results__tools-right">
                                 <#if response.facetExtras.hasSelectedNonTabFacets>
@@ -86,38 +102,72 @@
                                 </a>
                             </div>
                         </div>
+                        
+                        <#-- 
+                            Curator - We only want to display curator if there are any to avoid
+                            excessive padding/margins.
+                        -->
+                        <@curator.HasCurator position="center">
+                            <div class="fb-curator">
+                                <article class="search-results__list--list-view">
+                                    <@curator.Curator "center" />
+                                </article>
+                            </div>
+                        </@curator.HasCurator>
+
+                        <#-- 
+                            Best Bets - We only want to display best bets if there are any to avoid
+                            excessive padding/margins. 
+                        -->
+                        <@curator.HasBestBets>
+                            <div class="fb-curator">
+                                <article class="search-results__list--list-view">
+                                    <@curator.BestBets />
+                                </article>
+                            </div>
+                        </@curator.HasBestBets>
+
                     </div>
-    
-                    <#-- 
-                        Setup a global variable to ensure we only show curator once.
-                        The variable get secs to true once curator macro is called
-                        for the first time
-                    -->
-                    <#global haveshownCurator = false >
                     
+                    
+                    <#-- Programs -->
                     <#if question.customData.stencilsShowPrograms?? && question.customData.stencilsShowPrograms>
                         <@fb.ExtraResults name="programs">
                             <div class="content-wrapper">
                                 <@project.Results name=question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?cap_first + "s" />
                             
-                                <@project.Pagination/>
+                                <@base.Paging/>
                             </div>
                         </@fb.ExtraResults>
                     </#if>
 
+                    <#-- Courses -->
                     <#if question.customData.stencilsShowCourses?? && question.customData.stencilsShowCourses>
                         <@fb.ExtraResults name="courses">
                             <div class="content-wrapper">
 
                                 <@project.Results name=question.collection.configuration.value("stencils.I18n.finder_type_secondary", "Course")?cap_first + "s" />
 
-                                <@project.Pagination/>
+                                <@base.Paging/>
                             </div>
                         </@fb.ExtraResults>
                     </#if>
                 </section>
                 <#-- END SEARCH RESULTS -->
                 
+
+                <#-- Curator -->
+                <div class="content-wrapper">
+                    <div class="fb-curator">
+                        <article class="search-results__list--list-view">
+                            <@curator.Curator "bottom" />
+                        </article>
+                    </div>
+                </div>
+
+                <#-- Contextual navigation -->
+                <@base.ContextualNavigation />
+
                 <#-- testing custom code -->
                 <section class="module-compare js-module-compare">
                     <h2 class="sr-only">Compare elements</h2>
@@ -160,20 +210,27 @@
         <script src="/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
         <script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
         <script src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
+        
 
-        <@project.AutoCompleteTemplates />
+        <#-- 
+            Include all the auto complete templates which determines 
+            how items in concierge are to be displayed.
+        -->
+        <@programs.AutoCompleteTemplate />
+
         <script>
             jQuery(document).ready( function() {
-                <@project.AutoComplete />
+                <@auto_complete.AutoComplete />
             });
         </script>
         
 
         <@client_includes.ContentFooter />
+
+        <#-- Javascript (application) logic shared across all Vertical Product -->
         <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/runtime.js"></script>
         <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/vendors.js"></script>
         <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/main.js"></script>
-    
     
         <@project.CartTemplate/>
         <@history_cart.Config />

@@ -1,15 +1,24 @@
 
-.fb-container .fb-curator {
-  margin-top: 3em;
-  margin-bottom: 3em;
+/** Curated results **/
+.fb-container .fb-curator .search-results__list--list-view {
+  margin-top: 0px;
 }
 
-.fb-container .fb-curator .search-results__bottom {
-  height: 7.5em;
+/* Auto complete */
+
+@media only screen and (min-width: 1025px) {
+  .fb-container .module-search .tt-dataset-programs {
+      margin: 0;
+      padding: 0;
+      white-space: normal;
+  }
 }
 
-.fb-container .fb-curator .search-results__list--list-view .search-results__info {
-  color: #e42b12;
+.fb-container .module-search .tt-dataset-programs {
+  margin: 0 -1.125rem;
+  overflow: auto;
+  padding: 3.25rem 1.125rem 0 1.125rem;
+  white-space: nowrap;
 }
 
 /* 
@@ -22,4 +31,8 @@
       padding: 0 3.375rem;
       min-height: 5.65rem;
   }
+}
+
+.content-wrapper:empty {
+  display: none;
 }

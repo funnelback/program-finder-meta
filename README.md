@@ -56,13 +56,13 @@ To configure the extra searches, change the target collection in the following: 
 `extra_search.programs.cfg`
 ```
 collection=<insert_name_of_program_collection>
-query_processor_options=-num_ranks=8
+query_processor_options=-num_ranks=8 -clive=<insert_name_of_meta_collection>
 ```
 
 `extra_search.courses.cfg`
 ```
 collection=<insert_name_of_course_collection>
-query_processor_options=-num_ranks=8
+query_processor_options=-num_ranks=8 -clive=<insert_name_of_meta_collection>
 ```
 
 ## Setup the faceted navigation

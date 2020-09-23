@@ -79,3 +79,26 @@
         });
     </script>
 </#macro>
+
+<#--
+    Display the facet bread crumb which describes the 
+    facets/filter options that have been selected by the user
+--> 
+<#macro FacetBreadBox>
+    <#if response.facetExtras.hasSelectedNonTabFacets>
+        <section class="filter-list">
+            <h3 class="filter-list__title">Filters:</h3>
+            <ul class="filter-list__list">
+                <#list response.facets as facet>
+                    <#if facet.selected && facet.guessedDisplayType != "TAB">
+                        <#list facet.selectedValues as value>
+                            <li class="filter-list__item">
+                                <a href="${value.toggleUrl}" title="Remove '${facet.name}: ${value.label}'" class="filter-list__link"><span class="sr-only">Clear filter </span><strong>${facet.name}:</strong> ${value.label}</a>
+                            </li>
+                        </#list>
+                    </#if>
+                </#list>
+            </ul>
+        </section>
+    </#if>
+</#macro>

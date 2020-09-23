@@ -134,7 +134,7 @@
                     <#if question.customData.stencilsShowPrograms?? && question.customData.stencilsShowPrograms>
                         <@fb.ExtraResults name="programs">
                             <div class="content-wrapper">
-                                <@project.Results name=question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?cap_first + "s" />
+                                <@project.ResultList name=question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?cap_first + "s" />
                             
                                 <@base.Paging/>
                             </div>
@@ -146,7 +146,7 @@
                         <@fb.ExtraResults name="courses">
                             <div class="content-wrapper">
 
-                                <@project.Results name=question.collection.configuration.value("stencils.I18n.finder_type_secondary", "Course")?cap_first + "s" />
+                                <@project.ResultList name=question.collection.configuration.value("stencils.I18n.finder_type_secondary", "Course")?cap_first + "s" />
 
                                 <@base.Paging/>
                             </div>
@@ -156,14 +156,16 @@
                 <#-- END SEARCH RESULTS -->
                 
 
-                <#-- Curator -->
-                <div class="content-wrapper">
-                    <div class="fb-curator">
-                        <article class="search-results__list--list-view">
-                            <@curator.Curator "bottom" />
-                        </article>
+                <#-- Curator - Bottom -->
+                <@curator.HasCurator position="center">
+                    <div class="content-wrapper">
+                        <div class="fb-curator">
+                            <article class="search-results__list--list-view">
+                                <@curator.Curator position="bottom" />
+                            </article>
+                        </div>
                     </div>
-                </div>
+                </@curator.HasCurator>
 
                 <#-- Contextual navigation -->
                 <@base.ContextualNavigation />

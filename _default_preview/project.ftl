@@ -38,12 +38,16 @@
 
 
 <#-- Displays the search results -->
-<#macro Results name="Programs">
+<#macro ResultList name="Programs">
     <@base.TypeDisplay name=name />
     <@base.Count />
     <@base.NoResults />  
 
-    <article class="search-results__list">
+    <@base.ResultList nestedRank=3>            
+    </@base.ResultList>
+
+
+    <#--  <article class="search-results__list">
         <#list (response.resultPacket.resultsWithTierBars)![] as result>
             <#if result.class.simpleName == "TierBar">
                 <@results.TierBar tierbar=result />
@@ -55,9 +59,137 @@
                 </#if>
             </#if>
         </#list>
-    </article>
+    </article>  -->
 </#macro>
 
+
+<#-- 
+    Macro decides how each result should be presented. 
+
+    @param result An individual result fron the data model
+    @param view An uppercase string which represents how
+        the result should be displayed. Defaults to DETAILED.
+-->
+<#macro Result result view="LIST">
+    <#switch view?upper_case>
+        <#case "CARD">
+            <@CardView result=result />
+            <#break>
+        <#case "LIST">
+            <@ListView result=result />
+            <#break>
+        <#default>
+            <@ListView result=result />
+    </#switch>
+</#macro>
+
+<#--
+    Stardard view of a result which is to be displayed in the 
+    main section of the search engine result page (SERP)
+    @param result An individual result fron the data model
+-->
+<#macro ListView result>
+    <@GenericView result=result cardClass="fb-card--list" />
+</#macro>
+
+<#--
+    Card view of a result which is to be displayed in the 
+    main section of the search engine result page (SERP)
+    @param result An individual result fron the data model
+-->
+<#macro CardView result>
+    <@GenericView result=result cardClass="fb-card--fixed" />
+</#macro>
+
+<#--
+    A generic view used to drive both the the list and card view
+    @param result An individual result fron the data model
+-->
+<#macro GenericView result cardClass="fb-card--fixed">
+    <article class="search-results__item search-results__item--default">
+        <figure class="search-results__bg">
+            <#if (result.listMetadata["image"][0])!?has_content>
+                <#--  <img class="deferred rounded-circle fb-image-thumbnail" alt="Thumbnail for ${result.title!}" src="/stencils/resources/base/v15.8/img/pixel.gif" data-deferred-src="${result.listMetadata["image"][0]}">   -->
+                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.title)!''?url}"> 
+            <#else>
+                <img alt="Thumbnail for ${result.title!}" src="https://source.unsplash.com/random/160x160?${(result.title)!''?url}"> 
+            </#if>
+        </figure>
+        <div class="search-results__content">
+            <#if (result.title)!?has_content>
+                <h3 class="search-results__title">
+                    <#-- Show an icon to represented the file type of the current document -->
+                    <#switch result.fileType>
+                        <#case "pdf">
+                            <i class="far fa-file-pdf" aria-hidden="true"></i>
+                            <#break>
+                        <#case "doc">
+                        <#case "docx">
+                        <#case "rtf">
+                            <i class="far fa-file-word" aria-hidden="true"></i>
+                            <#break>
+                        <#case "xls">
+                        <#case "xlsx">
+                            <i class="far fa-file-excel" aria-hidden="true"></i>
+                            <#break>
+                        <#case "ppt">
+                        <#case "pptx">
+                            <i class="far fa-file-powerpoint" aria-hidden="true"></i>
+                            <#break>
+                    </#switch>
+
+                    <#--  <span class="fas fa-briefcase text-muted pull-right small mr-2" title="Job"></span>  -->
+                    <a href="${result.clickTrackingUrl!}" title="${result.title!}" class="search-results__link">
+                        <@s.boldicize>
+                            <@s.Truncate length=90>
+                                ${(result.title)!} 
+                            </@s.Truncate>
+                        </@s.boldicize>
+                    </a>
+                </h3>
+            </#if>
+            
+            <#-- Pretty version of the url of the document -->
+            <cite>
+                <@s.Truncate length=90>
+                    ${(result.displayUrl)!}
+                </@s.Truncate>
+                
+            </cite>
+
+            
+            <#-- Summary -->
+            <p class="search-results__desc">
+                <@s.boldicize>
+                    ${result.summary!?no_esc}
+                </@s.boldicize>
+            </p>
+
+            <section class="tags">
+                <ul class="tags__list">
+                    <li class="tags__item">
+                        Lorem
+                    </li>
+                    <li class="tags__item">
+                        Lorem ipsum
+                    </li>
+                    <li class="tags__item">
+                        Lorem
+                    </li>
+                    <li class="tags__item">
+                        Lorem ipsum
+                    </li>
+                    <li class="tags__item">
+                        Lorem
+                    </li>
+                </ul>
+            </section>
+
+            <#-- Display the time which this result has last been visited by the user -->
+            <@history_cart.LastVisitedLink result=result/>
+        </div>
+    </article>
+</#macro>
 
 
 

@@ -1,6 +1,49 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 
-<#macro Result result>
+<#-- 
+	Macro decides how each result should be presented. 
+
+	@param result An individual result fron the data model
+	@param view An uppercase string which represents how
+		the result should be displayed. Defaults to DETAILED.
+-->
+<#macro Result result=result view="LIST">
+	<#switch view?upper_case>
+		<#case "CARD">
+			<@CardView result=result />
+			<#break>
+		<#case "LIST">
+			<#-- Determine if results should be hidden or not -->
+			<@ListView result=result />
+			<#break>
+		<#default>
+			<@ListView result=result />
+	</#switch>
+</#macro>
+
+<#--
+	Stardard view of a result which is to be displayed in the 
+	main section of the search engine result page (SERP)
+	@param result An individual result fron the data model
+-->
+<#macro ListView result>
+	<@GenericView result=result cardClass="fb-card--list" />
+</#macro>
+
+<#--
+	Card view of a result which is to be displayed in the 
+	main section of the search engine result page (SERP)
+	@param result An individual result fron the data model
+-->
+<#macro CardView result>
+	<@GenericView result=result cardClass="fb-card--fixed" />
+</#macro>
+
+<#--
+	A generic view used to drive both the the list and card view
+	@param result An individual result fron the data model
+-->
+<#macro GenericView result cardClass="fb-card--fixed">
     <article class="search-results__item">
         <#if result.metaData.courseImage??>
             <figure class="search-results__bg">

@@ -31,6 +31,31 @@
 </#macro>
 
 <#--
+  Display query blending notice
+-->
+<#macro Blending>
+    <#if (response.resultPacket.QSups)!?size &gt; 0>
+        <blockquote class="blockquote">
+        <span class="fas fa-info-circle"></span>
+        Your query has been expanded to <strong><#list response.resultPacket.QSups as qsup> ${qsup.query}<#if qsup_has_next>, </#if></#list></strong>.
+        &nbsp;Search for <a href="?${QueryString}&amp;qsup=off" title="Turn off query expansion"><em>${question.originalQuery}</em></a> instead.
+        </blockquote>
+    </#if>
+</#macro>
+
+<#--
+  Display spelling suggestion notice
+-->
+<#macro Spelling>
+    <#if (response.resultPacket.spell)??>
+        <div class="search-spelling">
+            <span class="fas fa-question-circle"></span>
+            Did you mean <em><a href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${(response.resultPacket.spell.text)!}</a></em>?
+        </div>
+    </#if>
+</#macro>
+
+<#--
   Message to display when there are no results
 -->
 <#macro NoResults>
@@ -47,6 +72,26 @@
         </section>
     </#if>
 </#macro>
+
+<#-- Obtain the result mode from the CGI paramters; Valid values are LIST and CARD -->
+<#function getDisplayMode question>
+    <#-- Default the display mode to "list" -->
+    <#assign displayMode = ""> 
+
+    <#-- Get the mode that is currently configured -->
+    <#if (question.inputParameterMap["displayMode"])!?has_content>
+        <#-- Get the value from the user's selection -->
+        <#assign displayMode = question.inputParameterMap["displayMode"]!?upper_case>
+    <#elseif (question.getCurrentProfileConfig().get("stencils.results.display_mode"))!?has_content>
+        <#-- Get the value from profile config -->
+        <#assign displayMode = question.getCurrentProfileConfig().get("stencils.results.display_mode")!?upper_case>
+    <#else>
+        <#-- Default -->
+        <#assign displayMode = "LIST"> 
+    </#if>
+
+    <#return displayMode>
+</#function>
 
 <#macro DisplayMode>
     <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=card' 
@@ -172,6 +217,149 @@
         </nav>
     </section>
 </#macro>
+
+<#-- 
+    Determines if the results are to be displayed normally
+    or grouped together by some criteria
+-->
+<#macro ResultList nestedRank=-1>
+    <#assign displayMode = getDisplayMode(question)>
+
+    <#if (response.customData["stencilsGroupingResults"].mode)!?has_content>
+        <@GroupedResults view=displayMode/>
+    <#else>
+        <@StandardResults view=displayMode nestedRank=-1>
+            <#nested>    
+        </@StandardResults>
+    </#if>
+</#macro>
+
+<#--
+    Iterate over results and choose the right template depending
+    on the results type and what is configured in collection.cfg
+
+    Defaults to <code>&lt;@project.Result /&gt;
+
+    @param nestedRank Before which result to insert the nested content of the macro.
+        This is used to insert content (usually an extra search) between results.
+-->
+<#macro StandardResults view="LIST" nestedRank=-1>
+    <article class="search-results__list <#if getDisplayMode(question)! == 'LIST'>search-results__list--list-view</#if>">
+        <#list (response.resultPacket.resultsWithTierBars)![] as result>
+            <#if result.class.simpleName == "TierBar">
+                <@TierBar result=result />
+            <#else>
+                <#if nestedRank gte 0 && result.rank == nestedRank>
+                    <#nested>
+                </#if>
+                
+                <#-- Display the result based on the configured template -->
+                <@Result result=result view=view/>                
+            </#if>
+        </#list>
+    </article>
+</#macro>
+
+<#--
+  Display a tier bar
+-->
+<#macro TierBar result>
+    <#-- A tier bar -->
+    <#if result.matched != result.outOf>
+        <h3 class="search-tier text-muted">Results that match ${result.matched} of ${result.outOf} words</h3>
+    <#else>
+        <h3 class="sr-only search-tier">Fully-matching results</h3>
+    </#if>
+    <#-- Print event tier bars if they exist -->
+    <#if result.eventDate??>
+        <h3 class="text-muted search-tier">Events on ${result.eventDate?date}</h3>
+    </#if>
+</#macro>
+
+<#--
+    Displays a search result using the the right template depending
+    on the results type and what is configured in collection.cfg
+
+    Defaults to <code>&lt;@project.Result /&gt;
+
+    @param result The search result to output
+-->
+<#macro Result result question=question view="LIST">
+    <#-- Get result template depending on collection name -->
+    <#assign resultDisplayLibrary = question.getCurrentProfileConfig().get("stencils.template.result.${result.collection}")!"" />
+
+    <#-- If not defined, attempt to get it depending on the gscopes the result belong to -->
+    <#if !resultDisplayLibrary?has_content>
+        <#list (result.gscopesSet)![] as gscope>
+            <#assign resultDisplayLibrary = question.getCurrentProfileConfig().get("stencils.template.result.${gscope}")!"" />
+            <#if resultDisplayLibrary?has_content>
+                <#break>
+            </#if>
+        </#list>
+    </#if>
+
+    <#if .main[resultDisplayLibrary]??>
+        <@.main[resultDisplayLibrary].Result result=result view=view />
+    <#elseif .main["project"]??>
+        <#-- Default Result macro in current namespace -->
+        <@.main["project"].Result result=result view=view />
+    <#else>
+        <div class="alert alert-danger" role="alert">
+            <strong>Result template not found</strong>: Template <code>&lt;@<#if resultDisplayLibrary?has_content>${resultDisplayLibrary}<#else>(default namespace)</#if>.Result /&gt;</code>
+            not found for result from collection <em>${result.collection}</em>.
+        </div>
+    </#if>
+</#macro>
+
+<#macro GroupedResults view="LIST">
+    <#-- Loop through each grouped result tier -->
+    <#if (response.resultPacket.results)!?has_content>
+        <#list (response.customData["stencilsGroupingResults"].groups)![] as group>
+            <div class="mb-3">
+                <#-- Create facet link to be used in the title and "see more" -->
+                <#assign searchLink = question.getCurrentProfileConfig().get("ui.modern.search_link")!>
+                <#assign facetLink = (group.url)!"">
+
+                <span>
+                    <h3>
+                        <a class="text-muted" href="${searchLink + facetLink}">           
+                            ${group.label}
+                        </a>
+                    </h3>
+                </span>
+        
+                <ol class="list-unstyled fb-result-set fb-display-mode--${view?lower_case}">
+                    <#list response.resultPacket.results as result>                        
+                        <#-- Display the result based on the configured template -->
+                        <#switch ((response.customData["stencilsGroupingResults"].mode)!"")?upper_case>
+                            <#case "METADATA">
+                                <#if (result.metaData[group.field])!?has_content>
+                                    <@Result result=result view=view />
+                                </#if>
+                                <#break> 
+                            <#case "COLLECTION">
+                                <#if result.collection == (group.field)!"">
+                                    <@Result result=result view=view />
+                                </#if>
+                                <#break>
+                            <#default>                
+                                <#break>
+                        </#switch>         
+                    </#list>
+                </ol>
+
+                <#-- See more link -->
+                <span class="clearfix">        
+                    <a href="${searchLink + facetLink}"> 
+                        <i class="fas fa-arrow-right mr-1"></i>
+                        See more ${group.label} 
+                    </a>
+                </span>
+            </div>
+        </#list>    
+    </#if>
+</#macro>
+
 
 <#--
   Display the contextual navigation panel only if there are valid values

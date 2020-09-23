@@ -84,7 +84,7 @@
                             <@facets.FacetBreadBox/>
 
                             <div class="search-results__tools-right">
-                                <#if response.facetExtras.hasSelectedNonTabFacets>
+                                <#if (response.facetExtras.hasSelectedNonTabFacets)!>
                                     <a href="${response.facetExtras.unselectAllFacetsUrl!}"
                                     class="search-results__tools-link highlight">Clear all filters</a>
                                 </#if>

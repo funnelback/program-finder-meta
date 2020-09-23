@@ -45,42 +45,38 @@
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
     <article class="search-results__item">
-        <#if result.metaData.courseImage??>
+        <#if (result.listMetadata["stencilsProgramCredentialName"]?first)!?has_content>
             <figure class="search-results__bg">
-                <img src="${result.metaData.courseImage}" alt="${result.title}"/>
+                <img src="${(result.listMetadata["stencilsProgramCredentialName"]?first)!}" alt="${result.title!}"/>
             </figure>
         <#else>
             <figure class="search-results__bg">
-                <img src="https://source.unsplash.com/random/335x192?${(result.title)!''?url}" alt="${result.title}"/>
+                <img src="https://source.unsplash.com/random/335x192?${(result.title)!''?url}" alt="${result.title!}"/>
             </figure>
         </#if>
         <div class="search-results__content">
             <h3 class="search-results__title">
-                <a href="${result.clickTrackingUrl}" class="search-results__link">
-                    ${result.title}
+                <a href="${result.clickTrackingUrl!}" class="search-results__link">
+                    ${result.title!}
                 </a>
             </h3>
             <p class="search-results__desc">
-                <#if result.metaData.stencilsCourseDesc??>
-                    ${result.metaData.stencilsCourseDesc}
+                <#if (result.listMetadata["stencilsCourseDesc"]?first)!?has_content>
+                    ${(result.listMetadata["stencilsCourseDesc"]?first)!}
                 <#else>
-                    ${result.summary}
+                    ${result.summary!}
                 </#if>
             </p>
             <div class="search-results__bottom">
                 <span class="search-results__info search-results__info--icon search-results__info--icon-list">
-                    <#if result.metaData.stencilsCourseDepartment??>Department: ${result.metaData.stencilsCourseDepartment}</#if>
+                    <#if (result.listMetadata["stencilsCourseDepartment"]?first)!?has_content>Department: ${(result.listMetadata["stencilsCourseDepartment"]?first)!}</#if>
                 </span>
                 <span class="search-results__info search-results__info--icon search-results__info--icon-list">
-                    <#if result.metaData.stencilsCourseDelivery??>Delivery: ${result.metaData.stencilsCourseDelivery}</#if>
+                    <#if (result.listMetadata["stencilsCourseDelivery"]?first)!?has_content>Delivery: ${(result.listMetadata["stencilsCourseDelivery"]?first)!}</#if>
                 </span>
                 <span class="search-results__info search-results__info--icon search-results__info--icon-list">
-                    <#if result.metaData.stencilsCourseCredit??>${result.metaData.stencilsCourseCredit}</#if>
+                    <#if (result.listMetadata["stencilsCourseCredit"]?first)!?has_content>${(result.listMetadata["stencilsCourseCredit"]?first)!}</#if>
                 </span>
-                <#-- <div class="search-results__compare">
-                    <input type="checkbox" id="compareCourse${result.rank}" name="compareCourse${result.rank}" value="Compare Course">
-                    <label class="compare-button" data-url="${result.liveUrl}" for="compareCourse${result.rank}">Compare Course</label>
-                </div> -->
             </div>
         </div>
     </article>

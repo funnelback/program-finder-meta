@@ -47,56 +47,56 @@
     <article class="search-results__item">
         <#if (result.listMetadata["courseImage"]?first)!?has_content>
             <figure class="search-results__bg">
-                <img src="${(result.listMetadata["courseImage"]?first)!}" alt="${result.title}"/>
+                <img src="${(result.listMetadata["courseImage"]?first)!}" alt="${result.title!}"/>
             </figure>
         <#else>
             <figure class="search-results__bg">
-                <img src="https://source.unsplash.com/random/335x192?${(result.title)!''?url}" alt="${result.title}"/>
+                <img src="https://source.unsplash.com/random/335x192?${(result.title)!''?url}" alt="${result.title!}"/>
             </figure>
         </#if>
         <div class="search-results__content">
             <h3 class="search-results__title">
-                <a href="${result.clickTrackingUrl}" class="search-results__link">
-                    ${result.title}
+                <a href="${result.clickTrackingUrl!}" class="search-results__link">
+                    ${result.title!}
                 </a>
             </h3>
             <p class="search-results__desc">
-                <#if result.metaData.c??>
+                <#if (result.listMetadata["c"]?first)!?has_content>
                     ${(result.listMetadata["c"]?first)!}
                 <#else>
-                    ${result.summary}
+                    ${result.summary!}
                 </#if>
             </p>
             <div class="search-results__bottom">
                 <span class="search-results__info search-results__info--icon search-results__info--icon-list">
-                    <#if result.metaData.stencilsProgramID??>ID ${(result.listMetadata["stencilsProgramID"]?first)!} - </#if><#if (result.metaData.stencilsProgramCredentialName)!?has_content>${result.metaData.stencilsProgramCredentialName?split("|")?join(", ")}</#if>
+                    <#if (result.listMetadata["stencilsProgramID"]?first)!?has_content>ID ${(result.listMetadata["stencilsProgramID"]?first)!} - </#if><#if (result.listMetadata["stencilsProgramCredentialName"]?first)!?has_content>${(result.listMetadata["stencilsProgramCredentialName"]?first)!?split("|")?join(", ")}</#if>
                 </span>
                 <span class="search-results__info search-results__info--icon search-results__info--icon-list">
                     <#local hasPrev = false>
-                    <#if (result.metaData.stencilsProgramCredits!"0") != "0">
-                        ${(result.metaData.stencilsProgramCredits)!} credits
+                    <#if ((result.listMetadata["stencilsProgramCredits"]?first)!"0") != "0">
+                        ${(result.listMetadata["stencilsProgramLengthYears"]?first)!} credits
                     </#if>
-                    <#if (result.metaData.stencilsProgramLengthYears!"0") != "0">
+                    <#if ((result.listMetadata["stencilsProgramLengthYears"]?first)!"0") != "0">
                         <#if hasPrev>, </#if>
-                        ${result.metaData.stencilsProgramLengthYears} years
+                        ${(result.listMetadata["stencilsProgramLengthYears"]?first)!} years
                         <#local hasPrev = true>
                     </#if>
-                    <#if (result.metaData.stencilsProgramLengthMonths!"0") != "0">
+                    <#if ((result.listMetadata["stencilsProgramLengthMonths"]?first)!"0") != "0">
                         <#if hasPrev>, </#if>
-                        ${result.metaData.stencilsProgramLengthMonths} months
+                        ${(result.listMetadata["stencilsProgramLengthMonths"]?first)!} months
                         <#local hasPrev = true>
                     </#if>
-                    <#if (result.metaData.stencilsProgramLengthWeeks!"0") != "0">
+                    <#if ((result.listMetadata["stencilsProgramLengthWeeks"]?first)!"0") != "0">
                         <#if hasPrev>, </#if>
-                        ${result.metaData.stencilsProgramLengthWeeks} weeks
+                        ${(result.listMetadata["stencilsProgramLengthWeeks"]?first)!} weeks
                     </#if>
-                    <#if (result.metaData.stencilsProgramLengthVaries!"false") == "true">
+                    <#if ((result.listMetadata["stencilsProgramLengthVaries"]?first)!"false") == "true">
                         Variable length
                     </#if>
                 </span>
                 <div class="search-results__compare">
-                    <input type="checkbox" id="compare${result.rank}" name="compare${result.rank}" value="Compare Program">
-                    <label class="compare-button" data-url="${result.liveUrl}" for="compare${result.rank}">Compare Program</label>
+                    <input type="checkbox" id="compare${result.rank!}" name="compare${result.rank!}" value="Compare Program">
+                    <label class="compare-button" data-url="${result.liveUrl!}" for="compare${result.rank!}">Compare Program</label>
                 </div>
             </div>
         </div>

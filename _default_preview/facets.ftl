@@ -89,14 +89,12 @@
         <section class="filter-list">
             <h3 class="filter-list__title">Filters:</h3>
             <ul class="filter-list__list">
-                <#list response.facets as facet>
-                    <#if facet.selected && facet.guessedDisplayType != "TAB">
-                        <#list facet.selectedValues as value>
-                            <li class="filter-list__item">
-                                <a href="${value.toggleUrl}" title="Remove '${facet.name}: ${value.label}'" class="filter-list__link"><span class="sr-only">Clear filter </span><strong>${facet.name}:</strong> ${value.label}</a>
-                            </li>
-                        </#list>
-                    </#if>
+                <#list response.facets?filter(facet -> facet.selected && facet.guessedDisplayType != "TAB") as facet>
+                    <#list facet.selectedValues as value>
+                        <li class="filter-list__item">
+                            <a href="${value.toggleUrl}" title="Remove '${facet.name}: ${value.label}'" class="filter-list__link"><span class="sr-only">Clear filter </span><strong>${facet.name}:</strong> ${value.label}</a>
+                        </li>
+                    </#list>
                 </#list>
             </ul>
         </section>

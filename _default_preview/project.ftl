@@ -39,27 +39,8 @@
 
 <#-- Displays the search results -->
 <#macro ResultList name="Programs">
-    <@base.TypeDisplay name=name />
-    <@base.Count />
-    <@base.NoResults />  
-
     <@base.ResultList nestedRank=3>            
     </@base.ResultList>
-
-
-    <#--  <article class="search-results__list">
-        <#list (response.resultPacket.resultsWithTierBars)![] as result>
-            <#if result.class.simpleName == "TierBar">
-                <@results.TierBar tierbar=result />
-            <#else>
-                <#if name!?upper_case == (question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course") + "s")?upper_case >
-                    <@programs.Result result=result />
-                <#else>
-                    <@courses.Result result=result />
-                </#if>
-            </#if>
-        </#list>
-    </article>  -->
 </#macro>
 
 

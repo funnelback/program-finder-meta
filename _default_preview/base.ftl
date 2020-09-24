@@ -167,7 +167,6 @@
     </section>
 </#macro>
 
-
 <#--
   Display paging controls
 -->

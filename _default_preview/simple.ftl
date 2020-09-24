@@ -11,6 +11,7 @@
 <#import "results.ftl" as results />
 <#import "auto-complete.ftl" as auto_complete />
 <#import "curator.ftl" as curator />
+<#import "extra_search.ftl" as extra_search />
 
 
 <#-- Specific result styling imports
@@ -30,13 +31,11 @@
         <meta name="referrer" content="always">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         
-        <!-- Imports -->
-        <link href="https://unpkg.com/normalize.css@8.0.1/normalize.css" rel="stylesheet">
-         <script src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
-          
         <title><@s.AfterSearchOnly>${question.query!}<@s.IfDefCGI name="query">,&nbsp;</@s.IfDefCGI></@s.AfterSearchOnly><@s.cfg>service_name</@s.cfg></title>
         
         <#-- Presentation logic shared across all Vertical Product -->
+        <link href="https://unpkg.com/normalize.css@8.0.1/normalize.css" rel="stylesheet">
+        <script src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
         <link href="/s/resources/${question.collection.id}/${question.profile}/css/main.css" rel="stylesheet">
         
         <#-- Output the implementation specific CSS -->
@@ -49,147 +48,144 @@
         
         <div class="fb-container">
             <main class="main" role="main">
-
                 <#-- Display the initial -->
-                <@s.InitialFormOnly>
-                
-                <section class="module-intro content-wrapper">
-                    <h1 class="module-intro__title">Explore ${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")}s</h1>
-                    <p class="module-intro__desc">
-                        Use our interactive ${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")} Finder to explore what Funnelback has to offer. Filter your search by subject,
-                        delivery method and term. Or type a keyword to get started.
-                    </p>
-                </section>
+                <@s.InitialFormOnly>                
+                    <section class="module-intro content-wrapper">
+                        <h1 class="module-intro__title">Explore ${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")}s</h1>
+                        <p class="module-intro__desc">
+                            Use our interactive ${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")} Finder to explore what Funnelback has to offer. Filter your search by subject,
+                            delivery method and term. Or type a keyword to get started.
+                        </p>
+                    </section>
                 </@s.InitialFormOnly>
                 
                 <section class="module-search js-module-search content-wrapper">
-                    <h2 class="sr-only">Search module</h2>
-                    
-                    <@project.SearchForm />
-                    
+                    <h2 class="sr-only">Search module</h2>                    
+                    <@project.SearchForm />                    
                 </section>
                 
-                <@s.AfterSearchOnly>
-                
-                <#-- Display the facets for the program finder -->
-                <@project.Facets />
-        
-                <#-- SEARCH RESULTS -->
-                <section class="search-results js-search-results">
-                    <div class="content-wrapper">
-                        <div class="search-results__tools">
-                            <h2 class="search-results__tools-title">Search results <#if question.query??> for "<@s.QueryClean/>"</#if></h2>
-                            
-                            <#-- Display the facets which have been selected by the user -->
-                            <@facets.FacetBreadBox/>
+                <@s.AfterSearchOnly>                
+                    <#-- Display the facets for the program finder -->
+                    <@project.Facets />
+            
+                    <#-- SEARCH RESULTS -->
+                    <section class="search-results js-search-results">
+                        <div class="content-wrapper">
+                            <div class="search-results__tools">
+                                <h2 class="search-results__tools-title">Search results <#if question.query??> for "<@s.QueryClean/>"</#if></h2>
+                                
+                                <#-- Display the facets which have been selected by the user -->
+                                <@facets.FacetBreadBox/>
 
-                            <div class="search-results__tools-right">
-                                <#if (response.facetExtras.hasSelectedNonTabFacets)!>
-                                    <a href="${response.facetExtras.unselectAllFacetsUrl!}"
-                                    class="search-results__tools-link highlight">Clear all filters</a>
-                                </#if>
-                                <a href="#"
-                                    class="search-results__icon search-results__icon--box active">
-                                    <span class="sr-only">
-                                        Grid view
-                                    </span>
-                                </a>
-                                <a href="#"
-                                    class="search-results__icon search-results__icon--list">
-                                    <span class="sr-only">
-                                        List view
-                                    </span>
-                                </a>
+                                <div class="search-results__tools-right">
+                                    <#if (response.facetExtras.hasSelectedNonTabFacets)!>
+                                        <a href="${response.facetExtras.unselectAllFacetsUrl!}"
+                                        class="search-results__tools-link highlight">Clear all filters</a>
+                                    </#if>
+                                    <a href="#"
+                                        class="search-results__icon search-results__icon--box active">
+                                        <span class="sr-only">
+                                            Grid view
+                                        </span>
+                                    </a>
+                                    <a href="#"
+                                        class="search-results__icon search-results__icon--list">
+                                        <span class="sr-only">
+                                            List view
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                            
+                            <#-- 
+                                Curator - We only want to display curator if there are any to avoid
+                                excessive padding/margins.
+                            -->
+                            <@curator.HasCurator position="center">
+                                <div class="fb-curator">
+                                    <article class="search-results__list--list-view">
+                                        <@curator.Curator "center" />
+                                    </article>
+                                </div>
+                            </@curator.HasCurator>
+
+                            <#-- 
+                                Best Bets - We only want to display best bets if there are any to avoid
+                                excessive padding/margins. 
+                            -->
+                            <@curator.HasBestBets>
+                                <div class="fb-curator">
+                                    <article class="search-results__list--list-view">
+                                        <@curator.BestBets />
+                                    </article>
+                                </div>
+                            </@curator.HasBestBets>
+
+                        </div>                        
                         
-                        <#-- 
-                            Curator - We only want to display curator if there are any to avoid
-                            excessive padding/margins.
-                        -->
-                        <@curator.HasCurator position="center">
+                        <#-- Programs -->
+                        <#if question.customData.stencilsShowCourses?? && question.customData.stencilsShowCourses>
+                            <@extra_search.Preview  extraSearchName="programs" documentType="Programs" />
+                        </#if>
+
+                        <#--  <#if question.customData.stencilsShowPrograms?? && question.customData.stencilsShowPrograms>
+                            <@fb.ExtraResults name="programs">
+                                <div class="content-wrapper">
+                                    <@project.ResultList name=question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?cap_first + "s" />
+                                
+                                    <@base.Paging/>
+                                </div>
+                            </@fb.ExtraResults>
+                        </#if>  -->
+
+                        <#-- Courses -->
+                        <#if question.customData.stencilsShowCourses?? && question.customData.stencilsShowCourses>
+                            <@fb.ExtraResults name="courses">
+                                <div class="content-wrapper">
+
+                                    <@project.ResultList name=question.collection.configuration.value("stencils.I18n.finder_type_secondary", "Course")?cap_first + "s" />
+
+                                    <@base.Paging/>
+                                </div>
+                            </@fb.ExtraResults>
+                        </#if>
+                    </section>
+                    <#-- END SEARCH RESULTS -->
+                    
+
+                    <#-- Curator - Bottom -->
+                    <@curator.HasCurator position="center">
+                        <div class="content-wrapper">
                             <div class="fb-curator">
                                 <article class="search-results__list--list-view">
-                                    <@curator.Curator "center" />
+                                    <@curator.Curator position="bottom" />
                                 </article>
                             </div>
-                        </@curator.HasCurator>
-
-                        <#-- 
-                            Best Bets - We only want to display best bets if there are any to avoid
-                            excessive padding/margins. 
-                        -->
-                        <@curator.HasBestBets>
-                            <div class="fb-curator">
-                                <article class="search-results__list--list-view">
-                                    <@curator.BestBets />
-                                </article>
-                            </div>
-                        </@curator.HasBestBets>
-
-                    </div>
-                    
-                    
-                    <#-- Programs -->
-                    <#if question.customData.stencilsShowPrograms?? && question.customData.stencilsShowPrograms>
-                        <@fb.ExtraResults name="programs">
-                            <div class="content-wrapper">
-                                <@project.ResultList name=question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?cap_first + "s" />
-                            
-                                <@base.Paging/>
-                            </div>
-                        </@fb.ExtraResults>
-                    </#if>
-
-                    <#-- Courses -->
-                    <#if question.customData.stencilsShowCourses?? && question.customData.stencilsShowCourses>
-                        <@fb.ExtraResults name="courses">
-                            <div class="content-wrapper">
-
-                                <@project.ResultList name=question.collection.configuration.value("stencils.I18n.finder_type_secondary", "Course")?cap_first + "s" />
-
-                                <@base.Paging/>
-                            </div>
-                        </@fb.ExtraResults>
-                    </#if>
-                </section>
-                <#-- END SEARCH RESULTS -->
-                
-
-                <#-- Curator - Bottom -->
-                <@curator.HasCurator position="center">
-                    <div class="content-wrapper">
-                        <div class="fb-curator">
-                            <article class="search-results__list--list-view">
-                                <@curator.Curator position="bottom" />
-                            </article>
                         </div>
-                    </div>
-                </@curator.HasCurator>
+                    </@curator.HasCurator>
 
-                <#-- Contextual navigation -->
-                <@base.ContextualNavigation />
+                    <#-- Contextual navigation -->
+                    <@base.ContextualNavigation />
 
-                <#-- testing custom code -->
-                <section class="module-compare js-module-compare">
-                    <h2 class="sr-only">Compare elements</h2>
-                    <div class="module-compare__bar content-wrapper">
-                        <a href="#" class="module-compare__close">Close</a>
-                        <a href="#" class="module-compare__clear hidden">Clear</a>
-                         
-                    </div>
-                    <div class="module-compare__wrapper content-wrapper">
-                        <table class="module-compare__list">
-                            <tbody>
-                                <tr>
-                                    <th scope="row"></th>
-                                    <#-- actual compare items go here -->
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-               
+                    <#-- testing custom code -->
+                    <section class="module-compare js-module-compare">
+                        <h2 class="sr-only">Compare elements</h2>
+                        <div class="module-compare__bar content-wrapper">
+                            <a href="#" class="module-compare__close">Close</a>
+                            <a href="#" class="module-compare__clear hidden">Clear</a>
+                            
+                        </div>
+                        <div class="module-compare__wrapper content-wrapper">
+                            <table class="module-compare__list">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <#-- actual compare items go here -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>               
                 </@s.AfterSearchOnly>
             </main><!-- /.main -->
         </div>

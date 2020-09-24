@@ -70,10 +70,10 @@
         </@facets.IsNotSelected>
 
         <#-- Programs extra search -->
-        <@extra_search.Preview  extraSearchName="programs" documentType="Programs" />
+        <@extra_search.Preview  extraSearchName="programs" documentType=question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?cap_first + "s" />
         
         <#-- Courses extra search -->
-        <@extra_search.Preview  extraSearchName="courses" documentType="Courses" />
+        <@extra_search.Preview  extraSearchName="courses" documentType=question.collection.configuration.value("stencils.I18n.finder_type_secondary", "Course")?cap_first + "s" />
     </section>
     <#-- END SEARCH RESULTS -->
 

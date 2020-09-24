@@ -2,10 +2,11 @@
 
 <#macro Config>
  <#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
+ <#local host=httpRequest.getHeader('host')>
  <script type="text/javascript">
  var cartJS = {
     config: {
-        apiUrl: 'https://stage-stencil-search.clients.funnelback.com/s/cart.json',
+        apiUrl: '//${host}/s/cart.json',
         collectionName: 'program-finder-meta',
         loadOnInit: true,
         itemTemplate: document.getElementById('cart-template-program-finder').innerHTML,
@@ -446,4 +447,20 @@
   </script>
 
   </#if>
+</#macro>
+
+<#--
+	Display a "Last visited X time ago" link for a result
+
+	@param result Result to display the link for
+-->
+<#macro LastVisitedLink result>
+	<#if question.collection.configuration.valueAsBoolean("ui.modern.session") && session?? && session.getClickHistory(result.indexUrl)??>
+		<p class="search-last-visited session-history-link"> 
+			<small>
+				<span class="far fa-clock"></span>
+				Last visited ${prettyTime(session.getClickHistory(result.indexUrl).clickDate)}
+			</small>
+		</p>
+	</#if>
 </#macro>

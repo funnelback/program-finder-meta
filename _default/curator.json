@@ -57,4 +57,55 @@
     "type" : "PromoteUrls",
     "urlsToPromote" : [ "https://www.tru.ca/programs/catalogue/bachelor-of-business-administration" ]
   } ]
+}, {
+  "created" : "2020-06-03T12:05:51.469556Z",
+  "lastModified" : "2020-07-09T15:05:30.822104Z",
+  "id" : "d2daed55-d35b-4ed1-9d20-a6ce9c62f26e",
+  "name" : "Science - COVID Warning",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "science" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "COVID-19:  Coronavirus Updates",
+    "displayUrl" : "",
+    "linkUrl" : "www.funnelback.com",
+    "descriptionHtml" : "In an effort to limit exposure to and spread of COVID-19, the University will follow the advice of the CDC, specifically its recommendations in regard to higher education.",
+    "additionalProperties" : {
+      "tag" : "Promoted"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-07-09T15:07:22.090571Z",
+  "lastModified" : "2020-07-09T15:19:31.453776Z",
+  "id" : "4d4a25ee-e107-4134-b7b2-5e5eff298d48",
+  "name" : "",
+  "label" : "BEST_BETS",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "ExactQuery",
+    "triggerQuery" : "engineering",
+    "ignoreCase" : false
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "School of Trades and Technology",
+    "displayUrl" : "",
+    "linkUrl" : "",
+    "descriptionHtml" : "We offer foundation and apprenticeship training backed by the Industry Training Authority of BC, as well as career-oriented degrees, diplomas and certificates, and upgrading through continuing studies courses.",
+    "additionalProperties" : null,
+    "category" : "BEST_BETS",
+    "removeCollectionUrl" : false
+  } ]
 } ]

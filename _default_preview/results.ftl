@@ -1,10 +1,5 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 
-<#macro TierBar tierbar>
-    <#-- No design in this stencil by default -->
-</#macro>
-
-
 <#macro CartTemplate>
     <script id="cart-template-program-finder" type="text/x-cart-template">
         <td>

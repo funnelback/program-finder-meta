@@ -20,16 +20,6 @@
     </form>
 </#macro>
 
-<#macro TypeDisplay name="">
-    <h3 class="search-results__section-title">${name} (<span>${response.resultPacket.resultsSummary.totalMatching!}</span>)</h3>
-</#macro>
-
-<#macro Count>
-    <#if (response.resultPacket.resultsSummary.totalMatching)! != 0>
-        <span class="search-results__total text-right">Showing <span>${response.resultPacket.resultsSummary.currStart!}</span> - <span>${response.resultPacket.resultsSummary.currEnd!}</span> of <span>${response.resultPacket.resultsSummary.totalMatching!}</span> Results</span>
-    </#if>
-</#macro>
-
 <#--
   Display query blending notice
 -->
@@ -53,6 +43,33 @@
             Did you mean <em><a href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${(response.resultPacket.spell.text)!}</a></em>?
         </div>
     </#if>
+</#macro>
+
+<#--
+  Display result counts
+-->
+<#macro Counts>
+    <span class="search-results__total">
+        <#if response.resultPacket.resultsSummary.totalMatching == 0>        
+            <span class="search-counts-total-matching ">0</span> search results for <strong class="highlight"><@s.QueryClean /></strong>
+        </#if>
+        <#if response.resultPacket.resultsSummary.totalMatching != 0>
+            <span class="search-counts-page-start">${response.resultPacket.resultsSummary.currStart}</span> -
+            <span class="search-counts-page-end">${response.resultPacket.resultsSummary.currEnd}</span> of
+            <span class="search-counts-total-matching">${response.resultPacket.resultsSummary.totalMatching?string.number}</span>
+            <#if question.inputParameterMap["s"]?? && question.inputParameterMap["s"]?contains("?:")><em>collapsed</em> </#if>search results for <strong class="highlight"><@s.QueryClean></@s.QueryClean></strong> <#list response.resultPacket.QSups as qsup>or <strong class="highlight">${qsup.query}</strong><#if qsup_has_next>, </#if></#list>
+        </#if>
+
+        <#if (response.resultPacket.resultsSummary.partiallyMatching!0) != 0>
+            where <span class="search-counts-fully-matching">${response.resultPacket.resultsSummary.fullyMatching?string.number}</span>
+            match all words and <span class="search-counts-partially-matching">${response.resultPacket.resultsSummary.partiallyMatching?string.number}</span>
+            match some words.
+        </#if>
+        <#if (response.resultPacket.resultsSummary.collapsed!0) != 0>
+            <span class="search-counts-collapsed">${response.resultPacket.resultsSummary.collapsed}</span>
+            very similar results included.
+        </#if>
+    </span>
 </#macro>
 
 <#--

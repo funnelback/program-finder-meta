@@ -13,6 +13,87 @@
     <@base.SearchForm />
 </#macro>
 
+<#macro Results>
+    <#-- Display the facets for the program finder -->
+    <@project.Facets />
+
+    <#-- SEARCH RESULTS -->
+    <section class="search-results js-search-results">
+        <div class="content-wrapper">
+            <div class="search-results__tools cleafix">
+                <h2 class="search-results__tools-title">Search results</h2>
+                
+                <#-- Display the facets which have been selected by the user -->
+                <@facets.FacetBreadBox/>
+
+                <div class="search-results__tools-right clearfix">
+                    <@base.Counts />
+                    <#if (response.facetExtras.hasSelectedNonTabFacets)!>
+                        <a href="${response.facetExtras.unselectAllFacetsUrl!}"
+                        class="search-results__tools-link highlight">Clear all filters</a>
+                    </#if>
+                    <#--  <@base.LimitDropdown />
+                    <@base.SortDropdown />  -->
+                    <@base.DisplayMode />
+                </div>
+            </div>
+            
+            <#-- 
+                Curator - We only want to display curator if there are any to avoid
+                excessive padding/margins.
+            -->
+            <@curator.HasCurator position="center">
+                <article class="search-results__list--list-view fb-curator">
+                    <@curator.Curator "center" />
+                </article>
+            </@curator.HasCurator>
+
+            <#-- 
+                Best Bets - We only want to display best bets if there are any to avoid
+                excessive padding/margins. 
+            -->
+            <@curator.HasBestBets>
+                <article class="search-results__list--list-view fb-curator">
+                    <@curator.BestBets />
+                </article>
+            </@curator.HasBestBets>
+
+        </div>                        
+        
+        <#-- Hide the organic/normal results on the all tab -->
+        <@facets.IsNotSelected facetName="Tabs" categoryLabel="All">
+            <div class="content-wrapper">
+                <@base.NoResults />
+                <@base.ResultList />
+                <@base.Paging />
+            </div>
+        </@facets.IsNotSelected>
+
+        <#-- Programs extra search -->
+        <@extra_search.Preview  extraSearchName="programs" documentType="Programs" />
+        
+        <#-- Courses extra search -->
+        <@extra_search.Preview  extraSearchName="courses" documentType="Courses" />
+    </section>
+    <#-- END SEARCH RESULTS -->
+
+
+    <#-- Curator - Bottom -->
+    <@curator.HasCurator position="bottom">
+        <div class="content-wrapper">
+            <div class="fb-curator">
+                <article class="search-results__list--list-view">
+                    <@curator.Curator position="bottom" />
+                </article>
+            </div>
+        </div>
+    </@curator.HasCurator>
+
+    <#-- Contextual navigation -->
+    <@base.ContextualNavigation />
+</#macro>
+
+
 <#-- Display the facets allowing the user to refine the search results -->
 <#macro Facets>
     <section class="module-filter module-filter--dark js-module-filter content-wrapper">
@@ -35,14 +116,6 @@
         </div>
     </section>
 </#macro> 
-
-
-<#-- Displays the search results -->
-<#macro ResultList name="Programs">
-    <@base.ResultList nestedRank=3>            
-    </@base.ResultList>
-</#macro>
-
 
 <#-- 
     Macro decides how each result should be presented. 

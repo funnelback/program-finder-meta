@@ -26,7 +26,7 @@
                 <#assign searchLink = question.getCurrentProfileConfig().get("ui.modern.search_link")!>
                 <#assign previewLink = response.customData.stencilsSearchPreviewLink!>
                 
-                <a href="${searchLink}${previewLink}" class="search-results__link-all text-right" title="See more results for ${tabDisplayName!}">
+                <a href="${searchLink}${previewLink}" class="search-results__link-all text-right" title="See more results for ${documentType!}">
                 See all ${documentType!} 
                 <span>(${(response.resultPacket.resultsSummary.totalMatching)!})</span>
                 </a>

@@ -32,8 +32,10 @@
                         <a href="${response.facetExtras.unselectAllFacetsUrl!}"
                         class="search-results__tools-link highlight">Clear all filters</a>
                     </#if>
-                    <#--  <@base.LimitDropdown />
-                    <@base.SortDropdown />  -->
+                    <#-- TODO - Figure out how to style this                     
+                    <@base.LimitDropdown />
+                    <@base.SortDropdown />  
+                    -->
                     <@base.DisplayMode />
                 </div>
             </div>
@@ -60,7 +62,10 @@
 
         </div>                        
         
-        <#-- Hide the organic/normal results on the all tab -->
+        <#-- 
+            Hide the organic/normal results on the all tab as we only 
+            want to display the extra searches 
+        -->
         <@facets.IsNotSelected facetName="Tabs" categoryLabel="All">
             <div class="content-wrapper">
                 <@base.NoResults />
@@ -70,10 +75,10 @@
         </@facets.IsNotSelected>
 
         <#-- Programs extra search -->
-        <@extra_search.Preview  extraSearchName="programs" documentType=question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?cap_first + "s" />
+        <@extra_search.Preview  extraSearchName="programs" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary") + "s" />
         
         <#-- Courses extra search -->
-        <@extra_search.Preview  extraSearchName="courses" documentType=question.collection.configuration.value("stencils.I18n.finder_type_secondary", "Course")?cap_first + "s" />
+        <@extra_search.Preview  extraSearchName="courses" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_secondary") + "s" />
     </section>
     <#-- END SEARCH RESULTS -->
 

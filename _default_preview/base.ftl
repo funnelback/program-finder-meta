@@ -401,3 +401,13 @@
         </section>
     </#if>
 </#macro>
+
+<#-- 
+    Creates a valid CSS ID by replacing all special characters (except for hypens)
+    with underscores (_). Note mulitple underscores will be replace by 1 underscore.
+
+    @param input A string which is to be converted to a valid CSS ID.
+-->
+<#function getCssID input="">
+    <#return (input)!?replace('[^A-Za-z0-9-]+', '_', 'r')>
+</#function>

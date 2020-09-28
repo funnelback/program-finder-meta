@@ -14,7 +14,8 @@
 <#import "extra_search.ftl" as extra_search />
 
 
-<#-- Specific result styling imports
+<#--
+    Specific result styling imports
 	These imports are required for the automatic template selection to work
 	The various namespaces (e.g. 'video', 'facebook') need to be on the main scope 
 -->
@@ -88,6 +89,144 @@
                         </div>
                     </section>               
                 </@s.AfterSearchOnly>
+
+                <section class="quick-view js-quick-view" tabindex="-1">
+                    <button class="quick-view__close"><span class="sr-only">close</span></button>
+                    <div class="quick-view__wrapper">
+                        <div class="quick-view__content">
+                        <h2 class="quick-view__title">Lorem ipsum dolor (Ph.D.)</h2>
+                        <p class="quick-view__desc">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum risus, ultricies nec maecenas ornare
+                            adipiscing viverra nullam. Ultrices varius tortor, elit enim, eget id amet.
+                        </p>
+                        <p class="quick-view__desc">
+                            At pulvinar eget sed semper. Lectus facilisis cursus neque viverra in morbi. Augue ultrices non in nunc, sit in.
+                            Tempus laoreet mattis elementum dui ante augue. Egestas tincidunt eget tellus pretium adipiscing amet risus.
+                        </p>
+
+                        <div class="quick-view__details">
+                            <h3 class="quick-view__details-title">Program details</h3>
+
+                            <div class="quick-view__details-content">
+                                <h4>Lorem ipsum dolor sit amet.</h4>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non molestie ac adipiscing a.
+                                    Pharetra purus nam quis feugiat.
+                                </p>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non molestie ac adipiscing a.
+                                </p>
+                                <dl>
+                                    <dt>Program length:</dt>
+                                    <dd>3 years</dd>
+                                    <dt>Qualification:</dt>
+                                    <dd>pHd Science</dd>
+                                </dl>
+                                <a href="#" class="btn">Visit program page</a>
+                            </div>
+                        </div>
+                    </div>
+                        <section class="related">
+                        <h3 class="related__title">Related courses</h3>
+                        <ul class="related__list">
+                            <li class="related__item">
+                                <figure class="related__bg">
+                                    <img src="mysource_files/img-1.jpg" alt="">
+                                </figure>
+                                <div class="related__content">
+                                    <a href="#" class="related__link">
+                                        <h4 class="related__item-title">
+                                            Lorem Ipsum Dorem
+                                        </h4>
+                                        <span>Ph.D.</span>
+                                    </a>
+                                    <p class="related__desc">
+                                        Lorem ipsum dolor sit amet, consectetur non...
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="related__item">
+                                <figure class="related__bg">
+                                    <img src="mysource_files/img2.jpg" alt="">
+                                </figure>
+                                <div class="related__content">
+                                    <a href="#" class="related__link">
+                                        <h4 class="related__item-title">
+                                            Lorem Ipsum Dorem Lorem Ipsum Dorem
+                                        </h4>
+                                    </a>
+                                    <p class="related__desc">
+                                        Lorem ipsum dolor sit amet, consectetur non.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="related__item">
+                                <figure class="related__bg">
+
+                                </figure>
+                                <div class="related__content">
+                                    <a href="#" class="related__link">
+                                        <h4 class="related__item-title">
+                                            Lorem Ipsum Dorem
+                                        </h4>
+                                        <span>Ph.D.</span>
+                                    </a>
+                                    <p class="related__desc">
+                                        Lorem ipsum dolor sit amet, consectetur non.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="related__item">
+                                <figure class="related__bg">
+
+                                </figure>
+                                <div class="related__content">
+                                    <a href="#" class="related__link">
+                                        <h4 class="related__item-title">
+                                            Lorem Ipsum Dorem
+                                        </h4>
+                                        <span>Ph.D.</span>
+                                    </a>
+                                    <p class="related__desc">
+                                        Lorem ipsum dolor sit amet, consectetur non.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="related__item">
+                                <figure class="related__bg">
+
+                                </figure>
+                                <div class="related__content">
+                                    <a href="#" class="related__link">
+                                        <h4 class="related__item-title">
+                                            Lorem Ipsum Dorem
+                                        </h4>
+                                        <span>Ph.D.</span>
+                                    </a>
+                                    <p class="related__desc">
+                                        Lorem ipsum dolor sit amet, consectetur non.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="related__item">
+                                <figure class="related__bg">
+
+                                </figure>
+                                <div class="related__content">
+                                    <h4 class="related__item-title">
+                                        <a href="#" class="related__link">
+                                            Lorem Ipsum Dorem
+                                        </a>
+                                    </h4>
+                                    <p class="related__desc">
+                                        Lorem ipsum dolor sit amet, consectetur non.
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                    </div>
+                </section>                
             </main><!-- /.main -->
         </div>
   

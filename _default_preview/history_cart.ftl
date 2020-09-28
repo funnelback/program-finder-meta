@@ -12,10 +12,23 @@
         itemTemplate: document.getElementById('cart-template-program-finder').innerHTML,
         itemTemplateMap: {  // map between template and FB results
             url: 'indexUrl',
-            id: 'metaData.stencilsProgramID',
-            credential: 'metaData.stencilsProgramCredentialName',
+            name: 'title',
             desc: 'metaData.c',
-            name: 'title'
+            programID: 'metaData.programID',
+            programCode: 'metaData.programCode',
+            programCredentialName: 'metaData.programCredentialName',
+            programCredentialType: 'metaData.programCredentialType',
+            programCredits: 'metaData.programCredits',
+            programDelivery: 'metaData.programDelivery',
+            programDepartment: 'metaData.programDepartment',
+            programFaculty: 'metaData.programFaculty',
+            programImage: 'metaData.programImage',
+            programIntakeDates: 'metaData.programIntakeDates',
+            programLengthYears: 'metaData.programLengthYears',
+            programOption: 'metaData.programOption',
+            programPriorityResult: 'metaData.programPriorityResult',
+            programStatus: 'metaData.programStatus',
+            programTags: 'metaData.programTags'
         }
     },
     selectors: {

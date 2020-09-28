@@ -36,3 +36,27 @@
 .content-wrapper:empty {
   display: none;
 }
+
+/* Cart */
+.fb-container .module-compare dl.module-compare__data-list {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.fb-container .module-compare dl.module-compare__data-list dt {
+  flex-basis: 30%;
+  min-width: 5rem;
+  padding: 0.5rem 1.0rem;
+  text-align: right;
+  border-right: 1px solid rgba(185,185,185,0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;  
+}
+
+.fb-container .module-compare dl.module-compare__data-list dd {
+  flex-basis: 60%;
+  flex-grow: 1;
+  margin: 0;
+  padding: 0.5rem 1.5rem;
+  min-width: 10rem;
+}

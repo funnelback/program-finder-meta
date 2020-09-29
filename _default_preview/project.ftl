@@ -5,7 +5,7 @@
     how items in the cart are to be displayed.
 -->
 <#macro CartTemplate>
-    <@results.CartTemplate/>
+    <@programs.CartTemplate/>
 </#macro>
 
 <#-- Display the search form required to query this search implementation -->
@@ -115,7 +115,7 @@
             </div>
             
             <a href="#" class="btn__compare">
-                <span class="btn__compare-text">${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?cap_first} comparison</span>
+                <span class="btn__compare-text">${((question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary"))!"Course")?cap_first} comparison</span>
                 <span class="btn__compare-total">0</span>
             </a>
         </div>

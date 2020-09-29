@@ -72,30 +72,25 @@
                 </#if>
             </p>
             <div class="search-results__bottom">
+                <#--  <span class="search-results__info search-results__info--icon search-results__info--icon-list">
+                    <#if (result.listMetadata["programCode"]?first)!?has_content>(${(result.listMetadata["programCode"]?first)!}) </#if>
+                    <#if (result.listMetadata["programCredentialName"]?first)!?has_content>${(result.listMetadata["programCredentialName"]?first)!?split("|")?join(", ")}</#if>
+                </span>  -->
                 <span class="search-results__info search-results__info--icon search-results__info--icon-list">
-                    <#if (result.listMetadata["programID"]?first)!?has_content>ID ${(result.listMetadata["programID"]?first)!} - </#if><#if (result.listMetadata["programCredentialName"]?first)!?has_content>${(result.listMetadata["programCredentialName"]?first)!?split("|")?join(", ")}</#if>
-                </span>
+                    <#if ((result.listMetadata["stencilsDeliveryMethod"]?first)!"0") != "0">
+                        ${(result.listMetadata["stencilsDeliveryMethod"]?first)!}
+                    </#if>                   
+                </span>                
                 <span class="search-results__info search-results__info--icon search-results__info--icon-list">
                     <#local hasPrev = false>
                     <#if ((result.listMetadata["programCredits"]?first)!"0") != "0">
                         ${(result.listMetadata["programCredits"]?first)!} credits
-                    </#if>
+                        <#local hasPrev = true>
+                    </#if>                 
                     <#if ((result.listMetadata["programLengthYears"]?first)!"0") != "0">
                         <#if hasPrev>, </#if>
                         ${(result.listMetadata["programLengthYears"]?first)!} years
                         <#local hasPrev = true>
-                    </#if>
-                    <#if ((result.listMetadata["programLengthMonths"]?first)!"0") != "0">
-                        <#if hasPrev>, </#if>
-                        ${(result.listMetadata["programLengthMonths"]?first)!} months
-                        <#local hasPrev = true>
-                    </#if>
-                    <#if ((result.listMetadata["programLengthWeeks"]?first)!"0") != "0">
-                        <#if hasPrev>, </#if>
-                        ${(result.listMetadata["programLengthWeeks"]?first)!} weeks
-                    </#if>
-                    <#if ((result.listMetadata["programLengthVaries"]?first)!"false") == "true">
-                        Variable length
                     </#if>
                 </span>
                 <div class="search-results__compare">
@@ -148,22 +143,22 @@
                                 <dt>Campus:</dt>
                                 <dd>${(result.listMetadata["programCampus"]?first)!} </dd>
                             </#if>
-                            <#if (result.listMetadata["programDelivery"]?first)!?has_content >
+                            <#if (result.listMetadata["stencilsDeliveryMethod"]?first)!?has_content >
                                 <dt>Delivery method:</dt>
-                                <dd>${(result.listMetadata["programDelivery"]?first)!} </dd>
+                                <dd>${(result.listMetadata["stencilsDeliveryMethod"]?first)!} </dd>
                             </#if>
                             <#if (result.listMetadata["programLengthYears"]?first)!?has_content &&
                                 ((result.listMetadata["programLengthYears"]?first)!"0") != "0">
                                 <dt>Duration:</dt>
                                 <dd>${(result.listMetadata["programLengthYears"]?first)!} years</dd>
                             </#if>                                                                              
-                            <#if (result.listMetadata["programDepartment"]?first)!?has_content >
-                                <dt>Department:</dt>
-                                <dd>${(result.listMetadata["programDepartment"]?first)!} </dd>
-                            </#if>                                                  
                             <#if (result.listMetadata["programFaculty"]?first)!?has_content >
                                 <dt>Faculty:</dt>
                                 <dd>${(result.listMetadata["programFaculty"]?first)!} </dd>
+                            </#if>                                                  
+                            <#if (result.listMetadata["stencilsDepartment"]?first)!?has_content >
+                                <dt>Department:</dt>
+                                <dd>${(result.listMetadata["stencilsDepartment"]?first)!} </dd>
                             </#if>                                                  
                             <#if (result.listMetadata["programStatus"]?first)!?has_content >
                                 <dt>Status:</dt>
@@ -205,7 +200,54 @@
     </section>    
 </#macro>
 
-
+<#macro CartTemplate>
+    <script id="cart-template-program-finder" type="text/x-cart-template">
+        <td>
+            <a href="#" class="module-compare__remove" data-url="{{url}}">Remove</a>
+            <figure class="module-compare__bg">
+                <img src="https://source.unsplash.com/random/335x192?{{name}}" alt="">
+            </figure>
+            <span class="module-compare__phrase">{{stencilsDeliveryMethod}}</span>
+            <h3 class="module-compare__title">{{name}}</h3>
+            <p class="module-compare__desc">
+                {{desc}}
+            </p>
+            <a href="{{url}}" class="btn--link">More Details</a>
+            <dl class="module-compare__data-list">
+                <dt> 
+                    Credential type
+                </dt>
+                <dd> 
+                    {{programCredentialType}}
+                </dd>
+                <dt> 
+                    Duration
+                </dt>
+                <dd> 
+                    {{programLengthYears}} years
+                </dd>
+                <dt> 
+                    Delivery method
+                </dt>
+                <dd> 
+                    {{stencilsDeliveryMethod}}
+                </dd>                                                                      
+                <dt> 
+                    Faculty
+                </dt>
+                <dd> 
+                    {{programFaculty}}
+                </dd>
+                <dt> 
+                    Department
+                </dt>
+                <dd> 
+                    {{stencilsDepartment}}
+                </dd>
+            </dl>
+        </td>
+    </script>
+</#macro>
 
 <#macro AutoCompleteTemplate>
     <#-- 

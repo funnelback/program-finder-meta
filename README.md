@@ -67,7 +67,7 @@ query_processor_options=-num_ranks=8 -clive=<insert_name_of_meta_collection>
 
 ## Setup the faceted navigation
 
-The Program Finder relies on a facet called `Display` which determines when programs or courses should be displayed. An example of the faceted navigation configuration can be found below:
+The Program Finder relies on a facet called `Tabs` which determines when programs or courses should be displayed. An example of the faceted navigation configuration can be found below:
 
 `<insert image of facet navigation config of display>`
 

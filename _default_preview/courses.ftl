@@ -62,15 +62,21 @@
         <div class="search-results__content">
             <h3 class="search-results__title">
                 <a href="${result.clickTrackingUrl!}" class="search-results__link js-quick-link" data-target="#${base.getCssID(result.liveUrl)}">
-                    ${result.title!}
+                    <@s.boldicize>
+                        ${result.title!}
+                    </@s.boldicize> 
                 </a>
             </h3>
             <p class="search-results__desc">
-                <#if (result.listMetadata["courseDesc"]?first)!?has_content>
-                    ${(result.listMetadata["courseDesc"]?first)!}
-                <#else>
-                    ${result.summary!}
-                </#if>
+                <@s.boldicize>
+                    <@s.Truncate length=170>
+                        <#if (result.listMetadata["c"]?first)!?has_content>
+                            ${(result.listMetadata["c"]?first)!}                            
+                        <#else>
+                            ${result.summary!}
+                        </#if>
+                    </@s.Truncate>
+                </@s.boldicize> 
             </p>
             <div class="search-results__bottom">
                 <span class="search-results__info search-results__info--icon search-results__info--icon-list">

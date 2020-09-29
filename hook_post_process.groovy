@@ -46,6 +46,10 @@ transaction?.response?.resultPacket?.results.each() {
  * stencils.search_preview.events.facet_label=Events
  * stencils.search_preview.social_media.facet_name=Tabs
  * stencils.search_preview.social_media.facet_label=Facebook and Twitter
+ * 
+ * It is also possible to preserve the facet selection when navigating between tabs using the search 
+ * preview functionality by using the following option:
+ * stencils.search_preview.append_selected_facets=true|false
  *
  */
 @Log4j2

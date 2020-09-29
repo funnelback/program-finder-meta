@@ -15,23 +15,24 @@
 -->
 <#macro Preview extraSearchName documentType="" view="List">
     <@fb.ExtraResults name=extraSearchName>
+        <!-- extra_search.Preview -->
         <div class="content-wrapper">
             <h3 class="search-results__section-title">${documentType}</h3>
             <#-- 
                 Show the more link which will allow the user to navigate
                 to the corresponding tab or facet.
             -->
-            <#if (response.customData.stencilsSearchPreviewLink)!?has_content && (response.resultPacket.results)!?has_content>
-                
+            <#if (response.customData.stencilsSearchPreviewLink)!?has_content && (response.resultPacket.results)!?has_content>                
                 <#assign searchLink = question.getCurrentProfileConfig().get("ui.modern.search_link")!>
                 <#assign previewLink = response.customData.stencilsSearchPreviewLink!>
                 
                 <a href="${searchLink}${previewLink}" class="search-results__link-all text-right" title="See more results for ${documentType!}">
-                See all ${documentType!} 
-                <span>(${(response.resultPacket.resultsSummary.totalMatching)!})</span>
+                    See all ${documentType!} 
+                    <span>(${(response.resultPacket.resultsSummary.totalMatching)!})</span>
                 </a>
             </#if>
-
+            
+            <#-- Display the results from this extra search -->
             <@base.NoResults />
             <@base.ResultList />
 

@@ -1,8 +1,10 @@
+<#ftl encoding="utf-8" output_format="HTML" />
+
 <#--
     Javascript required to configure concierge
 -->
 <#macro AutoComplete>
-  <#if question.collection.configuration.hasValue("stencils.auto-completion.datasets")>
+  <#if (question.getCurrentProfileConfig().get("stencils.auto-completion.datasets"))!?has_content>
     jQuery('#query').qc({
         program: '<@s.cfg>auto-completion.program</@s.cfg>',
         alpha: '<@s.cfg>auto-completion.alpha</@s.cfg>',
@@ -13,12 +15,12 @@
             dataset: "module-search__item",
         },
         datasets:{
-          <#list question.collection.configuration.value("stencils.auto-completion.datasets")!?split(",") as dataset>
+          <#list question.getCurrentProfileConfig().get("stencils.auto-completion.datasets")!?split(",") as dataset>
             ${dataset}: {
-                name: '${question.collection.configuration.value("stencils.auto-completion.datasets.${dataset}.name")!}',
-                collection: '${question.collection.configuration.value("stencils.auto-completion.datasets.${dataset}.collection")!}',
-                profile: '${question.collection.configuration.value("stencils.auto-completion.datasets.${dataset}.profile")!question.profile}',
-                show: '${question.collection.configuration.value("stencils.auto-completion.datasets.${dataset}.show")!"10"}'
+                name: '${question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.name")!}',
+                collection: '${question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.collection")!}',
+                profile: '${question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.profile")!question.profile}',
+                show: '${question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.show")!"10"}' 
                 <#if dataset != "organic">
                   , template: {
                     suggestion: jQuery('#auto-completion-${dataset}').text()

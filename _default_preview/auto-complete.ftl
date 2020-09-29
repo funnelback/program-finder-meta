@@ -1,3 +1,5 @@
+<#ftl encoding="utf-8" output_format="HTML" />
+
 <#--
     Javascript required to configure concierge
 -->

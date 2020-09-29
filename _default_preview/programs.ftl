@@ -1,4 +1,9 @@
 <#ftl encoding="utf-8" output_format="HTML" />
+<#-- 
+    Contains all the presentation logic for Programs.
+    This includes how it should be displayed in 
+    auto-complete, cart and quick view.
+-->
 
 <#-- 
 	Macro decides how each result should be presented. 
@@ -47,6 +52,7 @@
 	@param result An individual result fron the data model
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
+    <#-- Generic view template for programs -->
     <article class="search-results__item">
         <#if (result.listMetadata["programImage"]?first)!?has_content>
             <figure class="search-results__bg">
@@ -72,10 +78,6 @@
                 </#if>
             </p>
             <div class="search-results__bottom">
-                <#--  <span class="search-results__info search-results__info--icon search-results__info--icon-list">
-                    <#if (result.listMetadata["programCode"]?first)!?has_content>(${(result.listMetadata["programCode"]?first)!}) </#if>
-                    <#if (result.listMetadata["programCredentialName"]?first)!?has_content>${(result.listMetadata["programCredentialName"]?first)!?split("|")?join(", ")}</#if>
-                </span>  -->
                 <span class="search-results__info search-results__info--icon search-results__info--icon-list">
                     <#if ((result.listMetadata["stencilsDeliveryMethod"]?first)!"0") != "0">
                         ${(result.listMetadata["stencilsDeliveryMethod"]?first)!}
@@ -102,7 +104,15 @@
     </article>
 </#macro>
 
+<#-- 
+    Output the template used in the quick view. Quick view
+    allows the user view more information about a particular
+    document without them having to leave the search results page.
+    This aims to minimise the amount of hopping back and forth 
+    between systems.
+-->
 <#macro QuickViewTemplate result> 
+    <!-- programs.QuickViewTemplate -->
     <section id="${base.getCssID(result.liveUrl)}" class="quick-view js-quick-view" tabindex="-1" role="dialog">
         <button class="quick-view__close"><span class="sr-only">close</span></button>
         <div class="quick-view__wrapper">
@@ -200,7 +210,9 @@
     </section>    
 </#macro>
 
+<#-- Output the template used in the cart -->
 <#macro CartTemplate>
+    <!-- programs.CartTemplate -->
     <script id="cart-template-program-finder" type="text/x-cart-template">
         <td>
             <a href="#" class="module-compare__remove" data-url="{{url}}">Remove</a>
@@ -249,7 +261,9 @@
     </script>
 </#macro>
 
+<#-- Template used in concierge (auto-complete) -->
 <#macro AutoCompleteTemplate>
+    <!-- programs.AutoCompleteTemplate -->
     <#-- 
         Even though this template is for a "program", we still need to call it a "course"
         The css framework currently assumes that the second channel resides under 

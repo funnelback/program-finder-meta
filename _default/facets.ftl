@@ -5,6 +5,7 @@
     
     <#list getFacets(response, facetNames) as facet>
         <#if facet.allValues?size != 0>
+            <!-- facets.RadioFacet -->
             <ul class="module-filter__radio-list">
                 <#list facet.allValues as value>
                     <li class="module-filter__radio-item">
@@ -19,6 +20,7 @@
 
 <#macro DropdownFacets>
     <#local facetNames = (question.getCurrentProfileConfig().get("stencils.facets.dropdown"))!""?split(",") >
+    <!-- facets.DropdownFacets -->
     <ul class="module-filter__list">
         <#list getFacets(response, facetNames) as facet>
         <#if facet.allValues?size != 0>
@@ -60,6 +62,7 @@
 <#macro CheckboxFacet>
     <#-- This can be only 1 facet -->
     <#local facetName = (question.getCurrentProfileConfig().get("stencils.facets.checkbox"))!"" >
+    <!-- facets.CheckboxFacet -->
     <h1>${facetName}</h1>
     <#list getFacets(response, facetName) as facet>
         <ul class="module-filter__checkbox-list">
@@ -87,6 +90,7 @@
 --> 
 <#macro FacetBreadBox>
     <#if response.facetExtras.hasSelectedNonTabFacets>
+        <!-- facets.FacetBreadBox -->
         <section class="filter-list">
             <h3 class="filter-list__title">Filters:</h3>
             <ul class="filter-list__list">

@@ -1,19 +1,12 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 
-<#-- 
-    Include all the cart templates which determines 
-    how items in the cart are to be displayed.
--->
-<#macro CartTemplate>
-    <@programs.CartTemplate/>
-</#macro>
-
 <#-- Display the search form required to query this search implementation -->
 <#macro SearchForm>
     <@base.SearchForm />
 </#macro>
 
 <#macro Results>
+    <!-- project.Results -->
     <#-- Display the facets for the program finder -->
     <@project.Facets />
 
@@ -101,6 +94,7 @@
 
 <#-- Display the facets allowing the user to refine the search results -->
 <#macro Facets>
+    <!-- project.Facets -->
     <section class="module-filter module-filter--dark js-module-filter content-wrapper">
         <div class="module-filter__wrapper">
             <h2 class="module-filter__title">Refine by<span class="mobile-hide">:</span></h2>
@@ -165,6 +159,7 @@
     @param result An individual result fron the data model
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
+    <!-- project.GenericView -->
     <article class="search-results__item search-results__item--default">
         <figure class="search-results__bg">
             <#if (result.listMetadata["image"][0])!?has_content>

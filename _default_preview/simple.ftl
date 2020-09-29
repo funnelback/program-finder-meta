@@ -1,5 +1,16 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 
+<#--
+    This file is responsible for determining the overall structure
+    of the search implementations. It contains things such as:
+
+    - The HTML for the overall structure such as the header, footer 
+        and main content.
+    - The references to the client's header and footer
+    - Third party libraries
+    - References to javascript templates for sessions and concierge
+-->
+
 <#import "/web/templates/modernui/funnelback_classic.ftl" as s/>
 <#import "/web/templates/modernui/funnelback.ftl" as fb />
 
@@ -12,7 +23,6 @@
 <#import "auto-complete.ftl" as auto_complete />
 <#import "curator.ftl" as curator />
 <#import "extra_search.ftl" as extra_search />
-
 
 <#--
     Specific result styling imports
@@ -49,7 +59,10 @@
         
         <div class="fb-container">
             <main class="main" role="main">
-                <#-- Display the initial -->
+                <#-- 
+                    Display the initial search page which is shown to the user
+                    when there is no query.
+                -->
                 <@s.InitialFormOnly>                
                     <section class="module-intro content-wrapper">
                         <h1 class="module-intro__title">Explore ${question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary")?cap_first}s</h1>
@@ -60,13 +73,16 @@
                     </section>
                 </@s.InitialFormOnly>
                 
+                <#-- Display the search form which accepts the user's query -->
                 <section class="module-search js-module-search content-wrapper">
                     <h2 class="sr-only">Search module</h2>                    
                     <@project.SearchForm />                    
                 </section>
                 
-                <#-- What to display after the user has entered a query -->
-                <@s.AfterSearchOnly>                                    
+                <#-- Display the full search page after the user has entered a query -->
+                <@s.AfterSearchOnly>
+
+                    <#-- The bulk of the search implementation will be found here -->                                    
                     <@project.Results />
 
                     <#-- Cart template -->
@@ -101,7 +117,7 @@
 
         <#-- Radio button changes -->
         <script type="text/javascript">
-            $(document).ready(function () {
+            jQuery(function () {
                 $('.program-finder-display').click(function() {
                     var url = $(this).attr('data-url');
                     window.location.href = url;
@@ -116,7 +132,7 @@
         <@programs.AutoCompleteTemplate />
 
         <script>
-            jQuery(document).ready( function() {
+            jQuery(function() {
                 <@auto_complete.AutoComplete />
             });
         </script>
@@ -129,7 +145,7 @@
         <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/vendors.js"></script>
         <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/main.js"></script>
     
-        <@project.CartTemplate/>
+        <@programs.CartTemplate/>
         <@history_cart.Config />
     </body>
 </html>

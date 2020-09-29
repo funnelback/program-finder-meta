@@ -1,4 +1,12 @@
 <#ftl encoding="utf-8" output_format="HTML" />
+<#-- 
+    A collections of common elements used in search implementations.
+
+    If a particular feature requires multiple presentations or is made
+    up more than one macro, consider refactoring the feature to 
+    its own freemarker template.
+->
+
 <#---
   Generates a search form for the current collection, passing through the
   relevant parameters like collection, profile, form, scope, ...
@@ -6,6 +14,7 @@
   @param class Optional <code>class</code> attribute to use on the &lt;form&gt; tag
 -->
 <#macro SearchForm class="">
+    <!-- base.SearchForm -->
     <form action="${question.collection.configuration.value("ui.modern.search_link")}" method="GET"<#if class?has_content> class="${class}"</#if>>
         <div class="module-search__group">
             <input type="hidden" name="collection" value="${question.collection.id}">
@@ -25,6 +34,7 @@
 -->
 <#macro Blending>
     <#if (response.resultPacket.QSups)!?size &gt; 0>
+        <!-- Blending -->
         <blockquote class="blockquote">
         <span class="fas fa-info-circle"></span>
         Your query has been expanded to <strong><#list response.resultPacket.QSups as qsup> ${qsup.query}<#if qsup_has_next>, </#if></#list></strong>.
@@ -38,6 +48,7 @@
 -->
 <#macro Spelling>
     <#if (response.resultPacket.spell)??>
+        <!-- base.Spelling -->
         <div class="search-spelling">
             <span class="fas fa-question-circle"></span>
             Did you mean <em><a href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${(response.resultPacket.spell.text)!}</a></em>?
@@ -49,6 +60,7 @@
   Display result counts
 -->
 <#macro Counts>
+    <!-- base.Counts -->
     <span class="search-results__total">
         <#if response.resultPacket.resultsSummary.totalMatching == 0>        
             <span class="search-counts-total-matching ">0</span> search results for <strong class="highlight"><@s.QueryClean /></strong>
@@ -78,6 +90,7 @@
 <#macro NoResults>
     <#if (response.resultPacket.resultsSummary.totalMatching)!?has_content &&
         response.resultPacket.resultsSummary.totalMatching == 0>
+        <!-- base.NoResults -->
         <section class="module-info content-wrapper">
             <figure class="module-info__bg">
                 <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/no-results-icon.svg" alt="">
@@ -111,6 +124,7 @@
 </#function>
 
 <#macro DisplayMode>
+    <!-- base.displayMode -->
     <a href='${question.getCurrentProfileConfig().get("ui.modern.search_link")}?${removeParam(QueryString, "displayMode")}&displayMode=card' 
         class="search-results__icon search-results__icon--box <#if getDisplayMode(question)! == 'CARD'>active</#if>"
         title="Display results as cards">
@@ -138,7 +152,8 @@
   "url": "URL (A-Z)",
   "durl": "URL (Z-A)",
   "shuffle": "Shuffle"} >
-
+    
+    <!-- base.SortDropdown -->
     <section class="dropdown-list">
         <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
             <span>${(options[question.inputParameterMap["sort"]])!"Sort by"}</span>
@@ -164,7 +179,7 @@
   @param limits Array of number of results to provide (defaults to 10, 20, 50)
 -->
 <#macro LimitDropdown limits=[10, 20, 50]>
-
+    <!-- base.LimitDropdown -->
     <section class="dropdown-list">
         <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
             <span>${question.inputParameterMap["num_ranks"]!"10"}</span>
@@ -188,6 +203,7 @@
   Display paging controls
 -->
 <#macro Paging>
+    <!-- base.Paging -->
     <section class="pagination">
         <nav class="pagination__nav" aria-label="Pagination Navigation">
             <#-- Previous page -->
@@ -260,6 +276,7 @@
         This is used to insert content (usually an extra search) between results.
 -->
 <#macro StandardResults view="LIST" nestedRank=-1>
+    <!-- base.StandardResults -->
     <article class="search-results__list <#if getDisplayMode(question)! == 'LIST'>search-results__list--list-view</#if>">
         <#list (response.resultPacket.resultsWithTierBars)![] as result>
             <#if result.class.simpleName == "TierBar">
@@ -280,6 +297,7 @@
   Display a tier bar
 -->
 <#macro TierBar result>
+    <!-- base.TierBar -->
     <#-- A tier bar -->
     <#if result.matched != result.outOf>
         <h3 class="search-tier text-muted">Results that match ${result.matched} of ${result.outOf} words</h3>
@@ -328,6 +346,7 @@
 </#macro>
 
 <#macro GroupedResults view="LIST">
+    <!-- base.GroupResults -->
     <#-- Loop through each grouped result tier -->
     <#if (response.resultPacket.results)!?has_content>
         <#list (response.customData["stencilsGroupingResults"].groups)![] as group>
@@ -383,6 +402,7 @@
 <#macro ContextualNavigation>
     <#if (response.resultPacket.contextualNavigation.categories)!?has_content &&
         response.resultPacket.contextualNavigation.categories?filter(category -> category.clusters?size gt 0)?size gt 0>
+        <!-- base.ContextualNavigation -->
         <section class="related-links">
             <h2 class="related-links__title">
                 Related searches for <strong><@s.QueryClean /></strong>

@@ -1,4 +1,5 @@
 <#ftl encoding="utf-8" output_format="HTML" />
+<#-- Contains all the presentation logic for Courses -->
 
 <#-- 
 	Macro decides how each result should be presented. 
@@ -47,6 +48,7 @@
 	@param result An individual result fron the data model
 -->
 <#macro GenericView result cardClass="fb-card--fixed">
+    <!-- courses.GenericView -->
     <article class="search-results__item">
         <#if (result.listMetadata["stencilsProgramCredentialName"]?first)!?has_content>
             <figure class="search-results__bg">
@@ -82,7 +84,15 @@
     </article>
 </#macro>
 
+<#-- 
+    Output the template used in the quick view. Quick view
+    allows the user view more information about a particular
+    document without them having to leave the search results page.
+    This aims to minimise the amount of hopping back and forth 
+    between systems.
+-->
 <#macro QuickViewTemplate result> 
+    <!-- courses.QuickViewTempplate -->
     <section id="${base.getCssID(result.liveUrl)}" class="quick-view js-quick-view" tabindex="-1" role="dialog">
         <button class="quick-view__close"><span class="sr-only">close</span></button>
         <div class="quick-view__wrapper">

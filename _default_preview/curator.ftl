@@ -7,6 +7,7 @@
         Only messages with a position attribute matching this will be displayed. Can be empty to display all messages regardless of position.
 -->
 <#macro Curator position>
+    <!-- curator.Curator -->
     <section class="module-curator module-curator--no-bg">
         <h2 class="sr-only">Curator</h2>
         <article class="module-curator__list">
@@ -84,6 +85,7 @@ facets?split(",")?filter( x -> response.facets?filter(y -> x == y.name && y.allV
   Display best bets.
 -->
 <#macro BestBets>
+    <!-- curator.BestBets -->
     <#list (response.curator.exhibits)![] as exhibit>
         <#if exhibit.category == "BEST_BETS">   
             <section class="module-curator module-curator--no-bg">

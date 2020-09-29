@@ -93,10 +93,12 @@
         </div>
   
         <#-- Concierge includes -->  
-        <script src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
-        <script src="/stencils/resources/thirdparty/popper/v1.12.3/umd/popper.min.js"></script>
-        <script src="/stencils/resources/thirdparty/bootstrap/v4.0.0/js/bootstrap.min.js"></script>
-        
+        <script type="text/javascript" src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="/stencils/resources/thirdparty/popper/v1.12.3/umd/popper.min.js"></script>
+        <script type="text/javascript" src="/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
+        <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
+        <script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
+
         <#-- Radio button changes -->
         <script type="text/javascript">
             $(document).ready(function () {
@@ -106,11 +108,6 @@
                 });
             });
         </script>
-
-        <script src="/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
-        <script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
-        <script src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
-        
 
         <#-- 
             Include all the auto complete templates which determines 

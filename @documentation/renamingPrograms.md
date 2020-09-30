@@ -66,7 +66,7 @@ The Program Finder is powered by extra searches which rely
 on the tabs for navigation. As we changed the `Tabs` facet in the previous
 step, we need update the extra search configurations accordingly.
 
-```
+```java
 stencils.search_preview.programs.category_label=<name_of_primary_type_used_in_facet>
 stencils.search_preview.courses.category_label=<name_of_secondary_type_used_in_facet>
 stencils.tabs.extra_searches.<name_of_primary_type_used_in_facet>=
@@ -75,14 +75,14 @@ stencils.tabs.extra_searches.<name_of_secondary_type_used_in_facet>=
 
 e.g. Given when changed the following:
 
-```.properties
+```plaintext
 Programs ->  Courses
 Courses ->  Modules
 ```
 
 The new configuration will be:
 
-```
+```java
 stencils.search_preview.programs.category_label=Courses
 stencils.search_preview.courses.category_label=Modules
 stencils.tabs.extra_searches.Courses=
@@ -92,7 +92,7 @@ stencils.tabs.extra_searches.Modules=
 ### Configure the concierge channel
 
 In additional to organic query completion, the Program Finder provides supports
-for multiple channels of contextual auto-complete suggestion.
+for multiple channels of contextual auto-complete suggestions.
 
 e.g.
 ![Program channel](images/concierge_program_channel.png "Program channel")
@@ -100,7 +100,9 @@ e.g.
 The label for the `Program` can be changed using the following in profile
 configurations:
 
-`stencils.auto-completion.datasets.courses.name=<new_label>`
+```java
+stencils.auto-completion.datasets.courses.name=<new_label>
+```
 
 ## Nice to do
 
@@ -110,4 +112,6 @@ It is best practice to set the service
 title to something which is user friendly as this is what is used in
 the marketing dashboard.
 
-`service.title=<client name> Program Finder`
+```java
+service.title=<client name> Program Finder
+```

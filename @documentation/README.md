@@ -13,7 +13,7 @@ The Program Finder is a highly flexible product which provides the ability to cu
 * **Concierge** - The metadata in the program channel of  concierge.
 * **Cart** - The metadata of programs in the cart.
 
-For more information can be found in [result customisations](result-customisation.md).
+For more information can be found in [result customisations](result-customisations.md).
 
 ## Integration
 

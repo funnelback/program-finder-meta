@@ -1,7 +1,5 @@
 # Program Finder Vertical Product
 
-![Configuring the labels of the facets](@documentation/images/program_finder_overview.png "Configuring the labels of the facets")
-
 This is a quick reference guide to implementing the Program Finder Vertical Product.
 
 At a high level, you will need to:
@@ -9,9 +7,9 @@ At a high level, you will need to:
 * **Setup the program and courses collections** - Create the collections and map the relevant metadata.
 * **Setup the meta collection** - Using this git repo as the basis, setup a new meta collection.
 * **Configure the extra searches** - Create and configure the programs and courses extra searches.
-* **Setup the faceted navigation** - Adjust the `Tabs` other relevant facets.
-* **Customise the result presentation** - Display the relevant images and metadata.
-* **Customise the quick view presentation** - Display the relevant images and metadata.
+* **Setup the faceted navigation** - Adjust the `Tabs` and other relevant facets.
+* **Customise the result presentation** - Display the relevant images and metadata for the results (both card and list views).
+* **Customise the quick view presentation** - Display the relevant images and metadata for the quick view.
 * **Configure concierge** - Customise the concierge to display the relevant metadata.
 * **Configure cart** - Customise the cart to display the relevant metadata.
 * **Configure the header and footer** - Add the client's header and footer to assist with a seamless transition from client's website to search.
@@ -24,7 +22,7 @@ The first step is to create two collections which will gather the programs and c
 
 The important aspect of this step is to get the documents indexed and mapped to the appropriate metadata classes.
 
-The metadata classes are the key drivers as they are used in result presentation, concierge, cart and faceted navigation. Where possible, please default metadata classes names which have been setup in the sample collections.
+The metadata classes are the key drivers as they are used in result presentation, concierge, cart and faceted navigation. Where possible, please use the default metadata classes (names starting with `stencils` or `program`/`course`) names which have been setup in the sample collections.
 
 ### Programs
 
@@ -90,12 +88,23 @@ Quick view allows the user view more information about a particular document wit
 
 It is possible to customise how this is displayed by modifying `<#macro QuickView>` in [programs.ftl](_default_preview/programs.ftl) and [courses.ftl](_default_preview/courses.ftl) templates.
 
+## Configure the concierge
+
+In addition to organic query completion, Concierge is setup to bring back relevant programs in a dedicated channel. This can be customised by
+modifying  `<#macro AutoCompleteTemplate>` in the [programs.ftl](_default_preview/programs.ftl) template.
+
 
 ## Configure the cart
 
-Similarly to the results presentation, it is possible to customise how programs the cart are displayed. This can be done by modifying the `<@macro CartTemplate>` in the [programs.ftl](_default_preview/programs.ftl).
+Similarly to the results presentation, it is possible to customise how programs the cart are displayed. This can be done by modifying  `<#macro CartTemplate>` in the [programs.ftl](_default_preview/programs.ftl) template.
 
 ## Configure the header and footer
 
 To help mimic the look and feel of the client's website, it is possible to configure the header and footer to use the clients markup and script.
 `<link to header and footers ftl>`
+
+## Review the search
+
+Congratulations! Once you completed the above steps, you should have something similar to the following:
+
+![Configuring the labels of the facets](@documentation/images/program_finder_overview.png "Configuring the labels of the facets")

@@ -31,14 +31,14 @@ At a higher level, the process will involve:
 In the profile configurations, set the primary and secondary finder types
 using the following configurations:
 
-```
+```java
 stencils.I18n.finder_type_primary=<name_of_primary_type>
 stencils.I18n.finder_type_secondary=<name_of_secondary_type>
 ```
 
 e.g. In the UK, programs are known as `courses` and courses are known as `modules`. The following will need
 
-```
+```java
 stencils.I18n.finder_type_primary=course
 stencils.I18n.finder_type_secondary=module
 ```
@@ -113,5 +113,5 @@ title to something which is user friendly as this is what is used in
 the marketing dashboard.
 
 ```java
-service.title=<client name> Program Finder
+service.title=<client_name> Program Finder
 ```

@@ -1,5 +1,7 @@
 # Program Finder Vertical Product
 
+![Configuring the labels of the facets](@documentation/images/program_finder_overview.png "Configuring the labels of the facets")
+
 This is a quick reference guide to implementing the Program Finder Vertical Product.
 
 At a high level, you will need to:
@@ -7,8 +9,9 @@ At a high level, you will need to:
 * **Setup the program and courses collections** - Create the collections and map the relevant metadata.
 * **Setup the meta collection** - Using this git repo as the basis, setup a new meta collection.
 * **Configure the extra searches** - Create and configure the programs and courses extra searches.
-* **Setup the faceted navigation** - Create the `display` radio facet and other relevant dropdown facets.
-* **Customise result presentation** - Display the relevant images and metadata.
+* **Setup the faceted navigation** - Adjust the `Tabs` other relevant facets.
+* **Customise the result presentation** - Display the relevant images and metadata.
+* **Customise the quick view presentation** - Display the relevant images and metadata.
 * **Configure concierge** - Customise the concierge to display the relevant metadata.
 * **Configure cart** - Customise the cart to display the relevant metadata.
 * **Configure the header and footer** - Add the client's header and footer to assist with a seamless transition from client's website to search.
@@ -21,23 +24,19 @@ The first step is to create two collections which will gather the programs and c
 
 The important aspect of this step is to get the documents indexed and mapped to the appropriate metadata classes.
 
-The metadata classes are the key drives in the result presentation, concierge, cart and faceted navigation. Please see `<funnelback_server>` for more information.
+The metadata classes are the key drivers as they are used in result presentation, concierge, cart and faceted navigation. Where possible, please default metadata classes names which have been setup in the sample collections.
 
 ### Programs
 
 Programs are the qualifications or accreditation earned which is awarded for completing a set number of courses.
 
-For an example of a program collection please see below:
-
-* `program-finder-programs-web`
+For an example of a program collection please see `program-finder-programs-web`.
 
 ### Courses
 
-Courses are subjects that student undertake as part of a Program. They usually involve lectures, tutorials, workshops, labs etc.
+Courses are subjects, units or modules that student undertake as part of a Program. They usually involve lectures, tutorials, workshops, labs etc.
 
-For an example of a course please see below:
-
-* `program-finder-courses-web`
+For an example of a course please see `program-finder-courses-web`.
 
 ## Setup the meta collection
 
@@ -54,37 +53,47 @@ The Program Finder uses extra searches to display programs and courses in separa
 To configure the extra searches, change the target collection in the following: extra search config:
 
 `extra_search.programs.cfg`
-```
-collection=<insert_name_of_program_collection>
-query_processor_options=-num_ranks=8 -clive=<insert_name_of_meta_collection>
+
+```java
+collection=<name_of_meta_collection>
+query_processor_options=-num_ranks=8 -clive=<name_of_program_collection> -log=off -curator=off -spelling=off -show_qsyntax_tree=off -explain=false
 ```
 
 `extra_search.courses.cfg`
-```
-collection=<insert_name_of_course_collection>
-query_processor_options=-num_ranks=8 -clive=<insert_name_of_meta_collection>
+
+```java
+collection=<name_of_meta_collection>
+query_processor_options=-num_ranks=8 -clive=<name_of_course_collection> -log=off -curator=off -spelling=off -show_qsyntax_tree=off -explain=false
 ```
 
 ## Setup the faceted navigation
 
 The Program Finder relies on a facet called `Tabs` which determines when programs or courses should be displayed. An example of the faceted navigation configuration can be found below:
 
-`<insert image of facet navigation config of display>`
+![Configuring the labels of the facets](@documentation/images/facet_labels.png "Configuring the labels of the facets")
 
-Change the value in the collections field for the Programs and Courses facets so that they reference the relevant collections.
+Change the value in the collections field for the Programs and Courses facets categories so that they reference the relevant collections.
 
-## Customise result presentation
+## Customise the result presentation
 
-It is fairly common that clients customise the way programs and courses are presented so that it best meets their requirement. This can include but not limited to:
+It is fairly common that clients would like to customise the way programs and courses are presented so that it best meets their requirement. This can include but not limited to:
+
 * Adding, changing or removing metadata.
 * Changing the length of title or summary.
 * Updating the html structure prevent or correct css collisions.
 
-`<link to program and courses ftl>`
+This can be done by modifying `<#macro GenericView>` in [programs.ftl](_default_preview/programs.ftl) and [courses.ftl](_default_preview/courses.ftl) templates.
+
+## Customise the quick view presentation
+
+Quick view allows the user view more information about a particular document without them having to leave the search results page. This aims to minimise the amount of hopping back and forth between systems.
+
+It is possible to customise how this is displayed by modifying `<#macro QuickView>` in [programs.ftl](_default_preview/programs.ftl) and [courses.ftl](_default_preview/courses.ftl) templates.
+
 
 ## Configure the cart
 
-Similarly to the results presentation, it is possible to customise how items in the cart are displayed. This can be done by modifying the `<link to template with cart ftl>`.
+Similarly to the results presentation, it is possible to customise how programs the cart are displayed. This can be done by modifying the `<@macro CartTemplate>` in the [programs.ftl](_default_preview/programs.ftl).
 
 ## Configure the header and footer
 

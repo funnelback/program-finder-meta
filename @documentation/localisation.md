@@ -1,7 +1,7 @@
 
 # Localising the Program Finder
 
-Many higher education institutions structure their study options using the following:
+Higher education institutions can structure their study options using the following:
 
 * Programs - Primary type - This is the overarching qualification which awarded through completion one or more courses.
 * Courses - Secondary type - These are the units of study that needs to be completed and contribute credit points towards earning qualifications (i.e. primary type).  
@@ -36,34 +36,33 @@ stencils.I18n.finder_type_primary=<name_of_primary_type>
 stencils.I18n.finder_type_secondary=<name_of_secondary_type>
 ```
 
-e.g. In the UK, programs are known as `courses` and courses are known as `modules`. The following will need
+e.g. In the UK, programs are known as `courses` and courses are known as `modules`. The following will needed:
 
 ```java
 stencils.I18n.finder_type_primary=course
 stencils.I18n.finder_type_secondary=module
 ```
 
-Note: Please use the singular and not the plural form.
+*Note: Please use the singular and not the plural form.*
 
 ### Changing the name of the facet labels
 
-Tab facets are used to allow the user to filter by either by programs and courses.
+Tab facets are used to allow the user to filter by programs and courses.
 
 ![Configuring the labels of the facets](images/screenshot_of_tabs.png "Configuring the labels of the facets")
 
 These labels can be changed by following the steps below:
 
-* On the meta collection, navigate to `Customise Faceted Navigation` and select the `Tabs` facet. 
-* Change the `label` for each facet category to best suit the client's requirement.
-* Take note of these labels as these will need to be used subsequent steps.
+* On the meta collection, navigate to `Customise Faceted Navigation` and select the `Tabs` facet.
+* Change the `label` for each facet category to something which best suits the client's requirement.
+* Take note of these labels as these will needed in subsequent steps.
 
-![Configuring the labels of the facets](images/facet_labels.png "Configuring the .labels of the facets") 
-
+![Configuring the labels of the facets](images/facet_labels.png "Configuring the .labels of the facets")
 
 ### Configuring the search previews
 
 The Program Finder is powered by extra searches which rely
-on the tabs for navigation. As we changed the `Tabs` facet in the previous
+on `Tabs` for navigation. As we changed the `Tabs` facet in the previous
 step, we need update the extra search configurations accordingly.
 
 ```java
@@ -73,7 +72,7 @@ stencils.tabs.extra_searches.<name_of_primary_type_used_in_facet>=
 stencils.tabs.extra_searches.<name_of_secondary_type_used_in_facet>=
 ```
 
-e.g. Given when changed the following:
+e.g. Given the following change:
 
 ```plaintext
 Programs ->  Courses
@@ -91,14 +90,15 @@ stencils.tabs.extra_searches.Modules=
 
 ### Configure the concierge channel
 
-In additional to organic query completion, the Program Finder provides supports
-for multiple channels of contextual auto-complete suggestions.
+Out-of-the-box, the Concierge in the Program Finder has a dedicated channel for `Programs`.
 
 e.g.
 ![Program channel](images/concierge_program_channel.png "Program channel")
 
+This should be renamed to better suit the client's requirements.
+
 The label for the `Program` can be changed using the following in profile
-configurations:
+configuration:
 
 ```java
 stencils.auto-completion.datasets.courses.name=<new_label>
@@ -113,5 +113,11 @@ title to something which is user friendly as this is what is used in
 the marketing dashboard.
 
 ```java
-service.title=<client_name> Program Finder
+service.title=<client_name> <primary_type> Finder
+```
+
+e.g.
+
+```java
+service.title=Funnelback Course Finder
 ```

@@ -33,7 +33,7 @@ Courses are subjects, units or modules that student undertake as part of a Progr
 
 For an example of a course please see `program-finder-courses-web`.
 
-### Meta collection
+#### Meta collection
 
 The meta collection contains the majority of the application and presentation logic required for the Program Finder Vertical Product. It is recommended to name the collection use the following format:
 

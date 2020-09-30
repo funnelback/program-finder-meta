@@ -1,8 +1,8 @@
 # Customisation Guide
 
-## Localisation 
+## Localisation
 
-The Program Finder can be localised by change the names of Program and Courses to better suit the language of the institution. For information on how to do this, please see [Localisations](localisation.md)
+The Program Finder can be localised by change the names of Program and Courses to better suit the language of the institution. For information on how to do this, please see [localisations](localisation.md).
 
 ## Result customisations
 
@@ -13,7 +13,7 @@ The Program Finder is a highly flexible product which provides the ability to cu
 * **Concierge** - The metadata in the program channel of  concierge.
 * **Cart** - The metadata of programs in the cart.
 
-For more information can be found in [Result customisations](result-customisation.md).
+For more information can be found in [result customisations](result-customisation.md).
 
 ## Integration
 

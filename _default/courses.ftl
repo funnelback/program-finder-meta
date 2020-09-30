@@ -12,16 +12,13 @@
 	<#switch view?upper_case>
 		<#case "CARD">
 			<@CardView result=result />
-            <@QuickViewTemplate result=result />
 			<#break>
 		<#case "LIST">
 			<#-- Determine if results should be hidden or not -->
 			<@ListView result=result />
-            <@QuickViewTemplate result=result />
 			<#break>
 		<#default>
 			<@ListView result=result />
-            <@QuickViewTemplate result=result />
 	</#switch>
 </#macro>
 
@@ -62,9 +59,9 @@
         <div class="search-results__content">
             <h3 class="search-results__title">
                 <a href="${result.clickTrackingUrl!}" class="search-results__link js-quick-link" data-target="#${base.getCssID(result.liveUrl)}">
-                    <@s.boldicize>
+                    <@s.Truncate length=100>
                         ${result.title!}
-                    </@s.boldicize> 
+                    </@s.Truncate>
                 </a>
             </h3>
             <p class="search-results__desc">
@@ -97,7 +94,7 @@
     This aims to minimise the amount of hopping back and forth 
     between systems.
 -->
-<#macro QuickViewTemplate result> 
+<#macro QuickView result> 
     <!-- courses.QuickViewTempplate -->
     <section id="${base.getCssID(result.liveUrl)}" class="quick-view js-quick-view" tabindex="-1" role="dialog">
         <button class="quick-view__close"><span class="sr-only">close</span></button>
@@ -117,7 +114,6 @@
                     <h3 class="quick-view__details-title">Program details</h3>
 
                     <div class="quick-view__details-content">
-                        <h4>${(result.listMetadata["programCredentialName"]?first)!} </h4>
                         <#--  
                             <p>
                                 Insert more information
@@ -175,15 +171,7 @@
                             <#if (result.listMetadata["stencilsTermCodes"]?first)!?has_content >
                                 <dt>Term codes:</dt>
                                 <dd>${(result.listMetadata["stencilsTermCodes"]?join(", "))!} </dd>
-                            </#if>
-                            <#if (result.listMetadata["programCareers"]?first)!?has_content >
-                                <dt>Careers:</dt>
-                                <dd>${(result.listMetadata["programCareers"]?join(", "))!} </dd>
-                            </#if>
-                            <#if (result.listMetadata["programTags"]?first)!?has_content >
-                                <dt>Tags:</dt>
-                                <dd>${(result.listMetadata["programTags"]?join(", "))!}</dd>
-                            </#if>               
+                            </#if>             
                         </dl>
                         <a href="${result.clickTrackingUrl!}" class="btn" data-target="#${base.getCssID(result.liveUrl)}">
                             Visit program page

@@ -16,16 +16,13 @@
 	<#switch view?upper_case>
 		<#case "CARD">
 			<@CardView result=result />
-            <@QuickViewTemplate result=result />
 			<#break>
 		<#case "LIST">
 			<#-- Determine if results should be hidden or not -->
 			<@ListView result=result />
-            <@QuickViewTemplate result=result />
 			<#break>
 		<#default>
 			<@ListView result=result />
-            <@QuickViewTemplate result=result />
 	</#switch>
 </#macro>
 
@@ -67,14 +64,14 @@
         <div class="search-results__content">
             <h3 class="search-results__title">
                 <a href="${result.clickTrackingUrl!}" class="search-results__link js-quick-link" data-target="#${base.getCssID(result.liveUrl)}">
-                    <@s.boldicize>
+                    <@s.Truncate length=100>
                         ${result.title!}
-                    </@s.boldicize> 
+                    </@s.Truncate>
                 </a>
             </h3>
             <p class="search-results__desc">
                 <@s.boldicize>
-                    <@s.Truncate length=170>
+                    <@s.Truncate length=150>
                         <#if (result.listMetadata["c"]?first)!?has_content>
                             ${(result.listMetadata["c"]?first)!}                            
                         <#else>
@@ -106,7 +103,7 @@
                     <label class="compare-button" data-url="${result.liveUrl!}" for="compare${result.rank!}">Compare Program</label>
                 </div>
             </div>
-        </div>
+        </div>     
     </article>
 </#macro>
 
@@ -117,7 +114,7 @@
     This aims to minimise the amount of hopping back and forth 
     between systems.
 -->
-<#macro QuickViewTemplate result> 
+<#macro QuickView result> 
     <!-- programs.QuickViewTemplate -->
     <section id="${base.getCssID(result.liveUrl)}" class="quick-view js-quick-view" tabindex="-1" role="dialog">
         <button class="quick-view__close"><span class="sr-only">close</span></button>
@@ -136,8 +133,10 @@
                 <div class="quick-view__details">
                     <h3 class="quick-view__details-title">Program details</h3>
 
-                    <div class="quick-view__details-content">
-                        <h4>${(result.listMetadata["programCredentialName"]?first)!} </h4>
+                    <div class="quick-view__details-content">                        
+                        <#if (result.listMetadata["programCredentialName"]?first)!?has_content>
+                            <h4>${(result.listMetadata["programCredentialName"]?first)!} </h4>
+                        </#if>
                         <#--  
                             <p>
                                 Insert more information

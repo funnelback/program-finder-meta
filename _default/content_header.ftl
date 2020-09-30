@@ -5,7 +5,7 @@
     <div class="fb-header-bottom content-wrapper">
         <div class="fb-header-left">
             <div class="header-logo">
-                <a class="header-logo__link" href="home.html">
+                <a class="header-logo__link" href="/s/search.html?collection=${(question.collection.id)!}&${(question.profile)!}">
                     <img class="header-logo__img" src="/s/resources/${question.collection.id}/${question.profile}/img/logo_funnelback.svg" width="auto"
                                 height="auto" alt="Home">
                 </a>

@@ -35,6 +35,7 @@
             <#-- Display the results from this extra search -->
             <@base.NoResults />
             <@base.ResultList />
+            <@base.QuickViewTemplates />
 
         </div>
     </@fb.ExtraResults>

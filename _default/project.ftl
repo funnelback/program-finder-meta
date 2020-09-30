@@ -11,7 +11,7 @@
     <@project.Facets />
 
     <#-- SEARCH RESULTS -->
-    <section class="search-results js-search-results">
+    <section class="search-results">
         <div class="content-wrapper">
             <div class="search-results__tools cleafix">
                 <h2 class="search-results__tools-title">Search results</h2>
@@ -64,6 +64,7 @@
             <div class="content-wrapper">
                 <@base.NoResults />
                 <@base.ResultList />
+                <@base.QuickViewTemplates />
                 <@base.Paging />
             </div>
         </@facets.IsNotSelected>

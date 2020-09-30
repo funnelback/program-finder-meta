@@ -15,11 +15,11 @@
 <#import "/web/templates/modernui/funnelback.ftl" as fb />
 
 <#import "/share/stencils/libraries/base/client_includes.ftl" as client_includes />
-<#import "history_cart.ftl" as history_cart />
 <#import "project.ftl" as project />
 <#import "base.ftl" as base />
 <#import "facets.ftl" as facets />
 <#import "results.ftl" as results />
+<#import "history_cart.ftl" as history_cart />
 <#import "auto-complete.ftl" as auto_complete />
 <#import "curator.ftl" as curator />
 <#import "extra_search.ftl" as extra_search />
@@ -48,6 +48,7 @@
         <link href="https://unpkg.com/normalize.css@8.0.1/normalize.css" rel="stylesheet">
         <script src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
         <link href="/s/resources/${question.collection.id}/${question.profile}/css/main.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
         
         <#-- Output the implementation specific CSS -->
         <@client_includes.HTMLHeader />
@@ -76,7 +77,9 @@
                 <#-- Display the search form which accepts the user's query -->
                 <section class="module-search js-module-search content-wrapper">
                     <h2 class="sr-only">Search module</h2>                    
-                    <@project.SearchForm />                    
+                    <@project.SearchForm />
+                    <@base.Blending />
+                    <@base.Spelling />                   
                 </section>
                 
                 <#-- Display the full search page after the user has entered a query -->
@@ -85,25 +88,12 @@
                     <#-- The bulk of the search implementation will be found here -->                                    
                     <@project.Results />
 
-                    <#-- Cart template -->
-                    <section class="module-compare js-module-compare">
-                        <h2 class="sr-only">Compare elements</h2>
-                        <div class="module-compare__bar content-wrapper">
-                            <a href="#" class="module-compare__close">Close</a>
-                            <a href="#" class="module-compare__clear hidden">Clear</a>
-                            
-                        </div>
-                        <div class="module-compare__wrapper content-wrapper">
-                            <table class="module-compare__list">
-                                <tbody>
-                                    <tr>
-                                        <th scope="row"></th>
-                                        <#-- actual compare items go here -->
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>               
+                    <#-- 
+                        Display the cart template which describes how the cart should be 
+                        presented. 
+                    -->
+                    <@history_cart.CartTemplate />
+
                 </@s.AfterSearchOnly>         
             </main><!-- /.main -->
         </div>

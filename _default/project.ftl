@@ -5,7 +5,7 @@
     <@base.SearchForm />
 </#macro>
 
-<#macro Results>
+<#macro Results>                    
     <!-- project.Results -->
     <#-- Display the facets for the program finder -->
     <@project.Facets />
@@ -32,6 +32,7 @@
                     <@base.DisplayMode />
                 </div>
             </div>
+
             
             <#-- 
                 Curator - We only want to display curator if there are any to avoid
@@ -57,7 +58,7 @@
         
         <#-- 
             Hide the organic/normal results on the all tab as we only 
-            want to display the extra searches 
+            want to display the extra searches.  
         -->
         <@facets.IsNotSelected facetName="Tabs" categoryLabel="All">
             <div class="content-wrapper">

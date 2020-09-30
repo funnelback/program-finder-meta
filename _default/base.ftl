@@ -35,10 +35,10 @@
 <#macro Blending>
     <#if (response.resultPacket.QSups)!?size &gt; 0>
         <!-- Blending -->
-        <blockquote class="blockquote">
+        <blockquote class="search-blending">
         <span class="fas fa-info-circle"></span>
         Your query has been expanded to <strong><#list response.resultPacket.QSups as qsup> ${qsup.query}<#if qsup_has_next>, </#if></#list></strong>.
-        &nbsp;Search for <a href="?${QueryString}&amp;qsup=off" title="Turn off query expansion"><em>${question.originalQuery}</em></a> instead.
+        &nbsp;Search for <a class="highlight" href="?${QueryString}&amp;qsup=off" title="Turn off query expansion"><em>${question.originalQuery}</em></a> instead.
         </blockquote>
     </#if>
 </#macro>
@@ -49,10 +49,9 @@
 <#macro Spelling>
     <#if (response.resultPacket.spell)??>
         <!-- base.Spelling -->
-        <div class="search-spelling">
-            <span class="fas fa-question-circle"></span>
-            Did you mean <em><a href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${(response.resultPacket.spell.text)!}</a></em>?
-        </div>
+        <blockquote class="search-spelling">
+            Did you mean <em><a class="highlight" href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${(response.resultPacket.spell.text)!}</a></em>?
+        </blockquote>
     </#if>
 </#macro>
 

@@ -480,3 +480,25 @@
 		</p>
 	</#if>
 </#macro>
+
+<#macro CartTemplate>
+    <!-- history_card.CartTemplate -->
+    <section class="module-compare js-module-compare">
+        <h2 class="sr-only">Compare elements</h2>
+        <div class="module-compare__bar content-wrapper">
+            <a href="#" class="module-compare__close">Close</a>
+            <a href="#" class="module-compare__clear hidden">Clear</a>
+            
+        </div>
+        <div class="module-compare__wrapper content-wrapper">
+            <table class="module-compare__list">
+                <tbody>
+                    <tr>
+                        <th scope="row"></th>
+                        <#-- actual compare items go here -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</#macro>

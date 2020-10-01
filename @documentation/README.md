@@ -1,3 +1,7 @@
+**Jump to:**
+
+[[_TOC_]]
+
 # Documentation
 
 ## Configuration guide for the Program Finder template

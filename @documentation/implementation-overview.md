@@ -66,7 +66,7 @@ The server configuration can be found below:
 | Hardware type | e.g `VM`|
 | Operating System | *e.g. Linux CentOS 7.0*|
 | CPU | *e.g. 4 cores*|
-| RAM | *e.g. *8GB**|
+| RAM | *e.g. 8GB*|
 | HDD | *e.g. 300GB*|
 
 >>>
@@ -113,9 +113,9 @@ The lists all the search URLs used by the project, either when wrapped by a CMS 
 
 | Function | Integration point | Source URL | Funnelback endpoint |
 | ---      |  ------  |--------- | ----- |
-| Main search   | Top-right corner search box (all pages). Wrapped by CMS  | http://client.com/  | http://funnelback-server.com/s/search.html?collection=client-meta&profile=example |
-| Course finder | Course finder homepage. Direct access to Funnelback | http://courses.client.com/ | http://courses.client.com/search.json?collection=courses |
-| Course listing pages (generated) |  Courses section of the main website. Wrapped by CMS | http://client.com/courses/ | http://funnelback-server.com/s/search.html?collection=courses&form=listing |
+| Main search   | Top-right corner search box (all pages). Wrapped by CMS  | `http://client.com/`  | `http://funnelback-server.com/s/search.html?collection=client-meta&profile=example` |
+| Course finder | Course finder homepage. Direct access to Funnelback | `http://courses.client.com/` | `http://courses.client.com/search.json?collection=courses` |
+| Course listing pages (generated) |  Courses section of the main website. Wrapped by CMS | `http://client.com/courses/` | `http://funnelback-server.com/s/search.html?collection=courses&form=listing` |
 
 >>>
 __TODO__: Populate the above table with the relevant information.

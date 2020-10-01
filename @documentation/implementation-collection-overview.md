@@ -33,8 +33,8 @@ The URLs requested by the Funnelback templates (typically to get headers / foote
 
 | Collection: Template | Function | Included URL |
 | ---      |  ------  |--------- |
-| simple.ftl   | Retrieve the page header to use for search results   | http://client.com/static/search-header.html |
-| simple.ftl   | Retrieve the page footer to use for search results   | http://client.com/static/search-footer.html |
+| simple.ftl   | Retrieve the page header to use for search results   | `https://client.com/static/search-header.html` |
+| simple.ftl   | Retrieve the page footer to use for search results   | `https://client.com/static/search-footer.html` |
 
 >>>
 __TODO__: Populate the above table with the relevant information.

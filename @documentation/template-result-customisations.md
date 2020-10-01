@@ -1,3 +1,7 @@
+**Jump to:**
+
+[[_TOC_]]
+
 # Result customisations
 
 It is fairly common that clients would like to customise how programs and courses are presented to better their requirements. This guide will touch on how to customise the results presentation in:

@@ -77,4 +77,4 @@ Congratulations! Once you completed the above steps, you should have something s
 
 ## Next steps
 
-Please see our [customisation guide](@documentation/README.md) for information on localisation and customisation.
+Please see our [customisation guide](@documentation/template-configurations-guide.md) for information on localisation and customisation.

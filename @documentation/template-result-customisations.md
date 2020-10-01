@@ -33,8 +33,3 @@ modifying  `<#macro AutoCompleteTemplate>` in the [programs.ftl](../_default_pre
 ## Cart
 
 Similarly to the results presentation, it is possible to customise how programs the cart are displayed in the cart. This can be done by modifying  `<#macro CartTemplate>` in the [programs.ftl](../_default_preview/programs.ftl) template.
-
-## Configure the header and footer
-
-To help mimic the look and feel of the client's website, it is possible to configure the header and footer to use the clients markup and script.
-`<link to header and footers ftl>`

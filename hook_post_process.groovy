@@ -236,7 +236,7 @@ class SearchPreviewHookLifecycle implements HookLifecycle {
 	public String getSelectedFacets(def facets) {
 		String selectedFacets = facets
         // Get the facet which is specified
-        .find() {
+        .findAll() {
 			it?.guessedDisplayType != com.funnelback.publicui.search.model.transaction.facet.FacetDisplayType.TAB && it?.selectedValues?.size() > 0
 		}
         // Convert from a collection of facet to a collection of selected categories

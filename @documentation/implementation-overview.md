@@ -190,5 +190,5 @@ Please note that we only require a high level summary of the functional aspect o
 Please refer to each collection for information on `why` and  `what` features are implemented.
 
 >>>
-__TODO__: Please complete a collection overview document (`@documentation/collection-over.md`) for each collection. An example can be found in [collection overview](collection-overview.md).
+__TODO__: Please complete a collection overview document (`@documentation/collection-over.md`) for each collection. An example can be found in [collection overview](implementation-collection-overview.md).
 >>>

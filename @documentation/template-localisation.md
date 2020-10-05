@@ -14,6 +14,7 @@ Higher education institutions can structure their study options using the follow
 Sadly, the names used for the primary and secondary types will vary between region to region.
 
 e.g.
+
 * In the US, the primary type is "Programs" and the secondary is "Courses"
 * In the UK, it is "Courses" and "Modules".
 * In AU, it is "Courses and "Units".

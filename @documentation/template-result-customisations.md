@@ -13,9 +13,9 @@ It is fairly common that clients would like to customise how programs and course
 
 ## Results
 
-The data used for each implementation can vary from organisations to organisations. This difference in data (in structure, type and quality) and unique requirements of each organisation usually means results needs customised. 
+The data used for each implementation can vary from organisations to organisations. This difference in data (in structure, type and quality) and unique requirements of each organisation usually means results needs customised.
 
-This can involve but not limited to:    
+This can involve but not limited to:
 
 * Adding, changing or removing metadata.
 * Changing the length of title or summary.

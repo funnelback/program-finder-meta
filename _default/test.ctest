@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE testfile SYSTEM
+"http://es.csiro.au/C-TEST/testfile_v1.0.dtd">
+<testfile>
+  <query id="4dae4b6f-1635-411d-a0c2-be30eafc1c49" text="science" weight="1.0" depth="20">
+    <interpretation id="ea9306f4-4ddc-4ecd-908d-4106693b83b5" label="" weight="1.0">
+      <eset util="1.0">
+        <docid>https://www.tru.ca/programs/catalogue/bachelor-of-science</docid>
+      </eset>
+      <eset util="1.0">
+        <docid>https://www.tru.ca/programs/catalogue/master-of-science-in-environmental-science</docid>
+      </eset>
+    </interpretation>
+    <created>2020-07-09T15:58:03.554359Z</created>
+    <lastModified>2020-07-09T15:58:53.45914Z</lastModified>
+  </query>
+  <query id="66d8fd0e-5f28-4655-9dde-0488656ab6a8" text="business" weight="1.0" depth="20">
+    <interpretation id="847032c3-ef07-4cba-a588-f8f639f99f7c" label="" weight="1.0">
+      <eset util="1.0">
+        <docid>https://www.tru.ca/programs/catalogue/bachelor-of-business-administration</docid>
+      </eset>
+      <eset util="1.0">
+        <docid>http://www.tru.ca/distance/courses/mktg4491.html</docid>
+      </eset>
+      <eset util="1.0">
+        <docid>https://www.tru.ca/programs/catalogue/international-business-major</docid>
+      </eset>
+    </interpretation>
+    <created>2020-07-09T15:58:39.304372Z</created>
+    <lastModified>2020-07-09T15:58:39.310599Z</lastModified>
+  </query>
+  <query id="b42ccf52-6737-48fc-9078-e50ca41ccbc2" text="law" weight="1.0" depth="20">
+    <interpretation id="824874cd-4ad1-4baa-9d78-b1f4c84e5417" label="" weight="1.0">
+      <eset util="1.0">
+        <docid>http://www.tru.ca/distance/courses/crim2261.html</docid>
+      </eset>
+    </interpretation>
+    <created>2020-07-09T15:57:40.891688Z</created>
+    <lastModified>2020-07-09T15:57:40.892345Z</lastModified>
+  </query>
+</testfile>

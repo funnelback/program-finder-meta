@@ -73,13 +73,18 @@
     matches the position.
 -->
 <#macro HasCurator position>
-    <#if ((response.curator.exhibits)![])?filter(exhibit -> exhibit.category != "BEST_BETS" && (!position?? || ((exhibit.additionalProperties.position)!"center") == position))?size gt 0>
+    <#local display = false>
+
+    <#list (response.curator.exhibits)![] as exhibit>
+        <#if exhibit.category != "BEST_BETS" && (!position?? || ((exhibit.additionalProperties.position)!"center") == position)>
+            <#local display = true>
+        </#if>
+    </#list>
+    
+    <#if display == true>
         <#nested>
     </#if>
 </#macro>
-
-
-facets?split(",")?filter( x -> response.facets?filter(y -> x == y.name && y.allValues?size gt 0)?size gt 0)?size gt 0>
 
 <#--
   Display best bets.
@@ -125,7 +130,16 @@ facets?split(",")?filter( x -> response.facets?filter(y -> x == y.name && y.allV
     Runs the nested code if there is at least 1 best bet rule.
 -->
 <#macro HasBestBets>
-    <#if ((response.curator.exhibits)![])?filter(exhibit -> exhibit.category == "BEST_BETS")?size gt 0>
+    <#local display = false>
+    
+    <#list (response.curator.exhibits)![] as exhibit> 
+    
+        <#if exhibit.category == "BEST_BETS">
+            <#local display = true>
+        </#if>
+    </#list>
+
+    <#if display == true>
         <#nested>
     </#if>
 </#macro>

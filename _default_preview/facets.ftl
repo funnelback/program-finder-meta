@@ -94,12 +94,14 @@
         <section class="filter-list">
             <h3 class="filter-list__title">Filters:</h3>
             <ul class="filter-list__list">
-                <#list response.facets?filter(facet -> facet.selected && facet.guessedDisplayType != "TAB") as facet>
-                    <#list facet.selectedValues as value>
-                        <li class="filter-list__item">
-                            <a href="${value.toggleUrl}" title="Remove '${facet.name}: ${value.label}'" class="filter-list__link"><span class="sr-only">Clear filter </span><strong>${facet.name}:</strong> ${value.label}</a>
-                        </li>
-                    </#list>
+                <#list response.facets as facet>
+                    <#if facet.selected && facet.guessedDisplayType != "TAB">
+                        <#list facet.selectedValues as value>
+                            <li class="filter-list__item">
+                                <a href="${value.toggleUrl}" title="Remove '${facet.name}: ${value.label}'" class="filter-list__link"><span class="sr-only">Clear filter </span><strong>${facet.name}:</strong> ${value.label}</a>
+                            </li>
+                        </#list>
+                    </#if>
                 </#list>
             </ul>
         </section>
@@ -114,23 +116,48 @@
             configurations are supplied.
         -->
         <#nested>
-    <#elseif (response.facets![])?filter(facet -> facet.name?upper_case == facetName?upper_case && facet.selectedValues?filter(category -> category.label?upper_case == categoryLabel?upper_case)?size gt 0)?size gt 0>
+    <#else> 
         <#-- 
             Given that valid configurations are supplied, we ony 
             want to show the nested content of the facet has been selected.
         -->
-        <#nested>
+        <#local display = true>
+        <#list (response.facets)![] as facet>
+            <#if facet.name?upper_case == facetName?upper_case>
+                <#list (facet.selectedValues)![] as category>
+                    <#if category.label?upper_case == categoryLabel?upper_case>
+                        <#local display = true>
+                    </#if>
+                </#list>    
+            </#if>
+        </#list>
+
+        <#if display == true>
+            <#nested>
+        </#if>
     </#if>
 </#macro>
 
 
 <#-- Runs the nested code only when a certain facet is selected -->
 <#macro IsNotSelected facetName="" categoryLabel="">
+    
+    <#local display = true>
     <#-- 
         Show the nested content only whent he supplied facet category
         has not been selected
     -->
-    <#if (response.facets![])?filter(facet -> facet.name?upper_case == facetName?upper_case && facet.selectedValues?filter(category -> category.label?upper_case == categoryLabel?upper_case)?size gt 0)?size == 0>
+    <#list (response.facets)![] as facet>
+        <#if facet.name?upper_case == facetName?upper_case>
+            <#list (facet.selectedValues)![] as category>
+                <#if category.label?upper_case == categoryLabel?upper_case>
+                    <#local display = false>
+                </#if>
+            </#list>    
+        </#if>
+    </#list>
+
+    <#if display == true>
         <#nested>
     </#if>
 </#macro>

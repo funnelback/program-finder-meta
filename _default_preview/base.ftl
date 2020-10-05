@@ -459,8 +459,7 @@
   Display the contextual navigation panel only if there are valid values
 -->
 <#macro ContextualNavigation>
-    <#if (response.resultPacket.contextualNavigation.categories)!?has_content &&
-        response.resultPacket.contextualNavigation.categories?filter(category -> category.clusters?size gt 0)?size gt 0>
+    <@HasContextualNavigation>
         <!-- base.ContextualNavigation -->
         <section class="related-links">
             <h2 class="related-links__title">
@@ -478,6 +477,22 @@
                 </#list>
             </ul>
         </section>
+    </@HasContextualNavigation>
+</#macro>
+
+<#--
+  Runs the nested code only if contextual navigation has valid values.
+-->
+<#macro HasContextualNavigation>
+    <#local display=false>
+    <#list (response.resultPacket.contextualNavigation.categories)![]  as category>
+        <#if category?size gt 0>
+            <#local display=true>
+        </#if>
+    </#list>
+            
+    <#if display == true>
+        <#nested>
     </#if>
 </#macro>
 

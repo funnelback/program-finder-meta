@@ -7,13 +7,11 @@ At a high level, you will need to:
 * **Setup the program and courses collections** - Create the collections and map the relevant metadata.
 * **Setup the meta collection** - Using this git repo as the basis, setup a new meta collection.
 * **Configure the extra searches** - Create and configure the programs and courses extra searches.
-* **Setup the faceted navigation** - Create the `display` radio facet and other relevant dropdown facets.
-* **Customise result presentation** - Display the relevant images and metadata.
-* **Configure concierge** - Customise the concierge to display the relevant metadata.
-* **Configure cart** - Customise the cart to display the relevant metadata.
-* **Configure the header and footer** - Add the client's header and footer to assist with a seamless transition from client's website to search.
+* **Setup the faceted navigation** - Adjust the `Tabs` and other relevant facets.
 
-## Setup the programs and courses collections
+## Initial setup
+
+### Setup the programs and courses collections
 
 The first step is to create two collections which will gather the programs and courses. The collection type can vary depending on how the data is made available (please see the funnelback documentation website for more details). When it comes to naming the collection, it is recommended to use the following format:
 
@@ -21,25 +19,21 @@ The first step is to create two collections which will gather the programs and c
 
 The important aspect of this step is to get the documents indexed and mapped to the appropriate metadata classes.
 
-The metadata classes are the key drives in the result presentation, concierge, cart and faceted navigation. Please see `<funnelback_server>` for more information.
+The metadata classes are the key drivers as they are used in result presentation, concierge, cart and faceted navigation. Where possible, please use the default metadata classes (names starting with `stencils` or `program`/`course`) names which have been setup in the sample collections.
 
-### Programs
+#### Programs collection
 
 Programs are the qualifications or accreditation earned which is awarded for completing a set number of courses.
 
-For an example of a program collection please see below:
+For an example of a program collection please see `program-finder-programs-web`.
 
-* `program-finder-programs-web`
+#### Courses collection
 
-### Courses
+Courses are subjects, units or modules that student undertake as part of a Program. They usually involve lectures, tutorials, workshops, labs etc.
 
-Courses are subjects that student undertake as part of a Program. They usually involve lectures, tutorials, workshops, labs etc.
+For an example of a course please see `program-finder-courses-web`.
 
-For an example of a course please see below:
-
-* `program-finder-courses-web`
-
-## Setup the meta collection
+#### Meta collection
 
 The meta collection contains the majority of the application and presentation logic required for the Program Finder Vertical Product. It is recommended to name the collection use the following format:
 
@@ -47,46 +41,40 @@ The meta collection contains the majority of the application and presentation lo
 
 e.g. `funnelback-program-finder-meta`
 
-## Configure the extra searches
+### Configure the extra searches
 
 The Program Finder uses extra searches to display programs and courses in separate areas on the search engine result page.
 
-To configure the extra searches, change the target collection in the following: extra search config:
+To configure the extra searches, change the target collection in the following extra search config:
 
 `extra_search.programs.cfg`
-```
-collection=<insert_name_of_program_collection>
-query_processor_options=-num_ranks=8
+
+```java
+collection=<name_of_meta_collection>
+query_processor_options=-num_ranks=8 -clive=<name_of_program_collection> -log=off -curator=off -spelling=off -show_qsyntax_tree=off -explain=false
 ```
 
 `extra_search.courses.cfg`
+
+```java
+collection=<name_of_meta_collection>
+query_processor_options=-num_ranks=8 -clive=<name_of_course_collection> -log=off -curator=off -spelling=off -show_qsyntax_tree=off -explain=false
 ```
-collection=<insert_name_of_course_collection>
-query_processor_options=-num_ranks=8
-```
 
-## Setup the faceted navigation
+### Setup the faceted navigation
 
-The Program Finder relies on a facet called `Display` which determines when programs or courses should be displayed. An example of the faceted navigation configuration can be found below:
+The Program Finder relies on a facet called `Tabs` which determines when programs or courses should be displayed. An example of the faceted navigation configuration can be found below:
 
-`<insert image of facet navigation config of display>`
+![Configuring the labels of the facets](@documentation/images/facet_labels.png "Configuring the labels of the facets")
 
-Change the value in the collections field for the Programs and Courses facets so that they reference the relevant collections.
+Change the value in the collections field for the `Programs` and `Courses` facets categories so that they reference the relevant collections.
 
-## Customise result presentation
+### Review the search
 
-It is fairly common that clients customise the way programs and courses are presented so that it best meets their requirement. This can include but not limited to:
-* Adding, changing or removing metadata.
-* Changing the length of title or summary.
-* Updating the html structure prevent or correct css collisions.
+Congratulations! Once you completed the above steps, you should have something similar to the following:
 
-`<link to program and courses ftl>`
+![Configuring the labels of the facets](@documentation/images/program_finder_overview.png "Configuring the labels of the facets")
 
-## Configure the cart
+## Next steps
 
-Similarly to the results presentation, it is possible to customise how items in the cart are displayed. This can be done by modifying the `<link to template with cart ftl>`.
-
-## Configure the header and footer
-
-To help mimic the look and feel of the client's website, it is possible to configure the header and footer to use the clients markup and script.
-`<link to header and footers ftl>`
+Please see our [customisation guide](@documentation/template-configurations-guide.md) for information on localisation and customisation.

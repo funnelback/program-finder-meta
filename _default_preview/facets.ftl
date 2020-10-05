@@ -2,8 +2,10 @@
 
 <#macro RadioFacet>
     <#local facetNames = (question.getCurrentProfileConfig().get("stencils.facets.radio"))!""?split(",") >
+    
     <#list getFacets(response, facetNames) as facet>
         <#if facet.allValues?size != 0>
+            <!-- facets.RadioFacet -->
             <ul class="module-filter__radio-list">
                 <#list facet.allValues as value>
                     <li class="module-filter__radio-item">
@@ -18,6 +20,7 @@
 
 <#macro DropdownFacets>
     <#local facetNames = (question.getCurrentProfileConfig().get("stencils.facets.dropdown"))!""?split(",") >
+    <!-- facets.DropdownFacets -->
     <ul class="module-filter__list">
         <#list getFacets(response, facetNames) as facet>
         <#if facet.allValues?size != 0>
@@ -59,6 +62,7 @@
 <#macro CheckboxFacet>
     <#-- This can be only 1 facet -->
     <#local facetName = (question.getCurrentProfileConfig().get("stencils.facets.checkbox"))!"" >
+    <!-- facets.CheckboxFacet -->
     <h1>${facetName}</h1>
     <#list getFacets(response, facetName) as facet>
         <ul class="module-filter__checkbox-list">
@@ -78,4 +82,55 @@
            });
         });
     </script>
+</#macro>
+
+<#--
+    Display the facet bread crumb which describes the 
+    facets/filter options that have been selected by the user
+--> 
+<#macro FacetBreadBox>
+    <#if response.facetExtras.hasSelectedNonTabFacets>
+        <!-- facets.FacetBreadBox -->
+        <section class="filter-list">
+            <h3 class="filter-list__title">Filters:</h3>
+            <ul class="filter-list__list">
+                <#list response.facets?filter(facet -> facet.selected && facet.guessedDisplayType != "TAB") as facet>
+                    <#list facet.selectedValues as value>
+                        <li class="filter-list__item">
+                            <a href="${value.toggleUrl}" title="Remove '${facet.name}: ${value.label}'" class="filter-list__link"><span class="sr-only">Clear filter </span><strong>${facet.name}:</strong> ${value.label}</a>
+                        </li>
+                    </#list>
+                </#list>
+            </ul>
+        </section>
+    </#if>
+</#macro>
+
+<#-- Runs the nested code only when a certain facet is selected -->
+<#macro IsSelected facetName="" categoryLabel="">
+    <#if !facetName?has_content || !categoryLabel?has_content>   
+        <#-- 
+            By default, we want to run the nested code if no valid
+            configurations are supplied.
+        -->
+        <#nested>
+    <#elseif (response.facets![])?filter(facet -> facet.name?upper_case == facetName?upper_case && facet.selectedValues?filter(category -> category.label?upper_case == categoryLabel?upper_case)?size gt 0)?size gt 0>
+        <#-- 
+            Given that valid configurations are supplied, we ony 
+            want to show the nested content of the facet has been selected.
+        -->
+        <#nested>
+    </#if>
+</#macro>
+
+
+<#-- Runs the nested code only when a certain facet is selected -->
+<#macro IsNotSelected facetName="" categoryLabel="">
+    <#-- 
+        Show the nested content only whent he supplied facet category
+        has not been selected
+    -->
+    <#if (response.facets![])?filter(facet -> facet.name?upper_case == facetName?upper_case && facet.selectedValues?filter(category -> category.label?upper_case == categoryLabel?upper_case)?size gt 0)?size == 0>
+        <#nested>
+    </#if>
 </#macro>

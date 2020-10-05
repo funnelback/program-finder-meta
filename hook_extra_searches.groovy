@@ -1,13 +1,19 @@
 import com.funnelback.publicui.search.model.transaction.Facet
 import com.funnelback.publicui.search.model.transaction.facet.FacetDisplayType
-import com.funnelback.publicui.utils.QueryStringUtils
 import com.funnelback.stencils.hook.StencilHooks
-import com.funnelback.stencils.util.DatamodelUtils
-import groovy.util.logging.Log4j2
-
 import com.funnelback.publicui.search.model.transaction.SearchTransaction
 import com.funnelback.publicui.search.model.transaction.SearchQuestion.SearchQuestionType
+
+import groovy.util.logging.Log4j2
+
 import com.funnelback.stencils.hook.support.HookLifecycle
+
+/**
+ * <p>Hook functions for the ExtraSearch stencil.</p>
+ *
+ */
+
+new ExtraSearchHookLifecycle().extraSearches(transaction)
 
 /**
  * <p>Hook functions for the ExtraSearch stencil.</p>

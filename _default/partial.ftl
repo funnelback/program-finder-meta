@@ -1,88 +1,123 @@
 <#ftl encoding="utf-8" output_format="HTML" />
+
+<#--
+    This file is responsible for determining the overall structure
+    of the search implementations. It contains things such as:
+
+    - The HTML for the overall structure such as the header, footer 
+        and main content.
+    - The references to the client's header and footer
+    - Third party libraries
+    - References to javascript templates for sessions and concierge
+-->
+
 <#import "/web/templates/modernui/funnelback_classic.ftl" as s/>
 <#import "/web/templates/modernui/funnelback.ftl" as fb />
 
-<#import "history_cart.ftl" as history_cart />
 <#import "/share/stencils/libraries/base/client_includes.ftl" as client_includes />
-
-<#-- These imports are required for the automatic template selection to work
-  The various namespaces (e.g. 'video', 'facebook') need to be on the main scope -->
 <#import "project.ftl" as project />
+<#import "base.ftl" as base />
+<#import "facets.ftl" as facets />
+<#import "results.ftl" as results />
+<#import "history_cart.ftl" as history_cart />
+<#import "auto-complete.ftl" as auto_complete />
+<#import "curator.ftl" as curator />
+<#import "extra_search.ftl" as extra_search />
+
+<#--
+    Specific result styling imports
+	These imports are required for the automatic template selection to work
+	The various namespaces (e.g. 'video', 'facebook') need to be on the main scope 
+-->
+<#import "programs.ftl" as programs />
 <#import "courses.ftl" as courses />
-<#import "people.ftl" as people />
-<#import "video.ftl" as video />
-<#import "facebook.ftl" as facebook />
-<#import "events.ftl" as events />
 
 <#-- Used to send absolute URLs for resources -->
 <#assign httpHost=httpRequest.getHeader('host')>
+        
+    <div class="fb-container">
+        <main class="main" role="main">
+            <#-- 
+                Display the initial search page which is shown to the user
+                when there is no query.
+            -->
+            <@s.InitialFormOnly>                
+                <section class="module-intro content-wrapper">
+                    <h1 class="module-intro__title">Explore ${question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary")?cap_first}s</h1>
+                    <p class="module-intro__desc">
+                        Use our interactive ${question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary")?cap_first} Finder to explore what Funnelback has to offer. Filter your search by subject,
+                        delivery method and term. Or type a keyword to get started.
+                    </p>
+                </section>
+            </@s.InitialFormOnly>
+            
+            <#-- Display the search form which accepts the user's query -->
+            <section class="module-search js-module-search content-wrapper">
+                <h2 class="sr-only">Search module</h2>                    
+                <@project.SearchForm />
+                <@base.Blending />
+                <@base.Spelling />                   
+            </section>
+            
+            <#-- Display the full search page after the user has entered a query -->
+            <@s.AfterSearchOnly>
 
-<main class="funnelback">
-  <h1 class="sr-only">Search</h1>
+                <#-- The bulk of the search implementation will be found here -->                                    
+                <@project.Results />
 
-    <@project.SearchForm />
+                <#-- 
+                    Display the cart template which describes how the cart should be 
+                    presented. 
+                -->
+                <@history_cart.CartTemplate />
 
-    <@s.AfterSearchOnly>
-      <@project.Tabs />
-      <@project.Results />
-    </@s.AfterSearchOnly>
-    <@history_cart.SearchHistory />
-    <@history_cart.Cart />
+            </@s.AfterSearchOnly>         
+        </main><!-- /.main -->
+    </div>
 
-  <#-- The following common scripts are commented in case they are already loaded in the CMS template  -->
-  <#-- It is recommended to load these from a CDN rather than the Funnelback server if possible -->
-  <#--
-  <script defer src="https://${httpHost}/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
-  <script defer src="https://${httpHost}/stencils/resources/thirdparty/popper/v1.12.3/umd/popper.min.js"></script>
-  <script defer src="https://${httpHost}/stencils/resources/thirdparty/bootstrap/v4.0.0/js/bootstrap.min.js"></script>
-  -->
+    <#-- Concierge includes -->  
+    <script type="text/javascript" src="https://${httpHost}/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://${httpHost}/stencils/resources/thirdparty/popper/v1.12.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://${httpHost}/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
+    <script type="text/javascript" src="https://${httpHost}/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
+    <script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
 
-  <#-- Provides the setDeferredImages and setupFacetLessMoreButtons functions -->
-  <#if question.profile?contains("_preview")>
-    <#-- Non-minified version provided in preview profiles for debugging -->
-    <script src="https://${httpHost}/stencils/resources/base/v15.24/js/base.js"></script>
-  <#else>
-    <script src="https://${httpHost}/stencils/resources/base/v15.24/js/base.min.js"></script>
-  </#if>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      setupDeferredImages();
-      setupFacetLessMoreButtons(${question.getCurrentProfileConfig().get("stencils.faceted_navigation.max_displayed_categories")!"undefined"}, '.search-facet');
-
-      <@project.AutoComplete />
-    });
-  </script>
-
-  <#-- Recommended to load third-party libraries from a CDN if possible -->
-  <script defer src="https://${httpHost}/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
-  <script defer src="https://${httpHost}/stencils/resources/autocompletion/js/handlebars.min-v4.0.5.js"></script>
-
-  <#-- Funnelback plugin to Typeahead for autocomplete -->
-  <script defer src="https://${httpHost}/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
-
-  <@courses.AutoCompleteTemplate />
-  <@people.AutoCompleteTemplate />
-
-  <#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
-    <@history_cart.CartTemplate />
-    <@courses.CartTemplate />
-
-    <#-- Promise polyfill for Internet Explorer -->
-    <script nomodule src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-
-    <#-- Non-minified version provided in preview profiles for debugging -->
+    <#-- Provides the setDeferredImages and setupFacetLessMoreButtons functions -->
     <#if question.profile?contains("_preview")>
-      <#-- Non-minified version provided in preview profiles for debugging -->
-      <script defer src="https://${httpHost}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.js"></script>
-      <script defer src="https://${httpHost}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
+        <#-- Non-minified version provided in preview profiles for debugging -->
+        <script src="https://${httpHost}/stencils/resources/base/v15.24/js/base.js"></script>
     <#else>
-      <script defer src="https://${httpHost}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.min.js"></script>
-      <script defer src="https://${httpHost}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.min.js"></script>
+        <script src="https://${httpHost}/stencils/resources/base/v15.24/js/base.min.js"></script>
     </#if>
-    <@history_cart.Configuration />
-  </#if>
 
-</main>
+    <#-- Radio button changes -->
+    <script type="text/javascript">
+        jQuery(function () {
+            $('.program-finder-display').click(function() {
+                var url = $(this).attr('data-url');
+                window.location.href = url;
+            });
+        });
+    </script>
+
+    <#-- 
+        Include all the auto complete templates which determines 
+        how items in concierge are to be displayed.
+    -->
+    <@programs.AutoCompleteTemplate />
+
+    <script>
+        jQuery(function() {
+            <@auto_complete.AutoComplete />
+        });
+    </script>
+    
+    <#-- Javascript (application) logic shared across all Vertical Product -->
+    <script type="text/javascript" src="https://${httpHost}/s/resources/${question.collection.id}/${question.profile}/js/runtime.js"></script>
+    <script type="text/javascript" src="https://${httpHost}/s/resources/${question.collection.id}/${question.profile}/js/vendors.js"></script>
+    <script type="text/javascript" src="https://${httpHost}/s/resources/${question.collection.id}/${question.profile}/js/main.js"></script>
+
+    <@programs.CartTemplate/>
+    <@history_cart.Config />
 
 <#-- vim: set expandtab ts=2 sw=2 sts=2 :-->

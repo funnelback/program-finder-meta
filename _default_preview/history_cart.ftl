@@ -8,7 +8,7 @@
         var cartJS = {
             config: {
                 apiUrl: '//${host}/s/cart.json',
-                collectionName: 'program-finder-meta',
+                collectionName: '${(question.collection.id)!}',
                 loadOnInit: true,
                 itemTemplate: document.getElementById('cart-template-program-finder').innerHTML,
                 itemTemplateMap: {  // map between template and FB results

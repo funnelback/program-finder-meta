@@ -1,12 +1,12 @@
 
 /** Curated results **/
-.fb-container .fb-curator .search-results__list--list-view {
+/* .fb-container .fb-curator .search-results__list--list-view {
   margin-top: 0px;
-}
+} */
 
 /* 
-  Ensure that the navigation bar in the case where there are 
-  no filters 
+  Ensure that the navigation bar has a consistent height there 
+  are no filters.
 */
 @media only screen and (min-width: 1025px) {
   .fb-container .module-filter--dark .module-filter__wrapper {

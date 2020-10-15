@@ -7,6 +7,7 @@ At a high level, you will need to:
 * **Setup the program and courses collections** - Create the collections and map the relevant metadata.
 * **Setup the meta collection** - Using this git repo as the basis, setup a new meta collection.
 * **Configure the extra searches** - Create and configure the programs and courses extra searches.
+* **Adjust the profile configurations** - Change the profile configurations to reference the collections specific to the implementation.
 * **Setup the faceted navigation** - Adjust the `Tabs` and other relevant facets.
 
 ## Initial setup
@@ -59,6 +60,20 @@ query_processor_options=-num_ranks=8 -clive=<name_of_program_collection> -log=of
 ```java
 collection=<name_of_meta_collection>
 query_processor_options=-num_ranks=8 -clive=<name_of_course_collection> -log=off -curator=off -spelling=off -show_qsyntax_tree=off -explain=false
+```
+
+### Adjust the profile configurations
+
+The program finder has some profile configurations which must be changed so that it references the collections referenced in earlier steps.
+
+Profile configurations
+```
+stencils.auto-completion.datasets.courses.collection=<name_of_program_collection>
+.
+.
+.
+stencils.template.result.<name_of_program_collection>=programs
+stencils.template.result.<name_of_course_collection>=courses
 ```
 
 ### Setup the faceted navigation

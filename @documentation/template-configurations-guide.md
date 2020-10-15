@@ -19,10 +19,15 @@ The Program Finder is a highly flexible product which provides the ability to cu
 
 For more information can be found in [result customisations](template-result-customisations.md).
 
-## Search Preview Configurations
+## Search Preview
 
 The Program Finder groups programs and courses into areas known as search previews providing a more intuitive way to navigate large
 sets of results. More information can be found in [search previews](template-search-previews.md).
+
+## Quick view
+
+Quick view allows the user view more information about a particular document without them having to leave the search results page. For detail information
+on how it works and how to disable it, please see the [quick view guide](template-quick-view.md).
 
 ## Integration
 

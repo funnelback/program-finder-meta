@@ -19,6 +19,11 @@ The Program Finder is a highly flexible product which provides the ability to cu
 
 For more information can be found in [result customisations](template-result-customisations.md).
 
+## Search Preview Configurations
+
+The Program Finder groups programs and courses into areas known as search previews providing a more intuitive way to navigate large
+sets of results. More information can be found in [search previews](template-search-previews.md).
+
 ## Integration
 
 ## Auto-complete / Concierge

@@ -1,4 +1,11 @@
 
+/* Increased the font on large viewports */
+@media only screen and (min-width: 1025px) {
+  html {
+      font-size: 0.925rem;
+  }
+}
+
 /** Curated results **/
 .fb-container .fb-curator .search-results__list--list-view {
   margin-top: 0px;

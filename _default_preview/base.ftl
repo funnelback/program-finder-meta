@@ -33,8 +33,8 @@
   Display query blending notice
 -->
 <#macro Blending>
+    <!-- base.Blending -->
     <#if (response.resultPacket.QSups)!?size &gt; 0>
-        <!-- Blending -->
         <blockquote class="search-blending">
         <span class="fas fa-info-circle"></span>
         Your query has been expanded to <strong><#list response.resultPacket.QSups as qsup> ${qsup.query}<#if qsup_has_next>, </#if></#list></strong>.
@@ -47,8 +47,8 @@
   Display spelling suggestion notice
 -->
 <#macro Spelling>
+    <!-- base.Spelling -->
     <#if (response.resultPacket.spell)??>
-        <!-- base.Spelling -->
         <blockquote class="search-spelling">
             Did you mean <em><a class="highlight" href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${(response.resultPacket.spell.text)!}</a></em>?
         </blockquote>
@@ -87,9 +87,9 @@
   Message to display when there are no results
 -->
 <#macro NoResults>
+    <!-- base.NoResults -->
     <#if (response.resultPacket.resultsSummary.totalMatching)!?has_content &&
         response.resultPacket.resultsSummary.totalMatching == 0>
-        <!-- base.NoResults -->
         <section class="module-info content-wrapper">
             <figure class="module-info__bg">
                 <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/no-results-icon.svg" alt="">

@@ -130,11 +130,22 @@
 
         <@client_includes.ContentFooter />
 
-        <#-- Javascript (application) logic shared across all Vertical Product -->
-        <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/runtime.js"></script>
+        <#-- 
+            Libraries required by the design developed by the Stencils cutup team. 
+            Avoid changing these if possible.
+        -->
+        <#-- The vendor.js file includes all the code from external libraries -->
         <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/vendors.js"></script>
+        <#-- 
+            Webpacks "runtime" code. Contains everything required to connect the
+            modularized application while it’s running in the browser. It contains 
+            the loading and resolving logic needed to connect your modules as they 
+            interact.
+        -->
+        <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/runtime.js"></script>
+        <#-- Stencil specific code such as the quickview and dropdowns -->
         <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/main.js"></script>
-    
+
         <@programs.CartTemplate/>
         <@history_cart.Config />
     </body>

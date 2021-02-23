@@ -42,7 +42,7 @@
                 pinBtn: '.compare-button',
                 clearBtn: '.module-compare__clear',
                 removeBtn: '.module-compare__remove',
-                searchResults: '.js-search-results',
+                searchResults: '.search-results',
             },
             activePinClass: 'active',
             activePinboardClass: 'pinboard--active',

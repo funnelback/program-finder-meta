@@ -46,7 +46,6 @@
         
         <#-- Presentation logic shared across all Vertical Product -->
         <link href="https://unpkg.com/normalize.css@8.0.1/normalize.css" rel="stylesheet">
-        <script src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
         <link href="/s/resources/${question.collection.id}/${question.profile}/css/main.css" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
         
@@ -98,12 +97,15 @@
             </main><!-- /.main -->
         </div>
   
+        <#-- Third parties -->
+        <#--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>	  -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js" integrity="sha512-Znnj7n0C0Xz1tdk6ih39WPm3kSCTZEKnX/7WaNbySW7GFbwSjO5r9/uOAGLMbgv6llI1GdghC7xdaQsFUStM1w==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha512-hJSZLjaUow3GsiAkjUBMxN4eaFysMaBvg7j6mkBeo219ZGmSe1eVhKaJJAj5GzGoD0j0Gr2/xNDzjeecdg+OCw==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js" integrity="sha512-qOBWNAMfkz+vXXgbh0Wz7qYSLZp6c14R0bZeVX2TdQxWpuKr6yHjBIM69fcF8Ve4GUX6B6AKRQJqiiAmwvmUmQ==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>
+
         <#-- Concierge includes -->  
-        <script type="text/javascript" src="/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="/stencils/resources/thirdparty/popper/v1.12.3/umd/popper.min.js"></script>
-        <script type="text/javascript" src="/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
         <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
-        <script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
 
         <#-- Radio button changes -->
         <script type="text/javascript">
@@ -130,11 +132,22 @@
 
         <@client_includes.ContentFooter />
 
-        <#-- Javascript (application) logic shared across all Vertical Product -->
-        <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/runtime.js"></script>
+        <#-- 
+            Libraries required by the design developed by the Stencils cutup team. 
+            Avoid changing these if possible.
+        -->
+        <#-- The vendor.js file includes all the code from external libraries -->
         <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/vendors.js"></script>
+        <#-- 
+            Webpacks "runtime" code. Contains everything required to connect the
+            modularized application while it’s running in the browser. It contains 
+            the loading and resolving logic needed to connect your modules as they 
+            interact.
+        -->
+        <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/runtime.js"></script>
+        <#-- Stencil specific code such as the quickview and dropdowns -->
         <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/main.js"></script>
-    
+
         <@programs.CartTemplate/>
         <@history_cart.Config />
     </body>

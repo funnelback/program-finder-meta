@@ -106,6 +106,13 @@
     </#if>
 </#macro>
 
+<#-- Run the nest code if the list of specified facets have at least one facet category -->
+<#macro HasFacets facets="">
+    <#if facets?split(",")?filter( x -> response.facets?filter(y -> x == y.name && y.allValues?size gt 0)?size gt 0)?size gt 0>
+        <#nested>
+    </#if>
+</#macro>
+
 <#-- Runs the nested code only when a certain facet is selected -->
 <#macro IsSelected facetName="" categoryLabel="">
     <#if !facetName?has_content || !categoryLabel?has_content>   

@@ -23,7 +23,7 @@
 <#import "facets.ftl" as facets />
 <#import "results.ftl" as results />
 <#import "history_cart.ftl" as history_cart />
-<#import "auto-complete.ftl" as auto_complete />
+<#import "auto_complete.ftl" as auto_complete />
 <#import "curator.ftl" as curator />
 <#import "extra_search.ftl" as extra_search />
 
@@ -78,20 +78,20 @@
         </main><!-- /.main -->
     </div>
 
-    <#-- Concierge includes -->  
+    <#-- Third party libraries -->  
     <script type="text/javascript" src="https://${httpHost}/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://${httpHost}/stencils/resources/thirdparty/popper/v1.12.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://${httpHost}/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
     <script type="text/javascript" src="https://${httpHost}/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
     <script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
 
-    <#-- Provides the setDeferredImages and setupFacetLessMoreButtons functions -->
-    <#if question.profile?contains("_preview")>
-        <#-- Non-minified version provided in preview profiles for debugging -->
-        <script src="https://${httpHost}/stencils/resources/base/v15.24/js/base.js"></script>
-    <#else>
-        <script src="https://${httpHost}/stencils/resources/base/v15.24/js/base.min.js"></script>
-    </#if>
+
+    <#-- Stencils specific code -->
+    <script src="/s/resources/${question.collection.id}/${question.profile}/js/stencils.js"></script> 
+    <script src="/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script> 
+
+    <!-- Funnelback auto-complete -->
+    <script src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.autocompletion-2.6.0.stencils.js"></script>
 
     <#-- Radio button changes -->
     <script type="text/javascript">

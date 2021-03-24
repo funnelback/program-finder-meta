@@ -374,6 +374,10 @@
 
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open(method || "GET", requestUrl);
+                
+                // Allow requests from cross domains to set and use cookies
+                xmlHttp.withCredentials = true;                
+                
                 xmlHttp.onload = function (e) {
                     if (this.status == 200) {
                         var data;

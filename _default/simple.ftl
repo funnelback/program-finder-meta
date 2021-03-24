@@ -20,7 +20,7 @@
 <#import "facets.ftl" as facets />
 <#import "results.ftl" as results />
 <#import "history_cart.ftl" as history_cart />
-<#import "auto-complete.ftl" as auto_complete />
+<#import "auto_complete.ftl" as auto_complete />
 <#import "curator.ftl" as curator />
 <#import "extra_search.ftl" as extra_search />
 
@@ -129,7 +129,7 @@
 
         <script>
             jQuery(function() {
-                <@auto_complete.AutoComplete />
+                <@auto_complete.Configuration />
             });
         </script>
         

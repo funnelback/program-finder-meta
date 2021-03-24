@@ -104,8 +104,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js" integrity="sha512-qOBWNAMfkz+vXXgbh0Wz7qYSLZp6c14R0bZeVX2TdQxWpuKr6yHjBIM69fcF8Ve4GUX6B6AKRQJqiiAmwvmUmQ==" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>
 
-        <#-- Concierge includes -->  
-        <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
+        <#-- Stencils specific code -->
+        <script src="/s/resources/${question.collection.id}/${question.profile}/js/stencils.js"></script> 
+        <script src="/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script> 
+
+        <!-- Funnelback auto-complete -->
+        <script src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.autocompletion-2.6.0.stencils.js"></script>
 
         <#-- Radio button changes -->
         <script type="text/javascript">

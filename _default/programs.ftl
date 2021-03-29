@@ -218,49 +218,77 @@
 <#-- Output the template used in the cart -->
 <#macro CartTemplate>
     <!-- programs.CartTemplate -->
-    <script id="cart-template-program-finder" type="text/x-cart-template">
+    <script id="cart-template-programs" type="text/x-cart-template">
         <td>
-            <a href="#" class="module-compare__remove" data-url="{{url}}">Remove</a>
+            <a href="#" class="module-compare__remove" data-url="{{indexUrl}}">Remove</a>
             <figure class="module-compare__bg">
-                <img src="https://source.unsplash.com/random/335x192?{{name}}" alt="">
+                <img src="https://source.unsplash.com/random/335x192?{{title}}" alt="">
             </figure>
-            <span class="module-compare__phrase">{{stencilsDeliveryMethod}}</span>
-            <h3 class="module-compare__title">{{name}}</h3>
-            <p class="module-compare__desc">
-                {{desc}}
-            </p>
-            <a href="{{url}}" class="btn--link">More Details</a>
+            
+            {{#if metaData.stencilsDeliveryMethod}}  
+                <span class="module-compare__phrase">
+                    {{metaData.stencilsDeliveryMethod}}
+                </span>
+            {{/if}}
+            
+
+            {{#if title}} 
+                <h3 class="module-compare__title">{{title}}</h3>
+            {{/if}}
+            
+            {{#if metaData.c}}  
+                <p class="module-compare__desc">
+                    {{metaData.c}}
+                </p>
+            {{/if}} 
+            
+            <a href="{{indexUrl}}" class="btn--link">More Details</a>
             <dl class="module-compare__data-list">
-                <dt> 
-                    Credential type
-                </dt>
-                <dd> 
-                    {{programCredentialType}}
-                </dd>
-                <dt> 
-                    Duration
-                </dt>
-                <dd> 
-                    {{programLengthYears}} years
-                </dd>
-                <dt> 
-                    Delivery method
-                </dt>
-                <dd> 
-                    {{stencilsDeliveryMethod}}
-                </dd>                                                                      
-                <dt> 
-                    Faculty
-                </dt>
-                <dd> 
-                    {{programFaculty}}
-                </dd>
-                <dt> 
-                    Department
-                </dt>
-                <dd> 
-                    {{stencilsDepartment}}
-                </dd>
+                {{#if metaData.programCredentialType}}  
+                    <dt> 
+                        Credential type
+                    </dt>
+                    <dd> 
+                        {{metaData.programCredentialType}}
+                    </dd>
+                {{/if}}
+
+                {{#if metaData.programLengthYears}}  
+                    <dt> 
+                        Duration
+                    </dt>
+                    <dd> 
+                        {{metaData.programLengthYears}} years
+                    </dd>
+                {{/if}}
+
+                {{#if metaData.stencilsDeliveryMethod}}  
+                    <dt> 
+                        Delivery method
+                    </dt>
+                    <dd> 
+                        {{metaData.stencilsDeliveryMethod}}
+                    </dd>                                                                      
+                {{/if}}
+
+                {{#if metaData.programFaculty}}  
+                    <dt> 
+                        Faculty
+                    </dt>
+                    <dd> 
+                        {{metaData.programFaculty}}
+                    </dd>
+                {{/if}}
+
+                {{#if metaData.stencilsDepartment}}  
+                    <dt> 
+                        Department
+                    </dt>
+                    <dd> 
+                        {{metaData.stencilsDepartment}}
+                    </dd>
+                {{/if}}
+
             </dl>
         </td>
     </script>

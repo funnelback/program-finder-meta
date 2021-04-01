@@ -22,7 +22,7 @@
               <@s.IfDefCGI name=parameter><input type="hidden" name="${parameter}" value="${question.inputParameterMap[parameter]!}"></@s.IfDefCGI>
             </#list>
             <label for="query" class="sr-only">Search</label>
-            <input name="query" id="query" type="search" class="module-search__query" autocomplete="off" placeholder="Search for ${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?lower_case}s, a career or topic" value="${question.query!}">
+            <input name="query" id="query" type="search" class="module-search__query" autocomplete="off" placeholder="Search for ${(question.currentProfileConfig.get("stencils.I18n.finder_type_primary")!"Course")?lower_case}s, a career or topic" value="${question.query!}">
             <button type="submit" class="module-search__btn"><span class="sr-only">Search</span></button>
         </div>
         <#nested>

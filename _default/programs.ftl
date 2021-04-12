@@ -63,11 +63,11 @@
         </#if>
         <div class="search-results__content">
             <h3 class="search-results__title">
-                <a href="${result.clickTrackingUrl!}" class="search-results__link js-quick-link" data-target="#${base.getCssID(result.liveUrl)}">
+                <button class="search-results__link js-quick-link" data-target="#${base.getCssID(result.liveUrl)}">
                     <@s.Truncate length=100>
                         ${result.title!}
                     </@s.Truncate>
-                </a>
+                </button>
             </h3>
             <p class="search-results__desc">
                 <@s.boldicize>
@@ -116,14 +116,19 @@
 -->
 <#macro QuickView result> 
     <!-- programs.QuickViewTemplate -->
-    <section id="${base.getCssID(result.liveUrl)}" class="quick-view js-quick-view" tabindex="-1" role="dialog">
+    <dialog id="${base.getCssID(result.liveUrl)}" 
+            class="quick-view js-quick-view invisible" 
+            role="dialog"
+            aria-labelledby="${base.getCssID(result.liveUrl)}-program-label"
+            aria-describedby="${base.getCssID(result.liveUrl)}-program-desc"
+            aria-modal="true">
         <button class="quick-view__close"><span class="sr-only">close</span></button>
         <div class="quick-view__wrapper">
             <div class="quick-view__content">
-                <h2 class="quick-view__title">
+                <h2 class="quick-view__title" id="${base.getCssID(result.liveUrl)}-program-label">
                     ${result.title!}          
                 </h2>
-                <p class="quick-view__desc">
+                <p class="quick-view__desc" id="${base.getCssID(result.liveUrl)}-program-desc">
                     <#if (result.listMetadata["c"]?first)!?has_content>
                         ${(result.listMetadata["c"]?first)!}
                     <#else>
@@ -212,7 +217,7 @@
             </div>
             <#-- TODO: Add related results -->
         </div>
-    </section>    
+    </dialog>    
 </#macro>
 
 <#-- Output the template used in the cart -->

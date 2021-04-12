@@ -490,3 +490,13 @@
 <#function getCssID input="">
     <#return (input)!?replace('[^A-Za-z0-9-]+', '_', 'r')>
 </#function>
+
+<#-- 
+    Overlay element
+    When a dialog is open (ex. QuickView), covers all elements 
+    besides the dialog.
+-->
+
+<#macro Overlay>
+  <div class="overlay"></div>
+</#macro>

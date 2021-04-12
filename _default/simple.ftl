@@ -54,6 +54,8 @@
     </head>
     <body>
 
+        <@base.Overlay />
+
         <#-- Output the clients global navigation -->
         <@client_includes.ContentHeader />
         

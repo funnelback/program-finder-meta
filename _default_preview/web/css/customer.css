@@ -107,6 +107,26 @@
   display: none;
 }
 
+/** Search results */
+
+.fb-container .search-results__link {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    font-weight: bold;
+    text-align: left;
+}
+
+/** Quick View */
+
+@media screen and (max-width: 1024px) {   
+    .fb-container .quick-view__content {
+        padding-left: .5rem;
+        padding-right: 1rem;
+    }
+}
+
 /* Cart */
 .fb-container .module-compare dl.module-compare__data-list {
   display: flex;
@@ -129,4 +149,24 @@
   margin: 0;
   padding: 0.5rem 1.5rem;
   min-width: 10rem;
+}
+
+/* Overlay on top of all elements */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s ease 0s, visibility 0s;
+}
+/* Display the overlay when the dialog is open */
+.opened-view .overlay {
+    visibility: visible;
+    opacity: 1;
 }

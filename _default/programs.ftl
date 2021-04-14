@@ -218,15 +218,11 @@
 <#-- Output the template used in the cart -->
 <#macro CartTemplate>
     <!-- programs.CartTemplate -->
-    <script id="cart-template-programs" type="text/x-handlebars-template">
+    <script id="cart-template-programs" type="text/x-cart-template">
         <td>
             <a href="#" class="module-compare__remove" data-url="{{indexUrl}}">Remove</a>
             <figure class="module-compare__bg">
-{{#if metaData.image}}
-  <img src="{{metaData.image}}" alt="{{title}}">
-{{#else}}
-  <img src="https://source.unsplash.com/random/335x192?{{title}}" alt="{{title}}">
-{{/if}}
+                <img src="https://source.unsplash.com/random/335x192?{{title}}" alt="">
             </figure>
             
             {{#if metaData.stencilsDeliveryMethod}}  

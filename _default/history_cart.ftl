@@ -7,7 +7,7 @@
         <script type="text/javascript">
 
         /* 
-            Handlebars is required for the compare functionality. This is
+            Handlesbars is required for the compare functionality. This is
             is usually loaded by Funnelback auto-complete library or the 
             product's cart library. However, to be defensive we are adding a 
             check and loading a version of it. 
@@ -69,9 +69,9 @@
 
                 // Pre-compile the handlebars templates  
                 self.itemTemplates = Object.entries(self.config.itemTemplates).reduce(
-                    (templates, [collection, template]) => {
-                    templates[collection] = window.Funnelback.Handlebars.compile(template);
-                    return templates
+                    function(templates, [collection, template]) {
+                        templates[collection] = window.Funnelback.Handlebars.compile(template);
+                        return templates;
                 }, {});
 
                 return true;
@@ -484,7 +484,8 @@
 		<#list question.getCurrentProfileConfig().getRawKeys()?filter(key -> key?lower_case?starts_with("stencils.template.shortlist.")) as key>
 			<#local collection = key?keep_after_last(".")>
 			<#local templateName = question.getCurrentProfileConfig().get(key)>
-			'${collection}': document.getElementById('cart-template-${templateName}').text,
+			'${collection}': document.getElementById('cart-template-${templateName}').text
+			<#if key_has_next>,</#if>
 		</#list> 
 	</#if>
 </#macro>

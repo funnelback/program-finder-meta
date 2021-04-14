@@ -69,9 +69,9 @@
 
                 // Pre-compile the handlebars templates  
                 self.itemTemplates = Object.entries(self.config.itemTemplates).reduce(
-                    (templates, [collection, template]) => {
-                    templates[collection] = window.Funnelback.Handlebars.compile(template);
-                    return templates
+                    function(templates, [collection, template]) {
+                        templates[collection] = window.Funnelback.Handlebars.compile(template);
+                        return templates;
                 }, {});
 
                 return true;

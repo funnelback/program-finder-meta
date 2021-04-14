@@ -27,32 +27,16 @@ const setupDeferredImages = (imageSelector = 'img.deferred') => {
     }
 }
 
-/* Element.prototype.matches polyfill for IE */
-/* https://developer.mozilla.org/en-US/docs/Web/API/Element/matches */
-if (!Element.prototype.matches) {
-  Element.prototype.matches = 
-      Element.prototype.matchesSelector || 
-      Element.prototype.mozMatchesSelector ||
-      Element.prototype.msMatchesSelector || 
-      Element.prototype.oMatchesSelector || 
-      Element.prototype.webkitMatchesSelector ||
-      function(s) {
-        var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-            i = matches.length;
-        while (--i >= 0 && matches.item(i) !== this) {}
-        return i > -1;            
-      };
-}
-
-/* Element.prototype.closest polyfill for IE */
-/* https://developer.mozilla.org/en-US/docs/Web/API/Element/closest */
-if (!Element.prototype.closest) {
-    Element.prototype.closest = function(s) {
-        var el = this
-        do {
-            if (el.matches(s)) return el
-            el = el.parentElement || el.parentNode
-        } while (el !== null && el.nodeType === 1)
-        return null
-    }
+/* Object.entries polyfill */
+/* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries */
+if (!Object.entries) {
+    Object.entries = function( obj ){
+      var ownProps = Object.keys( obj ),
+          i = ownProps.length,
+          resArray = new Array(i); // preallocate the Array
+      while (i--)
+        resArray[i] = [ownProps[i], obj[ownProps[i]]];
+  
+      return resArray;
+    };
 }

@@ -7,7 +7,7 @@
         <script type="text/javascript">
 
         /* 
-            Handlesbars is required for the compare functionality. This is
+            Handlebars is required for the compare functionality. This is
             is usually loaded by Funnelback auto-complete library or the 
             product's cart library. However, to be defensive we are adding a 
             check and loading a version of it. 

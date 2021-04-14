@@ -222,7 +222,11 @@
         <td>
             <a href="#" class="module-compare__remove" data-url="{{indexUrl}}">Remove</a>
             <figure class="module-compare__bg">
-                <img src="https://source.unsplash.com/random/335x192?{{title}}" alt="">
+{{#if metaData.image}}
+  <img src="{{metaData.image}}" alt="{{title}}">
+{{#else}}
+  <img src="https://source.unsplash.com/random/335x192?{{title}}" alt="{{title}}">
+{{/if}}
             </figure>
             
             {{#if metaData.stencilsDeliveryMethod}}  

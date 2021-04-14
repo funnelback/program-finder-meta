@@ -3,15 +3,17 @@
 <#-- Default template used for the cart  -->
 <#macro CartTemplate>
     <!-- results.CartTemplate -->
-    <script id="cart-template-default" type="text/x-cart-template">
+    <script id="cart-template-default" type="text/x-handlebars-template">
         <td>
             <a href="#" class="module-compare__remove" data-url="{{indexUrl}}">Remove</a>
 
-            {{#if title}} 
+            {{#if metaData.image}}
                 <figure class="module-compare__bg">
-                    <img src="https://source.unsplash.com/random/335x192?{{title}}" alt="">
-                </figure>
-            {{/if}} 
+                    <img src="{{metaData.image}}" alt="{{title}}">                
+                </figure>                
+            {{else}}
+                <img src="https://source.unsplash.com/random/335x192?{{title}}" alt="{{title}}">
+            {{/if}}
 
             <#-- Display a tab on top of the image -->
             <#--  

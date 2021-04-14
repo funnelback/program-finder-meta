@@ -218,11 +218,15 @@
 <#-- Output the template used in the cart -->
 <#macro CartTemplate>
     <!-- programs.CartTemplate -->
-    <script id="cart-template-programs" type="text/x-cart-template">
+    <script id="cart-template-programs" type="text/x-handlebars-template">
         <td>
             <a href="#" class="module-compare__remove" data-url="{{indexUrl}}">Remove</a>
             <figure class="module-compare__bg">
-                <img src="https://source.unsplash.com/random/335x192?{{title}}" alt="">
+                {{#if metaData.image}}
+                    <img src="{{metaData.image}}" alt="{{title}}">
+                {{else}}
+                    <img src="https://source.unsplash.com/random/335x192?{{title}}" alt="{{title}}">
+                {{/if}}
             </figure>
             
             {{#if metaData.stencilsDeliveryMethod}}  
@@ -302,7 +306,7 @@
         The css framework currently assumes that the second channel resides under 
         tt-dataset-courses.
     -->
-    <script id="auto-completion-courses" type="text/x-handlebar-template">
+    <script id="auto-completion-courses" type="text/x-handlebars-template">
         <div class="module-search__list-item">
             <a href="#" class="module-search__list-link" style="background-image: url('https://source.unsplash.com/random/335x192?{{extra.disp.title}};">
                 <span class="module-search__list-text">

@@ -5,31 +5,30 @@
         <#local host=httpRequest.getHeader('host')>
         <!-- history_cart.Config -->
         <script type="text/javascript">
+
+        /* 
+            Handlesbars is required for the compare functionality. This is
+            is usually loaded by Funnelback auto-complete library or the 
+            product's cart library. However, to be defensive we are adding a 
+            check and loading a version of it. 
+        */
+        if (!window.Funnelback) window.Funnelback = {}; // create namespace
+
+        if (!Handlebars) {
+            throw new Error('Handlebars must be included (https://handlebarsjs.com/)');
+        }
+
+        if (!window.Funnelback.Handlebars) {
+        window.Funnelback.Handlebars = Handlebars.create();
+        }
+
         var cartJS = {
             config: {
                 apiUrl: '//${host}/s/cart.json',
                 collectionName: '${(question.collection.id)!}',
                 loadOnInit: true,
-                itemTemplate: document.getElementById('cart-template-program-finder').innerHTML,
-                itemTemplateMap: {  // map between template and FB results
-                    url: 'indexUrl',
-                    name: 'title',
-                    desc: 'metaData.c',
-                    programID: 'metaData.programID',
-                    programCode: 'metaData.programCode',
-                    programCredentialName: 'metaData.programCredentialName',
-                    programCredentialType: 'metaData.programCredentialType',
-                    programCredits: 'metaData.programCredits',
-                    stencilsDeliveryMethod: 'metaData.stencilsDeliveryMethod',
-                    stencilsDepartment: 'metaData.stencilsDepartment',
-                    programFaculty: 'metaData.programFaculty',
-                    programImage: 'metaData.programImage',
-                    programIntakeDates: 'metaData.programIntakeDates',
-                    programLengthYears: 'metaData.programLengthYears',
-                    programOption: 'metaData.programOption',
-                    programPriorityResult: 'metaData.programPriorityResult',
-                    programStatus: 'metaData.programStatus',
-                    programTags: 'metaData.programTags'
+                itemTemplates: {
+                    <@CartTemplatesConfig />
                 }
             },
             selectors: {
@@ -67,6 +66,13 @@
                 if (self.config.loadOnInit) {
                     self.getItems();
                 }
+
+                // Pre-compile the handlebars templates  
+                self.itemTemplates = Object.entries(self.config.itemTemplates).reduce(
+                    function(templates, [collection, template]) {
+                        templates[collection] = window.Funnelback.Handlebars.compile(template);
+                        return templates;
+                }, {});
 
                 return true;
             },
@@ -252,60 +258,15 @@
                 document.querySelector(self.selectors.pinboardCounter).textContent = self.cart.length;
             },
 
-            setItemHTML: function (item) {
+            setItemHTML: function (data) {
                 'use strict';
                 var self = this;
 
-                var value, itemHTML = self.config.itemTemplate;
+                // Grab the template
+                const template = self.itemTemplates[data.collection] ? self.itemTemplates[data.collection] : self.itemTemplates.default;
 
-                // replace values from template
-                for (var key in self.config.itemTemplateMap) {
-                    // simple map
-                    // value = item[self.config.itemTemplateMap[key]];
-                    // "object" nap
-                    var value = '';
-                    var valueKeys = self.config.itemTemplateMap[key].split('.');
-                    if (valueKeys.length) {
-                        value = item[valueKeys[0]];
-                        if (valueKeys.length > 1) {
-                            var tmp = value;
-                            for (var i = 1; i < valueKeys.length; i++) {
-                                tmp = tmp[valueKeys[i]];
-                            }
-                            value = tmp;
-                        }
-                    }
-                    var regExp = new RegExp('\\{\\{' + key + '\\}\\}', 'gi');
-                    itemHTML = itemHTML.replace(regExp, value || '');
-                }
-                var ifElseRegexGlobal = new RegExp('\\{\\{#if (.*?)\\}\\}(.*?)\\{\\{else\\}\\}(.*?)\\{\\{\\/if\\}\\}', 'imsg');
-                var ifElseRegex = new RegExp('\\{\\{#if (.*?)\\}\\}(.*?)\\{\\{else\\}\\}(.*?)\\{\\{\\/if\\}\\}', 'ims');
-                var results = itemHTML.matchAll(ifElseRegexGlobal);
-                for(var j = 0; j < results.length; j++) {
-                    let result = results[j];
-                    let cond = result[1];
-                    let tbranch = result[2];
-                    let fbranch = result[3];
-
-                    if ( cond in self.config.itemTemplateMap ) {
-                        itemHTML = itemHTML.replace(ifElseRegex, tbranch);  
-                    } else {
-                        itemHTML = itemHTML.replace(ifElseRegex, fbranch); 
-                    }
-                }
-                
-                var ifRegexGlobal = new RegExp('\\{\\{#if (.*?)\\}\\}(.*?)\\{\\{\\/if\\}\\}', 'imsg');
-                var ifRegex = new RegExp('\\{\\{#if (.*?)\\}\\}(.*?)\\{\\{\\/if\\}\\}', 'ims');
-                results = itemHTML.matchAll(ifRegexGlobal);
-                for(var k = 0; k < results.length; k++) {
-                    let result = results[k];
-                    let cond = result[1];
-                    let tbranch = result[2];
-                    if ( cond in self.config.itemTemplateMap ) {
-                        itemHTML = itemHTML.replace(ifRegex, tbranch);  
-                    } 
-                }
-                return itemHTML;
+                // Generate the HTML by parsing the template with the data
+                return template(data);
             },
 
             getItems: function () {
@@ -505,4 +466,40 @@
             </table>
         </div>
     </section>
+</#macro>
+
+<#-- Output the config required to configure the cart templates -->
+<#macro CartTemplatesConfig >
+	<#-- 
+		Output the default template which is used when no cart template 
+		is explicitly defined.
+	-->
+	'default': document.getElementById('cart-template-default').text
+	<#if (question.getCurrentProfileConfig().getRawKeys())!?has_content>		
+		,
+		<#-- 
+			Output the custom cart templates config based on the 
+			user's configurations 
+		-->
+		<#list question.getCurrentProfileConfig().getRawKeys()?filter(key -> key?lower_case?starts_with("stencils.template.shortlist.")) as key>
+			<#local collection = key?keep_after_last(".")>
+			<#local templateName = question.getCurrentProfileConfig().get(key)>
+			'${collection}': document.getElementById('cart-template-${templateName}').text
+			<#if key_has_next>,</#if>
+		</#list> 
+	</#if>
+</#macro>
+
+<#-- 
+	Attempts to find and output all cart templates across all available
+	namespaces. It is assummed that cart templates are macros defined with 
+	the name <#macro CartTemplate> </#macro>.
+-->
+<#macro CartTemplatesForResults>
+	<!-- history_cart.CartTemplatesForResults -->
+	<#list .main as key, namespace >
+		<#if (namespace)!?is_hash && (namespace.CartTemplate)!?is_directive && key != "history_cart">
+			<@namespace.CartTemplate />
+		</#if>
+	</#list>
 </#macro>

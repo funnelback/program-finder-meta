@@ -154,7 +154,8 @@
         <#-- Stencil specific code such as the quickview and dropdowns -->
         <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/main.js"></script>
 
-        <@programs.CartTemplate/>
+		<#-- Specifies how each cart item should be presented -->
+		<@history_cart.CartTemplatesForResults />
         <@history_cart.Config />
     </body>
 </html>

@@ -218,7 +218,7 @@
 <#-- Output the template used in the cart -->
 <#macro CartTemplate>
     <!-- programs.CartTemplate -->
-    <script id="cart-template-programs" type="text/x-cart-template">
+    <script id="cart-template-programs" type="text/x-handlebars-template">
         <td>
             <a href="#" class="module-compare__remove" data-url="{{indexUrl}}">Remove</a>
             <figure class="module-compare__bg">

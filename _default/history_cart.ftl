@@ -484,8 +484,7 @@
 		<#list question.getCurrentProfileConfig().getRawKeys()?filter(key -> key?lower_case?starts_with("stencils.template.shortlist.")) as key>
 			<#local collection = key?keep_after_last(".")>
 			<#local templateName = question.getCurrentProfileConfig().get(key)>
-			'${collection}': document.getElementById('cart-template-${templateName}').text
-			<#if key_has_next>,</#if>
+			'${collection}': document.getElementById('cart-template-${templateName}').text,
 		</#list> 
 	</#if>
 </#macro>

@@ -6,7 +6,7 @@
     <#list getFacets(response, facetNames) as facet>
         <#if facet.allValues?size != 0>
             <!-- facets.RadioFacet -->
-            <ul class="module-filter__radio-list">
+            <ul class="module-filter__list module-filter__radio-list">
                 <#list facet.allValues as value>
                     <li class="module-filter__radio-item">
                         <input type="radio" id="${value.label}" name="${facet.name}" value="${value.label}" <#if value.selected>checked</#if>>
@@ -24,35 +24,25 @@
     <ul class="module-filter__list">
         <#list getFacets(response, facetNames) as facet>
         <#if facet.allValues?size != 0>
-        <li class="module-filter__item" tabindex="0">
-            <span class="module-filter__item-title<#if facet.selected> active</#if>" aria-haspopup="true" aria-expanded="false">
-                ${facet.name}
-            </span>
-            <div class="module-filter__facets">
-                <div class="content-wrapper">
-                    <#-- These counts allow us to split the values evenly along the ULs -->
-                    <#local breakCount = ((facet.allValues?size) / 3)?floor >
-                    <#local valueCount = 0>
-                    <#list facet.allValues as value>
-                        <#if valueCount == 0>
-                            <ul class="module-filter__facets-list" role="menu">
-                        </#if>
-                        <li class="module-filter__facets-item" role="menuitem">
+        <li>
+            <details class="module-filter__item">
+                <summary class="module-filter__item-title">
+                    ${facet.name}
+                </summary>
+                <div class="module-filter__facets">
+                    <div class="content-wrapper">
+                        <ul class="module-filter__facets-list" role="menu">
+                        <#list facet.allValues as value>
+                            <li class="module-filter__facets-item" role="menuitem">
                                 <a href="${value.toggleUrl}" class="module-filter__facets-link<#if value.selected> active</#if>">
-                                ${value.label}
+                                    ${value.label}
                                 </a>
-                        </li>
-                        <#local valueCount = valueCount + 1>
-                        <#-- reset once we reach our breakpoint -->
-                        <#if valueCount &gt;= breakCount>
-                            <#local valueCount = 0>
-                        </#if>
-                        <#if valueCount == 0 || value_index == (facet.allValues?size - 1) >
-                            </ul>
-                        </#if>
-                    </#list>
+                            </li>
+                        </#list>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </details>
         </li>
         </#if>
         </#list>
@@ -65,7 +55,7 @@
     <!-- facets.CheckboxFacet -->
     <h1>${facetName}</h1>
     <#list getFacets(response, facetName) as facet>
-        <ul class="module-filter__checkbox-list">
+        <ul class="module-filter__list module-filter__checkbox-list">
             <#list facet.allValues as value>
             <li class="module-filter__checkbox-item">
                 <input <#if value.selected>checked</#if> type="checkbox" id="${value.label?lower_case?replace(" ", "-")}" name="compare" value="${value.label}">

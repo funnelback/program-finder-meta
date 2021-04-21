@@ -84,7 +84,7 @@ i.e.
 ```java
 /**
   This filter removes the client's name from the title so that theres less redundant text on the search results page.
-**/>
+**/
 ```
 >>>
 
@@ -100,7 +100,7 @@ i.e.
 ```java
 /**
   This hook_preprocess.groovy script will force funnelback to return all results of no query is specified. This is required for listing all courses on the homepage.
-**/>
+**/
 ```
 >>>
 

@@ -35,14 +35,14 @@ At a higher level, the process will involve:
 In the profile configurations, set the primary and secondary finder types
 using the following configurations:
 
-```java
+```ini
 stencils.I18n.finder_type_primary=<name_of_primary_type>
 stencils.I18n.finder_type_secondary=<name_of_secondary_type>
 ```
 
 e.g. In the UK, programs are known as `courses` and courses are known as `modules`. The following will needed:
 
-```java
+```ini
 stencils.I18n.finder_type_primary=course
 stencils.I18n.finder_type_secondary=module
 ```
@@ -69,7 +69,7 @@ The Program Finder is powered by extra searches which rely
 on `Tabs` for navigation. As we changed the `Tabs` facet in the previous
 step, we need update the extra search configurations accordingly.
 
-```java
+```ini
 stencils.search_preview.programs.category_label=<name_of_primary_type_used_in_facet>
 stencils.search_preview.courses.category_label=<name_of_secondary_type_used_in_facet>
 stencils.tabs.extra_searches.<name_of_primary_type_used_in_facet>=
@@ -85,7 +85,7 @@ Courses ->  Modules
 
 The new configuration will be:
 
-```java
+```ini
 stencils.search_preview.programs.category_label=Courses
 stencils.search_preview.courses.category_label=Modules
 stencils.tabs.extra_searches.Courses=
@@ -104,7 +104,7 @@ This should be renamed to better suit the client's requirements.
 The label for the `Program` can be changed using the following in profile
 configuration:
 
-```java
+```ini
 stencils.auto-completion.datasets.courses.name=<new_label>
 ```
 
@@ -116,12 +116,12 @@ It is best practice to set the service
 title to something which is user friendly as this is what is used in
 the marketing dashboard.
 
-```java
+```ini
 service.title=<client_name> <primary_type> Finder
 ```
 
 e.g.
 
-```java
+```ini
 service.title=Funnelback Course Finder
 ```

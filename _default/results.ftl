@@ -5,7 +5,7 @@
     <!-- results.CartTemplate -->
     <script id="cart-template-default" type="text/x-handlebars-template">
         <td>
-            <a href="#" class="module-compare__remove" data-url="{{indexUrl}}">Remove</a>
+            <button class="module-compare__remove" data-url="{{indexUrl}}">Remove</button>
 
             {{#if metaData.image}}
                 <figure class="module-compare__bg">

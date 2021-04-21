@@ -449,12 +449,13 @@
 <#macro CartTemplate>
     <!-- history_card.CartTemplate -->
     <section class="module-compare js-module-compare">
-        <h2 class="sr-only">Compare elements</h2>
+        <h2 class="sr-only">Compare ${(question.currentProfileConfig.get("stencils.I18n.finder_type_primary")!"Course")?lower_case}s</h2>
+
         <div class="module-compare__bar content-wrapper">
-            <a href="#" class="module-compare__close">Close</a>
-            <a href="#" class="module-compare__clear hidden">Clear</a>
-            
+            <button class="module-compare__close">Close</button>
+            <button class="module-compare__clear hidden">Clear</button>
         </div>
+
         <div class="module-compare__wrapper content-wrapper">
             <table class="module-compare__list">
                 <tbody>

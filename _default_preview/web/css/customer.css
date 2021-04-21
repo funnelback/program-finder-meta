@@ -84,7 +84,12 @@
   }
 }
 
-
+.fb-container .btn__compare,
+.fb-container .module-compare__close,
+.fb-container .module-compare__clear {
+    background: none;
+    border: none;
+}
 
 /** Curated results **/
 .fb-container .fb-curator .search-results__list--list-view {

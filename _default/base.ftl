@@ -228,7 +228,7 @@
                             </li>
                         <#else>                    
                             <li class="pagination__item">
-                                <a class="pagination__link" href="${page.url}" aria-label="Goto Page 1">
+                                <a class="pagination__link" href="${page.url}" aria-label="Goto Page ${page.number}">
                                     <span class="pagination__label">${page.number}</span>
                                 </a>
                             </li>

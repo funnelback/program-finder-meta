@@ -130,9 +130,9 @@
         <@programs.AutoCompleteTemplate />
 
         <script>
-            jQuery(function() {
-                <@auto_complete.Configuration />
-            });
+        window.addEventListener('DOMContentLoaded', function() {
+            <@auto_complete.Configuration />
+        })
         </script>
         
 

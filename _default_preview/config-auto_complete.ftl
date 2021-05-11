@@ -122,9 +122,9 @@
                 <script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.autocompletion-2.6.0.stencils.js"></script>
 
                 <script>
-                    jQuery(function() {
-                        <@auto_complete.Configuration />
-                    });                                    
+                window.addEventListener('DOMContentLoaded', function() {
+                    <@auto_complete.Configuration />
+                })
                 </script>
                 <!-- Required CSS and javascript - END -->   
 

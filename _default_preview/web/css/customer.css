@@ -107,6 +107,11 @@
   display: none;
 }
 
+/** Arrow adjacent to facet category */
+.fb-container .module-filter__item-title::after {
+    background-color: #e42b12;
+}
+
 /** Search results */
 
 .fb-container .search-results__link {

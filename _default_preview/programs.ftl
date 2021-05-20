@@ -225,7 +225,7 @@
     <!-- programs.CartTemplate -->
     <script id="cart-template-programs" type="text/x-handlebars-template">
         <td>
-            <a href="#" class="module-compare__remove" data-url="{{indexUrl}}">Remove</a>
+            <button class="module-compare__remove" data-url="{{indexUrl}}">Remove</button>
             <figure class="module-compare__bg">
                 {{#if metaData.image}}
                     <img src="{{metaData.image}}" alt="{{title}}">

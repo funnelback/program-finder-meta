@@ -76,13 +76,13 @@ image::images/config-search_box.png[scaledwidth="90%"]
 
 == Filters and comparison
 
-Search filters meet expectations of students to filter results that match their desired location, mode of delivery, or level of study. 
+Search filters (otherwise knows as facets) meet expectations of students to filter results that match their desired location, mode of delivery, or level of study. 
 
 image::images/config-facets.png[scaledwidth="90%"]
 
 === What you can change
 * The labels used for each. i.e. All -> All results.
-* Add or remove filters and determine where to source the data from (limited to structured data crawled by Funnelback).
+* Add or remove facets and determine where to source the data from (limited to structured data crawled by Funnelback).
 * Change the order of facets.
 * Change the behaviour from allowing multiple selections to only being able to select one category at a time.
 
@@ -150,13 +150,15 @@ base on the program or course data.
 
 === What you cant change
 * Display data which is not found within Funnelback.
-* Changing the order of the overall elements. i.e. Title -> summary -> metadata fields
+* Changing the order of the overall elements. i.e. Title -> summary -> metadata fields.
 
 == Quick view
 
 Quick view allows the user view more information about a particular document without them having to leave the search results page. This aims to minimise the amount of hopping back and forth between systems.
 
 image::images/config-quick_view.png[scaledwidth="90%"]
+
+It is accessed by clicking on any program or course result.
 
 === What you can change
 * Change the title, summary and metadata fields shown.
@@ -206,8 +208,8 @@ image::images/config-comparison.png[scaledwidth="90%"]
 === What you can change
 * Content being used for the tags, title and summary.
 * Length of summary.
-* Number of metadata fields to display
-* Labels for each metadata
+* Number of metadata fields to display.
+* Labels for each metadata.
 * Add placeholder images or remove images altogether.
 
 === What you cant change
@@ -220,8 +222,8 @@ A simply message is displayed when the search does not return any result.
 image::images/config-no_results.png[scaledwidth="90%"]
 
 === What you can change
-* Change the no results message
-* Change the icon
+* Change the no results message.
+* Change the icon.
 
 == Final Thoughts
 

@@ -9,6 +9,7 @@ v2.2
 :page-article-nav-section: Reference guides
 :page-article-featuresgroup: Search frontends
 :page-article-features-frontend: Stencils
+:icons: font
 
 toc::[]
 
@@ -57,7 +58,7 @@ The footer usually contains additional links, contact details and copyright noti
 
 For a seamless search experience it's recommended that the header and footer on the search results page are identical to the ones on the main website.
 
-=== What you can change
+=== icon:comment[] What you can change
 * Insert static HTML which can be directly into the
 search implementation.
 * Source the header and footer directly from the website or CMS.

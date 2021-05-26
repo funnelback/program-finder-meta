@@ -1,4 +1,4 @@
-include::shared-content::partial$shared-attributes-default.adoc[]
+// include::shared-content::partial$shared-attributes-default.adoc[]
 = Program Finder configuration reference
 // v2.2
 // :page-search-title: Program Finder configuration reference
@@ -14,8 +14,6 @@ include::shared-content::partial$shared-attributes-default.adoc[]
 // toc::[]
 
 == Introduction
-
-=== Purpose
 
 This aim of this document is to provide a quick overview of the things which are generally included in a standard deployment of the Program Finder. 
 
@@ -44,7 +42,7 @@ Various Funnelback components or features use icons. Alternative icons can be re
 
 Below is a typical example of a Program Finder implementation.
 
-image::images/config-overview.png[scaledwidth="90%"]
+image::images/config-overview.png[scaledwidth="60%"]
 
 Each component and the list of configuration options can be found below.
 
@@ -135,7 +133,7 @@ image::images/config-results--list.png[scaledwidth="90%"]
 
 __Card view__
 
-image::images/config-results--card.png[scaledwidth="90%"]
+image::images/config-results--card.png[scaledwidth="60%"]
 
 The following rules apply for both list and card views.
 

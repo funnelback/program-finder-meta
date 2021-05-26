@@ -1,0 +1,567 @@
+include::shared-content::partial$shared-attributes-default.adoc[]
+= Program Finder configuration reference
+v2.2
+:page-search-title: Program Finder configuration reference
+:page-search-keywords: Program Finder package solution|Program Finder Stencil
+:page-description: This guide describes the configuration options that apply to the Program Finder.
+:page-content-type: Documentation
+:page-article-type: Documentation
+:page-article-nav-section: Reference guides
+:page-article-featuresgroup: Search frontends
+:page-article-features-frontend: Stencils
+
+toc::[]
+
+== Introduction
+
+=== Purpose
+
+This aim of this document is to provide an overview of the things which can be changed in a standard deployment of the Program Finder. 
+
+Generally, changes to content such as labels and data in relatively 
+straight forward whereas changes to functionality and presentation will require
+custom work. 
+
+Each section in this document gives a brief overview of the feature, the terminology used the degree in which it can be changed.
+
+== General considerations
+
+=== Fonts and colors
+
+The initial prototype implementation of the Program Finder will re-use the colours and fonts of the main website in a best effort fashion.
+
+Minimum change in these styles will be made (e.g. changing the color of specific elements, font size or weight, etc.) so that the Program Finder is 
+presentable and functional. 
+
+If more dramatic changes are required, a complete custom style sheet along with a up to date style guide must be provided.
+
+=== Icons
+
+Various Funnelback components use icons. Alternative icons can be requested from either:
+
+* http://fontawesome.io/[Font Awesome] library of icons or
+* Provided as image files
+
+== Search results page overview
+
+image::images/config-overview.png[scaledwidth="90%"]
+
+Each component and the list of configuration options made are detailed in the following sections.
+
+== Header and footer
+
+[.lead]
+The header and footer are static content block that are always displayed at the top & bottom of the page.
+
+The header usually contains a logo, a navigation menu and the search box.
+
+The footer usually contains additional links, contact details and copyright notices.
+
+For a seamless search experience it's recommended that the header and footer on the search results page
+are identical to the ones on the main website.
+
+=== What you can change
+* Insert static HTML which can be directly into the
+search implementation.
+* Source the header and footer directly from the website or CMS.
+
+
+== Search box
+
+[.lead]
+The search box allows the user to enter their query and the main way
+they will interact with the search
+
+image::images/config-search_box.png[scaledwidth="90%"]
+
+=== What you can change
+* The placeholder text.
+* The icon used for the submit button.
+
+
+== Filters and comparison
+
+Search filters meet expectations of students to filter results that match their desired location, mode of delivery, or level of study. 
+
+image::images/config-facets.png[scaledwidth="90%"]
+
+=== What you can change
+* The labels used for each. i.e. All -> All results.
+* Add or remove filters.
+* Change the behavior from allowing multiple selections to only being able to select
+one category at a time.
+
+=== What you cant change
+* Change the number of columns to be displayed.
+
+== Display mode
+
+Relevant programs/courses results displayed as a list and/or set of cards.
+The display mode toggle provides the ability for the user to switch
+between these two modes to better suit their desired search experience.
+
+=== What you can change
+* Disable the control altogether so that the user only has access to the default. 
+* Select either list or card as default. 
+* Choose different icons.
+
+=== What you cant change
+* Add additional options beyond list and card view
+
+== Curator
+
+Guide the student journey by promoting and
+modifying results so students find quick answers
+with the most relevant programs and courses.
+
+Drive traffic to the most relevant content and
+streamline UX by creating your own rules, triggers,
+and appearance of search results.
+
+image::images/config-curator.png[scaledwidth="90%"]
+
+== Programs and Courses sections
+
+== Contextual Navigation
+
+image::images/config-facets.png[scaledwidth="90%"]
+
+== Quick view
+
+Quick view allows the user view more information about a particular document without them having to leave the search results page. This aims to minimise the amount of hopping back and forth between systems.
+
+
+image::images/config-facets.png[scaledwidth="90%"]
+
+== Concierge
+
+Using Funnelback’s auto-suggest feature, visitors can
+navigate straight to program information from the
+search bar. This is the most effective way to shorten
+the visitor’s journey and improve user experience.
+Search-as-you-type reduces the chance of spelling
+mistakes, helps to prevent users from arriving
+at dead ends, and allows the institution to direct
+attention to the highest-value program pages. 
+
+image::images/config-facets.png[scaledwidth="90%"]
+
+== Comparison
+
+[.lead]
+
+Compare let students evaluate a side-by-side comparison of majors or programs that they are considering.
+
+image::images/config-comparison.png[scaledwidth="90%"]
+
+=== What you can change
+* Content being used for the tags, title and summary.
+* Length of summary.
+* Number of metadata fields to display
+* Labels for each metadata
+* Add placeholder images or remove images altogether.
+
+=== What you cant change
+* Change the order of saved results
+
+[.lead]
+The tabbed navigation allows to view only results from a specific section of the website (e.g. "News", "Events") or
+a specific source repository (e.g. "Staff", "Courses").
+
+image::screenshots/tabbed-navigation.png[]
+
+The tabbed navigation usually start with a _All_ tab displaying all results ^<1>^. The "All" tab is selected by default if present.
+Each tab has a name ^<2>^, and shows the estimated number of results ^<3>^ for this tab. An optional icon ^<4>^ can be displayed.
+
+=== Tabs results content
+
+Results get assigned to tabs based on their _URL prefix_. For example:
+
+* All results starting with http://example.org/courses/* belong to the _Courses_ tab
+* All results starting with http://staff-directory.example.org/* belong to the _Staff_ tab
+
+Additionally when separate datasources are used for non-web data (e.g. indexing a staff directory as an XML file), the whole datasource
+can be configured to belong to a specific tab.
+
+=== Tabs and faceted navigation
+
+The selected tab can affect which *facets* are displayed. For example it's possible to display only a _Date_ and _Format_
+facet when the _All_ tab is displayed, and only a _Campus location_ facet when the _Staff_ tab is displayed.
+
+image::screenshots/tab-facet-1.png[title="'People' tab shows a 'Campus' and 'Department' facets",scaledwidth="50%"]
+image::screenshots/tab-facet-2.png[title="'Events' tab shows different facets",scaledwidth="50%"]
+
+
+=== Other tabs impacts
+
+Apart from the faceted navigation and the fact that the results list will be scoped to the current tab, no other part of the search
+results page is affected by tab selection.
+
+=== Configuration options
+
+* Number of tabs (recommended: No more than 6)
+** A list of URL prefixes mapped to each type must be provided
+* Presence of the "All" tab: It can be removed, in which case there is no tab to search across all content.
+* Tab names
+* Tab order
+* Optional tab icon
+
+== Search box and advanced controls
+
+[.lead]
+The search box has become an iconic symbol for search in general and is the go-to place
+for users when attempting to find answers to their questions.
+
+The advanced controls allow the user to refine their results, interact with the shopping cart and the
+search history.
+
+image::screenshots/search-box.png[]
+
+The search box is where the user enter their search query ^<1>^. It will also display
+auto-completion / concierge if configured ^<2>^ for every keystroke.
+
+The shortlist ^<3>^ and history ^<4>^ toggle allows the user to access the results shortlist and the searches
+and clicks history.
+
+=== Advanced controls
+
+==== Shortlist
+
+The shortlist toggle allows a user to access the list of shortlisted results. It also displays
+the number of shortlisted results.
+
+image::screenshots/shortlist-toggle.png[]
+
+When toggled, the shortlist is displayed instead of the current search results:
+
+image::screenshots/shortlist.png[]
+
+==== Search history
+
+The search history toggle is used to get access to search and click history.
+
+image::screenshots/search-history-toggle.png[]
+
+When toggled, past searches ^<1>^ and clicked results ^<2>^ are displayed instead of the current search results:
+
+image::screenshots/search-history.png[]
+
+=== Configuration options
+
+==== Search box
+
+* Search icon (removal, or icon change)
+* Search button text and icon
+
+For details about auto-completion, see the auto-completion section.
+
+==== Shortlist toggle
+
+* Removal of the toggle (if the shortlist is disabled)
+* Toggle label (defaults to "Shortlist") and icon
+
+==== Shortlist screen
+
+* The metadata field to display to describe each shortlisted result (defaults to the summary)
+
+==== Search history toggle
+
+* Removal of the toggle (if the search history is disabled)
+* Toggle label (defaults to "History") and icon
+
+==== Search history screen
+
+No configuration options at this time.
+
+== Auto-completion
+
+[.lead]
+Auto-completion provides the user with real-time suggestions as search terms are typed
+into the search box.
+
+image::screenshots/auto-completion.png[]
+
+Suggestions are displayed just below the search box. They can be divided in categories ^<1>^,
+usually corresponding to the tabbed navigation. The display of each suggestion can be highly customised
+depending on its type (e.g. Course detail ^<2>^, contact details ^<3>^, etc.).
+
+Alternatively, a simpler mode is possible to display only the simple suggestions.
+
+image::screenshots/auto-completion-simple.png[]
+
+=== Configuration options
+
+* Choice of simple vs. complex suggestions
+* For complex suggestions:
+** Choice of categories (dependent of the datasource being indexed, recommended maximum: 3)
+
+For each suggestion within the categories:
+
+* Title
+* Metadata fields (subject to metadata available in the datasource)
+* Optional icons
+
+== Faceted navigation
+
+[.lead]
+Faceted Navigation allows the user to refine their search based on categories automatically generated
+from the content or manually defined.
+
+image::screenshots/facets.png[]
+
+The faceted navigation panel will display a list of pre-configured facets such as _Date_, _Format_,
+_Location_, etc. Each facet ^<1>^ contains a list of categories ^<2>^, or values, with the estimated number of
+documents matching the category ^<3>^. When more than 8 categories exist, a _More..._ link ^<4>^ is displayed
+to toggle them.
+
+Facets can be configured to depend on the tabbed navigation (e.g. the _All_ tab may show different facets than
+the _People_ tab).
+
+=== Facets definitions
+
+The following facets are available out of the box:
+
+* *Date*: Create categories for the content modification date, on a list of predefined ranges (e.g. _Past year,
+ _Past month_, _Past 3 month_, etc.)
+* *Format*: Create categories for the content type, for binary content (e.g. _PDF_, _DOC_, _XLS_)
+* *URL*: Allows drilling down by URL
+
+Additionally, custom facets can be defined depending on the metadata available on the content. For example:
+
+* On a Staff Directory datasource, facets like _Campus_, _Department_ or _Position_
+* On a Courses datasource, facets like _Degree Type_, _Delivery Method_, etc.
+
+The ability to configure these facets will depend on the availability of the corresponding metadata in the datasource.
+
+=== Configuration options
+
+* List of facets (subject to metadata availability in the datasource)
+** Facet label
+** Metadata to consider to generate the values
+* Order of facets
+* Optional: Association of facets with specific tabs (e.g. thee "Events" tab should show "Location" whereas the "People" tab should show "Department")
+
+== Search results
+
+[.lead]
+Search results display relevant content for the user search term and shows the correct amount of information to allow
+them to find quickly what they were searching for.
+
+The search results display is broken down in several components listed below.
+
+=== Summary of matching documents
+
+image::screenshots/matching-documents-summary.png[]
+
+The summary of matching documents describes an estimate of how many documents matched the user search terms ^<1>^. When there
+are multiple search terms, a breakdown of how many documents matched all of the search terms versus some of them is shown ^<2>^.
+
+==== Configuration options
+
+* Removal of the summary of matching documents
+* Simplification of the message (removal of the second part "...where N match all words...")
+
+=== Sort and limit controls
+
+image::screenshots/sort-control.png[]
+image::screenshots/limit-control.png[]
+
+The sort control ^<1>^ allows the user to sort search results.
+
+The limit control ^<2>^ allows the user to choose how may search results should be displayed per page.
+
+==== Configuration options
+
+* Removal of the sort control
+* List of sorting options (e.g. by "Title", "Date", etc.)
+* Removal of the limit control
+* Limit values (e.g. "10, 50, 100")
+
+=== Spelling suggestions
+
+image::screenshots/spelling-suggestions.png[]
+
+The spelling suggestions will automatically suggest an alternative query term ^<1>^ in case of misspellings. Clicking on
+the suggested terms runs a new search for it.
+
+==== Configuration options
+
+* Removal of the spelling suggestions
+
+=== Query blending
+
+image::screenshots/blending.png[]
+
+The query blending notification indicates when a query has been automatically expanded and provide
+a link ^<1>^ to search for the original query entered by the user. The expansions include:
+
+* Automatic correction of spelling mistakes (e.g. "Univorsity" -> "University" )
+* Automatic US/UK conflation (e.g. "Colour" -> "Color")
+* Configurable list of query blending synonyms (e.g. "F.B.U." -> "Funnelback University")
+
+==== Configuration options
+
+* Removal of the query blending
+* If present, which expansion modes to enable/disable
+
+=== Best bets
+
+image::screenshots/best-bet.png[]
+
+Best bet are used to display a featured result or a message when the search query match specific terms. The message
+has a title ^<1>^, a description ^<2>^, and a link ^<3>^. The link is accessed by clicking on the _Learn more_ button ^<4>^.
+This message may be configured to stand out from search results or to look like an "organic" result.
+
+Best bets are configured via the Marketing Dashboard.
+
+==== Configuration options
+
+* Whether to display best bets as a stand-out message, or an organic search result
+
+=== Curator
+
+image::screenshots/curator-simple-message.png[]
+
+Curator allows customising the search results page in a number of ways. These customisations includes displaying
+a message identical to the Best Bet message, or a simpler one (A simple line of text, without description or link).
+
+==== Configuration options
+
+* Look of the curator "simple" message
+
+=== Results
+
+image::screenshots/results.png[]
+
+Each search result is displayed with a title ^<1>^, its URL ^<2>^ and a summary ^<3>^. An optional thumbnail ^<4>^ can be displayed.
+Additional result metadata can be displayed depending on their availability, such as the date ^<5>^, content author, etc.
+
+A label will indicate if the result link was clicked recently ^<6>^ (e.g. _Last visited 1h ago_).
+
+Result display can be significantly different depending on the type of results, for example contact details for a person, or course details:
+
+image::screenshots/result-people.png[]
+
+Course results can have a shortlist toggle ^<7>^ to add/remove them from the user shortlist.
+
+image::screenshots/result-course.png[]
+
+The information to display will depend on the metadata availability on the datasource for each document.
+
+==== Title and metadata fields
+
+The title can come from:
+
+** Default HTML `<title>`. Recommended for better ranking and to avoid an extra search-specific "title" field in the CMS
+** Specific metadata (e.g. `<meta name="..." content="...">`)
+
+Similarly, metadata values can come from:
+
+** Content metadata tags (e.g. `<meta name="..." content="...">`)
+** External metadata file (A file listing additional metadata to associate to individual URLs)
+
+Default metadata fields include: Author, Description, Date, Description. Additional metadata fields can be defined
+in the content (e.g. `<meta name="dcterms.author" content="Shakespeare">`). Use of Dublin Core naming prefixes is recommended
+but not mandatory.
+
+==== Content snippet
+
+The content snippet for each result can either be:
+
+* A static string coming from a metadata field (e.g. the description of a course)
+* A query biased summary summary generated depending on the search terms. For example if searching for "science degree", the snippet will
+show an excerpt of the document containing those terms, and highlight them
+
+Query biased summary is recommended because it gives more context for the user to determine if the results is relevant
+for the information they were searching for. However when displaying strongly structured results (such as staff contact
+details) it usually makes more sense to display only static metadata fields.
+
+A fallback mechanism is possible so that if the chosen metadata field is empty, the dynamic summary will be used.
+
+==== Optional thumbnail
+
+A thumbnail can be associated with each result. This thumbnail can be:
+
+* An automatic preview screenshot of the target URL. This is only available for HTML documents (i.e. not PDF, DOC, etc.)
+* The URL of an image specified in a metadata field of the content (e.g. `<meta name="thumbnail" content="http://example.org/image.png" />`).
+Twitter (`twitter:image`) and OpenGraph (`og:image`) metadata are supported by default
+* A specific image from the content itself, located using a CSS selector (e.g. `div.article img.main` to select the image with the CSS class
+`main` contained within a DIV with CSS class `article`)
+
+===== Title
+
+* Source (default title or metadata field)
+* Minor content transformation (e.g. removing a suffix, etc.)
+
+===== Metadata fields
+
+* Which metadata fields should be indexed
+* Their source (content metadata tags, or external metadata)
+* Their position in the result display
+* Minor content transformation for display
+
+===== Content snippet
+
+* Source (static metadata field or query biased summary)
+* Length (default is 250 characters)
+
+===== URL
+
+* Minor content transformation (e.g. removing the `http://` prefix, etc.)
+
+===== Shortlist toggle
+
+* Removal of the shortlist toggle (disabled shortlist feature)
+
+===== Last visited label
+
+* Removal of the label
+
+===== Thumbnail
+
+* Presence of thumbnail
+* Thumbnail source (preview, page metadata, or page content)
+
+=== Pagination
+
+image::screenshots/pagination.png[]
+
+The pagination allows the user to navigate multiple pages of results, either by accessing a specific page number ^<1>^ or using
+the previous / next links ^<2>^ to browse.
+
+==== Configuration options
+
+No configuration options at this time.
+
+=== No results message
+
+image::screenshots/zero-results-page.png[]
+
+This message is displayed when the search didn't return any result.
+
+==== Configuration options
+
+* Content of the no results message
+
+== Related searches
+
+[.lead]
+Related Searches allow the user to rapidly discover all topics related to their search terms.
+
+image::screenshots/related-searches.png[]
+
+The related searches panel is divided in 3 columns showing related items to the user search terms:
+
+* By type
+* By topics
+* By site
+
+If more than 8 suggestions are made, a _more..._ link allow to expand the list.
+
+By clicking on a related topic a new search is triggered for the specific topic.
+
+=== Configuration options
+
+* Removal of the related searches panel
+* Configuration of the related searches via https://docs.funnelback.com/customise/standard-options/contextual-navigation.html[Contextual Navigation]
+

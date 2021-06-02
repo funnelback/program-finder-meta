@@ -6,7 +6,7 @@
         <div class="fb-header-left">
             <div class="header-logo">
                 <a class="header-logo__link" href="/s/search.html?collection=${(question.collection.id)!}&profile=${(question.profile)!}">
-                    <img class="header-logo__img" src="/s/resources/${question.collection.id}/${question.profile}/img/funnelback-horizontal-dark.svg" width="auto" height="auto" alt="Home"></a>
+                    <img class="header-logo__img" src="/s/resources/${question.collection.id}/${question.profile}/img/funnelback-horizontal-dark.svg" width="auto" height="auto" alt="Home">
                 </a>
             </div>
 

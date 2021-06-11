@@ -1,52 +1,82 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 
+<#--
+    Radio facets
+
+    The facets to display as radio buttons are configured in the `stencils.facets.radio`
+    configuration parameter as a comma-separated list.
+
+    If this configuration parameter is not present, or is an empty string, then this
+    section is not displayed.
+-->
 <#macro RadioFacet>
-    <#local facetNames = (question.getCurrentProfileConfig().get("stencils.facets.radio"))!""?split(",") >
-    
-    <#list getFacets(response, facetNames) as facet>
-        <#if facet.allValues?size != 0>
-            <!-- facets.RadioFacet -->
-            <ul class="module-filter__list module-filter__radio-list">
-                <#list facet.allValues as value>
-                    <li class="module-filter__radio-item">
-                        <input type="radio" id="${value.label}" name="${facet.name}" value="${value.label}" <#if value.selected>checked</#if>>
-                        <label class="program-finder-display" data-url="${value.toggleUrl}" for="${value.label}">${value.label}</label>
-                    </li>
-                </#list>
-            </ul>
+    <#local facetNamesStr = question.currentProfileConfig.get("stencils.facets.radio")!"">
+    <#if facetNamesStr?has_content>
+        <#local facetNames = facetNamesStr?split(",") >
+        <#if facetNames?has_content>
+        <div class="module-filter__wrapper-mobile">
+            <#nested>
+            <#list getFacets(response, facetNames) as facet>
+                <#if facet.allValues?size != 0>
+                    <!-- facets.RadioFacet -->
+                    <ul class="module-filter__list module-filter__radio-list">
+                        <#list facet.allValues as value>
+                            <li class="module-filter__radio-item">
+                                <input type="radio" id="${value.label}" name="${facet.name}" value="${value.label}" <#if value.selected>checked</#if>>
+                                <label class="program-finder-display" data-url="${value.toggleUrl}" for="${value.label}">${value.label}</label>
+                            </li>
+                        </#list>
+                    </ul>
+                </#if>
+            </#list>
+        </div>
         </#if>
-    </#list>
+    </#if>
 </#macro>
 
 <#macro DropdownFacets>
-    <#local facetNames = (question.getCurrentProfileConfig().get("stencils.facets.dropdown"))!""?split(",") >
+    <#local facetNames = question.currentProfileConfig.get("stencils.facets.dropdown")!"">
     <!-- facets.DropdownFacets -->
     <ul class="module-filter__list">
-        <#list getFacets(response, facetNames) as facet>
-        <#if facet.allValues?size != 0>
-        <li>
-            <details class="module-filter__item">
-                <summary class="module-filter__item-title">
-                    ${facet.name}
-                </summary>
-                <div class="module-filter__facets">
-                    <div class="content-wrapper">
-                        <ul class="module-filter__facets-list" role="menu">
-                        <#list facet.allValues as value>
-                            <li class="module-filter__facets-item" role="menuitem">
-                                <a href="${value.toggleUrl}" class="module-filter__facets-link<#if value.selected> active</#if>">
-                                    ${value.label}
-                                </a>
-                            </li>
-                        </#list>
-                        </ul>
-                    </div>
-                </div>
-            </details>
-        </li>
+        <#if facetNames?has_content>
+            <#-- If facets are explicitly defined in the config, use those -->
+            <#list getFacets(response, facetNames?split(",")) as facet>
+                <#if facet.allValues?size != 0>
+                    <@DropdownFacetItem facet=facet />
+                </#if>
+            </#list>
+        <#else>
+            <#-- If facets aren't limited by the config, then iterate through all of them -->
+            <#list response.facets as facet>
+                <#if facet.allValues?size != 0>
+                    <@DropdownFacetItem facet=facet />
+                </#if>
+            </#list>
         </#if>
-        </#list>
     </ul>
+</#macro>
+
+<#macro DropdownFacetItem facet>
+<li>
+    <details class="module-filter__item">
+        <summary class="module-filter__item-title">
+            ${facet.name}
+        </summary>
+        <div class="module-filter__facets">
+            <div class="content-wrapper">
+                <ul class="module-filter__facets-list" role="menu">
+                <#list facet.allValues as value>
+                    <li class="module-filter__facets-item" role="menuitem">
+                        <a href="${value.toggleUrl}" class="module-filter__facets-link<#if value.selected> active</#if>">
+                            ${value.label}
+                        </a>
+                    </li>
+                </#list>
+                </ul>
+            </div>
+        </div>
+    </details>
+</li>
 </#macro>
 
 <#macro CheckboxFacet>

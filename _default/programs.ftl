@@ -311,14 +311,14 @@
             {{#if extra.disp.metaData.image}}
             <a href="{{extra.action}}" class="module-search__list-link" style="background-image: url('{{extra.disp.metaData.image}}');">
                 <span class="module-search__list-text">
-                    {{extra.disp.title}}
+                    {{{extra.disp.title}}}
                     <span class="module-search__list-more">Learn More</span>
                 </span>
             </a>
             {{else}}
             <a href="{{extra.action}}" class="module-search__list-link" style="background-image: url('https://source.unsplash.com/random/335x192?{{extra.disp.title}};')">
                 <span class="module-search__list-text">
-                    {{extra.disp.title}}
+                    {{{extra.disp.title}}}
                     <span class="module-search__list-more">Learn More</span>
                 </span>
             </a>

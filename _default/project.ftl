@@ -100,11 +100,10 @@
     <section class="module-filter module-filter--dark js-module-filter content-wrapper">
         <div class="module-filter__wrapper">
 
-            <div class="module-filter__wrapper-mobile">
+            <@facets.RadioFacet>
                 <button class="module-filter__button"><h2 class="module-filter__title">Refine by</h2></button>
                 <h2 class="module-filter__title module-filter__title--desktop">Refine by:</h2>
-                <@facets.RadioFacet/>
-            </div>
+            </@facets.RadioFacet>
             
             <div class="module-filter__wrapper-mobile">
                 <button class="module-filter__button"><h2 class="module-filter__title">Filter by</h2></button>

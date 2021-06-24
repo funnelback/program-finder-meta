@@ -306,12 +306,7 @@
 <#-- Template used in concierge (auto-complete) -->
 <#macro AutoCompleteTemplate>
     <!-- programs.AutoCompleteTemplate -->
-    <#-- 
-        Even though this template is for a "program", we still need to call it a "course"
-        The css framework currently assumes that the second channel resides under 
-        tt-dataset-courses.
-    -->
-    <script id="auto-completion-courses" type="text/x-handlebars-template">
+    <script id="auto-completion-primary" type="text/x-handlebars-template">
         <div class="module-search__list-item">
             <a href="#" class="module-search__list-link" style="background-image: url('https://source.unsplash.com/random/335x192?{{extra.disp.title}};">
                 <span class="module-search__list-text">

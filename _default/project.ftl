@@ -99,14 +99,15 @@
     <!-- project.Facets -->
     <section class="module-filter module-filter--dark js-module-filter content-wrapper">
         <div class="module-filter__wrapper">
-            <h2 class="module-filter__title">Refine by<span class="mobile-hide">:</span></h2>
 
-            <div class="module-filter__wrapper-mobile">
-                <@facets.RadioFacet/>
-            </div>
+            <@facets.RadioFacet>
+                <button class="module-filter__button"><h2 class="module-filter__title">Refine by</h2></button>
+                <h2 class="module-filter__title module-filter__title--desktop">Refine by:</h2>
+            </@facets.RadioFacet>
             
-            <h2 class="module-filter__title">Filter by<span class="mobile-hide">:</span></h2>
             <div class="module-filter__wrapper-mobile">
+                <button class="module-filter__button"><h2 class="module-filter__title">Filter by</h2></button>
+                <h2 class="module-filter__title module-filter__title--desktop">Filter by:</h2>
                 <@facets.DropdownFacets/>
             </div>
             

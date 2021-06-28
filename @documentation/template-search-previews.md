@@ -184,6 +184,14 @@ The tab facet allows the user to switch between programs and courses (or both). 
     stencils.facets.radio=Tabs
 ```
 
+Additionally, you can get rid of the configuration below. This simplifies facet configuration by keeping all configuration in one place -- i.e. in the Faceted Navigation configuration screen.
+
+```
+stencils.facets.dropdown=Degree Type,Delivery Method,Career
+```
+
+The displayed facets will be what is configured in the Faceted Navigation screen, and customers won't need to go to two different places to configure it.
+
 * Alternative, you can define new values for the Tab facet.
 
 After completing that, search previews should be disabled.

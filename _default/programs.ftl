@@ -63,11 +63,11 @@
         </#if>
         <div class="search-results__content">
             <h3 class="search-results__title">
-                <a href="${result.clickTrackingUrl!}" class="search-results__link js-quick-link" data-target="#${base.getCssID(result.liveUrl)}">
+                <button class="search-results__link js-quick-link" data-target="#${base.getCssID(result.liveUrl)}">
                     <@s.Truncate length=100>
                         ${result.title!}
                     </@s.Truncate>
-                </a>
+                </button>
             </h3>
             <p class="search-results__desc">
                 <@s.boldicize>
@@ -116,14 +116,19 @@
 -->
 <#macro QuickView result> 
     <!-- programs.QuickViewTemplate -->
-    <section id="${base.getCssID(result.liveUrl)}" class="quick-view js-quick-view" tabindex="-1" role="dialog">
+    <dialog id="${base.getCssID(result.liveUrl)}" 
+            class="quick-view js-quick-view invisible" 
+            role="dialog"
+            aria-labelledby="${base.getCssID(result.liveUrl)}-program-label"
+            aria-describedby="${base.getCssID(result.liveUrl)}-program-desc"
+            aria-modal="true">
         <button class="quick-view__close"><span class="sr-only">close</span></button>
         <div class="quick-view__wrapper">
             <div class="quick-view__content">
-                <h2 class="quick-view__title">
+                <h2 class="quick-view__title" id="${base.getCssID(result.liveUrl)}-program-label">
                     ${result.title!}          
                 </h2>
-                <p class="quick-view__desc">
+                <p class="quick-view__desc" id="${base.getCssID(result.liveUrl)}-program-desc">
                     <#if (result.listMetadata["c"]?first)!?has_content>
                         ${(result.listMetadata["c"]?first)!}
                     <#else>
@@ -212,55 +217,87 @@
             </div>
             <#-- TODO: Add related results -->
         </div>
-    </section>    
+    </dialog>    
 </#macro>
 
 <#-- Output the template used in the cart -->
 <#macro CartTemplate>
     <!-- programs.CartTemplate -->
-    <script id="cart-template-program-finder" type="text/x-cart-template">
+    <script id="cart-template-programs" type="text/x-handlebars-template">
         <td>
-            <a href="#" class="module-compare__remove" data-url="{{url}}">Remove</a>
+            <button class="module-compare__remove" data-url="{{indexUrl}}">Remove</button>
             <figure class="module-compare__bg">
-                <img src="https://source.unsplash.com/random/335x192?{{name}}" alt="">
+                {{#if metaData.image}}
+                    <img src="{{metaData.image}}" alt="{{title}}">
+                {{else}}
+                    <img src="https://source.unsplash.com/random/335x192?{{title}}" alt="{{title}}">
+                {{/if}}
             </figure>
-            <span class="module-compare__phrase">{{stencilsDeliveryMethod}}</span>
-            <h3 class="module-compare__title">{{name}}</h3>
-            <p class="module-compare__desc">
-                {{desc}}
-            </p>
-            <a href="{{url}}" class="btn--link">More Details</a>
+            
+            {{#if metaData.stencilsDeliveryMethod}}  
+                <span class="module-compare__phrase">
+                    {{metaData.stencilsDeliveryMethod}}
+                </span>
+            {{/if}}
+            
+
+            {{#if title}} 
+                <h3 class="module-compare__title">{{title}}</h3>
+            {{/if}}
+            
+            {{#if metaData.c}}  
+                <p class="module-compare__desc">
+                    {{metaData.c}}
+                </p>
+            {{/if}} 
+            
+            <a href="{{indexUrl}}" class="btn--link">More Details</a>
             <dl class="module-compare__data-list">
-                <dt> 
-                    Credential type
-                </dt>
-                <dd> 
-                    {{programCredentialType}}
-                </dd>
-                <dt> 
-                    Duration
-                </dt>
-                <dd> 
-                    {{programLengthYears}} years
-                </dd>
-                <dt> 
-                    Delivery method
-                </dt>
-                <dd> 
-                    {{stencilsDeliveryMethod}}
-                </dd>                                                                      
-                <dt> 
-                    Faculty
-                </dt>
-                <dd> 
-                    {{programFaculty}}
-                </dd>
-                <dt> 
-                    Department
-                </dt>
-                <dd> 
-                    {{stencilsDepartment}}
-                </dd>
+                {{#if metaData.programCredentialType}}  
+                    <dt> 
+                        Credential type
+                    </dt>
+                    <dd> 
+                        {{metaData.programCredentialType}}
+                    </dd>
+                {{/if}}
+
+                {{#if metaData.programLengthYears}}  
+                    <dt> 
+                        Duration
+                    </dt>
+                    <dd> 
+                        {{metaData.programLengthYears}} years
+                    </dd>
+                {{/if}}
+
+                {{#if metaData.stencilsDeliveryMethod}}  
+                    <dt> 
+                        Delivery method
+                    </dt>
+                    <dd> 
+                        {{metaData.stencilsDeliveryMethod}}
+                    </dd>                                                                      
+                {{/if}}
+
+                {{#if metaData.programFaculty}}  
+                    <dt> 
+                        Faculty
+                    </dt>
+                    <dd> 
+                        {{metaData.programFaculty}}
+                    </dd>
+                {{/if}}
+
+                {{#if metaData.stencilsDepartment}}  
+                    <dt> 
+                        Department
+                    </dt>
+                    <dd> 
+                        {{metaData.stencilsDepartment}}
+                    </dd>
+                {{/if}}
+
             </dl>
         </td>
     </script>
@@ -269,19 +306,23 @@
 <#-- Template used in concierge (auto-complete) -->
 <#macro AutoCompleteTemplate>
     <!-- programs.AutoCompleteTemplate -->
-    <#-- 
-        Even though this template is for a "program", we still need to call it a "course"
-        The css framework currently assumes that the second channel resides under 
-        tt-dataset-courses.
-    -->
-    <script id="auto-completion-courses" type="text/x-handlebar-template">
+    <script id="auto-completion-primary" type="text/x-handlebars-template">
         <div class="module-search__list-item">
-            <a href="#" class="module-search__list-link" style="background-image: url('https://source.unsplash.com/random/335x192?{{extra.disp.title}};">
+            {{#if extra.disp.metaData.image}}
+            <a href="{{extra.action}}" class="module-search__list-link" style="background-image: url('{{extra.disp.metaData.image}}');">
                 <span class="module-search__list-text">
-                    {{extra.disp.title}}
+                    {{{extra.disp.title}}}
                     <span class="module-search__list-more">Learn More</span>
                 </span>
             </a>
+            {{else}}
+            <a href="{{extra.action}}" class="module-search__list-link" style="background-image: url('https://source.unsplash.com/random/335x192?{{extra.disp.title}};')">
+                <span class="module-search__list-text">
+                    {{{extra.disp.title}}}
+                    <span class="module-search__list-more">Learn More</span>
+                </span>
+            </a>
+            {{/if}}
         </div>
     </script>
 </#macro>

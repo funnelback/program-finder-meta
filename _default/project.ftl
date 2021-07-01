@@ -110,10 +110,10 @@
                 <@facets.DropdownFacets/>
             </div>
             
-            <a href="#" class="btn__compare">
+            <button class="btn__compare <#if !(session.resultsCart)!?has_content>hidden</#if>">
                 <span class="btn__compare-text">${((question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary"))!"Course")?cap_first} comparison</span>
                 <span class="btn__compare-total">0</span>
-            </a>
+            </button>
         </div>
     </section>
 </#macro> 

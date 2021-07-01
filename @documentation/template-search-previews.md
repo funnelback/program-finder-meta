@@ -21,7 +21,7 @@ By default, the Program Finder comes with shipped with two extra searches; [prog
 
 It is enabled via the collection configuration screen.
 
-```java
+```ini
 ui.modern.extra_searches=courses,programs
 ```
 
@@ -31,7 +31,7 @@ The navigation link allows the user to refine the results down to the context of
 
 The link itself can be configured to select any facet which has defined. By default, it will navigate the user to the corresponding tab facet.
 
-```java
+```ini
 stencils.search_preview.programs.facet_name=Tabs
 stencils.search_preview.programs.category_label=Programs
 stencils.search_preview.courses.facet_name=Tabs
@@ -87,14 +87,14 @@ Note: The documentType parameter represents the display name and is used in the 
 
 The last step is to configure the navigation link to send the user to the required facet. This is done using the following profile or collection configuration parameters:
 
-```java
+```ini
 stencils.search_preview.<extra_search_name>.facet_name=<name_of_facet>
 stencils.search_preview.<extra_search_name>.category_label=<name_of_facet_category>
 ```
 
 e.g. Given we have a extra search called `tutorial`, a facet call `Tabs` with a facet category called `Tutorial`, then the following will need to be added:
 
-```java
+```ini
 stencils.search_preview.tutorials.facet_name=Tabs
 stencils.search_preview.tutorials.category_label=Tutorials
 ```
@@ -116,7 +116,7 @@ The following are instructions on how to remove the program and courses search p
 
 Delete both the [programs](../extra_search.programs.cfg) and [courses](../extra_search.courses.cfg) extra searches and remove them from the collection configurations:
 
-```java
+```ini
 ui.modern.extra_searches=courses,programs
 ```
 
@@ -168,7 +168,7 @@ to
 
 The next step is to remove the search preview references in the collection and profile configurations. To do this, remove any keys which start with the following:
 
-```java
+```
 stencils.search_preview.programs
 stencils.search_preview.courses
 ```

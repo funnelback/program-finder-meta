@@ -50,14 +50,14 @@ To configure the extra searches, change the target collection in the following e
 
 `extra_search.programs.cfg`
 
-```java
+```ini
 collection=<name_of_meta_collection>
 query_processor_options=-num_ranks=8 -clive=<name_of_program_collection> -log=off -curator=off -spelling=off -show_qsyntax_tree=off -explain=false
 ```
 
 `extra_search.courses.cfg`
 
-```java
+```ini
 collection=<name_of_meta_collection>
 query_processor_options=-num_ranks=8 -clive=<name_of_course_collection> -log=off -curator=off -spelling=off -show_qsyntax_tree=off -explain=false
 ```

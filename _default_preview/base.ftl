@@ -22,7 +22,7 @@
               <@s.IfDefCGI name=parameter><input type="hidden" name="${parameter}" value="${question.inputParameterMap[parameter]!}"></@s.IfDefCGI>
             </#list>
             <label for="query" class="sr-only">Search</label>
-            <input name="query" id="query" type="search" class="module-search__query" autocomplete="off" placeholder="Search for ${question.collection.configuration.value("stencils.I18n.finder_type_primary", "Course")?lower_case}s, a career or topic" value="${question.query!}">
+            <input name="query" id="query" type="search" class="module-search__query" autocomplete="off" placeholder="Search for ${(question.currentProfileConfig.get("stencils.I18n.finder_type_primary")!"Course")?lower_case}s, a career or topic" value="${question.query!}">
             <button type="submit" class="module-search__btn"><span class="sr-only">Search</span></button>
         </div>
         <#nested>
@@ -33,8 +33,8 @@
   Display query blending notice
 -->
 <#macro Blending>
+    <!-- base.Blending -->
     <#if (response.resultPacket.QSups)!?size &gt; 0>
-        <!-- Blending -->
         <blockquote class="search-blending">
         <span class="fas fa-info-circle"></span>
         Your query has been expanded to <strong><#list response.resultPacket.QSups as qsup> ${qsup.query}<#if qsup_has_next>, </#if></#list></strong>.
@@ -47,8 +47,8 @@
   Display spelling suggestion notice
 -->
 <#macro Spelling>
+    <!-- base.Spelling -->
     <#if (response.resultPacket.spell)??>
-        <!-- base.Spelling -->
         <blockquote class="search-spelling">
             Did you mean <em><a class="highlight" href="${question.collection.configuration.value("ui.modern.search_link")}?${response.resultPacket.spell.url}" title="Spelling suggestion">${(response.resultPacket.spell.text)!}</a></em>?
         </blockquote>
@@ -87,9 +87,9 @@
   Message to display when there are no results
 -->
 <#macro NoResults>
+    <!-- base.NoResults -->
     <#if (response.resultPacket.resultsSummary.totalMatching)!?has_content &&
         response.resultPacket.resultsSummary.totalMatching == 0>
-        <!-- base.NoResults -->
         <section class="module-info content-wrapper">
             <figure class="module-info__bg">
                 <img src="/s/resources/${question.collection.id}/${question.profile}/css/mysource_files/no-results-icon.svg" alt="">
@@ -228,7 +228,7 @@
                             </li>
                         <#else>                    
                             <li class="pagination__item">
-                                <a class="pagination__link" href="${page.url}" aria-label="Goto Page 1">
+                                <a class="pagination__link" href="${page.url}" aria-label="Goto Page ${page.number}">
                                     <span class="pagination__label">${page.number}</span>
                                 </a>
                             </li>
@@ -490,3 +490,13 @@
 <#function getCssID input="">
     <#return (input)!?replace('[^A-Za-z0-9-]+', '_', 'r')>
 </#function>
+
+<#-- 
+    Overlay element
+    When a dialog is open (ex. QuickView), covers all elements 
+    besides the dialog.
+-->
+
+<#macro Overlay>
+  <div class="overlay"></div>
+</#macro>

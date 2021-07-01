@@ -2,13 +2,16 @@
 
 <#--
     This file is responsible for determining the overall structure
-    of the search implementations. It contains things such as:
-
-    - The HTML for the overall structure such as the header, footer 
-        and main content.
-    - The references to the client's header and footer
+    of the search implementations without the header. Unlike the simple.ftl
+    it only provides the search specific elements and does not include things
+    like the css or headers and footers. 
+    
+    - The HTML for the overall structure of the main content.
     - Third party libraries
     - References to javascript templates for sessions and concierge
+
+    The intended purpose of this template is to allow for partial integration
+    into an Content Management System (CMS). 
 -->
 
 <#import "/web/templates/modernui/funnelback_classic.ftl" as s/>
@@ -20,7 +23,7 @@
 <#import "facets.ftl" as facets />
 <#import "results.ftl" as results />
 <#import "history_cart.ftl" as history_cart />
-<#import "auto-complete.ftl" as auto_complete />
+<#import "auto_complete.ftl" as auto_complete />
 <#import "curator.ftl" as curator />
 <#import "extra_search.ftl" as extra_search />
 
@@ -75,20 +78,20 @@
         </main><!-- /.main -->
     </div>
 
-    <#-- Concierge includes -->  
+    <#-- Third party libraries -->  
     <script type="text/javascript" src="https://${httpHost}/stencils/resources/thirdparty/jquery/v3.2.1/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://${httpHost}/stencils/resources/thirdparty/popper/v1.12.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://${httpHost}/stencils/resources/autocompletion/js/typeahead.bundle-0.11.1.min.js"></script>
     <script type="text/javascript" src="https://${httpHost}/s/resources/${question.collection.id}/${question.profile}/js/typeahead.fb-2.6.js"></script>
     <script type="text/javascript" src="${GlobalResourcesPrefix}thirdparty/handlebars-4.0.12/handlebars.min.js"></script>
 
-    <#-- Provides the setDeferredImages and setupFacetLessMoreButtons functions -->
-    <#if question.profile?contains("_preview")>
-        <#-- Non-minified version provided in preview profiles for debugging -->
-        <script src="https://${httpHost}/stencils/resources/base/v15.24/js/base.js"></script>
-    <#else>
-        <script src="https://${httpHost}/stencils/resources/base/v15.24/js/base.min.js"></script>
-    </#if>
+
+    <#-- Stencils specific code -->
+    <script src="/s/resources/${question.collection.id}/${question.profile}/js/stencils.js"></script> 
+    <script src="/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script> 
+
+    <!-- Funnelback auto-complete -->
+    <script src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.autocompletion-2.6.0.stencils.js"></script>
 
     <#-- Radio button changes -->
     <script type="text/javascript">

@@ -1,6 +1,6 @@
-# Program Finder Vertical Product
+# Program Finder Stencil
 
-This is a quick reference guide to implementing the Program Finder Vertical Product.
+This is a quick reference guide to implementing the Program Finder Stencil.
 
 At a high level, you will need to:
 
@@ -36,7 +36,7 @@ For an example of a course please see `program-finder-courses-web`.
 
 #### Meta collection
 
-The meta collection contains the majority of the application and presentation logic required for the Program Finder Vertical Product. It is recommended to name the collection use the following format:
+The meta collection contains the majority of the application and presentation logic required for the Program Finder Stencil. It is recommended to name the collection use the following format:
 
 `<client>-program-finder-meta`
 

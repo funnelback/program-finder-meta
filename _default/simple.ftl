@@ -14,7 +14,7 @@
 <#import "/web/templates/modernui/funnelback_classic.ftl" as s/>
 <#import "/web/templates/modernui/funnelback.ftl" as fb />
 
-<#import "/share/stencils/libraries/base/client_includes.ftl" as client_includes />
+<#import "client_includes.ftl" as client_includes />
 <#import "project.ftl" as project />
 <#import "base.ftl" as base />
 <#import "facets.ftl" as facets />

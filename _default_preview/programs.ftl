@@ -308,8 +308,8 @@
     <!-- programs.AutoCompleteTemplate -->
     <script id="auto-completion-primary" type="text/x-handlebars-template">
         <div class="module-search__list-item">
-            {{#if extra.disp.metaData.image}}
-            <a href="{{extra.action}}" class="module-search__list-link" style="background-image: url('{{extra.disp.metaData.image}}');">
+            {{#if extra.disp.listMetadata.image.[0]}}
+            <a href="{{extra.action}}" class="module-search__list-link" style="background-image: url('{{extra.disp.listMetadata.image.[0]}}');">
                 <span class="module-search__list-text">
                     {{{extra.disp.title}}}
                     <span class="module-search__list-more">Learn More</span>

@@ -108,8 +108,8 @@
 
 <#-- Append the callback variable if it exists -->
 <#macro Callback>
-   <#if (question.inputParameterMap["callback"])!?has_content>
-      ${question.inputParameterMap["callback"]?json_string} (<#nested>)
+   <#if (question.inputParameters["callback"]?first)!?has_content>
+      ${question.inputParameters["callback"]?first?json_string} (<#nested>)
    <#else>
       <#nested>
    </#if>

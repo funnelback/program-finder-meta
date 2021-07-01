@@ -14,7 +14,7 @@
 <#import "/web/templates/modernui/funnelback_classic.ftl" as s/>
 <#import "/web/templates/modernui/funnelback.ftl" as fb />
 
-<#import "/share/stencils/libraries/base/client_includes.ftl" as client_includes />
+<#import "client_includes.ftl" as client_includes />
 <#import "project.ftl" as project />
 <#import "base.ftl" as base />
 <#import "facets.ftl" as facets />
@@ -142,8 +142,8 @@
             Libraries required by the design developed by the Stencils cutup team. 
             Avoid changing these if possible.
         -->
-        <#-- The vendor.js file includes all the code from external libraries -->
-        <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/vendors.js"></script>
+        <#-- Stencil specific code such as the quickview and dropdowns -->
+        <script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/js/main.js"></script>
 
 		<#-- Specifies how each cart item should be presented -->
 		<@history_cart.CartTemplatesForResults />

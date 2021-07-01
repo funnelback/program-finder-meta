@@ -19,7 +19,7 @@
         <div class="module-search__group">
             <input type="hidden" name="collection" value="${question.collection.id}">
             <#list ["enc", "form", "scope", "lang", "profile"] as parameter>
-              <@s.IfDefCGI name=parameter><input type="hidden" name="${parameter}" value="${question.inputParameterMap[parameter]!}"></@s.IfDefCGI>
+              <@s.IfDefCGI name=parameter><input type="hidden" name="${parameter}" value="${question.inputParameters[parameter]?first!}"></@s.IfDefCGI>
             </#list>
             <label for="query" class="sr-only">Search</label>
             <input name="query" id="query" type="search" class="module-search__query" autocomplete="off" placeholder="Search for ${(question.currentProfileConfig.get("stencils.I18n.finder_type_primary")!"Course")?lower_case}s, a career or topic" value="${question.query!}">
@@ -68,7 +68,7 @@
             <span class="search-counts-page-start">${response.resultPacket.resultsSummary.currStart}</span> -
             <span class="search-counts-page-end">${response.resultPacket.resultsSummary.currEnd}</span> of
             <span class="search-counts-total-matching">${response.resultPacket.resultsSummary.totalMatching?string.number}</span>
-            <#if question.inputParameterMap["s"]?? && question.inputParameterMap["s"]?contains("?:")><em>collapsed</em> </#if>search results for <strong class="highlight"><@s.QueryClean></@s.QueryClean></strong> <#list response.resultPacket.QSups as qsup>or <strong class="highlight">${qsup.query}</strong><#if qsup_has_next>, </#if></#list>
+            <#if question.inputParameters["s"]?first?? && question.inputParameters["s"]?first?contains("?:")><em>collapsed</em> </#if>search results for <strong class="highlight"><@s.QueryClean></@s.QueryClean></strong> <#list response.resultPacket.QSups as qsup>or <strong class="highlight">${qsup.query}</strong><#if qsup_has_next>, </#if></#list>
         </#if>
 
         <#if (response.resultPacket.resultsSummary.partiallyMatching!0) != 0>
@@ -108,9 +108,9 @@
     <#assign displayMode = ""> 
 
     <#-- Get the mode that is currently configured -->
-    <#if (question.inputParameterMap["displayMode"])!?has_content>
+    <#if (question.inputParameters["displayMode"]?first)!?has_content>
         <#-- Get the value from the user's selection -->
-        <#assign displayMode = question.inputParameterMap["displayMode"]!?upper_case>
+        <#assign displayMode = question.inputParameters["displayMode"]?first!?upper_case>
     <#elseif (question.getCurrentProfileConfig().get("stencils.results.display_mode"))!?has_content>
         <#-- Get the value from profile config -->
         <#assign displayMode = question.getCurrentProfileConfig().get("stencils.results.display_mode")!?upper_case>
@@ -155,13 +155,13 @@
     <!-- base.SortDropdown -->
     <section class="dropdown-list">
         <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
-            <span>${(options[question.inputParameterMap["sort"]])!"Sort by"}</span>
+            <span>${(options[question.inputParameters["sort"]?first])!"Sort by"}</span>
         </button>
         <ul class="dropdown-list__list" role="listbox" tabindex="-1"">
             <#list options as key, value>
                 <li role="option">                
                     <a class="dropdown-list__list-link" title="Sort by ${value}" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "sort")}&sort=${key}">
-                        <#if ((options[question.inputParameterMap["sort"]])!"") == value>
+                        <#if ((options[question.inputParameters["sort"]?first])!"") == value>
                             <i class="fas fa-check"></i>
                         </#if>
                         ${value}
@@ -181,13 +181,13 @@
     <!-- base.LimitDropdown -->
     <section class="dropdown-list">
         <button class="dropdown-list__link js-dropdown-list__link" aria-haspopup="true" aria-expanded="false">
-            <span>${question.inputParameterMap["num_ranks"]!"10"}</span>
+            <span>${question.inputParameters["num_ranks"]?first!"10"}</span>
         </button>
         <ul class="dropdown-list__list" role="listbox" tabindex="-1"">
             <#list limits as limit>
                 <li role="option">
                     <a class="dropdown-list__list-link" title="Limit to ${limit} results" href="${question.collection.configuration.value("ui.modern.search_link")}?${removeParam(QueryString, "num_ranks")}&num_ranks=${limit}">
-                        <#if ((question.inputParameterMap["num_ranks"]?number)!0) == limit>
+                        <#if ((question.inputParameters["num_ranks"]?first?number)!0) == limit>
                             <i class="fas fa-check"></i>
                         </#if>
                         ${limit} results
@@ -204,32 +204,44 @@
 <#macro Paging>
     <!-- base.Paging -->
     <section class="pagination">
-        <nav class="pagination__nav" aria-label="Pagination Navigation">
+        <nav class="pagination__nav" role="navigation" aria-label="Pagination navigation">
             <#-- Previous page -->
-            <#if (response.customData.stencilsPaging.previousUrl)??>
+            <#if (response.customData.stencils.pagination.previous)??>
                 <div class="pagination__item pagination__item-navigation pagination__item-previous">
-                    <a class="pagination__link" rel="prev" href="${response.customData.stencilsPaging.previousUrl}">
-                        <span class="pagination__label">Prev</span>
+                    <a class="pagination__link" 
+                        rel="prev" 
+                        href="${(response.customData.stencils.pagination.previous.url)!}">
+                        <span class="sr-only">
+                            Go to the
+                        </span>
+                        <span class="pagination__label">
+                            ${(response.customData.stencils.pagination.previous.label)!"Prev"}
+                        </span>
+                        <span class="sr-only">
+                            page
+                        </span>
                     </a>
                 </div>
             </#if>
 
             <#-- Sibling pages -->
-            <#if (response.customData.stencilsPaging.pages)!?has_content &&
-                response.customData.stencilsPaging.pages?size gt 1>
+            <#if (response.customData.stencils.pagination.pages)!?has_content &&
+                response.customData.stencils.pagination.pages?size gt 1>
                 <ul class="pagination__pages-list">
-                    <#list response.customData.stencilsPaging.pages as page>
+                    <#list response.customData.stencils.pagination.pages as page>
                         <#if page.selected>
-                            <li class="pagination__item pagination__item--active">
-
-                                <span class="pagination__current" aria-label="Current Page, Page ${page.number}">
-                                    <span class="pagination__label">${page.number}</span>
+                            <li class="pagination__item pagination__item--active" aria-current="page">
+                                <span class="pagination__current">
+                                    <span class="pagination__label">${page.label}</span>
                                 </span>                            
                             </li>
                         <#else>                    
                             <li class="pagination__item">
-                                <a class="pagination__link" href="${page.url}" aria-label="Goto Page ${page.number}">
-                                    <span class="pagination__label">${page.number}</span>
+                                <a class="pagination__link" href="${page.url}">
+                                    <span class="sr-only">
+                                        Go to page
+                                    </span>
+                                    <span class="pagination__label">${page.label}</span>
                                 </a>
                             </li>
                         </#if>
@@ -238,10 +250,20 @@
             </#if>
 
             <#-- Next page -->
-            <#if (response.customData.stencilsPaging.nextUrl)??>            
+            <#if (response.customData.stencils.pagination.next)??>            
                 <div class="pagination__item pagination__item-navigation pagination__item-next">
-                    <a class="pagination__link" rel="next" href="${response.customData.stencilsPaging.nextUrl}" >
-                        <span class="pagination__label">Next</span>
+                    <a class="pagination__link" 
+                        rel="next" 
+                        href="${(response.customData.stencils.pagination.next.url)!}">
+                        <span class="sr-only">
+                            Go to the
+                        </span>
+                        <span class="pagination__label">
+                            ${(response.customData.stencils.pagination.next.label)!"Next"}
+                        </span>
+                        <span class="sr-only">
+                            page
+                        </span>
                     </a>
                 </div>
             </#if> 
@@ -367,7 +389,7 @@
                         <#-- Display the result based on the configured template -->
                         <#switch ((response.customData["stencilsGroupingResults"].mode)!"")?upper_case>
                             <#case "METADATA">
-                                <#if (result.metaData[group.field])!?has_content>
+                                <#if (result.listMetadata[group.field]?first)!?has_content>
                                     <@Result result=result view=view />
                                 </#if>
                                 <#break> 

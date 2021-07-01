@@ -117,6 +117,12 @@
     background-color: #e42b12;
 }
 
+/* Grid and list icons to toggle view */
+.fb-container .search-results__icon--box,
+.fb-container .search-results__icon--list {
+    background-color: black;
+}
+
 /** Search results */
 
 .fb-container .search-results__link {

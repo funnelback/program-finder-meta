@@ -11,6 +11,17 @@ new SearchPreviewHookLifecycle().postProcess(transaction)
 new GroupingResultsHookLifecycle().postProcess(transaction)
 
 /**
+* If no query is provided the pre_process hook script injects a !padrenull query
+* This removes that query so that it doesn't show on the HTML output
+*/
+if (transaction.question.query == '!padrenull') {
+    transaction.question.query = ''
+    transaction.response.resultPacket.query = ''
+    transaction.response.resultPacket.queryCleaned = ''
+    transaction.response.resultPacket.queryRaw = ''
+}
+
+/**
  * The following functions are used for demo purposes.
  */
 

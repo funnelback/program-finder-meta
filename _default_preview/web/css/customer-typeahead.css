@@ -1,18 +1,46 @@
 
-/* Auto complete */
-
-@media only screen and (min-width: 1025px) {
-    .fb-container .module-search .tt-dataset-programs {
-        margin: 0;
-        padding: 0;
-        white-space: normal;
-    }
-  }
-  
-.fb-container .module-search .tt-dataset-programs {
-    margin: 0 -1.125rem;
-    overflow: auto;
-    padding: 3.25rem 1.125rem 0 1.125rem;
-    white-space: nowrap;
+/* 
+    Highlight the selected auto complete suggestion when the user
+    hovers or navigates there via the keyboard.
+*/
+.fb-container .module-search .tt-suggestion:hover { 
+    cursor: pointer; 
+    background-color: #f0f0f0; 
 }
-  
+
+/* Ensure each suggest occupies the entire line */
+.fb-container .module-search--bg .tt-suggestion {
+    width: 100%;
+}
+
+.fb-container .module-search .tt-suggestion.tt-cursor { 
+    background-color: #f0f0f0; 
+}
+
+/* 
+    TODO - Review if you need to adjust the presentation of the channels 
+    in concierge 
+*/
+@media only screen and (min-width: 1025px) {
+    .fb-container .module-search--bg .tt-dataset:nth-child(2),
+    .fb-container .module-search--bg .tt-dataset:nth-child(3)
+    {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-flex: 0;
+        flex: 0 0 50%;
+        flex-wrap: wrap;
+        max-width: 50%;
+        width: 50%;
+    }
+
+    .fb-container .module-search--bg .tt-category {
+        -webkit-box-flex: 0;
+        flex: 0 0 100%;
+    }
+}
+
+/* Hide empty sections in concierge */
+.fb-container .module-search .tt-dataset:empty {
+    display: none;
+}

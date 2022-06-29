@@ -21,7 +21,13 @@
 	</#if>
 </#macro>
 
+<#-- Output the markup where the search history and shortlist should be rendered -->
 <#macro SearchHistoryAndShortlist>
+    <@SearchHistory />
+    <@Shortlist />
+</#macro>
+
+<#macro SearchHistory>
     <section class="content-wrapper search-history" id="search-history">
         <button href="#" class="search-history__hide session-history-hide" type="button">
             <svg class="svg-icon svg-icon--small">
@@ -35,9 +41,13 @@
             <@query_history.QueryHistory />
         </div>
     </section>
+</#macro>
 
+<#macro Shortlist>
     <@shortlist.Shortlist />
 </#macro>
+
+
 
 <#macro Configuration>
 	<!-- history_cart.Configurations -->
@@ -58,13 +68,12 @@
 					},
 					cart: {
 						icon: '',
-						label: 'Shortlist',
+						label: '',
 						backIcon: 'fas fa-arrow-left',
 						backLabel: 'Back to results',
 						clearIcon: 'fas fa-times',
 						clearClasses: "btn btn-xs btn-light",                    
 						emptyMessage: '<span id="flb-cart-empty-message">No items in your shortlist</span>',
-					    pageSelector: ['#funnelbach-search-body', '#funnelbach-search-facets', '#search-history'], // list of CSS selectors to parts of page to hide it when history is displayed
 					},
 					item: {
 						icon: 'fas fa-star',          
@@ -129,20 +138,44 @@
 </#macro>
 
 <#-- 
-	Displays the controls used to toggle the cart and history and 
+	Displays the controls used to toggle the cart and click and 
 	query history functionality.
 -->
 <#macro Controls>
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>		
 		<!-- sessions::Controls -->
 		<div class="result-sessions__controls">
-			<span class="flb-cart-count"></span>
+				<@ShortlistControl />			
 				<a class="session-history-toggle" tabindex="0">
 				<span class="fas fa-history"></span>
 				History
 			</a>
 		</div>
 	</#if>    
+</#macro>
+
+<#-- 
+	Displays the controls used to toggle the click and 
+	query history functionality.
+-->
+<#macro SearchHistoryControls>
+	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>		
+		<!-- sessions::SearchHistoryControls -->
+		<div class="result-sessions__controls">
+				<a class="session-history-toggle" tabindex="0">
+				<span class="fas fa-history"></span>
+				History
+			</a>
+		</div>
+	</#if>    
+</#macro>
+
+<#-- Outputs the placeholder used to determine where the shortlist button should rendern -->
+<#macro ShortlistControl>
+	<!-- sessions::ShortlistControl -->
+	<div class="result-sessions__controls">
+		<@shortlist.ShortlistControl />
+	</div>		
 </#macro>
 
 <#macro Templates>

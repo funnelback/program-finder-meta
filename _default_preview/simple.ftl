@@ -85,40 +85,135 @@
 	
 	<#--  <@client_includes.ContentHeader />  -->
 
-		<div class="stencils__main">
-					
-			<@hero_banner.SearchForm />
-			<@tabs.Tabs />
+	<div class="stencils__main program-finder">
+				
+		<@hero_banner.SearchForm />
+		<@tabs.Tabs />
 
-			<div class="funnelback-search no-wysiwyg">			
-				<div class="funnelback-search__body" id="funnelbach-search-body">
-					<h2 class="funnelback-search__title">Results</h2>
-					
-					<@search_tools.SearchTools />
-					
-					<@query_blending.QueryBlending />
-					<@spelling_suggestions.SpellingSuggestions />
-					<@facets_breadcrumbs.Breadcrumb />
+		<div class="funnelback-search__header">
+			<button
+				type="button"
+				aria-controls="funnelback-search-facets-drawer"
+				data-component="activate-drawer"
+				class="funnelback-search__filters-button"
+			>
+				<svg class="svg-icon" role="img">
+					<title>Toggle show all filters</title>
+					<use href="#funnel"></use>
+				</svg>
+				Filters
+			</button>
 
-					<@s.AfterSearchOnly>						
-						<@curator.HasCuratorOrBestBet position="top">
-							<@curator.Curator position="top" />
-						</@curator.HasCuratorOrBestBet>
+			<button
+				type="button"
+				aria-controls="funnelback-search-shortlist-drawer"
+				data-component="activate-drawer"
+				class="funnelback-search__filters-button"
+			>
+				<@sessions.ShortlistControl />  
+			</button>
 
+			<@sessions.SearchHistoryControls />
+		</div>
+
+		<div class="funnelback-search no-wysiwyg">			
+			<div class="funnelback-search__body" id="funnelbach-search-body">
+				<h2 class="funnelback-search__title">Results</h2>
+				
+				<@search_tools.SearchTools />
+				
+				<@query_blending.QueryBlending />
+				<@spelling_suggestions.SpellingSuggestions />
+				<@facets_breadcrumbs.Breadcrumb />
+
+				<@s.AfterSearchOnly>						
+					<@curator.HasCuratorOrBestBet position="top">
+						<@curator.Curator position="top" />
+					</@curator.HasCuratorOrBestBet>
+
+					<#-- 
+						Hide the organic/normal results on the all tab as we only 
+						want to display the extra searches.  
+					-->
+					<@facets.IsNotSelected facetName="Tabs" categoryLabel="All">
 						<@no_results.NoResults />
 						<@result_list.ResultList />
+						<@pagination.Pagination />
+					</@facets.IsNotSelected>
 
-						<@curator.HasCuratorOrBestBet position="bottom">
-							<@curator.Curator position="bottom" />
-						</@curator.HasCuratorOrBestBet>
+					<#-- Programs extra search -->
+					<@extra_search.Preview  extraSearchName="programs" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary") + "s">
+						<@no_results.NoResults />
+						<@result_list.ResultList />
+					</@extra_search.Preview>
+					
+					<#-- Courses extra search -->
+					<@extra_search.Preview  extraSearchName="courses" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_secondary") + "s">
+						<@no_results.NoResults />
+						<@result_list.ResultList />
+					</@extra_search.Preview>
 
-					</@s.AfterSearchOnly>
+					<@curator.HasCuratorOrBestBet position="bottom">
+						<@curator.Curator position="bottom" />
+					</@curator.HasCuratorOrBestBet>
 
-					<@pagination.Pagination />
-					<@contextual_navigation.ContextualNavigation />
+				</@s.AfterSearchOnly>
+
+				<@contextual_navigation.ContextualNavigation />
+			</div>
+
+			<#--  <div class="funnelback-search__side" id="funnelbach-search-facets">					  -->
+				<#-- Get facets for the current selected tab -->
+				<#--  <#assign tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencils.tabs.selected)!}")!>
+
+				<@facets.HasFacets facets=tabFacets>
+					<@facets.Facets 
+						facets=tabFacets 
+						maxCategories=question.getCurrentProfileConfig().get("stencils.faceted_navigation.max_displayed_categories")!
+					/>
+				</@facets.HasFacets>
+
+				<@curator.HasCuratorOrBestBet position="left">
+					<@curator.Curator position="left" />
+				</@curator.HasCuratorOrBestBet>
+
+			</div>  -->
+			
+				
+		</div>				
+	</div>
+
+	<div class="facet-drawer">
+		<div
+			data-component="drawer"
+			data-drawer-width="25"
+			data-drawer-height="100"
+			data-drawer-transition-speed="0.5"
+			class="drawer drawer--open-right"
+			id="funnelback-search-facets-drawer"
+		>
+			<div
+				class="drawer__content"
+				role="alertdialog"
+				aria-labelledby="drawer-title-1"
+			>
+				<div class="drawer__controllers">
+					<h2 id="drawer-title-1">Filters</h2>
+					<button
+						type="button"
+						aria-expanded="true"
+						class="drawer__close"
+					>
+						<svg
+							class="svg-icon svg-icon--xlarge"
+							role="img"
+						>
+							<title>Close</title>
+							<use href="#close" />
+						</svg>
+					</button>
 				</div>
-
-				<div class="funnelback-search__side" id="funnelbach-search-facets">					
+				<div class="drawer__body">
 					<#-- Get facets for the current selected tab -->
 					<#assign tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencils.tabs.selected)!}")!>
 
@@ -127,17 +222,51 @@
 							facets=tabFacets 
 							maxCategories=question.getCurrentProfileConfig().get("stencils.faceted_navigation.max_displayed_categories")!
 						/>
-					</@facets.HasFacets>
-
-					<@curator.HasCuratorOrBestBet position="left">
-						<@curator.Curator position="left" />
-					</@curator.HasCuratorOrBestBet>
-
+					</@facets.HasFacets>						
 				</div>
-				
-					<@sessions.SearchHistoryAndShortlist />
-			</div>				
+			</div>
 		</div>
+	</div>
+
+	<div class="shortlist-drawer">
+		<div
+			data-component="drawer"
+			data-drawer-width="100"
+			data-drawer-height="100"
+			data-drawer-transition-speed="0.3"
+			class="drawer drawer--open-bottom"
+			id="funnelback-search-shortlist-drawer"
+		>
+			<div
+				class="drawer__content"
+				role="alertdialog"
+				aria-labelledby="shortlist-drawer-title"
+			>
+				<div class="drawer__controllers">
+					<h2 id="shortlist-drawer-title">Shortlist</h2>
+					<button
+						type="button"
+						aria-expanded="true"
+						class="drawer__close"
+					>
+						<svg
+							class="svg-icon svg-icon--xlarge"
+							role="img"
+						>
+							<title>Close</title>
+							<use href="#close" />
+						</svg>
+					</button>
+				</div>
+				<div class="drawer__body">
+					<@sessions.Shortlist />
+				</div>
+			</div>
+		</div>
+	</div>				
+
+	<@sessions.SearchHistory />
+
 
 	<#-- Third parties -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>	
@@ -177,8 +306,9 @@
 		Enable session functonality which includes cart and click 
 		and query history 
 	-->
-	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
-		<@sessions.Templates />
+	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>		
+		<@sessions.Templates />					
+		
 		
 		<script nomodule src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 		

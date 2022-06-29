@@ -4,7 +4,6 @@
 	extra search feature.
 -->
 
-
 <#-- 
 	Provides preview of a facet. This allows the user to see 
 	a sample of the results on another tab or facet selection without 
@@ -21,28 +20,30 @@
 <#macro Preview extraSearchName documentType="" view="List">
     <!-- extra_search::Preview -->
     <@fb.ExtraResults name=extraSearchName>
-        <div class="content-wrapper">
-            <h3 class="search-results__section-title">${documentType}</h3>
-            <#-- 
-                Show the more link which will allow the user to navigate
-                to the corresponding tab or facet.
-            -->
-            <#if (response.customData.stencilsSearchPreviewLink)!?has_content && (response.resultPacket.results)!?has_content>                
-                <#assign searchLink = question.getCurrentProfileConfig().get("ui.modern.search_link")!>
-                <#assign previewLink = response.customData.stencilsSearchPreviewLink!>
-                
-                <a href="${searchLink}${previewLink}" class="search-results__link-all text-right" title="See more results for ${documentType!}">
-                    See all ${documentType!} 
-                    <span>(${(response.resultPacket.resultsSummary.totalMatching)!})</span>
-                </a>
-            </#if>
-            
-            <#-- Display the results from this extra search -->
-            <@no_results.NoResults />
-            <@result_list.ResultList />
-            <#--  TODO - Add quickview  -->
-            <#--  <@base.QuickViewTemplates />  -->
 
+        <div class="extra-search">
+            <div class="extra-search__navigation">
+
+                <h3 class="extra-search__title">${documentType}</h3>
+                <#-- 
+                    Show the more link which will allow the user to navigate
+                    to the corresponding tab or facet.
+                -->
+                <#if (response.customData.stencils.searchPreviewLink)!?has_content && (response.resultPacket.results)!?has_content>      
+                    <#assign searchLink = question.getCurrentProfileConfig().get("ui.modern.search_link")!>
+                    <#assign previewLink = response.customData.stencils.searchPreviewLink!>
+                    
+                    <a href="${searchLink}${previewLink}" class="extra-search__link" title="See more results for ${documentType!}">
+                        See all ${documentType!} 
+                        <span class="extra-search__count">
+                        (${(response.resultPacket.resultsSummary.totalMatching)!})
+                        </span>
+                    </a>
+                </#if>
+            </div>
+            <div class="extra-search__results">
+                <#nested />
+            </div>
         </div>
     </@fb.ExtraResults>
 </#macro>

@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     
-                        <@sessions.Controls />                
+                    <#--  <@sessions.Controls />                  -->
                 </div>
             </div>
             <img 

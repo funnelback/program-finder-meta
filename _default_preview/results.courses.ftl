@@ -252,5 +252,4 @@
             </div>
         </article>    
     </script>
-  
-  </#macro>
+</#macro>

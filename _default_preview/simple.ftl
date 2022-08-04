@@ -88,32 +88,32 @@
 	<div class="stencils__main program-finder">
 				
 		<@hero_banner.SearchForm />
-		<@tabs.Tabs />
+		<#--  <@tabs.Tabs />  -->
 
-		<div class="funnelback-search__header">
-			<button
-				type="button"
-				aria-controls="funnelback-search-facets-drawer"
-				data-component="activate-drawer"
-				class="funnelback-search__filters-button"
-			>
-				<svg class="svg-icon" role="img">
-					<title>Toggle show all filters</title>
-					<use href="#funnel"></use>
-				</svg>
-				Filters
-			</button>
-
+		<div class="navbar">
 			<button
 				type="button"
 				aria-controls="funnelback-search-shortlist-drawer"
 				data-component="activate-drawer"
-				class="funnelback-search__filters-button"
+				class="navbar__item"
 			>
 				<@sessions.ShortlistControl />  
 			</button>
 
 			<@sessions.SearchHistoryControls />
+
+			<button
+				type="button"
+				aria-controls="funnelback-search-facets-drawer"
+				data-component="activate-drawer"
+				class="funnelback-search__filters-button navbar__item"
+			>
+				<svg class="svg-icon navbar__icon" role="img">
+					<title>Toggle show all filters</title>
+					<use href="#funnel"></use>
+				</svg>
+				<span class="navbar__label">Filters</span>				
+			</button>			
 		</div>
 
 		<div class="funnelback-search no-wysiwyg">			
@@ -318,7 +318,7 @@
 				Use the non-minified version for the preview so that 
 				it is easier to step through and investigate bugs 
 			-->
-			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.js"></script>
+			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.2.js"></script>
 			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
 		<#else>
 			<script type="module" defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.module.min.js"></script>

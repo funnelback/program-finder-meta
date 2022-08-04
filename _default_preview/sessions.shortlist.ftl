@@ -83,7 +83,7 @@
 	</#list>
 </#macro>
 
-<#-- Outputs the placeholder used to determine where the shortlist button should rendern -->
+<#-- Outputs the placeholder used to determine where the shortlist button should rendered. -->
 <#macro ShortlistControl>
 	<!-- sessions.shortlist.ShortlistControl -->
 	<span class="flb-cart-count"></span>

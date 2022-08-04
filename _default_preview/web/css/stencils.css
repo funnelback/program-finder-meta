@@ -23,28 +23,24 @@
     }
 }
 
-/* Sessions controls */
+/* 
+ * Sessions controls - These are created by scripts written by RnD and are outside 
+ * the plug and play framework. Therefore we need to add some custom styles here to make 
+ * it play nicely.
+ */
+.stencils .result-sessions__controls, 
 .stencils .result-sessions__controls {
-    background-color: rgba(255,255,255,0.6);
-    padding: 0.5rem;
-    border-radius: 1em;
-    align-self: flex-end;
-    margin-top: 0.75rem;
-    margin-bottom: 1.25rem;
-    color: black;    
-    width: max-content;
-    font-size: 1rem;
-    margin-left: auto;
+    margin-top: 0;
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: transparent;
+    border-radius: 0;
 }
 
-.stencils .result-sessions__controls a, 
-.stencils .result-sessions__controls button {
-    margin: 0.5rem;
-    color: black;
-    cursor: pointer;
-    text-decoration: underline;
-    background: none;
-    border: none;
+.stencils .navbar__item:hover,
+.stencils .navbar__item:focus {
+    background-color: hsla(0,0%,94%,.8);
+    color: #262626;
 }
 
 #search-history {

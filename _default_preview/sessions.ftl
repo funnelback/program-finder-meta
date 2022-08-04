@@ -64,7 +64,11 @@
 						template: '{{>icon-block}} {{>label-block}} ({{count}})',
 						icon: 'fas fa-star',
 						label: 'Shortlist',
-						isLabel: true
+						isLabel: true,
+						classes: "",
+						enableClick: false,
+						elementType: "span",
+						tabIndex: "-1",
 					},
 					cart: {
 						icon: '',
@@ -161,21 +165,19 @@
 <#macro SearchHistoryControls>
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>		
 		<!-- sessions::SearchHistoryControls -->
-		<div class="result-sessions__controls">
-				<a class="session-history-toggle" tabindex="0">
-				<span class="fas fa-history"></span>
+		<button class="session-history-toggle result-sessions__controls navbar__item">
+			<span class="fas fa-history navbar__icon"></span>
+			<span class="navbar__label">
 				History
-			</a>
-		</div>
+			</span>
+		</button>
 	</#if>    
 </#macro>
 
 <#-- Outputs the placeholder used to determine where the shortlist button should rendern -->
 <#macro ShortlistControl>
 	<!-- sessions::ShortlistControl -->
-	<div class="result-sessions__controls">
-		<@shortlist.ShortlistControl />
-	</div>		
+	<@shortlist.ShortlistControl />
 </#macro>
 
 <#macro Templates>

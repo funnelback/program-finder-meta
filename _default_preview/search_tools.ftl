@@ -14,7 +14,7 @@
         >
         <input type="hidden" name="collection" value="${question.collection.id}">
 
-            <@base.inputsForForms allowList= ["enc", "form", "scope", "lang", "profile", "userType", "displayMode", "num_ranks", "query"] />
+            <@base.inputsForForms allowList= ["enc", "form", "scope", "lang", "profile", "userType", "displayMode", "query"] />
 
             <#list question.selectedCategoryValues?keys as facetKey>
                 <#list question.selectedCategoryValues[facetKey] as value>

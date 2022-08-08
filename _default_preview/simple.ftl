@@ -88,7 +88,6 @@
 	<div class="stencils__main program-finder">
 				
 		<@hero_banner.SearchForm />
-		<#--  <@tabs.Tabs />  -->
 
 		<div class="navbar">
 			<button
@@ -101,6 +100,10 @@
 			</button>
 
 			<@sessions.SearchHistoryControls />
+			
+			<@tabs.TabsAsRadio facets="Tabs" />
+			
+			<i class="navbar__seperator fa-solid fa-grip-lines-vertical"  role="presentation" style="color:white;"></i>
 
 			<button
 				type="button"
@@ -183,7 +186,7 @@
 		</div>				
 	</div>
 
-	<div class="facet-drawer">
+	<div class="facet-drawer" tabindex="-1">
 		<div
 			data-component="drawer"
 			data-drawer-width="25"
@@ -228,7 +231,7 @@
 		</div>
 	</div>
 
-	<div class="shortlist-drawer">
+	<div class="shortlist-drawer" tabindex="-1">
 		<div
 			data-component="drawer"
 			data-drawer-width="100"

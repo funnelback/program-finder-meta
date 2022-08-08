@@ -24,44 +24,8 @@
 }
 
 /* NavBar */
-.stencils .navbar .facet-group__title {
-    display: none;
-}
-
-.stencils .navbar .navbar__seperator {
-    align-self: center;
-}
-
-.stencils .navbar .funnelback-facet {
-    margin-left: auto;
-    margin-bottom: 0;
-    padding: 0.5rem 1rem;
-}
-
 .stencils .navbar .facet-groups, .stencils .navbar .facet-group__type-radio-button {
     display: flex!important;
-}
-
-.stencils .navbar .facet-group__list-item {
-    color: white;
-    margin-bottom: 0;
-}
-
-.stencils .navbar .facet-group__results-number {
-    display: none;
-}
-
-.stencils .navbar .funnelback-search__filters-button.navbar__item {
-    margin-left: 0;
-}
-
-/* Quickview */
-.stencils .quickview .listing-item__title-link {
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-    text-align: left;
-    padding: 0;
 }
 
 /* 

@@ -23,6 +23,7 @@
     }
 }
 
+/* NavBar */
 .stencils .navbar .facet-group__title {
     display: none;
 }
@@ -53,6 +54,16 @@
 .stencils .navbar .funnelback-search__filters-button.navbar__item {
     margin-left: 0;
 }
+
+/* Quickview */
+.stencils .quickview .listing-item__title-link {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+}
+
 /* 
  * Sessions controls - These are created by scripts written by RnD and are outside 
  * the plug and play framework. Therefore we need to add some custom styles here to make 

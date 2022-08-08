@@ -40,8 +40,6 @@
 <#import "extra_search.ftl" as extra_search />
 <#import "results.ftl" as results />
 <#import "client_includes.ftl" as client_includes />
-<#import "quick_view.ftl" as quick_view />
-
 
 <#import "sessions.ftl" as sessions />
 
@@ -279,8 +277,6 @@
 	</div>				
 
 	<@sessions.SearchHistory />
-	<@quick_view.QuickViewTemplates />
-
 
 	<#-- Third parties -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>	

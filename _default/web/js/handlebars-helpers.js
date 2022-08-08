@@ -21,7 +21,7 @@ window.Funnelback.Handlebars.registerHelper({
     // Truncate content to provided length
     // Usage: {{#truncate 70}}{{title}}{{/truncate}}
     truncate: function (len, options) {
-      const str = options.fn(this);
+      const str = options.fn(this).trim();
       if (str && str.length > len) {
           let newStr = str + " ";
           newStr = str.slice(0, len);

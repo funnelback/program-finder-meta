@@ -40,6 +40,8 @@
 <#import "extra_search.ftl" as extra_search />
 <#import "results.ftl" as results />
 <#import "client_includes.ftl" as client_includes />
+<#import "quick_view.ftl" as quick_view />
+
 
 <#import "sessions.ftl" as sessions />
 
@@ -83,12 +85,18 @@
 		Skip to search results asdsa
 	</a>
 	
-	<#--  <@client_includes.ContentHeader />  -->
+	<#--
+		The placeholder header and footer have been excluded by default. 
+		To add it back in for demos or projects, add/uncomment the following:
+
+		<@client_includes.ContentHeader />  
+	-->
 
 	<div class="stencils__main program-finder">
 				
 		<@hero_banner.SearchForm />
 
+		<#--  Navigation Bar  -->
 		<div class="navbar">
 			<button
 				type="button"
@@ -105,6 +113,7 @@
 			
 			<i class="navbar__seperator fa-solid fa-grip-lines-vertical"  role="presentation" style="color:white;"></i>
 
+			<#--  Filter button which provides access to all the facets configured for the implementation -->
 			<button
 				type="button"
 				aria-controls="funnelback-search-facets-drawer"
@@ -118,7 +127,8 @@
 				<span class="navbar__label">Filters</span>				
 			</button>			
 		</div>
-
+		
+		<#--  Rest of the search page  -->
 		<div class="funnelback-search no-wysiwyg">			
 			<div class="funnelback-search__body" id="funnelbach-search-body">
 				<h2 class="funnelback-search__title">Results</h2>
@@ -269,6 +279,7 @@
 	</div>				
 
 	<@sessions.SearchHistory />
+	<@quick_view.QuickViewTemplates />
 
 
 	<#-- Third parties -->
@@ -281,7 +292,7 @@
 		Libraries required by the design developed by the Stencils cutup team. 
 		Avoid changing these if possible.
 	-->
-	<#-- Stencil specific code such as the quickview and dropdowns -->
+	<#-- Plug and play framework -->
 	<script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/themes/stencils/js/main.js"></script>
 
 	

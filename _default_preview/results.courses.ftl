@@ -80,6 +80,21 @@
                         </h3>
                     </a>
 
+                    <#--  Quickview button -->
+                    <button
+                        type="button"
+                        aria-controls="${base.getCssID(result.liveUrl)}"
+                        data-component="activate-drawer"
+                        class="result__quickview"
+                    >
+                        <svg class="svg-icon" role="img">
+                            <title>Toggle show all filters</title>
+                            <use href="#funnel"></use>
+                        </svg>
+                        <span class="navbar__label">Testing</span>				
+                    </button>			
+
+
                     <#-- Pretty version of the url of the document -->
                     <cite class="listing-item__subtitle listing-item__subtitle--highlight">
                         <@s.Truncate length=90>
@@ -252,4 +267,120 @@
             </div>
         </article>    
     </script>
+</#macro>
+
+<#-- 
+    Output the template used in the quick view. Quick view
+    allows the user view more information about a particular
+    document without them having to leave the search results page.
+    This aims to minimise the amount of hopping back and forth 
+    between systems.
+-->
+<#macro QuickView result> 
+    <!-- results.courses.QuickViewTempplate -->
+    <div class="quickview-drawer" tabindex="-1">
+        <div 
+			data-component="drawer"
+			data-drawer-width="25"
+			data-drawer-height="100"
+			data-drawer-transition-speed="0.5"
+			class="drawer drawer--open-right"
+			id="${base.getCssID(result.liveUrl)}"
+        >
+			<div
+				class="drawer__content"
+				role="alertdialog"
+				aria-labelledby="drawer-title-1"
+			>
+				<div class="drawer__controllers">
+					<h2 id="drawer-title-1">Filters</h2>
+					<button
+						type="button"
+						aria-expanded="true"
+						class="drawer__close"
+					>
+						<svg
+							class="svg-icon svg-icon--xlarge"
+							role="img"
+						>
+							<title>Close</title>
+							<use href="#close" />
+						</svg>
+					</button>
+				</div>
+				<div class="drawer__body">
+                    <h2 class="quick-view__title" id="${base.getCssID(result.liveUrl)}-course-label">
+                        ${result.title!}          
+                    </h2>
+                    
+                    <p class="quick-view__desc" id="${base.getCssID(result.liveUrl)}-course-desc">
+                        <#if (result.listMetadata["c"]?first)!?has_content>
+                            ${(result.listMetadata["c"]?first)!}
+                        <#else>
+                            ${result.summary!}
+                        </#if>
+                    </p>
+
+                    <h3 class="quick-view__details-title">Program details</h3>
+
+                    <div class="quick-view__details-content">
+                        <dl>
+                            <#if (result.listMetadata["programCredentialType"]?first)!?has_content>
+                                <dt>Credential type:</dt>
+                                <dd>${(result.listMetadata["programCredentialType"]?first)!} </dd>
+                            </#if>                    
+                            <#if ((result.listMetadata["courseCredit"]?first)!"0") != "0">
+                                <dt>Credits:</dt>
+                                <dd>${(result.listMetadata["courseCredit"]?first)!} credits</dd>
+                            </#if>                    
+                            <#if (result.listMetadata["programCampus"]?first)!?has_content>
+                                <dt>Campus:</dt>
+                                <dd>${(result.listMetadata["programCampus"]?first)!} </dd>
+                            </#if>
+                            <#if (result.listMetadata["stencilsDeliveryMethod"]?first)!?has_content >
+                                <dt>Delivery method:</dt>
+                                <dd>${(result.listMetadata["stencilsDeliveryMethod"]?first)!} </dd>
+                            </#if>
+                            <#if (result.listMetadata["programLengthYears"]?first)!?has_content &&
+                                ((result.listMetadata["programLengthYears"]?first)!"0") != "0">
+                                <dt>Duration:</dt>
+                                <dd>${(result.listMetadata["programLengthYears"]?first)!} years</dd>
+                            </#if>                                                                              
+                            <#if (result.listMetadata["programFaculty"]?first)!?has_content >
+                                <dt>Faculty:</dt>
+                                <dd>${(result.listMetadata["programFaculty"]?first)!} </dd>
+                            </#if>                                                  
+                            <#if (result.listMetadata["stencilsDepartment"]?first)!?has_content >
+                                <dt>Department:</dt>
+                                <dd>${(result.listMetadata["stencilsDepartment"]?first)!} </dd>
+                            </#if>                                                  
+                            <#if (result.listMetadata["programStatus"]?first)!?has_content >
+                                <dt>Status:</dt>
+                                <dd>${(result.listMetadata["programStatus"]?first)!} </dd>
+                            </#if>                                                  
+                            <#if (result.listMetadata["courseCode"]?first)!?has_content >
+                                <dt>Code:</dt>
+                                <dd>${(result.listMetadata["courseCode"]?first)!} </dd>
+                            </#if>
+                            <#if (result.listMetadata["courseNumber"]?first)!?has_content >
+                                <dt>Number:</dt>
+                                <dd>${(result.listMetadata["courseNumber"]?join(", "))!} </dd>
+                            </#if>
+                            <#if (result.listMetadata["programLength"]?first)!?has_content >
+                                <dt>Length:</dt>
+                                <dd>${(result.listMetadata["programLength"]?first)!} </dd>
+                            </#if>
+                            <#if (result.listMetadata["stencilsTermCodes"]?first)!?has_content >
+                                <dt>Term codes:</dt>
+                                <dd>${(result.listMetadata["stencilsTermCodes"]?join(", "))!} </dd>
+                            </#if>             
+                        </dl>
+                        <a href="${result.clickTrackingUrl!}" class="btn" data-target="#${base.getCssID(result.liveUrl)}">
+                            Visit program page
+                        </a>                    
+                    </div>
+				</div>
+			</div>
+        </div>
+    </div>
 </#macro>

@@ -88,3 +88,43 @@
 	<!-- sessions.shortlist.ShortlistControl -->
 	<span class="flb-cart-count"></span>
 </#macro>
+
+<#--  Output the sliding drawer for the shortlist.  -->
+<#macro ShortlistDrawer>
+	<div class="shortlist-drawer" tabindex="-1">
+		<div
+			data-component="drawer"
+			data-drawer-width="100"
+			data-drawer-height="100"
+			data-drawer-transition-speed="0.3"
+			class="drawer drawer--open-bottom"
+			id="funnelback-search-shortlist-drawer"
+		>
+			<div
+				class="drawer__content"
+				role="alertdialog"
+				aria-labelledby="shortlist-drawer-title"
+			>
+				<div class="drawer__controllers">
+					<h2 id="shortlist-drawer-title">Shortlist</h2>
+					<button
+						type="button"
+						aria-expanded="true"
+						class="drawer__close"
+					>
+						<svg
+							class="svg-icon svg-icon--xlarge"
+							role="img"
+						>
+							<title>Close</title>
+							<use href="#close" />
+						</svg>
+					</button>
+				</div>
+				<div class="drawer__body">
+					<@sessions.Shortlist />
+				</div>
+			</div>
+		</div>
+	</div>	
+</#macro>

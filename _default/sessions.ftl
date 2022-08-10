@@ -192,3 +192,7 @@
     -->
     <@shortlist.ShortlistTemplatesForResults />    
 </#macro>
+
+<#macro ShortlistDrawer>
+	<@shortlist.ShortlistDrawer />
+</#macro>

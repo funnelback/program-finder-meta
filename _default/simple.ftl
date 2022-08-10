@@ -40,6 +40,8 @@
 <#import "extra_search.ftl" as extra_search />
 <#import "results.ftl" as results />
 <#import "client_includes.ftl" as client_includes />
+<#import "navbar.ftl" as navbar />
+
 
 <#import "sessions.ftl" as sessions />
 
@@ -94,37 +96,7 @@
 				
 		<@hero_banner.SearchForm />
 
-		<#--  Navigation Bar  -->
-		<div class="navbar">
-			<button
-				type="button"
-				aria-controls="funnelback-search-shortlist-drawer"
-				data-component="activate-drawer"
-				class="navbar__item"
-			>
-				<@sessions.ShortlistControl />  
-			</button>
-
-			<@sessions.SearchHistoryControls />
-			
-			<@tabs.TabsAsRadio facets="Tabs" />
-			
-			<i class="navbar__seperator fa-solid fa-grip-lines-vertical"  role="presentation" style="color:white;"></i>
-
-			<#--  Filter button which provides access to all the facets configured for the implementation -->
-			<button
-				type="button"
-				aria-controls="funnelback-search-facets-drawer"
-				data-component="activate-drawer"
-				class="funnelback-search__filters-button navbar__item"
-			>
-				<svg class="svg-icon navbar__icon" role="img">
-					<title>Toggle show all filters</title>
-					<use href="#funnel"></use>
-				</svg>
-				<span class="navbar__label">Filters</span>				
-			</button>			
-		</div>
+		<@navbar.Navbar />
 		
 		<#--  Rest of the search page  -->
 		<div class="funnelback-search no-wysiwyg">			
@@ -171,111 +143,11 @@
 				</@s.AfterSearchOnly>
 
 				<@contextual_navigation.ContextualNavigation />
-			</div>
-
-			<#--  <div class="funnelback-search__side" id="funnelbach-search-facets">					  -->
-				<#-- Get facets for the current selected tab -->
-				<#--  <#assign tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencils.tabs.selected)!}")!>
-
-				<@facets.HasFacets facets=tabFacets>
-					<@facets.Facets 
-						facets=tabFacets 
-						maxCategories=question.getCurrentProfileConfig().get("stencils.faceted_navigation.max_displayed_categories")!
-					/>
-				</@facets.HasFacets>
-
-				<@curator.HasCuratorOrBestBet position="left">
-					<@curator.Curator position="left" />
-				</@curator.HasCuratorOrBestBet>
-
-			</div>  -->
-			
-				
+			</div>					
 		</div>				
 	</div>
 
-	<div class="facet-drawer">
-		<div
-			data-component="drawer"
-			data-drawer-width="25"
-			data-drawer-height="100"
-			data-drawer-transition-speed="0.5"
-			class="drawer drawer--open-right"
-			id="funnelback-search-facets-drawer"
-            tabIndex="-1"            			
-		>
-			<div
-				class="drawer__content"
-				role="alertdialog"
-				aria-labelledby="drawer-title-1"
-			>
-				<div class="drawer__controllers">
-					<h2 id="drawer-title-1">Filters</h2>
-					<button
-						type="button"
-						aria-expanded="true"
-						class="drawer__close"
-					>
-						<svg
-							class="svg-icon svg-icon--xlarge"
-							role="img"
-						>
-							<title>Close</title>
-							<use href="#close" />
-						</svg>
-					</button>
-				</div>
-				<div class="drawer__body">
-					<#-- Get facets for the current selected tab -->
-					<#assign tabFacets = question.getCurrentProfileConfig().get("stencils.tabs.facets.${(response.customData.stencils.tabs.selected)!}")!>
-
-					<@facets.HasFacets facets=tabFacets>
-						<@facets.Facets 
-							facets=tabFacets 
-							maxCategories=question.getCurrentProfileConfig().get("stencils.faceted_navigation.max_displayed_categories")!
-						/>
-					</@facets.HasFacets>						
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="shortlist-drawer" tabindex="-1">
-		<div
-			data-component="drawer"
-			data-drawer-width="100"
-			data-drawer-height="100"
-			data-drawer-transition-speed="0.3"
-			class="drawer drawer--open-bottom"
-			id="funnelback-search-shortlist-drawer"
-		>
-			<div
-				class="drawer__content"
-				role="alertdialog"
-				aria-labelledby="shortlist-drawer-title"
-			>
-				<div class="drawer__controllers">
-					<h2 id="shortlist-drawer-title">Shortlist</h2>
-					<button
-						type="button"
-						aria-expanded="true"
-						class="drawer__close"
-					>
-						<svg
-							class="svg-icon svg-icon--xlarge"
-							role="img"
-						>
-							<title>Close</title>
-							<use href="#close" />
-						</svg>
-					</button>
-				</div>
-				<div class="drawer__body">
-					<@sessions.Shortlist />
-				</div>
-			</div>
-		</div>
-	</div>				
+	<@sessions.ShortlistDrawer />			
 
 	<@sessions.SearchHistory />
 

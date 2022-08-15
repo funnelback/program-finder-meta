@@ -1,41 +1,31 @@
 <#ftl encoding="utf-8" output_format="HTML" />
+<#-- Outputs all the css and related libraries used for the implementation -->
 
-<link rel="stylesheet" href="/s/resources/${question.collection.id}/${question.profile}/css/customer.css">
-<link rel="stylesheet" href="/s/resources/${question.collection.id}/${question.profile}/css/customer-typeahead.css">
+<#-- Template specific code. Avoid changing these files if possible -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+<link href="https://unpkg.com/normalize.css@8.0.1/normalize.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<#-- Stencil's theme -->
+<link href="${ContextPath}/resources/${question.collection.id}/${question.profile}/themes/stencils/main.css" rel="stylesheet">
 
 <#-- 
-    Polyfills for Internet Explorer 11 can go below 
+    Presentation logic specific to this Stencil. More often that not, this will eventually 
+    be refactored into the Stencils Design System.
 
-    Ensure that these have the `nomodule` attribute so that
-    modern browsers ignore them and don't incur the parsing
-    and loading cost.
 -->
+<link rel="stylesheet" href="${ContextPath}/resources/${(question.collection.id)!}/${(question.profile)!}/css/stencils.css">
+
+<#-- Presentation logic specific for demonstrations. -->
+<#if ((question.getCurrentProfileConfig().get("stencils.showcase"))!"FALSE")?upper_case == "TRUE">
+    <link rel="stylesheet" href="${ContextPath}/resources/${(question.collection.id)!}/${(question.profile)!}/css/showcase.css">
+</#if>
 
 <#-- 
-    NodeList.prototype.forEach
-    https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach
+    Implementation specific style changes. It is recommended that changes to the 
+    presentation of this implementation should be made here.
+-->
+<link rel="stylesheet" href="${ContextPath}/resources/${(question.collection.id)!}/${(question.profile)!}/css/customer.css">
 
-    Object.entries
-    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
- -->
-<script nomodule>
-if (window.NodeList && !NodeList.prototype.forEach) {
-    NodeList.prototype.forEach = function (callback, thisArg) {
-        thisArg = thisArg || window;
-        for (var i = 0; i < this.length; i++) {
-            callback.call(thisArg, this[i], i, this);
-        }
-    };
-}
-if (!Object.entries) {
-  Object.entries = function( obj ){
-    var ownProps = Object.keys( obj ),
-        i = ownProps.length,
-        resArray = new Array(i); // preallocate the Array
-    while (i--)
-      resArray[i] = [ownProps[i], obj[ownProps[i]]];
 
-    return resArray;
-  };
-}
-</script>

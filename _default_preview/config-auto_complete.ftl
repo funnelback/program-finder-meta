@@ -21,7 +21,8 @@
     TODO: Add or update the follow to include templates containing the handlebar templates required
     for autocomplete.
 -->
-<#import "programs.ftl" as programs />
+<#import "people.ftl" as people />
+<#import "courses.ftl" as courses />
 
 <#-- Used to send absolute URLs for resources -->
 <#assign httpHost=httpRequest.getHeader('host')>
@@ -73,7 +74,7 @@
                     action="https://${httpHost!}/s/search.html" 
                     method="GET"
                     role="search"
-                    class="module-search">
+                    class="module-search--bg module-search">
 
                     <div class="module-search__group">
                         <input required 
@@ -103,7 +104,8 @@
                 <#-- 
                     TODO: Add or update the following list include the handlebars templates used for the implementation.
                 -->                
-                <@programs.AutoCompleteTemplate />
+                <@courses.AutoCompleteTemplate />
+                <@people.AutoCompleteTemplate />
 
                 <link rel="stylesheet" href="https://${httpHost!}/s/resources/${(question.collection.id)!}/${(question.profile)!}/css/main.css">
                 <link rel="stylesheet" href="https://${httpHost!}/s/resources/${(question.collection.id)!}/${(question.profile)!}/css/customer-typeahead.css">
@@ -114,17 +116,15 @@
                 <!-- Handlebars is used to render client-side templates -->
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>
 
-                <#-- Stencils specific code -->
-                <script src="/s/resources/${question.collection.id}/${question.profile}/js/stencils.js"></script> 
-                <script src="/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script> 
+                <!-- Stencils specific code -->
+                <script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script>  
 
                 <!-- Funnelback auto-complete -->
                 <script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.autocompletion-2.6.0.stencils.js"></script>
 
+
                 <script>
-                window.addEventListener('DOMContentLoaded', function() {
                     <@auto_complete.Configuration />
-                })
                 </script>
                 <!-- Required CSS and javascript - END -->   
 
@@ -147,7 +147,7 @@
                     Please keep in mind that the css provided with Funnelback relies on 
                     the &lt;input&gt; being nested in the following structure:
                     
-                    <pre>.fb-container .module-search .module-search__group</pre>
+                    <pre>.fb-container .module-search--bg.module-search .module-search__group</pre>
                     
                     Note: The CSS provided is an example implementation of what you can do. 
                     Please feel free to add additional styling to suit the page your are integrating
@@ -186,7 +186,8 @@
     TODO: Add or update the following list include the handlebars templates used for the implementation.
 -->
 <#assign autoCompleteTemplate>
-<@programs.AutoCompleteTemplate />
+<@people.AutoCompleteTemplate />
+<@courses.AutoCompleteTemplate />
 </#assign>
 
                 <strong>Handlebars templates</strong>

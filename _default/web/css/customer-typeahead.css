@@ -1,18 +1,4 @@
 
-/* Auto complete */
-
-@media only screen and (min-width: 1025px) {
-    .fb-container .module-search .tt-dataset-programs {
-        margin: 0;
-        padding: 0;
-        white-space: normal;
-    }
-  }
-  
-.fb-container .module-search .tt-dataset-programs {
-    margin: 0 -1.125rem;
-    overflow: auto;
-    padding: 3.25rem 1.125rem 0 1.125rem;
-    white-space: nowrap;
-}
-  
+/* 
+    Customer specific overrides for concierge should go here.
+*/

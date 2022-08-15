@@ -51,7 +51,7 @@
     "fileSize"
     "fileType"
     "tier"
-    "metaData"
+    "listMetadata"
     "customData"
     "docNum"
     "exploreLink"
@@ -61,7 +61,10 @@
     "clickTrackingUrl"
     "explain"
     "indexUrl"
-    "documentVisibleToUser"
+    "documentVisibleToUser"    
+    <#-- Metadata values -->
+    "listMetadata"
+    "image"
     <#-- Spelling suggestions -->
     "spell"
     <#-- Best bets -->
@@ -127,7 +130,7 @@
       Note: Need to ensure that this test appears above the test for strings
       as hashes are also treated as strings.
     -->
-    <#if (node)!?has_content && (node.getClass())!?has_content && node.getClass().isEnum()>
+    <#if (node)!?has_content && node.getClass?is_method && node.getClass().isEnum?is_method && node.getClass().isEnum()>
       <#--
         Unfortuantely, enumerations are also considered hashes which when
         processed normally, looks like:
@@ -239,11 +242,11 @@
 </#macro>
 
 <#--
-  Output the required nodes as JSON
-  This can be customised to print out the question and extra searches
+  Output the required nodes as JSON.
+  This can be customised to print out the question, extra searches or facets.
 -->
 <@compress single_line=true>
   <@Callback>
-    { "response" : <@ProcessNode WHITELIST response.curator /> }
+    { "response" : <@ProcessNode WHITELIST response.resultPacket /> }
   </@Callback>
 </@compress>

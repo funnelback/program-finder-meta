@@ -1,8 +1,29 @@
 [ {
-  "created" : "2020-06-03T12:05:51.469556Z",
-  "lastModified" : "2020-07-02T04:55:04.369918+10:00",
-  "id" : "546c96f9-38a3-40cd-8c27-a0062f7f1454",
-  "name" : "Science - STEM Promotion",
+  "created" : "2018-11-21T09:35:16.971+11:00",
+  "lastModified" : "2018-11-21T09:35:16.971+11:00",
+  "id" : "3f3c203c-75a2-40f8-88f5-9e582896a514",
+  "name" : "",
+  "label" : "BEST_BETS",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "AllQueryWords",
+    "triggerWords" : [ "admissions" ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Admissions open Dec 30th",
+    "displayUrl" : "funnelback.edu/apply",
+    "linkUrl" : "https://funnelback.edu/apply",
+    "descriptionHtml" : "Apply to Funnelback University now to join thousands of students and access numerous academic opportunities!",
+    "additionalProperties" : null,
+    "category" : "BEST_BETS",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-03-12T14:33:01.536859Z",
+  "lastModified" : "2020-12-03T09:16:38.588196Z",
+  "id" : "f667e7b1-7136-405b-af29-16e0fee57036",
+  "name" : "[Example] Curator in the top - health, corona, covid",
   "label" : "DEFAULT",
   "enabled" : true,
   "trigger" : {
@@ -11,99 +32,540 @@
       "type" : "Or",
       "triggers" : [ {
         "type" : "AllQueryWords",
-        "triggerWords" : [ "science" ]
+        "triggerWords" : [ "health" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "corona" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "covid" ]
       } ]
     } ]
   },
   "actions" : [ {
     "type" : "DisplayUrlAdvert",
-    "titleHtml" : "STEM Scholarships",
-    "displayUrl" : "",
-    "linkUrl" : "www.funnelback.com",
-    "descriptionHtml" : "We're offering STEM students a $1,000 scholarship to celebrate your hard work and success. Made possible through generous donations from alumni, businesses, and other supporters.",
+    "titleHtml" : "Prevent the spread - what you need to do",
+    "displayUrl" : "https://www.nhs.uk/conditions/coronavirus-covid-19/",
+    "linkUrl" : "https://www.nhs.uk/conditions/coronavirus-covid-19/social-distancing/what-you-need-to-do/",
+    "descriptionHtml" : "Everyone must stay at home to help stop coronavirus (COVID-19) spreading. Wash your hands with soap and water often to reduce the risk of infection.",
     "additionalProperties" : {
-      "tag" : "Promoted"
+      "image" : "https://source.unsplash.com/random/160x160?nhs"
     },
     "category" : "",
     "removeCollectionUrl" : false
   }, {
-    "type" : "PromoteUrls",
-    "urlsToPromote" : [ "https://www.tru.ca/programs/catalogue/bachelor-of-science" ]
-  } ]
-}, {
-  "created" : "2020-06-03T23:56:42.567678+10:00",
-  "lastModified" : "2020-06-03T23:56:42.574417+10:00",
-  "id" : "b79c4d02-8716-4bd1-89d4-8ca9522b695d",
-  "name" : "Business - top result",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "And",
-    "triggers" : [ {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "business" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "administration" ]
-      }, {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "admin" ]
-      } ]
-    } ]
-  },
-  "actions" : [ {
-    "type" : "PromoteUrls",
-    "urlsToPromote" : [ "https://www.tru.ca/programs/catalogue/bachelor-of-business-administration" ]
-  } ]
-}, {
-  "created" : "2020-06-03T12:05:51.469556Z",
-  "lastModified" : "2020-07-09T15:05:30.822104Z",
-  "id" : "d2daed55-d35b-4ed1-9d20-a6ce9c62f26e",
-  "name" : "Science - COVID Warning",
-  "label" : "DEFAULT",
-  "enabled" : true,
-  "trigger" : {
-    "type" : "And",
-    "triggers" : [ {
-      "type" : "Or",
-      "triggers" : [ {
-        "type" : "AllQueryWords",
-        "triggerWords" : [ "science" ]
-      } ]
-    } ]
-  },
-  "actions" : [ {
     "type" : "DisplayUrlAdvert",
-    "titleHtml" : "COVID-19:  Coronavirus Updates",
-    "displayUrl" : "",
-    "linkUrl" : "www.funnelback.com",
-    "descriptionHtml" : "In an effort to limit exposure to and spread of COVID-19, the University will follow the advice of the CDC, specifically its recommendations in regard to higher education.",
+    "titleHtml" : "Current Alert Level",
+    "displayUrl" : "https://covid19.waimakariri.govt.nz/app",
+    "linkUrl" : "https://covid19.waimakariri.govt.nz/app",
+    "descriptionHtml" : "New Zealand is at Alert Level 1.\n\nAuckland joined the rest of New Zealand at Alert Level 1 at 11:59pm on Wednesday 7 October.",
     "additionalProperties" : {
-      "tag" : "Promoted"
+      "position" : "top",
+      "call_to_action_label" : "See more",
+      "call_to_action_url" : "https://covid19.govt.nz/alert-system/alert-level-1/",
+      "image" : "https://source.unsplash.com/random/40x40?covid"
     },
     "category" : "",
     "removeCollectionUrl" : false
   } ]
 }, {
-  "created" : "2020-07-09T15:07:22.090571Z",
-  "lastModified" : "2020-07-09T15:19:31.453776Z",
-  "id" : "4d4a25ee-e107-4134-b7b2-5e5eff298d48",
+  "created" : "2020-04-08T21:56:46.500816Z",
+  "lastModified" : "2020-12-03T09:18:29.892714Z",
+  "id" : "0f46ff92-62e3-46d2-9a29-f2f9bc2599d9",
+  "name" : "[Example] Curator at the bottom - health, corona, covid",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "health" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "corona" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "covid" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "RESEARCH INSIGHT | Access to Health Care",
+    "displayUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
+    "linkUrl" : "https://www.health.org.uk/funding-and-partnerships/programmes/insight-2019",
+    "descriptionHtml" : "Access to health services affects the well-being of millions of consumers, and objective or situational access factors, such as distance from facility, often dominate the conversation. However, the reality is that subjective perceptions play just as great a role in consumers’ overall health and well-being.",
+    "additionalProperties" : {
+      "position" : "bottom"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-08-17T16:12:56.407535Z",
+  "lastModified" : "2022-02-03T22:39:01.876356Z",
+  "id" : "fe3b1d3b-fa55-4fbe-a154-a3d4ed3c2e32",
+  "name" : "[Example] Curator on top - timetable",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "timetable" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "schedule" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "tutorials" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "labs" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Tutorials and laboratories",
+    "displayUrl" : "www.example.com",
+    "linkUrl" : "www.example.com",
+    "descriptionHtml" : "For the remainder of the 2020/21 academic year, all compulsory teaching, learning and assessments, including those taking place in Summer Term 2021, will be delivered online.",
+    "additionalProperties" : {
+      "position" : "top",
+      "call_to_action_label" : "BOOK NOW",
+      "call_to_action_url" : "www.example.com",
+      "image" : "https://source.unsplash.com/random/160x160?damage"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  }, {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Having difficulties logging in?",
+    "displayUrl" : "www.example.com",
+    "linkUrl" : "www.example.com",
+    "descriptionHtml" : "One of the first steps you need to complete after accepting a course offer is to activate your University account, through the Account Management page.",
+    "additionalProperties" : {
+      "position" : "top",
+      "call_to_action_label" : "ACTIVATE ACCOUNT",
+      "call_to_action_url" : "www.example.com",
+      "image" : "https://source.unsplash.com/random/160x160?bins"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-08-17T16:48:38.568916Z",
+  "lastModified" : "2021-02-08T19:31:36.992905Z",
+  "id" : "2c27d476-f132-4772-95ad-06fb61b3323f",
+  "name" : "[Example] Curator in the top - school, campus, term dates",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "school" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "term", "dates" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "campus" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Discover life at FBU",
+    "displayUrl" : "www.example.com",
+    "linkUrl" : "www.example.com",
+    "descriptionHtml" : "The Cumberland Student Guild manages all non-academic services on campus, including a food court, bookstore and shopping outlets.",
+    "additionalProperties" : {
+      "call_to_action_label" : "VIEW DATES",
+      "call_to_action_url" : "www.example.com",
+      "class" : "top",
+      "image" : "https://source.unsplash.com/random/160x160?calendar"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-08-19T16:00:08.117078Z",
+  "lastModified" : "2020-12-03T09:17:39.146201Z",
+  "id" : "878f2174-ef98-48a1-9fdc-9ab1954a587b",
+  "name" : "[Example] Curator in the top - fines",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "fine" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "fines" ]
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "parking" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Pay a Penalty Charge Notice",
+    "displayUrl" : "https://www3.camden.gov.uk/pay",
+    "linkUrl" : "https://www3.camden.gov.uk/pay",
+    "descriptionHtml" : "Pay a Penalty Charge Notice (PCN) online",
+    "additionalProperties" : {
+      "call_to_action_url" : "https://www3.camden.gov.uk/pay",
+      "position" : "top",
+      "call_to_action_label" : "Pay now",
+      "image" : "https://source.unsplash.com/random/160x160?fines"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2020-12-02T13:44:32.48577Z",
+  "lastModified" : "2021-02-08T19:29:49.028549Z",
+  "id" : "36517c65-c621-48c4-bdda-8a1f35d64bfc",
+  "name" : "[Example] Curator on the left - Classes",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "classes" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Planning for a Safe Start",
+    "displayUrl" : "https://example.com",
+    "linkUrl" : "https://example.com",
+    "descriptionHtml" : "Fall 2020 semester will start earlier than originally scheduled, on August 17 and end on Tuesday, Nov. 24",
+    "additionalProperties" : {
+      "position" : "left",
+      "call_to_action_label" : "SEE MORE",
+      "call_to_action_url" : "www.example.com"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2018-11-21T09:35:16.971+11:00",
+  "lastModified" : "2018-11-21T09:35:16.971+11:00",
+  "id" : "3f3c203c-75a2-40f8-88f5-9e582896a514",
+  "name" : "",
+  "label" : "BEST_BETS",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "AllQueryWords",
+    "triggerWords" : [ "admissions" ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Admissions open Dec 30th",
+    "displayUrl" : "funnelback.edu/apply",
+    "linkUrl" : "https://funnelback.edu/apply",
+    "descriptionHtml" : "Apply to Funnelback University now to join thousands of students and access numerous academic opportunities!",
+    "additionalProperties" : null,
+    "category" : "BEST_BETS",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2017-06-13T09:49:12.186-07:00",
+  "lastModified" : "2021-02-08T22:06:06.762275Z",
+  "id" : "53ca94ee-cd8a-4c11-9d18-fbad04f324d6",
+  "name" : "[Example] Curator for a selected tab - Virtual information session",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "FacetSelection",
+        "facetName" : "Tabs",
+        "categoryValue" : "Programs",
+        "matchType" : "EXACT"
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Virtual information sessions",
+    "displayUrl" : "",
+    "linkUrl" : "-",
+    "descriptionHtml" : "Please register for one of the available dates",
+    "additionalProperties" : {
+      "position" : "top",
+      "call_to_action_url" : "https://www.dtcc.edu/admissions-financial-aid/prospective-student-information/info-sessions-open-house/virtual-info-sessions",
+      "call_to_action_label" : "Schedule Now"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2017-07-07T17:26:06.115-07:00",
+  "lastModified" : "2021-02-08T22:15:14.440146Z",
+  "id" : "5c2b2b38-581f-4eae-8d55-4cbd1d8f4de9",
+  "name" : "[Example] Curator on the bottom - Classes moving online",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "ExactQuery",
+        "triggerQuery" : "class schedule",
+        "ignoreCase" : true
+      }, {
+        "type" : "ExactQuery",
+        "triggerQuery" : "classes",
+        "ignoreCase" : true
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Planning for a Safe Start",
+    "displayUrl" : "",
+    "linkUrl" : "www.example.com",
+    "descriptionHtml" : "Fall 2020 semester will start earlier than originally scheduled, on August 17 and end on Tuesday, Nov. 24",
+    "additionalProperties" : {
+      "position" : "bottom"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2019-09-06T05:07:18.601853+10:00",
+  "lastModified" : "2021-02-08T22:06:20.07507Z",
+  "id" : "b8526b84-fd33-4d99-bea3-759b073b2923",
+  "name" : "[Example] Curator on the left - Directory",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "Directory" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Staff Directory",
+    "displayUrl" : "www.example.com",
+    "linkUrl" : "www.example.com",
+    "descriptionHtml" : "It looks like you may be trying to find our directory. Try searching the name of the person you're looking for and selecting our \"People\" tab.",
+    "additionalProperties" : { },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2019-09-27T04:48:27.842603+10:00",
+  "lastModified" : "2019-10-03T06:39:48.614989+10:00",
+  "id" : "2ce1abc6-3992-48a6-8ee1-31e5e86998bd",
   "name" : "",
   "label" : "BEST_BETS",
   "enabled" : true,
   "trigger" : {
     "type" : "ExactQuery",
-    "triggerQuery" : "engineering",
+    "triggerQuery" : "Biology",
     "ignoreCase" : false
   },
   "actions" : [ {
     "type" : "DisplayUrlAdvert",
-    "titleHtml" : "School of Trades and Technology",
+    "titleHtml" : "UG College of Arts & Sciences: Biology Major",
+    "displayUrl" : "https://sydney.edu.au/courses/subject-areas/major/biology.html",
+    "linkUrl" : "https://sydney.edu.au/courses/subject-areas/major/biology.html",
+    "descriptionHtml" : "The major will initially cover fundamental concepts in biology, such as life, the structure and function of molecules, cells and organisms and processes including metabolism and respiration.",
+    "additionalProperties" : null,
+    "category" : "BEST_BETS",
+    "removeCollectionUrl" : true
+  } ]
+}, {
+  "created" : "2019-10-03T07:03:43.417579+10:00",
+  "lastModified" : "2021-02-08T22:16:17.938928Z",
+  "id" : "cba44c9b-9e48-4e7d-adda-064e3f8701c9",
+  "name" : "[Example] Promoting results to the top - Psychology major",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "ExactQuery",
+        "triggerQuery" : "psychology",
+        "ignoreCase" : true
+      }, {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "psychology major", "psychology undergrad" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "PromoteUrls",
+    "urlsToPromote" : [ "https://sydney.edu.au/courses/courses/uc/bachelor-of-psychology0.html", "https://sydney.edu.au/content/dam/corporate/documents/faculty-of-science/study/psychology/how-can-i-study-psychology.pdf", "https://sydney.edu.au/courses/uos-landing.html/content/courses/courses/uc/bachelor-of-psychology0.html" ]
+  } ]
+}, {
+  "created" : "2019-10-08T06:16:40.573387+11:00",
+  "lastModified" : "2019-10-08T06:16:40.590868+11:00",
+  "id" : "195b11a3-3c0f-4258-b192-e239a5796b60",
+  "name" : "",
+  "label" : "BEST_BETS",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "ExactQuery",
+    "triggerQuery" : "Monday Night in Milwaukee",
+    "ignoreCase" : false
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Kick off Monday Night at the Hilton!",
+    "displayUrl" : "highedweb.org/2019/09/heweb19-monday-night-in-milwaukee",
+    "linkUrl" : "highedweb.org/2019/09/heweb19-monday-night-in-milwaukee",
+    "descriptionHtml" : "Join us 4:45-6:30 PM at Miller Time Pub for a drink, post-conference shop-talk, dinner recommendations or a group to carpool with to your next destination.",
+    "additionalProperties" : null,
+    "category" : "BEST_BETS",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2019-10-18T04:33:25.577069+11:00",
+  "lastModified" : "2019-10-18T04:33:25.600242+11:00",
+  "id" : "dec0cf52-6c18-4e60-bab7-0692930fe489",
+  "name" : "",
+  "label" : "BEST_BETS",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "QueryRegularExpression",
+    "triggerPattern" : "Calendar"
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "2019-2020 Academic Calendar",
+    "displayUrl" : "https://www.seattleu.edu/media/redhawk-service-center/registrar/2019-20-Academic-Calendar.pdf",
+    "linkUrl" : "https://www.seattleu.edu/media/redhawk-service-center/registrar/2019-20-Academic-Calendar.pdf",
+    "descriptionHtml" : "Winter Quarter Begins on January 6th.  Last Day to Add/Drop Classes is January 10th.",
+    "additionalProperties" : null,
+    "category" : "BEST_BETS",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2019-10-18T04:37:02.729376+11:00",
+  "lastModified" : "2021-02-08T22:14:05.802604Z",
+  "id" : "90d338bf-5c18-4e03-8cd7-0c91a7ae42bc",
+  "name" : "[Example] Curator in the top and date restraint - Fall Schedule",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "schedule" ]
+      } ]
+    }, {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "DateRange",
+        "startDate" : 1610956800000,
+        "endDate" : 1617260400000
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Reminder: 2021 Schedule",
     "displayUrl" : "",
-    "linkUrl" : "",
-    "descriptionHtml" : "We offer foundation and apprenticeship training backed by the Industry Training Authority of BC, as well as career-oriented degrees, diplomas and certificates, and upgrading through continuing studies courses.",
+    "linkUrl" : "www.example.com",
+    "descriptionHtml" : "8-11 March: Spring Break - no curriculum classes<br><br>\n31 March: Spring graduation application submission deadline",
+    "additionalProperties" : {
+      "position" : "top"
+    },
+    "category" : "",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2019-10-18T05:56:08.074198+11:00",
+  "lastModified" : "2019-10-18T06:33:29.621255+11:00",
+  "id" : "7fd8499e-4082-4eb3-9783-b8af77f4d881",
+  "name" : "",
+  "label" : "BEST_BETS",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "QuerySubstring",
+    "triggerSubstring" : "Calendar"
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Homecoming Weekend",
+    "displayUrl" : "funnelbackuniversity.edu/homecoming",
+    "linkUrl" : "funnelbackuniversity.edu/homecoming",
+    "descriptionHtml" : "October 24-26, 2020 <div></div>\nWe hope you’ll join us as we celebrate Homecoming Weekend, a time for families, alumni, students, and friends of the university to enjoy the spirit of community. We look forward to seeing you on this special weekend!\n<a class=\"float-right\" href=\"http://funnelback.edu/calendar\">Buy Tickets <span class=\"fa fa-arrow-right\"></span></a>\n</div>",
+    "additionalProperties" : null,
+    "category" : "BEST_BETS",
+    "removeCollectionUrl" : false
+  } ]
+}, {
+  "created" : "2019-10-18T06:40:31.729582+11:00",
+  "lastModified" : "2021-02-08T22:07:02.608846Z",
+  "id" : "446d8b5e-9bba-49c4-9138-b37322374316",
+  "name" : "[Example] Promoting results to the top - Engineering Videos",
+  "label" : "DEFAULT",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "And",
+    "triggers" : [ {
+      "type" : "Or",
+      "triggers" : [ {
+        "type" : "AllQueryWords",
+        "triggerWords" : [ "engineering" ]
+      } ]
+    } ]
+  },
+  "actions" : [ {
+    "type" : "PromoteUrls",
+    "urlsToPromote" : [ "https://sydney.edu.au/engineering/home.html", "http://www.youtube.com/watch?v=JaeCWCP73sQ&feature=youtube_gdata_player", "https://sydney.edu.au/engineering/schools/school-of-electrical-and-information-engineering.html" ]
+  } ]
+}, {
+  "created" : "2020-03-18T03:58:57.233562+11:00",
+  "lastModified" : "2020-03-18T04:36:07.844996+11:00",
+  "id" : "ebd06db2-69c6-4034-bf8d-bbbf9250639d",
+  "name" : "",
+  "label" : "BEST_BETS",
+  "enabled" : true,
+  "trigger" : {
+    "type" : "ExactQuery",
+    "triggerQuery" : "covid19",
+    "ignoreCase" : false
+  },
+  "actions" : [ {
+    "type" : "DisplayUrlAdvert",
+    "titleHtml" : "Corona Virus updates",
+    "displayUrl" : "https://www.who.int/emergencies/diseases/novel-coronavirus-2019",
+    "linkUrl" : "https://www.who.int/emergencies/diseases/novel-coronavirus-2019",
+    "descriptionHtml" : "The world health organisations updates and advice about the coronavirus.",
     "additionalProperties" : null,
     "category" : "BEST_BETS",
     "removeCollectionUrl" : false

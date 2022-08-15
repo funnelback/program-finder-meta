@@ -1,0 +1,108 @@
+:root {
+    --red: #da1007;
+}
+
+/* Design overrides specific to the implementation of stencils - Avoid changing these if possible */
+
+/* Add some space between the icon and text for tabs */
+.stencils .tab__button .fas {
+    margin-right: 0.25rem;
+}
+
+/* ******************************** */
+/* Move this into the Design System */
+/* ******************************** */
+
+.stencils__main .funnelback-search {
+    max-width: 100rem;
+}
+
+@media (min-width: 768px) {
+    .stencils__main .autocomplete-concierge {
+        margin: 0;
+    }
+}
+
+/* NavBar */
+.stencils .navbar .facet-groups, .stencils .navbar .facet-group__type-radio-button {
+    display: flex!important;
+}
+
+/* 
+ * Sessions controls - These are created by scripts written by RnD and are outside 
+ * the plug and play framework. Therefore we need to add some custom styles here to make 
+ * it play nicely.
+ */
+.stencils .result-sessions__controls, 
+.stencils .result-sessions__controls {
+    margin-top: 0;
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.stencils .navbar__item:hover,
+.stencils .navbar__item:focus {
+    background-color: hsla(0,0%,94%,.8);
+    color: #262626;
+}
+
+#search-history {
+    display: none;
+    width: 100%;
+    padding: 1rem;
+}
+
+
+#search-cart {
+    display: block!important;
+    width: 100%;
+    padding: 1rem;
+}
+
+.flb-cart-item-trigger {
+    --pnp-typeface-margin: 0.75rem;
+    background-color: inherit;
+    border: none;
+    color: #da1007;
+    font: inherit;
+    font-size: 100%;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.625rem;
+    margin: 0.625rem 0 0.75rem;
+    padding: 0.25rem;
+    vertical-align: baseline;    
+}
+
+.enable-cart-on-result.listing-item__action:hover,
+.enable-cart-on-result.listing-item__action:focus {
+    background-color: transparent;
+    cursor: pointer;    
+}
+
+.flb-cart-item-trigger, #flb-cart-box-clear {
+    cursor: pointer;
+    transition: color,background-color .3s ease-in-out;
+    border-radius: 1rem;    
+}
+
+.flb-cart-box-item {
+    list-style: none;
+}
+
+#flb-cart-box-list {
+    padding-left: 0;
+}
+
+.flb-cart-item-trigger:hover,
+.flb-cart-item-trigger:focus {
+    background-color: #da1007;
+    color: white; 
+}
+
+.search-cart {
+    width: 100%;
+    padding: 0.25rem;
+}

@@ -173,22 +173,22 @@
             </h6>
 
             <div class="details">
-                {{#if extra.disp.listMetadata.eventLocation[0]}}
+                {{#if extra.disp.listMetadata.eventLocation.[0]}}
                     <div class="fb-auto-complete__body__metadata">
                         <span class="fas fa-map-marker-alt" aria-hidden="true" aria-label="Event location" title="Event location"></span> 
-                        {{extra.disp.listMetadata.eventLocation[0]}}
+                        {{extra.disp.listMetadata.eventLocation.[0]}}
                     </div>
                 {{/if}}
-                {{#if extra.disp.listMetadata.eventContactPhone[0]}}
+                {{#if extra.disp.listMetadata.eventContactPhone.[0]}}
                     <div class="fb-auto-complete__body__metadata">
                         <span class="fas fa-map-marker-alt" aria-hidden="true" aria-label="Event phone number" title="Event phone number"></span> 
-                        {{extra.disp.listMetadata.eventContactPhone[0]}}
+                        {{extra.disp.listMetadata.eventContactPhone.[0]}}
                     </div>
                 {{/if}}
-                {{#if extra.disp.listMetadata.eventContactEmail[0]}}
+                {{#if extra.disp.listMetadata.eventContactEmail.[0]}}
                     <div class="fb-auto-complete__body__metadata">
                         <span class="far fa-envelope" aria-hidden="true" aria-label="Event email" title="email"></span> 
-                        {{extra.disp.listMetadata.eventContactEmail[0]}}
+                        {{extra.disp.listMetadata.eventContactEmail.[0]}}
                     </div>
                 {{/if}}
             </div>      

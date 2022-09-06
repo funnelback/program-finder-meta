@@ -192,22 +192,11 @@
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>		
 		<@sessions.Templates />					
 		
-		
 		<script nomodule src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 		
 		<#-- We have replaced the products session code with an extended version for Stencils -->
-		<#if question.profile?contains("_preview")>
-			<#-- 
-				Use the non-minified version for the preview so that 
-				it is easier to step through and investigate bugs 
-			-->
-			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.2.js"></script>
-			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
-		<#else>
-			<script type="module" defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.module.min.js"></script>
-      		<script nomodule defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.1.legacy.min.js"></script>
-			<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.min.js"></script>
-		</#if>
+		<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.2.js"></script>
+		<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
 		<@sessions.Configuration />
 	</#if>
 </body>

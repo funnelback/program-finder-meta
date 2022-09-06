@@ -180,7 +180,7 @@
 
 <#-- Output the cart template -->
 <#macro ShortlistTemplate>
-    <!-- results.programs::Shortlist -->    
+    <!-- results.programs::ShortlistTemplate -->    
     <#-- 
         Note: Cart templates as assigned to document types in profile.cfg/collection.cfg using 
         the following configuration:

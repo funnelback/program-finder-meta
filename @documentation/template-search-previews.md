@@ -17,7 +17,7 @@ Search preview have two key elements; The documents to be displayed in the previ
 
 Each search preview contains a list of matching search results. These are powered by extra searches and can be configured to run on different collections or have different queries or scoping applied.
 
-By default, the Program Finder comes with shipped with two extra searches; [programs](../extra_search.programs.cfg) and [courses](../extra_search.courses.cfg).
+By default, the Program Finder comes with shipped with two extra searches; programs and courses.
 
 It is enabled via the collection configuration screen.
 
@@ -104,7 +104,7 @@ stencils.search_preview.tutorials.category_label=Tutorials
 If a client only has one type of document, it would make better sense to remove the search preview functionality from the default implementation and only show
 the organic results. The can be done using the following steps:
 
-* Remove extra searches
+* Remove extra searches configurations from the search package configurations.
 * Remove the references in the template
 * Update the organic search results so that it is always displayed
 * Remove references in the collection and profile configurations
@@ -114,65 +114,45 @@ The following are instructions on how to remove the program and courses search p
 
 ### Remove extra searches
 
-Delete both the [programs](../extra_search.programs.cfg) and [courses](../extra_search.courses.cfg) extra searches and remove them from the collection configurations:
+* Remove all configurations starting with `ui.modern.extra_searches.*` from the search package configurations.
 
-```ini
-ui.modern.extra_searches=courses,programs
-```
+### Remove the references to the search previews from the template
 
-### Remove the references from the template
-
-You can remove the references to the search previews by removing the following from `<#macro Results>` macro found in [project.ftl](../extra_search.programs.cfg)
+You can remove the references to the search previews by removing the following from [simple.ftl](../simple.ftl)
 
 ```html
+    <#-- 
+        Hide the organic/normal results on the all tab as we only 
+        want to display the extra searches.  
+    -->
+    <@facets.IsNotSelected facetName="Tabs" categoryLabel="All">
+        <@no_results.NoResults />
+        <@result_list.ResultList />
+        <@pagination.Pagination />
+    </@facets.IsNotSelected>
+
     <#-- Programs extra search -->
-    <@extra_search.Preview  extraSearchName="programs" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary") + "s" />
-
+    <@extra_search.Preview  extraSearchName="programs" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary") + "s">
+        <@no_results.NoResults />
+        <@result_list.ResultList />
+    </@extra_search.Preview>
+    
     <#-- Courses extra search -->
-    <@extra_search.Preview  extraSearchName="courses" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_secondary") + "s" />
+    <@extra_search.Preview  extraSearchName="courses" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_secondary") + "s">
+        <@no_results.NoResults />
+        <@result_list.ResultList />
+    </@extra_search.Preview>
 ```
-
 ### Update the organic search results so that it is always displayed
 
 The default implementation hides the organic results on the "all" tab so that duplicates do not appear due to the presence of the search previews. To enable
 the organic results on all tabs, we need to change the following in `<#macro Results>` macro found in [project.ftl](../extra_search.programs.cfg):
 
 ```html
-    <#--
-        Hide the organic/normal results on the all tab as we only
-        want to display the extra searches.  
-    -->
-    <@facets.IsNotSelected facetName="Tabs" categoryLabel="All">
-        <div class="content-wrapper">
-            <@base.NoResults />
-            <@base.ResultList />
-            <@base.QuickViewTemplates />
-            <@base.Paging />
-        </div>
-    </@facets.IsNotSelected>
+    <@no_results.NoResults />
+    <@result_list.ResultList />
+    <@pagination.Pagination />
 ```
-
-to
-
-```html
-    <div class="content-wrapper">
-        <@base.NoResults />
-        <@base.ResultList />
-        <@base.QuickViewTemplates />
-        <@base.Paging />
-    </div>
-```
-
-
-### Remove references in the collection and profile configurations
-
-The next step is to remove the search preview references in the collection and profile configurations. To do this, remove any keys which start with the following:
-
-```
-stencils.search_preview.programs
-stencils.search_preview.courses
-```
-
 ### Remove or define new Tab facet
 
 The tab facet allows the user to switch between programs and courses (or both). As there is only one type, it is worthwhile to either

@@ -23,6 +23,10 @@ It is enabled via the collection configuration screen.
 
 ```ini
 ui.modern.extra_searches=courses,programs
+ui.modern.extra_searches.courses.query_processor_options=-num_ranks=8 -clive=pnp~ds-program-finder-courses-web -log=off -spelling=off -show_qsyntax_tree=off -explain=false 
+ui.modern.extra_searches.courses.source=pnp~sp-program-finder-meta
+ui.modern.extra_searches.programs.query_processor_options=-num_ranks=8 -clive=pnp~ds-program-finder-programs-web -log=off -spelling=off -show_qsyntax_tree=off -explain=false 
+ui.modern.extra_searches.programs.source=pnp~sp-program-finder-meta
 ```
 
 ### Navigation link
@@ -52,11 +56,11 @@ This section will describe how to add a new search preview to a page. It involve
 
 ### Configuring a new extra search
 
-Setup a new extra search which is scoped to the desired documents. Depending on the requirements, this may involve creating new collections or writing groovy scripts. For more details about extra searches, please visit the documentation website.
+Setup a new extra search which is scoped to the desired documents. Depending on the requirements, this may involve creating new collections. For more details about extra searches, please visit the documentation website.
 
 ### Updating the templates
 
-After the extra search has been create, it needs to be exposed in the template. This can be done by modifying the `<#macro Results>` macro in [project.ftl](../extra_search.programs.cfg)
+After the extra search has been create, it needs to be exposed in the template. This can be done by modifying the [simple.ftl](../simple.ftl)
 
 e.g. Given a extra search called `tutorials` exists which scopes documents down to just `tutorials`, we can output the results by modifying the following:
 

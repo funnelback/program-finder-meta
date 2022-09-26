@@ -59,6 +59,9 @@
 <#import "results.twitter.ftl" as twitter />
 <#import "results.instagram.ftl" as instagram />
 
+<#-- Used to send absolute URLs for resources -->
+<#assign httpHost=httpRequest.getHeader('host')!"">
+
 <!DOCTYPE html>
 <html lang="en" class="stencils">
 <head>
@@ -81,8 +84,8 @@
 		<#include "utilities.icons.ftl" />
 	</div>
 
-	<a href="#search-results" class="sr-only" title="Skip to search results">
-		Skip to search results asdsa
+	<a href="#funnelbach-search-body" class="sr-only" title="Skip to search results">
+		Skip to search results
 	</a>
 	
 	<#--
@@ -162,12 +165,12 @@
 		Avoid changing these if possible.
 	-->
 	<#-- Plug and play framework -->
-	<script type="text/javascript" src="/s/resources/${question.collection.id}/${question.profile}/themes/stencils/js/main.js"></script>
+	<script type="text/javascript" src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/themes/stencils/js/main.js"></script>
 
 	
 	<#-- Stencils specific code -->
-	<script src="/s/resources/${question.collection.id}/${question.profile}/js/stencils.js"></script> 
-	<script src="/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script> 
+	<script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/stencils.js"></script> 
+	<script src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/handlebars-helpers.js"></script> 
 				
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {			
@@ -195,8 +198,8 @@
 		<script nomodule src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 		
 		<#-- We have replaced the products session code with an extended version for Stencils -->
-		<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.2.js"></script>
-		<script defer src="/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
+		<script defer src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.2.js"></script>
+		<script defer src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
 		<@sessions.Configuration />
 	</#if>
 </body>

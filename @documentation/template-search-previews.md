@@ -56,11 +56,11 @@ This section will describe how to add a new search preview to a page. It involve
 
 ### Configuring a new extra search
 
-Setup a new extra search which is scoped to the desired documents. Depending on the requirements, this may involve creating new collections. For more details about extra searches, please visit the documentation website.
+Setup a new extra search which is scoped to the desired documents. Depending on the requirements, this may involve creating new collections. For more details about extra searches, please visit the [documentation](https://docs.squiz.net/funnelback/docs/latest/build/results-pages/extra-searches/index.html) website.
 
 ### Updating the templates
 
-After the extra search has been create, it needs to be exposed in the template. This can be done by modifying the [simple.ftl](../simple.ftl)
+After the extra search has been create, it needs to be exposed in the template. This can be done by modifying the [simple.ftl](../_default_preview/simple.ftl)
 
 e.g. Given a extra search called `tutorials` exists which scopes documents down to just `tutorials`, we can output the results by modifying the following:
 
@@ -108,8 +108,8 @@ stencils.search_preview.tutorials.category_label=Tutorials
 If a client only has one type of document, it would make better sense to remove the search preview functionality from the default implementation and only show
 the organic results. The can be done using the following steps:
 
-* Remove extra searches configurations from the search package configurations.
-* Remove the references in the template
+* Remove extra search configurations from the search package configurations.
+* Remove extra search references from the in the template (simple.ftl)
 * Update the organic search results so that it is always displayed
 * Remove references in the collection and profile configurations
 * Remove or define new Tab facet
@@ -120,21 +120,11 @@ The following are instructions on how to remove the program and courses search p
 
 * Remove all configurations starting with `ui.modern.extra_searches.*` from the search package configurations.
 
-### Remove the references to the search previews from the template
+### Remove the references to the search previews from the template (simple.ftl)
 
 You can remove the references to the search previews by removing the following from [simple.ftl](../simple.ftl)
 
 ```html
-    <#-- 
-        Hide the organic/normal results on the all tab as we only 
-        want to display the extra searches.  
-    -->
-    <@facets.IsNotSelected facetName="Tabs" categoryLabel="All">
-        <@no_results.NoResults />
-        <@result_list.ResultList />
-        <@pagination.Pagination />
-    </@facets.IsNotSelected>
-
     <#-- Programs extra search -->
     <@extra_search.Preview  extraSearchName="programs" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary") + "s">
         <@no_results.NoResults />
@@ -150,8 +140,22 @@ You can remove the references to the search previews by removing the following f
 ### Update the organic search results so that it is always displayed
 
 The default implementation hides the organic results on the "all" tab so that duplicates do not appear due to the presence of the search previews. To enable
-the organic results on all tabs, we need to change the following in `<#macro Results>` macro found in [project.ftl](../extra_search.programs.cfg):
+the organic results on all tabs, we need to change the following in [simple.ftl](../_default_preview/simple.ftl):
 
+Change the following:
+
+```html
+    <#-- 
+        Hide the organic/normal results on the all tab as we only 
+        want to display the extra searches.  
+    -->
+    <@facets.IsNotSelected facetName="Tabs" categoryLabel="All">
+        <@no_results.NoResults />
+        <@result_list.ResultList />
+        <@pagination.Pagination />
+    </@facets.IsNotSelected>
+```
+to
 ```html
     <@no_results.NoResults />
     <@result_list.ResultList />
@@ -159,14 +163,9 @@ the organic results on all tabs, we need to change the following in `<#macro Res
 ```
 ### Remove or define new Tab facet
 
-The tab facet allows the user to switch between programs and courses (or both). As there is only one type, it is worthwhile to either
+The tab facet allows the user to switch between programs and courses (or both). As there is only one type, it is worthwhile to:
 
-* Remove the Tabs facet completely - This can be via the faceted navigation and removing the following from profile configurations.
-
-```
-    #The facet to display as radio buttons. The design currently only supports 1.
-    stencils.facets.radio=Tabs
-```
+* Remove the Tabs facet completely - This can be via the faceted navigation screens.
 
 * Alternative, you can define new values for the Tab facet.
 

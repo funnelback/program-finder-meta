@@ -15,11 +15,12 @@ Search preview have two key elements; The documents to be displayed in the previ
 
 ### Documents to be displayed
 
-Each search preview contains a list of matching search results. These are powered by extra searches and can be configured to run on different collections or have different queries or scoping applied.
+Each search preview contains a list of matching search results. These are powered by extra searches and can be configured 
+return documents from different data sources or have different queries or scoping applied.
 
 By default, the Program Finder comes with shipped with two extra searches; programs and courses.
 
-It is enabled via the collection configuration screen.
+It is enabled via the search package configuration screen.
 
 ```ini
 ui.modern.extra_searches=courses,programs
@@ -56,7 +57,7 @@ This section will describe how to add a new search preview to a page. It involve
 
 ### Configuring a new extra search
 
-Setup a new extra search which is scoped to the desired documents. Depending on the requirements, this may involve creating new collections. For more details about extra searches, please visit the [documentation](https://docs.squiz.net/funnelback/docs/latest/build/results-pages/extra-searches/index.html) website.
+Setup a new extra search which is scoped to the desired documents. Depending on the requirements, this may involve creating new data sources. For more details about extra searches, please visit the [documentation](https://docs.squiz.net/funnelback/docs/latest/build/results-pages/extra-searches/index.html) website.
 
 ### Updating the templates
 
@@ -89,7 +90,7 @@ Note: The documentType parameter represents the display name and is used in the 
 
 ### Configuring the navigation link
 
-The last step is to configure the navigation link to send the user to the required facet. This is done using the following profile or collection configuration parameters:
+The last step is to configure the navigation link to send the user to the required facet. This is done using the following result page or search package configuration parameters:
 
 ```ini
 stencils.search_preview.<extra_search_name>.facet_name=<name_of_facet>
@@ -109,10 +110,10 @@ If a client only has one type of document, it would make better sense to remove 
 the organic results. The can be done using the following steps:
 
 * Remove extra search configurations from the search package configurations.
-* Remove extra search references from the in the template (simple.ftl)
-* Update the organic search results so that it is always displayed
-* Remove references in the collection and profile configurations
-* Remove or define new Tab facet
+* Remove extra search references from the in the template (simple.ftl).
+* Update the organic search results so that it is always displayed.
+* Remove references in the results page and search package configurations.
+* Remove or define new Tab facet.
 
 The following are instructions on how to remove the program and courses search preview from the default implementation.
 

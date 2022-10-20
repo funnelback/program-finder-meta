@@ -52,7 +52,7 @@
             <#if question.profile?ends_with("_preview") && question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.profile")!?has_content>
                 <#local profile = question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.profile")! + "_preview">
             <#else>
-                <#local profile = question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.profile")!question.collection.id>        
+                <#local profile = question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.profile")!question.profile>   
             </#if>
             <#-- Used to style each channel. -->
             <#local customClass = question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.customClass")!"">

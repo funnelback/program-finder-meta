@@ -15,14 +15,19 @@ Search preview have two key elements; The documents to be displayed in the previ
 
 ### Documents to be displayed
 
-Each search preview contains a list of matching search results. These are powered by extra searches and can be configured to run on different collections or have different queries or scoping applied.
+Each search preview contains a list of matching search results. These are powered by extra searches and can be configured 
+return documents from different data sources or have different queries or scoping applied.
 
-By default, the Program Finder comes with shipped with two extra searches; [programs](../extra_search.programs.cfg) and [courses](../extra_search.courses.cfg).
+By default, the Program Finder comes with shipped with two extra searches; programs and courses.
 
-It is enabled via the collection configuration screen.
+It is enabled via the search package configuration screen.
 
 ```ini
 ui.modern.extra_searches=courses,programs
+ui.modern.extra_searches.courses.query_processor_options=-num_ranks=8 -clive=pnp~ds-program-finder-courses-web -log=off -spelling=off -show_qsyntax_tree=off -explain=false 
+ui.modern.extra_searches.courses.source=pnp~sp-program-finder-meta
+ui.modern.extra_searches.programs.query_processor_options=-num_ranks=8 -clive=pnp~ds-program-finder-programs-web -log=off -spelling=off -show_qsyntax_tree=off -explain=false 
+ui.modern.extra_searches.programs.source=pnp~sp-program-finder-meta
 ```
 
 ### Navigation link
@@ -52,11 +57,11 @@ This section will describe how to add a new search preview to a page. It involve
 
 ### Configuring a new extra search
 
-Setup a new extra search which is scoped to the desired documents. Depending on the requirements, this may involve creating new collections or writing groovy scripts. For more details about extra searches, please visit the documentation website.
+Setup a new extra search which is scoped to the desired documents. Depending on the requirements, this may involve creating new data sources. For more details about extra searches, please visit the [documentation](https://docs.squiz.net/funnelback/docs/latest/build/results-pages/extra-searches/index.html) website.
 
 ### Updating the templates
 
-After the extra search has been create, it needs to be exposed in the template. This can be done by modifying the `<#macro Results>` macro in [project.ftl](../extra_search.programs.cfg)
+After the extra search has been create, it needs to be exposed in the template. This can be done by modifying the [simple.ftl](../_default_preview/simple.ftl)
 
 e.g. Given a extra search called `tutorials` exists which scopes documents down to just `tutorials`, we can output the results by modifying the following:
 
@@ -85,7 +90,7 @@ Note: The documentType parameter represents the display name and is used in the 
 
 ### Configuring the navigation link
 
-The last step is to configure the navigation link to send the user to the required facet. This is done using the following profile or collection configuration parameters:
+The last step is to configure the navigation link to send the user to the required facet. This is done using the following result page or search package configuration parameters:
 
 ```ini
 stencils.search_preview.<extra_search_name>.facet_name=<name_of_facet>
@@ -104,85 +109,64 @@ stencils.search_preview.tutorials.category_label=Tutorials
 If a client only has one type of document, it would make better sense to remove the search preview functionality from the default implementation and only show
 the organic results. The can be done using the following steps:
 
-* Remove extra searches
-* Remove the references in the template
-* Update the organic search results so that it is always displayed
-* Remove references in the collection and profile configurations
-* Remove or define new Tab facet
+* Remove extra search configurations from the search package configurations.
+* Remove extra search references from the in the template (simple.ftl).
+* Update the organic search results so that it is always displayed.
+* Remove references in the results page and search package configurations.
+* Remove or define new Tab facet.
 
 The following are instructions on how to remove the program and courses search preview from the default implementation.
 
 ### Remove extra searches
 
-Delete both the [programs](../extra_search.programs.cfg) and [courses](../extra_search.courses.cfg) extra searches and remove them from the collection configurations:
+* Remove all configurations starting with `ui.modern.extra_searches.*` from the search package configurations.
 
-```ini
-ui.modern.extra_searches=courses,programs
-```
+### Remove the references to the search previews from the template (simple.ftl)
 
-### Remove the references from the template
-
-You can remove the references to the search previews by removing the following from `<#macro Results>` macro found in [project.ftl](../extra_search.programs.cfg)
+You can remove the references to the search previews by removing the following from [simple.ftl](../simple.ftl)
 
 ```html
     <#-- Programs extra search -->
-    <@extra_search.Preview  extraSearchName="programs" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary") + "s" />
-
+    <@extra_search.Preview  extraSearchName="programs" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_primary") + "s">
+        <@no_results.NoResults />
+        <@result_list.ResultList />
+    </@extra_search.Preview>
+    
     <#-- Courses extra search -->
-    <@extra_search.Preview  extraSearchName="courses" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_secondary") + "s" />
+    <@extra_search.Preview  extraSearchName="courses" documentType=question.getCurrentProfileConfig().get("stencils.I18n.finder_type_secondary") + "s">
+        <@no_results.NoResults />
+        <@result_list.ResultList />
+    </@extra_search.Preview>
 ```
-
 ### Update the organic search results so that it is always displayed
 
 The default implementation hides the organic results on the "all" tab so that duplicates do not appear due to the presence of the search previews. To enable
-the organic results on all tabs, we need to change the following in `<#macro Results>` macro found in [project.ftl](../extra_search.programs.cfg):
+the organic results on all tabs, we need to change the following in [simple.ftl](../_default_preview/simple.ftl):
+
+Change the following:
 
 ```html
-    <#--
-        Hide the organic/normal results on the all tab as we only
+    <#-- 
+        Hide the organic/normal results on the all tab as we only 
         want to display the extra searches.  
     -->
     <@facets.IsNotSelected facetName="Tabs" categoryLabel="All">
-        <div class="content-wrapper">
-            <@base.NoResults />
-            <@base.ResultList />
-            <@base.QuickViewTemplates />
-            <@base.Paging />
-        </div>
+        <@no_results.NoResults />
+        <@result_list.ResultList />
+        <@pagination.Pagination />
     </@facets.IsNotSelected>
 ```
-
 to
-
 ```html
-    <div class="content-wrapper">
-        <@base.NoResults />
-        <@base.ResultList />
-        <@base.QuickViewTemplates />
-        <@base.Paging />
-    </div>
+    <@no_results.NoResults />
+    <@result_list.ResultList />
+    <@pagination.Pagination />
 ```
-
-
-### Remove references in the collection and profile configurations
-
-The next step is to remove the search preview references in the collection and profile configurations. To do this, remove any keys which start with the following:
-
-```
-stencils.search_preview.programs
-stencils.search_preview.courses
-```
-
 ### Remove or define new Tab facet
 
-The tab facet allows the user to switch between programs and courses (or both). As there is only one type, it is worthwhile to either
+The tab facet allows the user to switch between programs and courses (or both). As there is only one type, it is worthwhile to:
 
-* Remove the Tabs facet completely - This can be via the faceted navigation and removing the following from profile configurations.
-
-```
-    #The facet to display as radio buttons. The design currently only supports 1.
-    stencils.facets.radio=Tabs
-```
+* Remove the Tabs facet completely - This can be via the faceted navigation screens.
 
 * Alternative, you can define new values for the Tab facet.
 

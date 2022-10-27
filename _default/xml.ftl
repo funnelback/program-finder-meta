@@ -51,7 +51,7 @@
     "fileSize"
     "fileType"
     "tier"
-    "metaData"
+    "listMetadata"
     "customData"
     "docNum"
     "exploreLink"
@@ -62,8 +62,13 @@
     "explain"
     "indexUrl"
     "documentVisibleToUser"
-    <#-- Metadata values -->
-    "listMetadata"
+    <#-- 
+      Metadata values - Add the list of metadata which should be exposed
+      in the json.
+    -->
+    "author"
+    "keyword"
+    "yourMetadata"
     "image"
     <#-- Spelling suggestions -->
     "spell"
@@ -107,7 +112,7 @@
     "additionalProperties"
     "category"
     "messageHtml"
-    ]>
+]>
 
 <#-- Process a node (object in the datamodel) and prints the XML equivalent -->
 <#macro ProcessNode fields node>

@@ -122,7 +122,7 @@
             <div class="listing-item__footer">
                 <#if (result.listMetadata["programLengthYears"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Duration</title>
                             <use href="#time">
                             </use>
@@ -133,7 +133,7 @@
 
                 <#if (result.listMetadata["programCampus"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Campus</title>
                             <use href="#map"></use>
                         </svg>
@@ -143,39 +143,6 @@
             </div>                                        
         </div>
     </article>    
-</#macro>
-
-<#-- 
-	Handlebars template used to display the current object
-	in concierge.
---> 
-<#macro AutoCompleteTemplate>
-    <!-- results.programs::AutoCompleteTemplate -->
-	<script id="auto-completion-programs" type="text/x-handlebars-template">
-		<div class="fb-auto-complete--non-organic">
-            <h6>
-                {{{extra.disp.title}}}
-
-                {{#if extra.disp.listMetadata.programCredentialType.[0]}}
-                    ({{{extra.disp.listMetadata.programCredentialType.[0]}}})
-                {{/if}}                
-            </h6>
-
-            <div class="details">
-                {{#if extra.disp.listMetadata.programFaculty.[0]}}
-                    <div class="fb-auto-complete__body__metadata text-muted">
-                        {{{extra.disp.listMetadata.programFaculty.[0]}}}
-                    </div>
-                {{/if}}
-
-                {{#if extra.disp.listMetadata.stencilsDeliveryMethod.[0]}}
-                    <div class="fb-auto-complete__body__metadata text-muted">
-                        {{{extra.disp.listMetadata.stencilsDeliveryMethod.[0]}}}
-                    </div>
-                {{/if}}                
-            </div>      
-		</div>    
-	</script>
 </#macro>
 
 <#-- Output the cart template -->
@@ -277,7 +244,7 @@
                 <div class="listing-item__footer">
                     {{#if metaData.programLengthYears}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Duration</title>
                                 <use href="#time">
                                 </use>
@@ -288,7 +255,7 @@
 
                     {{#if metaData.programCampus}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Campus</title>
                                 <use href="#map"></use>
                             </svg>
@@ -332,7 +299,7 @@
                             class="modal__close"
                             title="Close modal"
                         >
-                            <svg class="svg-icon">
+                            <svg class="svg-icon listing-item__icon">
                                 <use href="#close" />
                             </svg>
                         </button>

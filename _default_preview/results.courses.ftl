@@ -267,7 +267,7 @@
                             class="modal__close"
                             title="Close modal"
                         >
-                            <svg class="svg-icon">
+                            <svg class="svg-icon listing-item__icon">
                                 <use href="#close" />
                             </svg>
                         </button>

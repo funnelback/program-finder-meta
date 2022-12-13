@@ -16,8 +16,16 @@
             <@sessions.ShortlistControl />  
         </button>
 
-        <@sessions.SearchHistoryControls />
-        
+		<#--  Search History  -->
+		<button 
+			class="session-history-toggle navbar__item" 
+			aria-controls="funnelback-search-history-drawer"
+			data-component="activate-drawer"
+		>
+			<span class="fas fa-history"></span>
+			History
+		</button>
+
         <@tabs.TabsAsRadio facets="Tabs" />
         
         <i class="navbar__seperator fa-solid fa-grip-lines-vertical"  role="presentation"></i>
@@ -60,7 +68,7 @@
 						class="drawer__close"
 					>
 						<svg
-							class="svg-icon svg-icon--xlarge"
+							class="svg-icon drawer__icon"
 							role="img"
 						>
 							<title>Close</title>

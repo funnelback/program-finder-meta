@@ -1,9 +1,7 @@
 <#ftl encoding="utf-8" output_format="HTML" />
 
-<#import "sessions.click_history.ftl" as click_history />
-<#import "sessions.query_history.ftl" as query_history />
+<#import "sessions.search_history.ftl" as search_history />
 <#import "sessions.shortlist.ftl" as shortlist />
-
 
 <#--
 	Display a "Last visited X time ago" link for a result
@@ -21,34 +19,15 @@
 	</#if>
 </#macro>
 
-<#-- Output the markup where the search history and shortlist should be rendered -->
 <#macro SearchHistoryAndShortlist>
-    <@SearchHistory />
-    <@Shortlist />
+	<@search_history.Drawer />
+    <@shortlist.Drawer />
 </#macro>
 
-<#macro SearchHistory>
-    <section class="content-wrapper search-history" id="search-history">
-        <button href="#" class="search-history__hide session-history-hide" type="button">
-            <svg class="svg-icon svg-icon--small">
-                <use href="#arrow"></use>
-            </svg>
-            Back to results
-        </button>
-        <h2 class="search-history__title">Search History</h2>
-        <div class="search-history__items">
-            <@click_history.ClickHistory />
-            <@query_history.QueryHistory />
-        </div>
-    </section>
-</#macro>
-
-<#macro Shortlist>
-    <@shortlist.Shortlist />
-</#macro>
-
-
-
+<#--  	
+	This output the configurations required to setup the shortlist
+	which comes shipped with Funnelback.
+-->
 <#macro Configuration>
 	<!-- history_cart.Configurations -->
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
@@ -82,7 +61,7 @@
 					item: {
 						icon: 'fas fa-star',          
 						templates: {
-							<@shortlist.ShortlistTemplatesConfig />
+							<@shortlist.TemplatesConfig />
 						},
 						class: ''
 					},
@@ -111,78 +90,44 @@
 						labelDelete: "REMOVE FROM SHORTLIST"
 					}        
 				});
-
-				new Funnelback.SessionHistory({
-					searchApiBase: '${question.getCurrentProfileConfig().get("stencils.sessions.history.search.api_base")!"https://${host}/s/search-history.json"}',
-					clickApiBase: '${question.getCurrentProfileConfig().get("stencils.sessions.history.click.api_base")!"https://${host}/s/click-history.json"}',
-					collection: '${question.collection.id}',
-                    
-                    // Selectors to DOM elements displaying content; each CSS selector should return not more than one element
-                    historySelector: '#search-history', // CSS selector to element where content of history should be displayed
-                    clickEmptySelector: '.session-history-click-empty', // CSS selector to element displaying message about no click history data
-                    clickResultsSelector: '.session-history-click-results', // CSS selector to element displaying click history data
-                    searchEmptySelector: '.session-history-search-empty', // CSS selector to element displaying message about no search history data
-                    searchResultsSelector: '.session-history-search-results', // CSS selector to element displaying search history data
-					pageSelector: ['#funnelbach-search-body', '#funnelbach-search-facets', '#search-cart'], // list of CSS selectors to parts of page to hide it when history is displayed
-
-                    // Selectors to DOM elements triggering events; each CSS selector can return zero or more elements    
-                    clearClickSelector: '.session-history-clear-click', // CSS selector to element on clicking which click history data will be cleared
-                    clearSearchSelector: '.session-history-clear-search', // CSS selector to element on clicking which search history data will be cleared
-                    hideSelector: '.session-history-hide', // CSS selector to element on clicking which history box will be hidden
-                    showSelector: '.session-history-show', // CSS selector to element on clicking which history box will be shown
-                    currentSearchHistorySelectors: ['.session-history-breadcrumb'], // list of CSS selectors to elements which should be hidden when the search history data is cleared.
-                    currentClickHistorySelectors: ['.session-history-link'], // list of CSS selectors to elements which should be hidden when the click history data is cleared.
-                    
-                    toggleSelector: '.session-history-toggle', // CSS selector to element on clicking which history box will be toggled
-
-				});
 			});
 		</script>
 	</#if>
 </#macro>
 
 <#-- 
-	Displays the controls used to toggle the cart and click and 
-	query history functionality.
+	Displays the controls used to toggle the shortlist and search history 
+	functionality.
 -->
 <#macro Controls>
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>		
 		<!-- sessions::Controls -->
 		<div class="result-sessions__controls">
-				<@ShortlistControl />			
-				<a class="session-history-toggle" tabindex="0">
+			<#--  Shortlist  -->
+			<span class="flb-cart-count"></span>
+			<#--  Search History  -->
+			<button 
+				class="session-history-toggle" 
+				aria-controls="funnelback-search-history-drawer"
+				data-component="activate-drawer"
+				tabindex="0"
+			>
 				<span class="fas fa-history"></span>
 				History
-			</a>
+			</button>
 		</div>
-	</#if>    
-</#macro>
-
-<#-- 
-	Displays the controls used to toggle the click and 
-	query history functionality.
--->
-<#macro SearchHistoryControls>
-	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>		
-		<!-- sessions::SearchHistoryControls -->
-		<button class="session-history-toggle result-sessions__controls navbar__item">
-			<span class="fas fa-history navbar__icon"></span>
-			<span class="navbar__label">
-				History
-			</span>
-		</button>
 	</#if>    
 </#macro>
 
 <#-- Outputs the placeholder used to determine where the shortlist button should rendern -->
 <#macro ShortlistControl>
 	<!-- sessions::ShortlistControl -->
-	<@shortlist.ShortlistControl />
+	<@shortlist.Control />
 </#macro>
 
 <#macro Templates>
     <#-- Specifies how each cart item should be presented -->
-    <@shortlist.ShortlistTemplate />
+    <@shortlist.Template />
 
     <#-- 
         Automatically include the cart template for all document types defined
@@ -190,9 +135,9 @@
         do calls like <@courses.CartTemplate> to include the Handlebars templates 
         as this macro will automatically be include it for you.   
     -->
-    <@shortlist.ShortlistTemplatesForResults />    
+    <@shortlist.TemplatesForResults />    
 </#macro>
 
 <#macro ShortlistDrawer>
-	<@shortlist.ShortlistDrawer />
+	<@shortlist.Drawer />
 </#macro>

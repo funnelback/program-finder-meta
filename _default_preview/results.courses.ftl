@@ -64,11 +64,11 @@
                     <@QuickView result=result />
 
                     <#-- Pretty version of the url of the document -->
-                    <cite class="listing-item__subtitle listing-item__subtitle--highlight">
+                    <#--  <cite class="listing-item__subtitle listing-item__subtitle--highlight">
                         <@s.Truncate length=90>
                             ${(result.displayUrl)!}
                         </@s.Truncate>                
-                    </cite>
+                    </cite>  -->
                 </div>
             </#if>
             
@@ -164,11 +164,11 @@
                         </a>
 
                         <#-- Pretty version of the url of the document -->
-                        {{#if indexUrl}}  
+                        <#--  {{#if indexUrl}}  
                             <cite class="listing-item__subtitle listing-item__subtitle--highlight">
                                 {{indexUrl}}
                             </cite>
-                        {{/if}} 
+                        {{/if}}   -->
                     </div>
                 {{/if}} 
                 

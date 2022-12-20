@@ -104,7 +104,14 @@
 		<!-- sessions::Controls -->
 		<div class="result-sessions__controls">
 			<#--  Shortlist  -->
-			<span class="flb-cart-count"></span>
+			<button
+				type="button"
+				aria-controls="funnelback-search-shortlist-drawer"
+				data-component="activate-drawer"
+			>
+				<@sessions.ShortlistControl />  
+			</button>
+
 			<#--  Search History  -->
 			<button 
 				class="session-history-toggle" 

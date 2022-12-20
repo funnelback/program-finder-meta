@@ -10,7 +10,7 @@
 <#macro SearchForm preserveTab=true class="">
     <!-- hero_banner:SearchForm -->
     <div
-        class="no-wysiwyg hero-banner hero-banner--settings hero-banner--bg-compact hero-banner--undefined  hero-banner-search"
+          class="no-wysiwyg hero-banner hero-banner--settings hero-banner--overlay-50 hero-banner--bg-compact hero-banner--undefined hero-banner--pull-centered hero-banner-search"
     >
         <div class="hero-banner-wrapper">
             <div class="hero-banner__contents-container">
@@ -101,8 +101,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <#--  <@sessions.Controls />                  -->
                 </div>
             </div>
         </div>

@@ -213,7 +213,7 @@
                 <div class="listing-item__footer">
                     {{#if metaData.programLengthYears}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Duration</title>
                                 <use href="#time">
                                 </use>
@@ -224,7 +224,7 @@
 
                     {{#if metaData.programCampus}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Campus</title>
                                 <use href="#map"></use>
                             </svg>

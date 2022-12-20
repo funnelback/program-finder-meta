@@ -97,10 +97,6 @@
 	-->
 
 	<div class="stencils__main program-finder">
-				
-		
-
-		
 		<#--  Rest of the search page  -->
 		<div class="funnelback-search no-wysiwyg">			
 			<div class="funnelback-search__body" id="funnelbach-search-body">
@@ -175,17 +171,7 @@
 				
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {			
-			setupDeferredImages();
-			
-			// Make the history button accessible via the keyboard for WCAG 2.1
-			var historyElement = document.querySelectorAll('.session-history-toggle');
-
-			// Add a href which does not reference any valid anchor so that 
-			// hitting enter while the element is in focus will activate
-			// the onclick event
-			historyElement.forEach((element) => {
-				element.setAttribute("href", "#fb-history-placeholder");
-			});
+			setupDeferredImages();			
 		});
 	</script>
 

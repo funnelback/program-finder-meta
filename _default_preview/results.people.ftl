@@ -117,7 +117,7 @@
             <div class="listing-item__footer">
                 <#if (result.listMetadata["peopleEmail"]?first)!?has_content>                
                     <a href="mailto:${(result.listMetadata["peopleEmail"]?first)!}" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact email</title>
                             <use href="#email"></use>
                         </svg>
@@ -126,7 +126,7 @@
                 </#if>
                 <#if (result.listMetadata["peoplePhone"]?first)!?has_content>
                     <a href="tel:${(result.listMetadata["peoplePhone"]?first)!}" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact phone</title>
                             <use href="#phone"></use>
                         </svg>
@@ -135,7 +135,7 @@
                 </#if>
                 <#if (result.listMetadata["peopleLocation"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                         <title>Time</title>
                         <use href="#map"></use>
                         </svg>

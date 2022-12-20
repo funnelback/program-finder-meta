@@ -118,7 +118,7 @@
                 <#if (result.listMetadata["eventStartTime"]?first)!?has_content &&
                     (result.listMetadata["eventEndTime"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Time</title>
                             <use href="#time">
                             </use>
@@ -127,7 +127,7 @@
                     </div>
                 <#else>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Time</title>
                             <use href="#time">
                             </use>
@@ -138,7 +138,7 @@
 
                 <#if (result.listMetadata["eventContactEmail"]?first)!?has_content>
                     <a href="mailto:${(result.listMetadata["eventContactEmail"]?first)!}" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact email</title>
                             <use href="#email"></use>
                         </svg>
@@ -148,7 +148,7 @@
 
                 <#if (result.listMetadata["eventContactPhone"]?first)!?has_content>
                     <a href="tel:${result.listMetadata["eventContactPhone"]?first!}" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact phone</title>
                             <use href="#phone"></use>
                         </svg>

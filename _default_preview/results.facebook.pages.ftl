@@ -152,7 +152,7 @@
                         class="listing-item__footer-block
                             listing-item__footer-block--highlight"
                     >
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact phone</title>
                             <use href="#phone"></use>
                         </svg>

@@ -67,7 +67,7 @@
 					},
 					resultItemTrigger: {
 						selector: '.enable-cart-on-result',
-                        class: 'testing',
+                        class: '',
 						labelAdd: 'ADD TO SHORTLIST',
 						iconAdd: 'far fa-star',
 						labelDelete: 'REMOVE FROM SHORTLIST',

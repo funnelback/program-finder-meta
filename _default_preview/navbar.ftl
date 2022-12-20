@@ -45,7 +45,7 @@
         </button>			
     </div>
 
-	<div class="facet-drawer">
+	<div class="facet-drawer" tabindex="-1" style="visibility: hidden;">
 		<div
 			data-component="drawer"
 			data-drawer-width="25"
@@ -53,7 +53,6 @@
 			data-drawer-transition-speed="0.5"
 			class="drawer drawer--open-right"
 			id="funnelback-search-facets-drawer"
-            tabIndex="-1"            			
 		>
 			<div
 				class="drawer__content"

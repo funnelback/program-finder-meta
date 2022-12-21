@@ -42,7 +42,10 @@
             </button>
         </div> 
 
-        <ul id="flb-cart-box-list" class="list-unstyled listing"></ul>
+
+		<#assign shortlistListingDisplayClass = question.getCurrentProfileConfig().get("stencils.shortlist.display.class")!"" />  
+        
+		<ul id="flb-cart-box-list" class="list-unstyled listing ${shortlistListingDisplayClass}"></ul>
 	</script>
 </#macro>
 

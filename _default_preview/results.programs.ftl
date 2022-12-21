@@ -367,7 +367,7 @@
                         </#if>             
                     </dl>
                     <a href="${result.clickTrackingUrl!}" class="quickview__action" data-target="#${base.getCssID(result.liveUrl)}">
-                        Visit program page
+                        Visit course page
                     </a>                    
 				</section>
                 <footer class="quickview__footer" />

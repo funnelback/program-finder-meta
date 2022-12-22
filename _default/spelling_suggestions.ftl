@@ -1,4 +1,5 @@
 <#ftl encoding="utf-8" output_format="HTML" />
+
 <#--
   Display spelling suggestion notice.
 -->
@@ -6,7 +7,7 @@
     <!-- spelling_suggestions::SpellingSuggestions -->
     <#if (response.resultPacket.spell)??>
         <div class="search-spelling-suggestions">
-            <svg class="svg-icon svg-icon--small">
+            <svg class="svg-icon search-spelling-suggestions__icon">
                 <use href="#information"></use>
             </svg>
             Did you mean

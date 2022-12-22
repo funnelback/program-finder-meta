@@ -72,14 +72,26 @@
                         Display the show more button which will be visible whent he viewport 
                         is smaller than the available space to show all the tabs.
                     -->
-                    <div class="tab-list-nav-overflow-menu__wrapper" data-tab-group-element="overflow-menu-wrapper">
-                        <button class="tab-list-nav-overflow-menu__button" type="button" data-tab-group-element="overflow-menu-button" aria-labelledby="View more">
+                    <div 
+                        class="overflow-menu__wrapper" 
+                        data-tab-group-element="overflow-menu-wrapper"
+                        data-component="button-overflow"
+                        data-container=".tabs"
+                        data-items="[data-tab-group-control]"
+                        data-items-container="[data-tab-group-element='tab-list-nav']"
+                    >
+                        <button 
+                            class="overflow-menu__button" 
+                            type="button" 
+                            data-tab-group-element="overflow-menu-button" 
+                            aria-labelledby="View more"
+                        >
                             <span class="sr-only">show more tabs</span>
-                            <svg class="svg-icon">
+                            <svg class="overflow-menu__icon">
                                 <use href="#overflow-menu"></use>
                             </svg>
                         </button>
-                        <div class="tab-list-nav__overflow-menu" data-tab-group-element="overflow-menu-container"></div>
+                        <div class="overflow-menu" data-tab-group-element="overflow-menu-container"></div>
                     </div>                    
                 </div>
             </div>
@@ -108,10 +120,10 @@
                 data-component="collapse-all"
             >
                 Refine your results
-                <svg class="svg-icon svg-icon--closed">
+                <svg class="facet-group__icon facet-group__icon--closed">
                     <use href="#add"></use>
                 </svg>
-                <svg class="svg-icon svg-icon--open">
+                <svg class="facet-group__icon facet-group__icon--open">
                     <use href="#subtract"></use>
                 </svg>
                 <span class="sr-only">Collapse all facets</span>
@@ -143,10 +155,10 @@
                                     data-component="facet-group-control" 
                                     >
                                     ${facet.name}
-                                    <svg class="svg-icon svg-icon--closed">
+                                    <svg class="facet-group__icon facet-group__icon--closed">
                                         <use href="#add"></use>
                                     </svg>
-                                    <svg class="svg-icon svg-icon--open">
+                                    <svg class="facet-group__icon facet-group__icon--open">
                                         <use href="#subtract"></use>
                                     </svg>
                                 </button>
@@ -199,7 +211,7 @@
                 class="facet-group__show-more"
                 data-component="facet-group-show-more-button"
             >
-                <svg class="svg-icon"><use href="#add"></use></svg>
+                <svg class="facet-group__icon"><use href="#add"></use></svg>
                 Show more
                 <span class="facet-group-show-more__hidden-items-count">
                     ( ${facet.allValues?size - maxCategories?number} )

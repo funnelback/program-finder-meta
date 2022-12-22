@@ -9,7 +9,7 @@
         response.resultPacket.resultsSummary.totalMatching == 0>
         <div class="no-results">
             <h3 class="no-results__title">
-            <svg class="svg-icon svg-icon--xxlarge">
+            <svg class="svg-icon no-results__icon">
                 <use href="#no-results"></use>
             </svg>
             No matching results

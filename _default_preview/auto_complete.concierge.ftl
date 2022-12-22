@@ -27,13 +27,16 @@
     <#local program=(question.getCurrentProfileConfig().get("stencils.auto-completion.program"))!"/s/suggest.json">
     <#local sort=(question.getCurrentProfileConfig().get("stencils.auto-completion.sort"))!"0">
     <#local inputID=(question.getCurrentProfileConfig().get("stencils.auto-completion.input_id"))!"query">
-
+    <#local serviceUrl = "https://${host}/s/search.html">
     <div
         id="autocomplete-concierge"
         data-component="autocomplete-concierge"
-        data-autocomplete-config="{
+        data-configuration="{
             <#if portal=true>&quot;portal&quot;:&quot;#${inputID}&quot;,</#if>
+            &quot;placeholder&quot;:&quot;testing&quot;,
+            &quot;action&quot;:&quot;${serviceUrl}&quot;,
             &quot;showSubmit&quot;:true
+            <#--  &quot;modalVersion&quot;:true,  -->            
         }"
     >
         <input type="hidden" name="collection" value="${question.collection.id}">
@@ -52,7 +55,7 @@
             <#if question.profile?ends_with("_preview") && question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.profile")!?has_content>
                 <#local profile = question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.profile")! + "_preview">
             <#else>
-                <#local profile = question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.profile")!question.profile>        
+                <#local profile = question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.profile")!question.profile>   
             </#if>
             <#-- Used to style each channel. -->
             <#local customClass = question.getCurrentProfileConfig().get("stencils.auto-completion.datasets.${dataset}.customClass")!"">

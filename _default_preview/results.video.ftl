@@ -118,7 +118,7 @@
             <div class="listing-item__footer">
                 <#if (result.listMetadata["videoDurationPretty"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Duration</title>
                             <use href="#time">
                             </use>
@@ -127,7 +127,7 @@
                     </div>
                 <#elseif (result.listMetadata["videoDuration"]?first)!?has_content>                    
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Duration</title>
                             <use href="#time">
                             </use>

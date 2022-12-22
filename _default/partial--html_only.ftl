@@ -78,16 +78,12 @@
 -->
 
 <div class="stencils__main program-finder">
-            
-    <@hero_banner.SearchForm />
-
-    <@navbar.Navbar />
-    
     <#--  Rest of the search page  -->
     <div class="funnelback-search no-wysiwyg">			
         <div class="funnelback-search__body" id="funnelbach-search-body">
+            <@hero_banner.SearchForm />
+            <@navbar.Navbar />            
             <h2 class="funnelback-search__title">Results</h2>
-            
             <@search_tools.SearchTools />
             
             <@query_blending.QueryBlending />

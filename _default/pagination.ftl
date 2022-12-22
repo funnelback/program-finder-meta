@@ -16,7 +16,7 @@
             <#if (response.customData.stencils.pagination.previous)??>
                 <div class="pagination__item pagination__item--previous">
                     <a class="pagination__link" rel="prev nofollow" href="${(response.customData.stencils.pagination.previous.url)!}" aria-label="Previous page">
-                        <svg aria-hidden="true" class="svg-icon">
+                        <svg aria-hidden="true" class="pagination__icon">
                             <use href="#chevron"></use>
                         </svg>
                         <span class="pagination__label">
@@ -62,7 +62,7 @@
                         <span class="pagination__label">
                             ${(response.customData.stencils.pagination.next.label)!"Next"}
                         </span>
-                        <svg aria-hidden="true" class="svg-icon">
+                        <svg aria-hidden="true" class="pagination__icon">
                             <use href="#chevron"></use>
                         </svg>
                     </a>

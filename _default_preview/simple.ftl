@@ -18,31 +18,32 @@
 	Global Stencils imports
 	The namespace will be available in all templates which are imported 
 -->
+<#import "auto_complete.concierge.ftl" as concierge />
+<#import "auto_complete.ftl" as auto_complete />
 <#import "base.ftl" as base />
-<#import "hero_banner.ftl" as hero_banner />
-<#import "search_tools.ftl" as search_tools />
+<#import "browse_mode.ftl" as browse_mode />
+<#import "client_includes.ftl" as client_includes />
+<#import "contextual_navigation.ftl" as contextual_navigation />
 <#import "counts.ftl" as counts />
-<#import "query_blending.ftl" as query_blending />
-<#import "spelling_suggestions.ftl" as spelling_suggestions />
 <#import "curator.ftl" as curator />
-<#import "tabs.ftl" as tabs />
+<#import "curator.ftl" as curator />
+<#import "extra_search.ftl" as extra_search />
 <#import "facets.breadcrumbs.ftl" as facets_breadcrumbs />
 <#import "facets.ftl" as facets />
-<#import "tier_bars.ftl" as tier_bars />
-<#import "pagination.ftl" as pagination />
-<#import "browse_mode.ftl" as browse_mode />
-<#import "contextual_navigation.ftl" as contextual_navigation />
-<#import "auto_complete.ftl" as auto_complete />
-<#import "auto_complete.concierge.ftl" as concierge />
-<#import "curator.ftl" as curator />
-<#import "result_list.ftl" as result_list />
-<#import "no_results.ftl" as no_results />
-<#import "extra_search.ftl" as extra_search />
-<#import "results.ftl" as results />
-<#import "client_includes.ftl" as client_includes />
+<#import "hero_banner.ftl" as hero_banner />
 <#import "navbar.ftl" as navbar />
+<#import "no_results.ftl" as no_results />
+<#import "pagination.ftl" as pagination />
+<#import "query_blending.ftl" as query_blending />
+<#import "result_list.ftl" as result_list />
+<#import "results.ftl" as results />
+<#import "search_tools.ftl" as search_tools />
+<#import "spelling_suggestions.ftl" as spelling_suggestions />
+<#import "tabs.ftl" as tabs />
+<#import "tier_bars.ftl" as tier_bars />
 
-
+<#import "sessions.search_history.ftl" as search_history />
+<#import "sessions.shortlist.ftl" as shortlist />
 <#import "sessions.ftl" as sessions />
 
 
@@ -96,14 +97,11 @@
 	-->
 
 	<div class="stencils__main program-finder">
-				
-		<@hero_banner.SearchForm />
-
-		<@navbar.Navbar />
-		
 		<#--  Rest of the search page  -->
 		<div class="funnelback-search no-wysiwyg">			
 			<div class="funnelback-search__body" id="funnelbach-search-body">
+				<@hero_banner.SearchBoxOnly />
+				<@navbar.Navbar />
 				<h2 class="funnelback-search__title">Results</h2>
 				
 				<@search_tools.SearchTools />
@@ -150,9 +148,8 @@
 		</div>				
 	</div>
 
-	<@sessions.ShortlistDrawer />			
-
-	<@sessions.SearchHistory />
+	<#--  Output the drawers for the search history and shortlist.  -->
+	<@sessions.SearchHistoryAndShortlist />			
 
 	<#-- Third parties -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>	
@@ -174,17 +171,7 @@
 				
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {			
-			setupDeferredImages();
-			
-			// Make the history button accessible via the keyboard for WCAG 2.1
-			var historyElement = document.querySelectorAll('.session-history-toggle');
-
-			// Add a href which does not reference any valid anchor so that 
-			// hitting enter while the element is in focus will activate
-			// the onclick event
-			historyElement.forEach((element) => {
-				element.setAttribute("href", "#fb-history-placeholder");
-			});
+			setupDeferredImages();			
 		});
 	</script>
 
@@ -199,7 +186,6 @@
 		
 		<#-- We have replaced the products session code with an extended version for Stencils -->
 		<script defer src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-cart-0.2.js"></script>
-		<script defer src="https://${httpHost!}/s/resources/${question.collection.id}/${question.profile}/js/funnelback.session-history-0.1.js"></script>
 		<@sessions.Configuration />
 	</#if>
 </body>

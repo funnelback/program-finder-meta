@@ -8,9 +8,8 @@
 
   Note: Shortlist and cart are used interchangeably. There is a growing shift
   of using the term shortlist.
-
 -->
-<#macro Shortlist>
+<#macro Placeholder>
 	<#if question.collection.configuration.valueAsBoolean("ui.modern.session")>
 		<section class="search-cart" id="search-cart" class="search-results__list search-results__list--list-view" style="display: none;">
 		</section>
@@ -21,11 +20,11 @@
 	The handlebars template which is used to display the container which 
     holds all the shortlist items.  
 -->
-<#macro ShortlistTemplate>
-	<!-- sessions.shortlist.ShortlisTtemplate -->
+<#macro Template>
+	<!-- sessions.shortlist.Template -->
 	<script id="cart-template" type="text/x-handlebars-template">
         <button id="flb-cart-box-back" class="search-shortlist__hide" type="button">
-            <svg class="svg-icon svg-icon--small"><use href="#arrow"></use></svg>
+            <svg class="svg-icon search-shortlist__icon"><use href="#arrow"></use></svg>
             {{>label-block label=backLabel}}
         </button>
 
@@ -38,17 +37,20 @@
                 class="search-shortlist__clear"
                 title="Remove all items from the shortlist"
             >
-                <svg class="svg-icon svg-icon"><use href="#close"></use></svg>
+				<svg class="svg-icon search-shortlist__icon"><use href="#close"></use></svg>
                     {{>label-block label=clearLabel}}
             </button>
         </div> 
 
-        <ul id="flb-cart-box-list" class="list-unstyled listing"></ul>
+
+		<#assign shortlistListingDisplayClass = question.getCurrentProfileConfig().get("stencils.shortlist.display.class")!"" />  
+        
+		<ul id="flb-cart-box-list" class="list-unstyled listing ${shortlistListingDisplayClass}"></ul>
 	</script>
 </#macro>
 
 <#-- Output the config required to configure the cart templates -->
-<#macro ShortlistTemplatesConfig >
+<#macro TemplatesConfig >
 	<#-- 
 		Output the default template which is used when no cart template 
 		is explicitly defined.
@@ -74,8 +76,8 @@
 	namespaces. It is assummed that cart templates are macros defined with 
 	the name <#macro ShortlistTemplate> </#macro>.
 -->
-<#macro ShortlistTemplatesForResults>
-	<!-- sessions.shortlist.ShortlistTemplatesForResults -->
+<#macro TemplatesForResults>
+	<!-- sessions.shortlist.TemplatesForResults -->
 	<#list .main as key, namespace >
 		<#if (namespace)!?is_hash && (namespace.ShortlistTemplate)!?is_directive && key != "shortlist">
 			<@namespace.ShortlistTemplate />
@@ -84,13 +86,14 @@
 </#macro>
 
 <#-- Outputs the placeholder used to determine where the shortlist button should rendered. -->
-<#macro ShortlistControl>
-	<!-- sessions.shortlist.ShortlistControl -->
+<#macro Control>
+	<!-- sessions.shortlist.Control -->
 	<span class="flb-cart-count"></span>
 </#macro>
 
 <#--  Output the sliding drawer for the shortlist.  -->
-<#macro ShortlistDrawer>
+<#macro Drawer>
+	<!-- sessions.shortlist.Drawer -->
 	<div class="shortlist-drawer" tabindex="-1">
 		<div
 			data-component="drawer"
@@ -113,7 +116,7 @@
 						class="drawer__close"
 					>
 						<svg
-							class="svg-icon svg-icon--xlarge"
+							class="svg-icon drawer__icon"
 							role="img"
 						>
 							<title>Close</title>
@@ -122,7 +125,7 @@
 					</button>
 				</div>
 				<div class="drawer__body">
-					<@sessions.Shortlist />
+					<@Placeholder />
 				</div>
 			</div>
 		</div>

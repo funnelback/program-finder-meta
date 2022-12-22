@@ -54,7 +54,6 @@
     padding: 1rem;
 }
 
-
 #search-cart {
     display: block!important;
     width: 100%;
@@ -68,11 +67,11 @@
     color: #da1007;
     font: inherit;
     font-size: 100%;
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 700;
     line-height: 1.625rem;
     margin: 0.625rem 0 0.75rem;
-    padding: 0.25rem;
+    padding: 0;
     vertical-align: baseline;    
 }
 
@@ -94,15 +93,4 @@
 
 #flb-cart-box-list {
     padding-left: 0;
-}
-
-.flb-cart-item-trigger:hover,
-.flb-cart-item-trigger:focus {
-    background-color: #da1007;
-    color: white; 
-}
-
-.search-cart {
-    width: 100%;
-    padding: 0.25rem;
 }

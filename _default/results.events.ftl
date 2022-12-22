@@ -118,7 +118,7 @@
                 <#if (result.listMetadata["eventStartTime"]?first)!?has_content &&
                     (result.listMetadata["eventEndTime"]?first)!?has_content>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Time</title>
                             <use href="#time">
                             </use>
@@ -127,7 +127,7 @@
                     </div>
                 <#else>
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Time</title>
                             <use href="#time">
                             </use>
@@ -138,7 +138,7 @@
 
                 <#if (result.listMetadata["eventContactEmail"]?first)!?has_content>
                     <a href="mailto:${(result.listMetadata["eventContactEmail"]?first)!}" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact email</title>
                             <use href="#email"></use>
                         </svg>
@@ -148,7 +148,7 @@
 
                 <#if (result.listMetadata["eventContactPhone"]?first)!?has_content>
                     <a href="tel:${result.listMetadata["eventContactPhone"]?first!}" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact phone</title>
                             <use href="#phone"></use>
                         </svg>
@@ -158,42 +158,6 @@
             </div>                                        
         </div>
     </article>
-</#macro>
-
-<#-- 
-    Handlebars template used to display the current object
-    in concierge.
---> 
-<#macro AutoCompleteTemplate>
-    <!-- results.events::AutoCompleteTemplate -->
-    <script id="auto-completion-events" type="text/x-handlebars-template">
-        <div class="fb-auto-complete--non-organic">
-            <h6>
-                {{extra.disp.title}}
-            </h6>
-
-            <div class="details">
-                {{#if extra.disp.listMetadata.eventLocation.[0]}}
-                    <div class="fb-auto-complete__body__metadata">
-                        <span class="fas fa-map-marker-alt" aria-hidden="true" aria-label="Event location" title="Event location"></span> 
-                        {{extra.disp.listMetadata.eventLocation.[0]}}
-                    </div>
-                {{/if}}
-                {{#if extra.disp.listMetadata.eventContactPhone.[0]}}
-                    <div class="fb-auto-complete__body__metadata">
-                        <span class="fas fa-map-marker-alt" aria-hidden="true" aria-label="Event phone number" title="Event phone number"></span> 
-                        {{extra.disp.listMetadata.eventContactPhone.[0]}}
-                    </div>
-                {{/if}}
-                {{#if extra.disp.listMetadata.eventContactEmail.[0]}}
-                    <div class="fb-auto-complete__body__metadata">
-                        <span class="far fa-envelope" aria-hidden="true" aria-label="Event email" title="email"></span> 
-                        {{extra.disp.listMetadata.eventContactEmail.[0]}}
-                    </div>
-                {{/if}}
-            </div>      
-		</div>
-    </script>
 </#macro>
 
 <#-- vim: set expandtab ts=2 sw=2 sts=2 :-->

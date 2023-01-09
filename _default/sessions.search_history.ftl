@@ -57,7 +57,7 @@
         class="visuallyhidden"
         data-pnp-component="link-tracker"
         data-search-form=".autocomplete-concierge__form-wrapper"
-        data-link-query=".listing-item__title-link"
+        data-link-query=".listing-item__title-link,.quickview__action"
         data-search-term="${question.originalQuery!}"
         data-results-count="${response.resultPacket.resultsSummary.totalMatching!}"
         data-history-size="20"

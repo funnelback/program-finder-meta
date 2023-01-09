@@ -366,8 +366,12 @@
                             <dd>${(result.listMetadata["stencilsTermCodes"]?join(", "))!} </dd>
                         </#if>             
                     </dl>
-                    <a href="${result.clickTrackingUrl!}" class="quickview__action" data-target="#${base.getCssID(result.liveUrl)}">
-                        Visit course page
+                    <a href="${result.clickTrackingUrl!}" 
+                        class="quickview__action" 
+                        data-live-url="${result.liveUrl}" 
+                        data-target="#${base.getCssID(result.liveUrl)}"
+                        title="${result.title!}">
+                        Visit program page
                     </a>                    
 				</section>
                 <footer class="quickview__footer" />

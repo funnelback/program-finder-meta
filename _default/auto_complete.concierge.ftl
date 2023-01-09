@@ -33,7 +33,7 @@
         data-component="autocomplete-concierge"
         data-configuration="{
             <#if portal=true>&quot;portal&quot;:&quot;#${inputID}&quot;,</#if>
-            &quot;placeholder&quot;:&quot;testing&quot;,
+            &quot;placeholder&quot;:&quot;Start your search here...&quot;,
             &quot;action&quot;:&quot;${serviceUrl}&quot;,
             &quot;showSubmit&quot;:true
             <#--  &quot;modalVersion&quot;:true,  -->            

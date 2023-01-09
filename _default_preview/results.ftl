@@ -138,7 +138,7 @@
             <#--              
                 <div class="listing-item__footer">
                     <div class="listing-item__footer-block listing-item__footer-block">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Time</title>
                             <use href="#time">
                             </use>
@@ -146,14 +146,14 @@
                         10:30 AM - 1:30 PM
                     </div>
                     <a href="mailto:it@department.edu" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact email</title>
                             <use href="#email"></use>
                             </svg>
                             it@department.edu 
                     </a>
                     <a href="tel:650.725.4747" class="listing-item__footer-block listing-item__footer-block--highlight">
-                        <svg class="svg-icon svg-icon--small">
+                        <svg class="svg-icon listing-item__icon">
                             <title>Contact phone</title>
                             <use href="#phone"></use>
                         </svg>

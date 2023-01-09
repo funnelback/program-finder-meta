@@ -64,11 +64,11 @@
                     <@QuickView result=result />
 
                     <#-- Pretty version of the url of the document -->
-                    <cite class="listing-item__subtitle listing-item__subtitle--highlight">
+                    <#--  <cite class="listing-item__subtitle listing-item__subtitle--highlight">
                         <@s.Truncate length=90>
                             ${(result.displayUrl)!}
                         </@s.Truncate>                
-                    </cite>
+                    </cite>  -->
                 </div>
             </#if>
             
@@ -164,11 +164,11 @@
                         </a>
 
                         <#-- Pretty version of the url of the document -->
-                        {{#if indexUrl}}  
+                        <#--  {{#if indexUrl}}  
                             <cite class="listing-item__subtitle listing-item__subtitle--highlight">
                                 {{indexUrl}}
                             </cite>
-                        {{/if}} 
+                        {{/if}}   -->
                     </div>
                 {{/if}} 
                 
@@ -213,7 +213,7 @@
                 <div class="listing-item__footer">
                     {{#if metaData.programLengthYears}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Duration</title>
                                 <use href="#time">
                                 </use>
@@ -224,7 +224,7 @@
 
                     {{#if metaData.programCampus}} 
                         <div class="listing-item__footer-block listing-item__footer-block">
-                            <svg class="svg-icon svg-icon--small">
+                            <svg class="svg-icon listing-item__icon">
                                 <title>Campus</title>
                                 <use href="#map"></use>
                             </svg>
@@ -267,7 +267,7 @@
                             class="modal__close"
                             title="Close modal"
                         >
-                            <svg class="svg-icon">
+                            <svg class="svg-icon listing-item__icon">
                                 <use href="#close" />
                             </svg>
                         </button>
@@ -334,8 +334,12 @@
                             <dd>${(result.listMetadata["stencilsTermCodes"]?join(", "))!} </dd>
                         </#if>             
                     </dl>
-                    <a href="${result.clickTrackingUrl!}" class="quickview__action" data-target="#${base.getCssID(result.liveUrl)}">
-                        Visit program page
+                    <a 
+                        href="${result.clickTrackingUrl!}" 
+                        class="quickview__action" 
+                        data-live-url="${result.liveUrl}" 
+                        title="${result.title!}">
+                        Visit course page
                     </a>                    
 				</section>
                 <footer class="quickview__footer" />

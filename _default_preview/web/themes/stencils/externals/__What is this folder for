@@ -1,0 +1,7 @@
+Put files in this directory you would like to get created in /dist/externals when you run 'npm run build'.  
+
+This file will be ignored and not placed in /dist/ as per 'const copyWebPack' webpack.common.js. 
+
+This file exists just so Git will create this folder.  It can be deleted safely. 
+
+See https://gitlab.squiz.net/boilerplate/webpack-boilerplate/wikis/Usage for more information. 

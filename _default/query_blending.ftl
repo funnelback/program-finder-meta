@@ -8,7 +8,7 @@
     <!-- query_blending::QueryBlending -->
     <#if (response.resultPacket.QSups)!?size &gt; 0>        
         <p class="query-blending">
-            <svg class="svg-icon svg-icon--small">
+            <svg class="svg-icon query-blending__icon">
                 <use href="#information"></use>
             </svg>
             
